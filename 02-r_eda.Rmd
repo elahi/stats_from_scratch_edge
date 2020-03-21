@@ -1,0 +1,162 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE)
+```
+
+# R and exploratory data analysis {#r_eda}
+
+```{r load-packages}
+library(stfspack)
+library(tidyverse)
+theme_set(theme_bw(base_size = 12) + 
+            theme(strip.background = element_blank(), 
+                  panel.grid = element_blank())) 
+```
+
+This chapter is about getting comfortable with R. Edge uses base R for data wrangling and plotting, but here I'll also recreate the chapter exercises using the `tidyverse`. For a deeper dive into R and the `tidyverse`:
+
+[Data carpentry's ecology lesson](https://datacarpentry.org/R-ecology-lesson/index.html)  
+[R for data science](https://r4ds.had.co.nz/)  
+
+## Inspecting the dataframe
+
+```{r}
+head(iris)
+glimpse(iris)
+summary(iris)
+```
+
+## Histograms
+
+```{r}
+# Base
+hist(iris$Sepal.Length, xlab = "Sepal Length", main = "")
+# Tidyverse
+iris %>% 
+  ggplot(aes(Sepal.Length)) + 
+  geom_histogram(bins = 8, col = "white") + 
+  labs(x = "Sepal Length")
+```
+
+## Summarising data
+
+```{r}
+# Base
+tapply(iris$Sepal.Length, iris$Species, mean)
+# Tidyverse
+iris %>% 
+  group_by(Species) %>% 
+  summarise(mean = mean(Sepal.Length))
+```
+
+Note that the tidyverse output is a tibble (essentially a dataframe), which is a consistent feature of the tidy approach to data wrangling. Not that you can't do this in base R with the `aggregate` function - which is how I used to do it BT (*before tidyverse*):
+
+```{r}
+# Base option 2
+aggregate(iris$Sepal.Length, list(iris$Species), mean) 
+# You can check the output using str()
+aggregate(iris$Sepal.Length, list(iris$Species), mean) %>% str()
+```
+
+
+## Loops
+
+```{r}
+for(i in 1:3){
+  print(i)
+}
+```
+
+```{r}
+i <- 1
+print(i)
+```
+
+```{r}
+unique(iris$Species)
+
+for(i in unique(iris$Species)){
+  print(mean(iris$Sepal.Length[iris$Species == i]))
+}
+```
+
+## Functions
+
+```{r}
+conditional.mean <- function(x, y){
+  for(i in unique(y)){
+    print(mean(x[y == i]))
+  }
+}
+```
+
+```{r}
+conditional.mean(x = iris$Sepal.Length, y = iris$Species)
+conditional.mean(x = iris$Sepal.Width, y = iris$Species)
+```
+
+## Boxplots
+
+```{r}
+# Base
+boxplot(iris$Sepal.Length ~ iris$Species, 
+        xlab = "Species", ylab = "Sepal length")
+# Tidyverse
+iris %>% 
+  ggplot(aes(Species, Sepal.Length)) + 
+  geom_boxplot() + 
+  labs(x = "Species", y = "Sepal length")
+```
+
+## Scatterplots
+
+```{r}
+# Base
+plot(iris$Sepal.Length, iris$Sepal.Width, 
+        xlab = "Sepal length", ylab = "Sepal width")
+# Tidyverse
+iris %>% 
+  ggplot(aes(Sepal.Length, Sepal.Width)) + 
+  geom_point() + 
+  labs(x = "Sepal length", y = "Sepal width")
+```
+
+With unique symbols for species:
+
+```{r}
+# Base
+plot(iris$Sepal.Length, iris$Sepal.Width, 
+     xlab = "Sepal length", ylab = "Sepal width", 
+     pch = as.numeric(iris$Species))
+legend("topright", pch = c(1,2,3), 
+       legend = c("setosa", "versicolor", "virginica"))
+# Tidyverse
+iris %>% 
+  ggplot(aes(Sepal.Length, Sepal.Width, shape = Species)) + 
+  geom_point() + 
+  labs(x = "Sepal length", y = "Sepal width")
+```
+
+## Exercise set 2-2
+
+1. Repeat the above analyses (histogram, summarising data, boxplots) for `Petal.Width`. 
+
+2. Install and load a new package `gpairs`. Run the following line of code. What do you see?
+
+```{r, eval = FALSE}
+gpairs(iris, scatter.pars = list(col = as.numeric(iris$Species)))
+```
+
+3. Install and load the package `stfspack` if you have not already done so. 
+
+```{r eval = FALSE}
+install.packages("devtools")
+library(devtools) 
+install_github("mdedge/stfspack")
+library(stfspack)
+```

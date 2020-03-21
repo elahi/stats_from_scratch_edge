@@ -84,9 +84,7 @@ What do the following columns in the 'Coefficients' table refer to?
   - *Pr(>|t|)*
   - How do each of these relate to the ideas of *estimation* and *inference*?
 
-### A cautionary tale {-}
-
-Next we fit a different set of (fake) data, that give the exact same regression results: 
+Next, a cautionary tale. Here we fit another regression model to a different set of (fake) data, that gives the exact same regression results. 
 
 
 ```r
@@ -103,7 +101,7 @@ anscombe %>%
 <p class="caption">(\#fig:m2)The data underlying the analysis of the variables y3 and x3 in the anscombe data set</p>
 </div>
 
-Yes, you can run another regression model, but you should treat the results of the table with suspicion, given the figure above. 
+You should treat the results of the table with suspicion, given the figure above. 
 
 
 ```r
