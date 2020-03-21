@@ -2,6 +2,6 @@ book_filename: "stats_scratch_edge"
 chapter_name: "Chapter "
 repo: https://github.com/elahi/stats_from_scratch_edge
 output_dir: docs
-rmd_files: ["index.Rmd", "01-intro.Rmd", "02-Diving-In.Rmd", "03-Work-in-Progress.Rmd"]
+rmd_files: ["index.Rmd", "01-intro.Rmd"]
 clean: [packages.bib, bookdown.bbl]
 new_session: yes

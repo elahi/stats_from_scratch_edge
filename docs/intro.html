@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="diving-in.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -131,17 +131,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Notes on Statistical Thinking from Scratch</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#useful-information-on-bookdown"><i class="fa fa-check"></i><b>0.1</b> Useful information on <code>bookdown</code></a><ul>
-<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#using-bookdown"><i class="fa fa-check"></i><b>0.1.1</b> Using bookdown</a></li>
-<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#how-to-publish-on-github"><i class="fa fa-check"></i><b>0.1.2</b> How to publish on github</a></li>
-</ul></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#things-to-come"><i class="fa fa-check"></i><b>1.1</b> Things to come:</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#a-cautionary-tale"><i class="fa fa-check"></i>A cautionary tale</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="diving-in.html"><a href="diving-in.html"><i class="fa fa-check"></i><b>2</b> Diving In</a></li>
-<li class="chapter" data-level="3" data-path="technical-details.html"><a href="technical-details.html"><i class="fa fa-check"></i><b>3</b> Technical Details</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -164,50 +157,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="intro" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>Statistics<br />
-- allows us to reason from data
-- need a mathematical framework</p>
-<div id="things-to-come" class="section level2">
-<h2><span class="header-section-number">1.1</span> Things to come:</h2>
-<ul>
-<li>simple linear regression</li>
-<li>identify a line that ‘best’ fits the data</li>
-</ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(stfspack)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
-<pre><code>## ── Attaching packages ─────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
-<pre><code>## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
-## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
-## ✓ tidyr   0.8.1     ✓ stringr 1.4.0
-## ✓ readr   1.3.1     ✓ forcats 0.3.0</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>(<span class="dt">base_size =</span> <span class="dv">12</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="st">            </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_blank</span>(), </a>
-<a class="sourceLine" id="cb6-3" title="3">                  <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>())) </a></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">mod.fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y1 <span class="op">~</span><span class="st"> </span>x1, <span class="dt">data =</span> anscombe)</a>
-<a class="sourceLine" id="cb7-2" title="2">anscombe <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x1, y1)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>() </a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:m1"></span>
-<img src="01-intro_files/figure-html/m1-1.png" alt="Fertilizer consumption and cereal yield in 11 sub-Saharan African countries" width="80%" />
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>(<span class="dt">base_size =</span> <span class="dv">12</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="st">            </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_blank</span>(), </a>
+<a class="sourceLine" id="cb2-5" title="5">                  <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>())) </a></code></pre></div>
+<p>Figure <a href="intro.html#fig:fig1">1.1</a> shows data on the amount of fertilizer applied to cropland (x-axis), and the cereal yields (y-axis), for each of 11 countries in Africa. There is a positive relationship, but is it strong? Is it weak? How are we to reason about these data?</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">anscombe <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x1, y1)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fertilizer consumption (kg/hectare)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Cereal yield (100kg/hectare)&quot;</span>)</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig1"></span>
+<img src="01-intro_files/figure-html/fig1-1.png" alt="Fertilizer consumption and cereal yield in 11 sub-Saharan African countries" width="80%" />
 <p class="caption">
 Figure 1.1: Fertilizer consumption and cereal yield in 11 sub-Saharan African countries
 </p>
 </div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">mod.fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y1 <span class="op">~</span><span class="st"> </span>x1, <span class="dt">data =</span> anscombe)</a>
-<a class="sourceLine" id="cb8-2" title="2">anscombe <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x1, y1)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:m2"></span>
-<img src="01-intro_files/figure-html/m2-1.png" alt="The agriculture data with a line of best fit from the simple linear regression" width="80%" />
+<p>Statistics, that’s how! Statistics allows us to reason from data, and rests on a mathematical framework. It is worth understanding, even minimally, this framework. That’s why we are reading this book. Chapter 1 provides an overview of simple linear regression, which allows us to identify a line that ‘best’ fits the data.</p>
+<p>We can use the <code>lm()</code> function in R to fit a simple linear regression:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">mod.fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y1 <span class="op">~</span><span class="st"> </span>x1, <span class="dt">data =</span> anscombe)</a>
+<a class="sourceLine" id="cb4-2" title="2">anscombe <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x1, y1)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fertilizer consumption (kg/hectare)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Cereal yield (100kg/hectare)&quot;</span>)</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:m1"></span>
+<img src="01-intro_files/figure-html/m1-1.png" alt="The agriculture data with a line of best fit from the simple linear regression" width="80%" />
 <p class="caption">
 Figure 1.2: The agriculture data with a line of best fit from the simple linear regression
 </p>
 </div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">summary</span>(mod.fit)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">summary</span>(mod.fit)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y1 ~ x1, data = anscombe)
@@ -226,18 +206,31 @@ Figure 1.2: The agriculture data with a line of best fit from the simple linear 
 ## Residual standard error: 1.237 on 9 degrees of freedom
 ## Multiple R-squared:  0.6665, Adjusted R-squared:  0.6295 
 ## F-statistic: 17.99 on 1 and 9 DF,  p-value: 0.00217</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">mod.fit2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y3 <span class="op">~</span><span class="st"> </span>x3, <span class="dt">data =</span> anscombe)</a>
-<a class="sourceLine" id="cb11-2" title="2">anscombe <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x3, y3)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-5" title="5"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<div class="figure"><span id="fig:m3"></span>
-<img src="01-intro_files/figure-html/m3-1.png" alt="The data underlying the analysis of the variables y3 and x3 in the anscombe data set" width="672" />
+<p>What do the following columns in the ‘Coefficients’ table refer to?</p>
+<ul>
+<li>the <em>Estimates</em>: (Intercept) and x1</li>
+<li><em>Std. Error</em><br />
+</li>
+<li><em>Pr(&gt;|t|)</em></li>
+<li>How do each of these relate to the ideas of <em>estimation</em> and <em>inference</em>?</li>
+</ul>
+<div id="a-cautionary-tale" class="section level3 unnumbered">
+<h3>A cautionary tale</h3>
+<p>Next we fit a different set of (fake) data, that give the exact same regression results:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">mod.fit2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y3 <span class="op">~</span><span class="st"> </span>x3, <span class="dt">data =</span> anscombe)</a>
+<a class="sourceLine" id="cb7-2" title="2">anscombe <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x3, y3)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fertilizer consumption (kg/hectare)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Cereal yield (100kg/hectare)&quot;</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:m2"></span>
+<img src="01-intro_files/figure-html/m2-1.png" alt="The data underlying the analysis of the variables y3 and x3 in the anscombe data set" width="672" />
 <p class="caption">
 Figure 1.3: The data underlying the analysis of the variables y3 and x3 in the anscombe data set
 </p>
 </div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">summary</span>(mod.fit2)</a></code></pre></div>
+<p>Yes, you can run another regression model, but you should treat the results of the table with suspicion, given the figure above.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">summary</span>(mod.fit2)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y3 ~ x3, data = anscombe)
@@ -256,175 +249,20 @@ Figure 1.3: The data underlying the analysis of the variables y3 and x3 in the a
 ## Residual standard error: 1.236 on 9 degrees of freedom
 ## Multiple R-squared:  0.6663, Adjusted R-squared:  0.6292 
 ## F-statistic: 17.97 on 1 and 9 DF,  p-value: 0.002176</code></pre>
-<p>You can label chapter and section titles using <code>{#label}</code> after them, e.g., we can reference Chapter <a href="intro.html#intro">1</a>. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter <a href="#methods"><strong>??</strong></a>.</p>
-<p>Figures and tables with captions will be placed in <code>figure</code> and <code>table</code> environments, respectively.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">.1</span>, <span class="fl">.1</span>))</a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="kw">plot</span>(pressure, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:nice-fig"></span>
-<img src="01-intro_files/figure-html/nice-fig-1.png" alt="Here is a nice figure!" width="80%" />
-<p class="caption">
-Figure 1.4: Here is a nice figure!
-</p>
-</div>
-<p>Reference a figure by its code chunk label with the <code>fig:</code> prefix, e.g., see Figure <a href="intro.html#fig:nice-fig">1.4</a>. Similarly, you can reference tables generated from <code>knitr::kable()</code>, e.g., see Table <a href="intro.html#tab:nice-tab">1.1</a>.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">knitr<span class="op">::</span><span class="kw">kable</span>(</a>
-<a class="sourceLine" id="cb15-2" title="2">  <span class="kw">head</span>(iris, <span class="dv">20</span>), <span class="dt">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</a>
-<a class="sourceLine" id="cb15-3" title="3">  <span class="dt">booktabs =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb15-4" title="4">)</a></code></pre></div>
-<table>
-<caption><span id="tab:nice-tab">Table 1.1: </span>Here is a nice table!</caption>
-<thead>
-<tr class="header">
-<th align="right">Sepal.Length</th>
-<th align="right">Sepal.Width</th>
-<th align="right">Petal.Length</th>
-<th align="right">Petal.Width</th>
-<th align="left">Species</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">5.1</td>
-<td align="right">3.5</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.9</td>
-<td align="right">3.0</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.7</td>
-<td align="right">3.2</td>
-<td align="right">1.3</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.6</td>
-<td align="right">3.1</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.0</td>
-<td align="right">3.6</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.4</td>
-<td align="right">3.9</td>
-<td align="right">1.7</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.6</td>
-<td align="right">3.4</td>
-<td align="right">1.4</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.0</td>
-<td align="right">3.4</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.4</td>
-<td align="right">2.9</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.9</td>
-<td align="right">3.1</td>
-<td align="right">1.5</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.4</td>
-<td align="right">3.7</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.8</td>
-<td align="right">3.4</td>
-<td align="right">1.6</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.8</td>
-<td align="right">3.0</td>
-<td align="right">1.4</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.3</td>
-<td align="right">3.0</td>
-<td align="right">1.1</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.8</td>
-<td align="right">4.0</td>
-<td align="right">1.2</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.7</td>
-<td align="right">4.4</td>
-<td align="right">1.5</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.4</td>
-<td align="right">3.9</td>
-<td align="right">1.3</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.1</td>
-<td align="right">3.5</td>
-<td align="right">1.4</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.7</td>
-<td align="right">3.8</td>
-<td align="right">1.7</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.1</td>
-<td align="right">3.8</td>
-<td align="right">1.5</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-</tbody>
-</table>
+<p>The rest of the book will give us the foundation to interpret all of the values in the regression table, and the underlying assumptions of the linear model.</p>
+<!-- You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods). -->
+<!-- Figures and tables with captions will be placed in `figure` and `table` environments, respectively. -->
+<!-- ```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'} -->
+<!-- par(mar = c(4, 4, .1, .1)) -->
+<!-- plot(pressure, type = 'b', pch = 19) -->
+<!-- ``` -->
+<!-- Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab). -->
+<!-- ```{r nice-tab, tidy=FALSE} -->
+<!-- knitr::kable( -->
+<!--   head(iris, 20), caption = 'Here is a nice table!', -->
+<!--   booktabs = TRUE -->
+<!-- ) -->
+<!-- ``` -->
 
 </div>
 </div>
@@ -433,8 +271,8 @@ Figure 1.4: Here is a nice figure!
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="diving-in.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

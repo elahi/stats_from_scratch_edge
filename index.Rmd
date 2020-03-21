@@ -33,20 +33,16 @@ knitr::write_bib(c(
 ), 'packages.bib')
 ```
 
-As Edge points out in his **Prelude**, the typical introductory course in biological statistics (including my own) revolves around learning a series of *tests*: t-tests, regression, ANOVA . In *STFS*, the focus instead is on one procedure - simple linear regression - and takes 'little for granted' (translation: we'll be working through the math). The primary dataset consists of 11 observations. To heck with big data. 
+As Edge points out in his **Prelude**, the typical introductory course in biological statistics (including my own) revolves around learning a series of *tests*: t-tests, regression, ANOVA . In *STFS*, the focus instead is on one procedure - simple linear regression - and takes 'little for granted' (translation: we'll be working through the math, lightly). The primary dataset consists of 11 observations. To heck with big data. 
 
 The chapters will work through the following:    
 1. Probability  
-2. Estimation (use data to guess the values that describe a data generating process)  
-3. Inference (test hypotheses about the processes that might have generated an observed dataset)  
+2. Estimation (using data to guess the values that describe a data generating process)  
+3. Inference (testing hypotheses about the processes that might have generated an observed dataset)  
 
-## Useful information on `bookdown`
+What is a [data generating process](https://en.wikipedia.org/wiki/Data_generating_process)? This wikipedia entry is not all that helpful, aside from the fact that it highlights the difficulty in defining this term. For now, let's just think of the DGP as a set of rules (e.g., a deterministic equation) plus 'noise' that allows us to describe a set of obervations (i.e., data). 
 
-### Using bookdown
-
-https://bookdown.org/yihui/bookdown/
-
-### How to publish on github
+#### How to publish a `bookdown` project on github {-}
 
 https://community.rstudio.com/t/hosting-bookdown-in-github/20427  
 http://seankross.com/2016/11/17/How-to-Start-a-Bookdown-Book.html

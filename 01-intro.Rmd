@@ -4,17 +4,13 @@ editor_options:
   chunk_output_type: console
 ---
 
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE)
+```
+
 # Introduction {#intro}
 
-Statistics  
-  - allows us to reason from data
-  - need a mathematical framework
-  
-## Things to come:
-  - simple linear regression
-  - identify a line that 'best' fits the data
-
-```{r load-packages, warning = FALSE}
+```{r load-packages}
 library(stfspack)
 library(tidyverse)
 theme_set(theme_bw(base_size = 12) + 
@@ -22,51 +18,75 @@ theme_set(theme_bw(base_size = 12) +
                   panel.grid = element_blank())) 
 ```
 
-```{r m1, fig.cap = 'Fertilizer consumption and cereal yield in 11 sub-Saharan African countries', out.width='80%', fig.asp=.75, fig.align='center'}
-mod.fit <- lm(y1 ~ x1, data = anscombe)
+Figure \@ref(fig:fig1) shows data on the amount of fertilizer applied to cropland (x-axis), and the cereal yields (y-axis), for each of 11 countries in Africa. There is a positive relationship, but is it strong? Is it weak? How are we to reason about these data? 
+
+```{r fig1, fig.cap = 'Fertilizer consumption and cereal yield in 11 sub-Saharan African countries', out.width='80%', fig.asp=.75, fig.align='center'}
 anscombe %>% 
   ggplot(aes(x1, y1)) + 
-  geom_point() 
+  geom_point() + 
+  labs(x = "Fertilizer consumption (kg/hectare)", y = "Cereal yield (100kg/hectare)")
 ```
 
-```{r m2, fig.cap = 'The agriculture data with a line of best fit from the simple linear regression', out.width='80%', fig.asp=.75, fig.align='center'}
+Statistics, that's how! Statistics allows us to reason from data, and rests on a mathematical framework. It is worth understanding, even minimally, this framework. That's why we are reading this book. Chapter 1 provides an overview of simple linear regression, which allows us to identify a line that 'best' fits the data. 
+
+We can use the `lm()` function in R to fit a simple linear regression: 
+
+```{r m1, fig.cap = 'The agriculture data with a line of best fit from the simple linear regression', out.width='80%', fig.asp=.75, fig.align='center'}
 mod.fit <- lm(y1 ~ x1, data = anscombe)
 anscombe %>% 
   ggplot(aes(x1, y1)) + 
   geom_point() + 
-  geom_smooth(method = "lm", se = FALSE)
+  geom_smooth(method = "lm", se = FALSE) + 
+  labs(x = "Fertilizer consumption (kg/hectare)", y = "Cereal yield (100kg/hectare)")
 ```
   
 ```{r view-mod}
 summary(mod.fit)
 ```
 
-```{r m3, fig.cap = 'The data underlying the analysis of the variables y3 and x3 in the anscombe data set'}
+What do the following columns in the 'Coefficients' table refer to?
+
+  - the *Estimates*: (Intercept) and x1
+  - *Std. Error*  
+  - *Pr(>|t|)*
+  - How do each of these relate to the ideas of *estimation* and *inference*?
+
+### A cautionary tale {-}
+
+Next we fit a different set of (fake) data, that give the exact same regression results: 
+
+```{r m2, fig.cap = 'The data underlying the analysis of the variables y3 and x3 in the anscombe data set'}
 mod.fit2 <- lm(y3 ~ x3, data = anscombe)
 anscombe %>% 
   ggplot(aes(x3, y3)) + 
   geom_point() + 
-  geom_smooth(method = "lm", se = FALSE)
+  geom_smooth(method = "lm", se = FALSE) + 
+  labs(x = "Fertilizer consumption (kg/hectare)", y = "Cereal yield (100kg/hectare)")
 ```
+
+Yes, you can run another regression model, but you should treat the results of the table with suspicion, given the figure above. 
 
 ```{r view-mod2}
 summary(mod.fit2)
 ```
 
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
+The rest of the book will give us the foundation to interpret all of the values in the regression table, and the underlying assumptions of the linear model. 
 
-Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
 
-```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
-```
+<!-- You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods). -->
 
-Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
+<!-- Figures and tables with captions will be placed in `figure` and `table` environments, respectively. -->
 
-```{r nice-tab, tidy=FALSE}
-knitr::kable(
-  head(iris, 20), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
-```
+<!-- ```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'} -->
+<!-- par(mar = c(4, 4, .1, .1)) -->
+<!-- plot(pressure, type = 'b', pch = 19) -->
+<!-- ``` -->
+
+<!-- Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab). -->
+
+<!-- ```{r nice-tab, tidy=FALSE} -->
+<!-- knitr::kable( -->
+<!--   head(iris, 20), caption = 'Here is a nice table!', -->
+<!--   booktabs = TRUE -->
+<!-- ) -->
+<!-- ``` -->

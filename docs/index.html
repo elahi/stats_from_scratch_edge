@@ -131,17 +131,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Notes on Statistical Thinking from Scratch</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#useful-information-on-bookdown"><i class="fa fa-check"></i><b>0.1</b> Useful information on <code>bookdown</code></a><ul>
-<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#using-bookdown"><i class="fa fa-check"></i><b>0.1.1</b> Using bookdown</a></li>
-<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#how-to-publish-on-github"><i class="fa fa-check"></i><b>0.1.2</b> How to publish on github</a></li>
-</ul></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#things-to-come"><i class="fa fa-check"></i><b>1.1</b> Things to come:</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#a-cautionary-tale"><i class="fa fa-check"></i>A cautionary tale</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="diving-in.html"><a href="diving-in.html"><i class="fa fa-check"></i><b>2</b> Diving In</a></li>
-<li class="chapter" data-level="3" data-path="technical-details.html"><a href="technical-details.html"><i class="fa fa-check"></i><b>3</b> Technical Details</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -175,23 +168,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(devtools) </a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="kw">install_github</span>(<span class="st">&quot;mdedge/stfspack&quot;</span>)</a>
 <a class="sourceLine" id="cb1-4" title="4"><span class="kw">library</span>(stfspack)</a></code></pre></div>
-<p>As Edge points out in his <strong>Prelude</strong>, the typical introductory course in biological statistics (including my own) revolves around learning a series of <em>tests</em>: t-tests, regression, ANOVA . In <em>STFS</em>, the focus instead is on one procedure - simple linear regression - and takes ‘little for granted’ (translation: we’ll be working through the math). The primary dataset consists of 11 observations. To heck with big data.</p>
+<p>As Edge points out in his <strong>Prelude</strong>, the typical introductory course in biological statistics (including my own) revolves around learning a series of <em>tests</em>: t-tests, regression, ANOVA . In <em>STFS</em>, the focus instead is on one procedure - simple linear regression - and takes ‘little for granted’ (translation: we’ll be working through the math, lightly). The primary dataset consists of 11 observations. To heck with big data.</p>
 <p>The chapters will work through the following:<br />
 1. Probability<br />
-2. Estimation (use data to guess the values that describe a data generating process)<br />
-3. Inference (test hypotheses about the processes that might have generated an observed dataset)</p>
-<div id="useful-information-on-bookdown" class="section level2">
-<h2><span class="header-section-number">0.1</span> Useful information on <code>bookdown</code></h2>
-<div id="using-bookdown" class="section level3">
-<h3><span class="header-section-number">0.1.1</span> Using bookdown</h3>
-<p><a href="https://bookdown.org/yihui/bookdown/" class="uri">https://bookdown.org/yihui/bookdown/</a></p>
-</div>
-<div id="how-to-publish-on-github" class="section level3">
-<h3><span class="header-section-number">0.1.2</span> How to publish on github</h3>
+2. Estimation (using data to guess the values that describe a data generating process)<br />
+3. Inference (testing hypotheses about the processes that might have generated an observed dataset)</p>
+<p>What is a <a href="https://en.wikipedia.org/wiki/Data_generating_process">data generating process</a>? This wikipedia entry is not all that helpful, aside from the fact that it highlights the difficulty in defining this term. For now, let’s just think of the DGP as a set of rules (e.g., a deterministic equation) plus ‘noise’ that allows us to describe a set of obervations (i.e., data).</p>
+<div id="how-to-publish-a-bookdown-project-on-github" class="section level4 unnumbered">
+<h4>How to publish a <code>bookdown</code> project on github</h4>
 <p><a href="https://community.rstudio.com/t/hosting-bookdown-in-github/20427" class="uri">https://community.rstudio.com/t/hosting-bookdown-in-github/20427</a><br />
 <a href="http://seankross.com/2016/11/17/How-to-Start-a-Bookdown-Book.html" class="uri">http://seankross.com/2016/11/17/How-to-Start-a-Bookdown-Book.html</a></p>
 
-</div>
 </div>
 </div>
             </section>
