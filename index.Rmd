@@ -33,13 +33,21 @@ knitr::write_bib(c(
 ), 'packages.bib')
 ```
 
-As Edge points out in his **Prelude**, the typical introductory course in biological statistics (including my own) revolves around learning a series of *tests*: t-tests, regression, ANOVA . In *STFS*, the focus instead is on one procedure - simple linear regression - and takes 'little for granted' (translation: we'll be working through the math). The primary dataset consists of 11 observations.
+As Edge points out in his **Prelude**, the typical introductory course in biological statistics (including my own) revolves around learning a series of *tests*: t-tests, regression, ANOVA . In *STFS*, the focus instead is on one procedure - simple linear regression - and takes 'little for granted' (translation: we'll be working through the math). The primary dataset consists of 11 observations. To heck with big data. 
 
 The chapters will work through the following:    
 1. Probability  
 2. Estimation (use data to guess the values that describe a data generating process)  
 3. Inference (test hypotheses about the processes that might have generated an observed dataset)  
 
+## Useful information on `bookdown`
 
-How to publish on github:  
-https://community.rstudio.com/t/hosting-bookdown-in-github/20427
+### Using bookdown
+
+https://bookdown.org/yihui/bookdown/
+
+### How to publish on github
+
+https://community.rstudio.com/t/hosting-bookdown-in-github/20427  
+http://seankross.com/2016/11/17/How-to-Start-a-Bookdown-Book.html
+

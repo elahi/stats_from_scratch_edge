@@ -1,4 +1,57 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
 # Introduction {#intro}
+
+Statistics  
+  - allows us to reason from data
+  - need a mathematical framework
+  
+## Things to come:
+  - simple linear regression
+  - identify a line that 'best' fits the data
+
+```{r load-packages, warning = FALSE}
+library(stfspack)
+library(tidyverse)
+theme_set(theme_bw(base_size = 12) + 
+            theme(strip.background = element_blank(), 
+                  panel.grid = element_blank())) 
+```
+
+```{r m1, fig.cap = 'Fertilizer consumption and cereal yield in 11 sub-Saharan African countries', out.width='80%', fig.asp=.75, fig.align='center'}
+mod.fit <- lm(y1 ~ x1, data = anscombe)
+anscombe %>% 
+  ggplot(aes(x1, y1)) + 
+  geom_point() 
+```
+
+```{r m2, fig.cap = 'The agriculture data with a line of best fit from the simple linear regression', out.width='80%', fig.asp=.75, fig.align='center'}
+mod.fit <- lm(y1 ~ x1, data = anscombe)
+anscombe %>% 
+  ggplot(aes(x1, y1)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE)
+```
+  
+```{r view-mod}
+summary(mod.fit)
+```
+
+```{r m3, fig.cap = 'The data underlying the analysis of the variables y3 and x3 in the anscombe data set'}
+mod.fit2 <- lm(y3 ~ x3, data = anscombe)
+anscombe %>% 
+  ggplot(aes(x3, y3)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+```{r view-mod2}
+summary(mod.fit2)
+```
 
 You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
 
@@ -17,5 +70,3 @@ knitr::kable(
   booktabs = TRUE
 )
 ```
-
-You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].

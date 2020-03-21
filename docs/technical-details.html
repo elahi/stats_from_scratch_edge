@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Notes on Statistical Thinking from Scratch</title>
+  <title>Chapter 3 Technical Details | Notes on Statistical Thinking from Scratch</title>
   <meta name="description" content="Cliff notes for Statistical Thinking from Scratch, by Doc Edge." />
   <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Notes on Statistical Thinking from Scratch" />
+  <meta property="og:title" content="Chapter 3 Technical Details | Notes on Statistical Thinking from Scratch" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="elahi/stats_from_scratch_edge" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Notes on Statistical Thinking from Scratch" />
+  <meta name="twitter:title" content="Chapter 3 Technical Details | Notes on Statistical Thinking from Scratch" />
   
   <meta name="twitter:description" content="Cliff notes for Statistical Thinking from Scratch, by Doc Edge." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="diving-in.html"/>
 
-<link rel="next" href="intro.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -162,45 +162,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Notes on Statistical Thinking from Scratch</h1>
-<p class="author"><em>Robin Elahi</em></p>
-<p class="date"><em>2020-03-20</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>This project is a set of notes for <em>Statistical Thinking from Scratch</em>, by <a href="https://www.doc-edge.net/">M.D. Edge</a>. My personal goal is to become more comfortable with the nitty gritty underlying the statistical tools I commonly use - essentially, regression. Edge takes a unique approach in that he takes a small dataset, and dissects regression ‘from scratch’. Each of these <code>bookdown</code> chapters corresponds to each of Edge’s 10 book chapters. The impetus for this <code>bookdown</code> project was the cancellation of my spring 2020 course <a href="https://elahi.github.io/">Experimental Design and Probability</a> due to the coronavirus pandemic. So, I’ll be filling in some gaps in my stats toolkit <em>and</em> learning how to use <a href="https://bookdown.org/">bookdown</a>.</p>
-<p>The <strong>stfs</strong> package can be installed from Github:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(devtools) </a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw">install_github</span>(<span class="st">&quot;mdedge/stfspack&quot;</span>)</a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw">library</span>(stfspack)</a></code></pre></div>
-<p>As Edge points out in his <strong>Prelude</strong>, the typical introductory course in biological statistics (including my own) revolves around learning a series of <em>tests</em>: t-tests, regression, ANOVA . In <em>STFS</em>, the focus instead is on one procedure - simple linear regression - and takes ‘little for granted’ (translation: we’ll be working through the math). The primary dataset consists of 11 observations. To heck with big data.</p>
-<p>The chapters will work through the following:<br />
-1. Probability<br />
-2. Estimation (use data to guess the values that describe a data generating process)<br />
-3. Inference (test hypotheses about the processes that might have generated an observed dataset)</p>
-<div id="useful-information-on-bookdown" class="section level2">
-<h2><span class="header-section-number">0.1</span> Useful information on <code>bookdown</code></h2>
-<div id="using-bookdown" class="section level3">
-<h3><span class="header-section-number">0.1.1</span> Using bookdown</h3>
-<p><a href="https://bookdown.org/yihui/bookdown/" class="uri">https://bookdown.org/yihui/bookdown/</a></p>
-</div>
-<div id="how-to-publish-on-github" class="section level3">
-<h3><span class="header-section-number">0.1.2</span> How to publish on github</h3>
-<p><a href="https://community.rstudio.com/t/hosting-bookdown-in-github/20427" class="uri">https://community.rstudio.com/t/hosting-bookdown-in-github/20427</a><br />
-<a href="http://seankross.com/2016/11/17/How-to-Start-a-Bookdown-Book.html" class="uri">http://seankross.com/2016/11/17/How-to-Start-a-Bookdown-Book.html</a></p>
+<div id="technical-details" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Technical Details</h1>
+<p>Now I’ll teach you some crazy math, but I need to work it out first…</p>
 
-</div>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="diving-in.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
