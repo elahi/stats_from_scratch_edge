@@ -14,7 +14,7 @@ description: "Cliff notes for Statistical Thinking from Scratch, by Doc Edge."
 
 # Preface {-}
 
-This project is a set of notes for *Statistical Thinking from Scratch*, by [M.D. Edge](https://www.doc-edge.net/). My personal goal is to become more comfortable with the nitty gritty underlying the statistical tools I commonly use - essentially, regression. Edge takes a unique approach in that he takes a small dataset, and dissects regression 'from scratch'. Each of these `bookdown` chapters corresponds to each of Edge's 10 book chapters. The impetus for this `bookdown` project was the cancellation of my spring 2020 course [Experimental Design and Probability](https://elahi.github.io/) due to the coronavirus pandemic. So, I'll be filling in some gaps in my stats toolkit *and* learning how to use [bookdown](https://bookdown.org/). 
+This project is a set of notes for [Statistical Thinking from Scratch](https://global.oup.com/academic/product/statistical-thinking-from-scratch-9780198827634?cc=us&lang=en&#), by [M.D. Edge](https://www.doc-edge.net/). The goal is to become more comfortable with the nitty gritty underlying the statistical tools I commonly use - essentially, regression. Edge takes a unique approach in that he takes a small dataset, and dissects regression 'from scratch'. Each of these `bookdown` chapters corresponds to each of Edge's 10 book chapters. The impetus for this `bookdown` project was the cancellation of my spring 2020 course [Experimental Design and Probability](https://elahi.github.io/xdp/) due to [COVID-19](https://healthalerts.stanford.edu/). So, I'll be filling in some gaps in my stats toolkit and learning how to use [bookdown](https://bookdown.org/). 
 
 The **stfs** package can be installed from Github:
 
@@ -29,7 +29,7 @@ library(stfspack)
 
 
 
-As Edge points out in his **Prelude**, the typical introductory course in biological statistics (including my own) revolves around learning a series of *tests*: t-tests, regression, ANOVA . In *STFS*, the focus instead is on one procedure - simple linear regression - and takes 'little for granted' (translation: we'll be working through the math, lightly). The primary dataset consists of 11 observations. To heck with big data. 
+As Edge points out in his **Prelude**, the typical introductory course in biological statistics (including my own) revolves around learning a series of *tests*: t-tests, regression, ANOVA . In *STFS*, the focus instead is on one procedure - simple linear regression - and takes 'little for granted' (translation: we'll be working through the math, lightly). The primary dataset consists of 11 observations. To heck with big data. So in this project, you will find mostly code - I'll leave the exposition to Edge, who does a nice job explaining the concepts in his textbook. I'll chime in whenever it seems useful - I welcome your comments (send them to my twitter handle: elahi_r). 
 
 The chapters will work through the following:    
 1. Probability  
