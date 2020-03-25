@@ -82,4 +82,36 @@ summary(m1)
 
 3. On paper
 
-4. 
+4. Comparing L1 and L2 lines. 
+
+
+```r
+library(quantreg)
+x <- anscombe$x1
+y <- anscombe$y1
+
+mL1 <- rq(y ~ x, tau = 0.5)
+mL2 <- lm(y ~ x)
+
+plot(x, y)
+abline(mL2, lty = 1)
+abline(mL1, lty = 2)
+legend("topleft", legend = c("L2", "L1"), lty = c(1, 2))
+```
+
+<img src="03_best-fit-line_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+
+Dataset with outlier. 
+
+
+```r
+mL1 <- rq(y3 ~ x3, tau = 0.5, data = anscombe)
+mL2 <- lm(y3 ~ x3, data = anscombe)
+
+plot(y3 ~ x3, data = anscombe)
+abline(mL2, lty = 1)
+abline(mL1, lty = 2)
+legend("topleft", legend = c("L2", "L1"), lty = c(1, 2))
+```
+
+<img src="03_best-fit-line_files/figure-html/unnamed-chunk-3-1.png" width="672" />

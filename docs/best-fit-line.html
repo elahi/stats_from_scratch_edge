@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-03-24" />
+<meta name="date" content="2020-03-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -228,8 +228,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>On paper</p></li>
 <li><p>On paper</p></li>
 <li><p>On paper</p></li>
-<li></li>
+<li><p>Comparing L1 and L2 lines.</p></li>
 </ol>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">library</span>(quantreg)</a>
+<a class="sourceLine" id="cb55-2" title="2">x &lt;-<span class="st"> </span>anscombe<span class="op">$</span>x1</a>
+<a class="sourceLine" id="cb55-3" title="3">y &lt;-<span class="st"> </span>anscombe<span class="op">$</span>y1</a>
+<a class="sourceLine" id="cb55-4" title="4"></a>
+<a class="sourceLine" id="cb55-5" title="5">mL1 &lt;-<span class="st"> </span><span class="kw">rq</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">tau =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb55-6" title="6">mL2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</a>
+<a class="sourceLine" id="cb55-7" title="7"></a>
+<a class="sourceLine" id="cb55-8" title="8"><span class="kw">plot</span>(x, y)</a>
+<a class="sourceLine" id="cb55-9" title="9"><span class="kw">abline</span>(mL2, <span class="dt">lty =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb55-10" title="10"><span class="kw">abline</span>(mL1, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb55-11" title="11"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;L2&quot;</span>, <span class="st">&quot;L1&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a></code></pre></div>
+<p><img src="03_best-fit-line_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Dataset with outlier.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1">mL1 &lt;-<span class="st"> </span><span class="kw">rq</span>(y3 <span class="op">~</span><span class="st"> </span>x3, <span class="dt">tau =</span> <span class="fl">0.5</span>, <span class="dt">data =</span> anscombe)</a>
+<a class="sourceLine" id="cb56-2" title="2">mL2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y3 <span class="op">~</span><span class="st"> </span>x3, <span class="dt">data =</span> anscombe)</a>
+<a class="sourceLine" id="cb56-3" title="3"></a>
+<a class="sourceLine" id="cb56-4" title="4"><span class="kw">plot</span>(y3 <span class="op">~</span><span class="st"> </span>x3, <span class="dt">data =</span> anscombe)</a>
+<a class="sourceLine" id="cb56-5" title="5"><span class="kw">abline</span>(mL2, <span class="dt">lty =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb56-6" title="6"><span class="kw">abline</span>(mL1, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb56-7" title="7"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;L2&quot;</span>, <span class="st">&quot;L1&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a></code></pre></div>
+<p><img src="03_best-fit-line_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 
 </div>
 </div>
