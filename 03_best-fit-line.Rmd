@@ -1,0 +1,52 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Line of best fit {#best-fit-line}
+
+```{r load-packages}
+library(tidyverse)
+theme_set(theme_bw(base_size = 12) + 
+            theme(strip.background = element_blank(), 
+                  panel.grid = element_blank())) 
+```
+
+## Exercise set 3-1
+
+1. Calculate least-squares intercept *a* and least-squares slope *b* for the `anscombe` data. 
+
+I will use equations 3.8 and 3.9. 
+
+```{r}
+x <- anscombe$x1
+y <- anscombe$y1
+
+xbar <- mean(x)
+ybar <- mean(y)
+
+b <- sum((x - xbar)*(y - ybar)) / sum((x - xbar)^2)
+b
+
+a <- ybar - b*xbar
+a
+
+# Check using lm
+m1 <- lm(y ~ x)
+summary(m1)
+```
+
+## Exercise set 3-2
+
+1. On paper
+
+2. On paper
+
+3. On paper
+
+4. 
