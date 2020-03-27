@@ -1,7 +1,7 @@
 --- 
 title: "Notes on Statistical Thinking from Scratch"
 author: "Robin Elahi"
-date: "2020-03-25"
+date: "2020-03-26"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -36,7 +36,7 @@ The chapters will work through the following:
 2. Estimation (using data to guess the values that describe a data generating process)  
 3. Inference (testing hypotheses about the processes that might have generated an observed dataset)  
 
-What is a [data generating process](https://en.wikipedia.org/wiki/Data_generating_process)? This wikipedia entry is not all that helpful, aside from the fact that it highlights the difficulty in defining this term. For now, let's just think of the DGP as a set of rules (e.g., a deterministic equation) plus 'noise' that allows us to describe a set of obervations (i.e., data). 
+<!-- What is a [data generating process](https://en.wikipedia.org/wiki/Data_generating_process)? This wikipedia entry is not all that helpful, aside from the fact that it highlights the difficulty in defining this term. For now, let's just think of the DGP as a set of rules (e.g., a deterministic equation) plus 'noise' that allows us to describe a set of obervations (i.e., data).  -->
 
 #### How to publish a `bookdown` project on github {-}
 
