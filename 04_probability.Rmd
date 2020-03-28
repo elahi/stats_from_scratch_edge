@@ -40,7 +40,7 @@ Degrees-of-belief view
 
 An aside: is the universe fundamentally probabilistic or deterministic?
 
-### Set notation
+## Set notation
 
 A **set** ($\Omega$, in *STFS*) is an unordered collection of objects (*elements*). 
 
@@ -63,15 +63,67 @@ A Venn diagram is useful here:
 
 ![](images/venn_1.png)
 
+The notation for the probability of an event is typically denoted using either $P()$ or $[]$: 
+
+$$
+\begin{aligned}
+P(event) = [event] \\
+\end{aligned}
+$$
+
 ### Kolmogorov's three axioms of probability
 
-1. Probabilities cannot be negative
-2. The probability of the event that includes every outcome is 1. 
-3. The probability of observing either of two mutually exclusive events is the sum of their individual probabilities
+1. Probabilities of any event *i* ($E_i$) cannot be negative:
 
-## Exercise set 4-1
+$$
+\begin{aligned}
+\ [E_i] \geq 0 \\
+\end{aligned}
+$$
 
-## Exercise set 4-2
+2. The probability of the event that includes every outcome is 1:
+
+$$
+\begin{aligned}
+\ [\Omega] = 1 \\
+\end{aligned}
+$$
+
+3. The probability of observing either of two mutually exclusive events is the sum of their individual probabilities:
+
+$$
+\begin{aligned}
+\text{If } E_1 \cap E_2 = \emptyset,  \\
+\text{then } [E_1 \cup E_2] = [E_1] + [E_2] 
+\end{aligned}
+$$
+
+### Exercise set 4-1
+
+1. Given P($A$), we would like to know P($A^C$). We already learned the following properties of complements:
+
+$$
+\begin{aligned}
+A \cup A^C = \Omega  \\
+A \cap A^C = \emptyset
+\end{aligned}
+$$
+The intersection between $A$ and $A^C$ is zero, meaning they don't share any elements. The union of $A$ and $A^C$ is $[\Omega]$. We also learned the 2nd axiom of probability, $[\Omega] = 1$. Therefore:
+
+$$
+\begin{aligned}
+\ [A] + [A^C] = 1 \\ 
+\ [A^C] = 1 - [A]
+\end{aligned}
+$$
+
+2. On paper
+
+3. See book github page for solution. 
+
+## Conditional probability and independence
+
+### Exercise set 4-2
 
 
 

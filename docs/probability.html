@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-03-26" />
+<meta name="date" content="2020-03-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -158,12 +158,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>4</b> Probability and random variables</a><ul>
 <li class="chapter" data-level="4.1" data-path="probability.html"><a href="probability.html#probability-vs-estimation"><i class="fa fa-check"></i><b>4.1</b> Probability vs estimation</a></li>
-<li class="chapter" data-level="4.2" data-path="probability.html"><a href="probability.html#what-is-a-probability"><i class="fa fa-check"></i><b>4.2</b> What is a probability?</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="probability.html"><a href="probability.html#set-notation"><i class="fa fa-check"></i><b>4.2.1</b> Set notation</a></li>
-<li class="chapter" data-level="4.2.2" data-path="probability.html"><a href="probability.html#kolmogorovs-three-axioms-of-probability"><i class="fa fa-check"></i><b>4.2.2</b> Kolmogorov’s three axioms of probability</a></li>
+<li class="chapter" data-level="4.2" data-path="probability.html"><a href="probability.html#what-is-a-probability"><i class="fa fa-check"></i><b>4.2</b> What is a probability?</a></li>
+<li class="chapter" data-level="4.3" data-path="probability.html"><a href="probability.html#set-notation"><i class="fa fa-check"></i><b>4.3</b> Set notation</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="probability.html"><a href="probability.html#kolmogorovs-three-axioms-of-probability"><i class="fa fa-check"></i><b>4.3.1</b> Kolmogorov’s three axioms of probability</a></li>
+<li class="chapter" data-level="4.3.2" data-path="probability.html"><a href="probability.html#exercise-set-4-1"><i class="fa fa-check"></i><b>4.3.2</b> Exercise set 4-1</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="probability.html"><a href="probability.html#exercise-set-4-1"><i class="fa fa-check"></i><b>4.3</b> Exercise set 4-1</a></li>
-<li class="chapter" data-level="4.4" data-path="probability.html"><a href="probability.html#exercise-set-4-2"><i class="fa fa-check"></i><b>4.4</b> Exercise set 4-2</a></li>
+<li class="chapter" data-level="4.4" data-path="probability.html"><a href="probability.html#conditional-probability-and-independence"><i class="fa fa-check"></i><b>4.4</b> Conditional probability and independence</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="probability.html"><a href="probability.html#exercise-set-4-2"><i class="fa fa-check"></i><b>4.4.1</b> Exercise set 4-2</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -214,8 +216,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>what is the degree of belief in the occurrence of an event that a rational person would have?</li>
 </ul>
 <p>An aside: is the universe fundamentally probabilistic or deterministic?</p>
-<div id="set-notation" class="section level3">
-<h3><span class="header-section-number">4.2.1</span> Set notation</h3>
+</div>
+<div id="set-notation" class="section level2">
+<h2><span class="header-section-number">4.3</span> Set notation</h2>
 <p>A <strong>set</strong> (<span class="math inline">\(\Omega\)</span>, in <em>STFS</em>) is an unordered collection of objects (<em>elements</em>).</p>
 <p><strong>Intersection</strong> (<span class="math inline">\(\cap\)</span>) of two sets is the set of elements that appear in both sets.</p>
 <p><strong>Union</strong> (<span class="math inline">\(\cup\)</span>) of two sets is the set that has every element that appears in <em>either</em> of the two original sets.</p>
@@ -229,22 +232,70 @@ S \cap S^C = \emptyset
 <p>where <span class="math inline">\(\emptyset\)</span> is used to denote the empty set, or the set with no elements.</p>
 <p>A Venn diagram is useful here:</p>
 <p><img src="images/venn_1.png" /></p>
-</div>
+<p>The notation for the probability of an event is typically denoted using either <span class="math inline">\(P()\)</span> or <span class="math inline">\([]\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(event) = [event] \\
+\end{aligned}
+\]</span></p>
 <div id="kolmogorovs-three-axioms-of-probability" class="section level3">
-<h3><span class="header-section-number">4.2.2</span> Kolmogorov’s three axioms of probability</h3>
+<h3><span class="header-section-number">4.3.1</span> Kolmogorov’s three axioms of probability</h3>
 <ol style="list-style-type: decimal">
-<li>Probabilities cannot be negative</li>
-<li>The probability of the event that includes every outcome is 1.</li>
-<li>The probability of observing either of two mutually exclusive events is the sum of their individual probabilities</li>
+<li>Probabilities of any event <em>i</em> (<span class="math inline">\(E_i\)</span>) cannot be negative:</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+\ [E_i] \geq 0 \\
+\end{aligned}
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>The probability of the event that includes every outcome is 1:</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+\ [\Omega] = 1 \\
+\end{aligned}
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>The probability of observing either of two mutually exclusive events is the sum of their individual probabilities:</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+\text{If } E_1 \cap E_2 = \emptyset,  \\
+\text{then } [E_1 \cup E_2] = [E_1] + [E_2] 
+\end{aligned}
+\]</span></p>
+</div>
+<div id="exercise-set-4-1" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Exercise set 4-1</h3>
+<ol style="list-style-type: decimal">
+<li>Given P(<span class="math inline">\(A\)</span>), we would like to know P(<span class="math inline">\(A^C\)</span>). We already learned the following properties of complements:</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+A \cup A^C = \Omega  \\
+A \cap A^C = \emptyset
+\end{aligned}
+\]</span>
+The intersection between <span class="math inline">\(A\)</span> and <span class="math inline">\(A^C\)</span> is zero, meaning they don’t share any elements. The union of <span class="math inline">\(A\)</span> and <span class="math inline">\(A^C\)</span> is <span class="math inline">\([\Omega]\)</span>. We also learned the 2nd axiom of probability, <span class="math inline">\([\Omega] = 1\)</span>. Therefore:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\ [A] + [A^C] = 1 \\ 
+\ [A^C] = 1 - [A]
+\end{aligned}
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>On paper</p></li>
+<li><p>See book github page for solution.</p></li>
 </ol>
 </div>
 </div>
-<div id="exercise-set-4-1" class="section level2">
-<h2><span class="header-section-number">4.3</span> Exercise set 4-1</h2>
-</div>
-<div id="exercise-set-4-2" class="section level2">
-<h2><span class="header-section-number">4.4</span> Exercise set 4-2</h2>
+<div id="conditional-probability-and-independence" class="section level2">
+<h2><span class="header-section-number">4.4</span> Conditional probability and independence</h2>
+<div id="exercise-set-4-2" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> Exercise set 4-2</h3>
 
+</div>
 </div>
 </div>
             </section>
