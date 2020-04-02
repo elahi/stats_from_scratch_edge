@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-03-27" />
+<meta name="date" content="2020-04-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -157,15 +157,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="best-fit-line.html"><a href="best-fit-line.html#exercise-set-3-2"><i class="fa fa-check"></i><b>3.2</b> Exercise set 3-2</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>4</b> Probability and random variables</a><ul>
-<li class="chapter" data-level="4.1" data-path="probability.html"><a href="probability.html#probability-vs-estimation"><i class="fa fa-check"></i><b>4.1</b> Probability vs estimation</a></li>
-<li class="chapter" data-level="4.2" data-path="probability.html"><a href="probability.html#what-is-a-probability"><i class="fa fa-check"></i><b>4.2</b> What is a probability?</a></li>
-<li class="chapter" data-level="4.3" data-path="probability.html"><a href="probability.html#set-notation"><i class="fa fa-check"></i><b>4.3</b> Set notation</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="probability.html"><a href="probability.html#kolmogorovs-three-axioms-of-probability"><i class="fa fa-check"></i><b>4.3.1</b> Kolmogorov’s three axioms of probability</a></li>
-<li class="chapter" data-level="4.3.2" data-path="probability.html"><a href="probability.html#exercise-set-4-1"><i class="fa fa-check"></i><b>4.3.2</b> Exercise set 4-1</a></li>
+<li class="chapter" data-level="4.0.1" data-path="probability.html"><a href="probability.html#probability-vs-estimation"><i class="fa fa-check"></i><b>4.0.1</b> Probability vs estimation</a></li>
+<li class="chapter" data-level="4.0.2" data-path="probability.html"><a href="probability.html#what-is-a-probability"><i class="fa fa-check"></i><b>4.0.2</b> What is a probability?</a></li>
+<li class="chapter" data-level="4.0.3" data-path="probability.html"><a href="probability.html#set-notation"><i class="fa fa-check"></i><b>4.0.3</b> Set notation</a></li>
+<li class="chapter" data-level="4.1" data-path="probability.html"><a href="probability.html#kolmogorovs-three-axioms-of-probability"><i class="fa fa-check"></i><b>4.1</b> Kolmogorov’s three axioms of probability</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="probability.html"><a href="probability.html#exercise-set-4-1"><i class="fa fa-check"></i><b>4.1.1</b> Exercise set 4-1</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="probability.html"><a href="probability.html#conditional-probability-and-independence"><i class="fa fa-check"></i><b>4.4</b> Conditional probability and independence</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="probability.html"><a href="probability.html#exercise-set-4-2"><i class="fa fa-check"></i><b>4.4.1</b> Exercise set 4-2</a></li>
+<li class="chapter" data-level="4.2" data-path="probability.html"><a href="probability.html#conditional-probability-and-independence"><i class="fa fa-check"></i><b>4.2</b> Conditional probability and independence</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="probability.html"><a href="probability.html#exercise-set-4-2"><i class="fa fa-check"></i><b>4.2.1</b> Exercise set 4-2</a></li>
 </ul></li>
+<li class="chapter" data-level="4.3" data-path="probability.html"><a href="probability.html#bayes-theorem"><i class="fa fa-check"></i><b>4.3</b> Bayes’ Theorem</a></li>
+<li class="chapter" data-level="4.4" data-path="probability.html"><a href="probability.html#discrete-random-variables-and-distributions"><i class="fa fa-check"></i><b>4.4</b> Discrete random variables and distributions</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="probability.html"><a href="probability.html#exercise-set-4-3"><i class="fa fa-check"></i><b>4.4.1</b> Exercise set 4-3</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="probability.html"><a href="probability.html#continuous-random-variables-and-distributions"><i class="fa fa-check"></i><b>4.5</b> Continuous random variables and distributions</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="probability.html"><a href="probability.html#exercise-set-4-4"><i class="fa fa-check"></i><b>4.5.1</b> Exercise set 4-4</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="probability.html"><a href="probability.html#probability-density-functions"><i class="fa fa-check"></i><b>4.6</b> Probability density functions</a></li>
+<li class="chapter" data-level="4.7" data-path="probability.html"><a href="probability.html#families-of-distributions"><i class="fa fa-check"></i><b>4.7</b> Families of distributions</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -193,8 +202,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb57-2" title="2"><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>(<span class="dt">base_size =</span> <span class="dv">12</span>) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb57-3" title="3"><span class="st">            </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_blank</span>(), </a>
 <a class="sourceLine" id="cb57-4" title="4">                  <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>())) </a></code></pre></div>
-<div id="probability-vs-estimation" class="section level2">
-<h2><span class="header-section-number">4.1</span> Probability vs estimation</h2>
+<div id="probability-vs-estimation" class="section level3">
+<h3><span class="header-section-number">4.0.1</span> Probability vs estimation</h3>
 <p>Here are two quotes from <em>STFS</em> that encapsulate the distinction between probability and estimation:</p>
 <blockquote>
 <p><em>In probability theory, we think about processes that generate data, and we ask "what can we say about the data generated by such a process?</em></p>
@@ -204,8 +213,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <p>So, we can define probability as the <em>study of data generated by specified processes</em> - and that’s the focus of this chapter. Later on, when we get to data - we’ll be assuming probabilistic models - but we have to accept the fact that the data we observed were not likely to be generated by the assumed model! But we do the best we can.</p>
 </div>
-<div id="what-is-a-probability" class="section level2">
-<h2><span class="header-section-number">4.2</span> What is a probability?</h2>
+<div id="what-is-a-probability" class="section level3">
+<h3><span class="header-section-number">4.0.2</span> What is a probability?</h3>
 <p>Frequency view</p>
 <ul>
 <li>the probability of a given event is simply the proportion of times it occurs over many trials</li>
@@ -217,8 +226,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>An aside: is the universe fundamentally probabilistic or deterministic?</p>
 </div>
-<div id="set-notation" class="section level2">
-<h2><span class="header-section-number">4.3</span> Set notation</h2>
+<div id="set-notation" class="section level3">
+<h3><span class="header-section-number">4.0.3</span> Set notation</h3>
 <p>A <strong>set</strong> (<span class="math inline">\(\Omega\)</span>, in <em>STFS</em>) is an unordered collection of objects (<em>elements</em>).</p>
 <p><strong>Intersection</strong> (<span class="math inline">\(\cap\)</span>) of two sets is the set of elements that appear in both sets.</p>
 <p><strong>Union</strong> (<span class="math inline">\(\cup\)</span>) of two sets is the set that has every element that appears in <em>either</em> of the two original sets.</p>
@@ -238,8 +247,9 @@ S \cap S^C = \emptyset
 P(event) = [event] \\
 \end{aligned}
 \]</span></p>
-<div id="kolmogorovs-three-axioms-of-probability" class="section level3">
-<h3><span class="header-section-number">4.3.1</span> Kolmogorov’s three axioms of probability</h3>
+</div>
+<div id="kolmogorovs-three-axioms-of-probability" class="section level2">
+<h2><span class="header-section-number">4.1</span> Kolmogorov’s three axioms of probability</h2>
 <ol style="list-style-type: decimal">
 <li>Probabilities of any event <em>i</em> (<span class="math inline">\(E_i\)</span>) cannot be negative:</li>
 </ol>
@@ -265,9 +275,8 @@ P(event) = [event] \\
 \text{then } [E_1 \cup E_2] = [E_1] + [E_2] 
 \end{aligned}
 \]</span></p>
-</div>
 <div id="exercise-set-4-1" class="section level3">
-<h3><span class="header-section-number">4.3.2</span> Exercise set 4-1</h3>
+<h3><span class="header-section-number">4.1.1</span> Exercise set 4-1</h3>
 <ol style="list-style-type: decimal">
 <li>Given P(<span class="math inline">\(A\)</span>), we would like to know P(<span class="math inline">\(A^C\)</span>). We already learned the following properties of complements:</li>
 </ol>
@@ -291,11 +300,80 @@ The intersection between <span class="math inline">\(A\)</span> and <span class=
 </div>
 </div>
 <div id="conditional-probability-and-independence" class="section level2">
-<h2><span class="header-section-number">4.4</span> Conditional probability and independence</h2>
+<h2><span class="header-section-number">4.2</span> Conditional probability and independence</h2>
 <div id="exercise-set-4-2" class="section level3">
-<h3><span class="header-section-number">4.4.1</span> Exercise set 4-2</h3>
-
+<h3><span class="header-section-number">4.2.1</span> Exercise set 4-2</h3>
 </div>
+</div>
+<div id="bayes-theorem" class="section level2">
+<h2><span class="header-section-number">4.3</span> Bayes’ Theorem</h2>
+</div>
+<div id="discrete-random-variables-and-distributions" class="section level2">
+<h2><span class="header-section-number">4.4</span> Discrete random variables and distributions</h2>
+<p><strong>Random variable</strong>: e.g., the process of rolling a die, <span class="math inline">\(X\)</span></p>
+<ul>
+<li><span class="math inline">\(X\)</span> is random, can take integer values 1-6</li>
+<li><span class="math inline">\(X\)</span> is not a number yet - it is the unrealized outcome of a random process</li>
+<li>The realization of that process is an <strong>instance</strong> - which is a number</li>
+<li>Capital <span class="math inline">\(X\)</span>: random variable</li>
+<li>Lower case <span class="math inline">\(x\)</span>: instance</li>
+</ul>
+<p>All the probability information is contained in its distribution.</p>
+<p>In our case, <span class="math inline">\(X\)</span> is a <strong>discrete</strong> random variable, meaning that the number of outcomes is countable, in principle.</p>
+<p>Two ways to represent the distribution:</p>
+<ol style="list-style-type: decimal">
+<li>Probability mass function (pmf), <span class="math inline">\(f_X(x) = P(X = x)\)</span></li>
+<li>Cumulative distribution function (cdf), <span class="math inline">\(F_X(x) = P(X \leq x)\)</span></li>
+</ol>
+<p>The cdf is a series of partial sums of the pmf,</p>
+<p><span class="math display">\[
+\begin{aligned}
+F_X(x) = P(X \leq x) = \sum_{x_i \leq x} f_X(x_i)
+\end{aligned}
+\]</span>
+and increases monotonically in <span class="math inline">\(x\)</span>.</p>
+<div id="exercise-set-4-3" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> Exercise set 4-3</h3>
+</div>
+</div>
+<div id="continuous-random-variables-and-distributions" class="section level2">
+<h2><span class="header-section-number">4.5</span> Continuous random variables and distributions</h2>
+<p>What about values that are not countable - anything with a decimal? Impossible to get a specific number, or instance, and thus we cannot use the pmf. But we can still use the cdf!</p>
+<div id="exercise-set-4-4" class="section level3">
+<h3><span class="header-section-number">4.5.1</span> Exercise set 4-4</h3>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(X\)</span> is a random variable that takes values in the interval [0, 1], and the probability distribution is uniform. Draw the cumulative distribution function <span class="math inline">\(F_X(x)\)</span> for <span class="math inline">\(x \in [-1, 2]\)</span>.</li>
+</ol>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb58-2" title="2">Fx &lt;-<span class="st"> </span>x</a>
+<a class="sourceLine" id="cb58-3" title="3"><span class="kw">plot</span>(x, Fx, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb58-4" title="4"><span class="kw">lines</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>), <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb58-5" title="5"><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="04_probability_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>If <span class="math inline">\(X\)</span> were more likely to land in [0.4, 0.6] than in any other region of length 0.2, the line between 0.4 and 0.6 would be steeper.</li>
+</ol>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">x1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.4</span>)</a>
+<a class="sourceLine" id="cb59-2" title="2">x2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>)</a>
+<a class="sourceLine" id="cb59-3" title="3">x3 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb59-4" title="4">Fx1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.3</span>)</a>
+<a class="sourceLine" id="cb59-5" title="5">Fx2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb59-6" title="6">Fx3 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.7</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb59-7" title="7"><span class="kw">plot</span>(x1, Fx1, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">xlab =</span></a>
+<a class="sourceLine" id="cb59-8" title="8"><span class="st">&quot;x&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Fx&quot;</span>)</a>
+<a class="sourceLine" id="cb59-9" title="9"><span class="kw">lines</span>(x2, Fx2)</a>
+<a class="sourceLine" id="cb59-10" title="10"><span class="kw">lines</span>(x3, Fx3)</a>
+<a class="sourceLine" id="cb59-11" title="11"><span class="kw">lines</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>), <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb59-12" title="12"><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="04_probability_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+</div>
+<div id="probability-density-functions" class="section level2">
+<h2><span class="header-section-number">4.6</span> Probability density functions</h2>
+</div>
+<div id="families-of-distributions" class="section level2">
+<h2><span class="header-section-number">4.7</span> Families of distributions</h2>
+
 </div>
 </div>
             </section>
