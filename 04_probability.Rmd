@@ -192,6 +192,159 @@ lines(c(1,2), c(1, 1))
 
 ## Probability density functions
 
+**For a continuous random variable, the pdf is the derivative of the cdf**
+
+Below I have re-created Fig 4-4, with a pdf in the upper panel and a cdf in the lower panel - for an *exponential* random variable with rate 1. 
+
+```{r edge-fig-options, echo = FALSE}
+figwidth <- 6 #6
+figheight <- 4.5 #4.5
+un <- "in"
+reso <- 600 #pixels/in
+cex.pts <- 0.6
+cex.labs <- 1.2
+cex.axs <- 1.1
+mgp.set <- c(2.3, .8, 0)
+mar.df <- c(3.5, 3.5, 1, 1)
+cex.labs.fx <- 1.4
+mar.fx <- c(5,5,2,1)
+fontfam <- "sans"
+type.plot <- "cairo"
+```
+
+```{r, echo = FALSE}
+par(mar = mar.fx, las = 1, family = fontfam, bty = "n")
+#par(mfrow=c(2,1))
+x <- seq(0, 5, length.out = 1000)
+fx <- dexp(x)
+Fx <- pexp(x)
+
+plot(x, fx, type = "l", xlab = expression(italic(x)), 
+     ylab = expression(paste(italic(f[X]), "(", italic(x), ")", sep = "")), lwd = 2,
+     cex.axis = cex.labs.fx, cex.lab = cex.labs.fx)
+polygon(c(0, seq(0, 1, length.out = 1000), 1), c(0, dexp(seq(0, 1, length.out = 1000)), 0),  col = "grey", border = NA)
+text(expression(italic(F[X](1))), x = 1/2, y = 1/4)
+mtext("Probability density function", adj = 0, cex = cex.labs.fx)
+
+plot(x, Fx, type = "l", xlab = expression(italic(x)), 
+     ylab = expression(paste(italic(F[X]), "(", italic(x), ")", sep = "")), lwd = 2,
+     cex.axis = cex.labs.fx, cex.lab = cex.labs.fx)
+text(expression(italic(F[X](1))), x = 1.2, y = 1/4, srt = 90, col = "grey55")
+mtext("Cumulative distribution function", adj = 0, cex = cex.labs.fx)
+lines(c(1,1), c(0, pexp(1)), lty = 2, col = "grey55")
+```
+
+
+### Exercise set 4-6
+
+1. On paper
+
+2. On paper
+
 ## Families of distributions
 
+Two requirements for mass or density functions:
+
+1. Must be non-negative
+
+2. Sum of all values is 1 (mass), or area under curve is 1 (density)
+
+Distribution family
+
+  - similarly shaped distributions
+  - summaries of their behavior can be computed from the same functions
+  - but **parameter** values differ
+
+### Exercise set 4-6
+
+1. On paper
+
+2. On paper
+
+3. Consider a Poisson distribution with parameter $\lambda$ = 5. If we want to know the value of the probability mass function for x = 2, $f_X(2)$, we use the `dpois()` function:
+
+```{r}
+dpois(2, lambda = 5)
+```
+
+To get the value of the cumulative distribution function $F_X(2)$, we use `ppois()`:
+
+```{r}
+ppois(2, lambda = 5)
+```
+
+If we want to know the *inverse* of the cumulative distribution function. That is, we want to know the value of $q$ that solves the equation $F_X(q) = p$. What is the number $q$ such that the probability tha the random variable is less than or equal to $q$ is $p$; $q$ is the $pth$ percentile of the distribution. We can get this using `qpois()`:
+
+```{r}
+qpois(0.124652, lambda = 5)
+```
+
+The inverse of the cdf is also called the quantile function. 
+
+Using the standard normal distribution (mean = 0, sd = 1):
+
+Plot the probability density function for x $\in$ [-3, 3]. 
+```{r}
+x <- seq(-3, 3, by = 0.1)
+x
+fx <- dnorm(x = x)
+plot(x, fx, type = "l", main = "PDF", col = "red")
+```
+
+Plot the cdf for x $\in$ [-3, 3].
+```{r}
+x <- seq(-3, 3, by = 0.1)
+x
+fx <- pnorm(q = x)
+plot(x, fx, type = "l", main = "CDF", col = "red")
+```
+
+What value of $x$ is at the 97.5th percentile of the standard normal?
+```{r}
+qnorm(p = 0.975)
+```
+
+4. Simulating from a normal distribution. 
+
+```{r}
+n <- 1000
+x <- rnorm(n)
+hist(x)
+```
+
+Simulating from a uniform distribution. 
+
+```{r}
+n <- 1000
+x <- runif(n, min = 0, max = 1)
+hist(x)
+```
+
+Now take those values between 0 and 1, and feed them into the `qnorm` function to get the values at which we see those quantiles:
+
+```{r}
+y <- qnorm(p = x, mean = 0, sd = 1)
+hist(y)
+```
+
+These values are normally distributed around 0. This plot is saying that most of the probability (in fact ~95%) lies between -2 < y < 2 (2 standard deviations). 
+
+```{r}
+r <- seq(-3, 3, length.out = 1000)
+cdf <- pnorm(r)
+#Draw the normal cumulative distribution function.
+plot(r, cdf, type = "l", xaxs = "i", yaxs = "i", xlim = c(-3,
+3), xlab = expression(italic(x)), ylab =
+expression(paste(italic(F[X]), "(", italic(x), ")", sep = "")),
+lwd = 2)
+#Draw light grey lines representing random samples from the
+#standard normal distribution.
+x <- rnorm(100)
+for(i in x){
+  lines(c(i,i), c(min(x), pnorm(i)), col = rgb(190, 190, 190,
+     alpha = 60, max = 255))
+  lines(c(min(x)-1,i), c(pnorm(i), pnorm(i)), col = rgb(190,
+     190, 190, alpha = 60, max = 255))
+}
+```
 

@@ -197,6 +197,185 @@ lines(c(1,2), c(1, 1))
 
 ## Probability density functions
 
+**For a continuous random variable, the pdf is the derivative of the cdf**
+
+Below I have re-created Fig 4-4, with a pdf in the upper panel and a cdf in the lower panel - for an *exponential* random variable with rate 1. 
+
+
+
+<img src="04_probability_files/figure-html/unnamed-chunk-3-1.png" width="672" /><img src="04_probability_files/figure-html/unnamed-chunk-3-2.png" width="672" />
+
+
+### Exercise set 4-6
+
+1. On paper
+
+2. On paper
+
 ## Families of distributions
 
+Two requirements for mass or density functions:
+
+1. Must be non-negative
+
+2. Sum of all values is 1 (mass), or area under curve is 1 (density)
+
+Distribution family
+
+  - similarly shaped distributions
+  - summaries of their behavior can be computed from the same functions
+  - but **parameter** values differ
+
+### Exercise set 4-6
+
+1. On paper
+
+2. On paper
+
+3. Consider a Poisson distribution with parameter $\lambda$ = 5. If we want to know the value of the probability mass function for x = 2, $f_X(2)$, we use the `dpois()` function:
+
+
+```r
+dpois(2, lambda = 5)
+```
+
+```
+## [1] 0.08422434
+```
+
+To get the value of the cumulative distribution function $F_X(2)$, we use `ppois()`:
+
+
+```r
+ppois(2, lambda = 5)
+```
+
+```
+## [1] 0.124652
+```
+
+If we want to know the *inverse* of the cumulative distribution function. That is, we want to know the value of $q$ that solves the equation $F_X(q) = p$. What is the number $q$ such that the probability tha the random variable is less than or equal to $q$ is $p$; $q$ is the $pth$ percentile of the distribution. We can get this using `qpois()`:
+
+
+```r
+qpois(0.124652, lambda = 5)
+```
+
+```
+## [1] 2
+```
+
+The inverse of the cdf is also called the quantile function. 
+
+Using the standard normal distribution (mean = 0, sd = 1):
+
+Plot the probability density function for x $\in$ [-3, 3]. 
+
+```r
+x <- seq(-3, 3, by = 0.1)
+x
+```
+
+```
+##  [1] -3.0 -2.9 -2.8 -2.7 -2.6 -2.5 -2.4 -2.3 -2.2 -2.1 -2.0 -1.9 -1.8 -1.7 -1.6
+## [16] -1.5 -1.4 -1.3 -1.2 -1.1 -1.0 -0.9 -0.8 -0.7 -0.6 -0.5 -0.4 -0.3 -0.2 -0.1
+## [31]  0.0  0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1.0  1.1  1.2  1.3  1.4
+## [46]  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3  2.4  2.5  2.6  2.7  2.8  2.9
+## [61]  3.0
+```
+
+```r
+fx <- dnorm(x = x)
+plot(x, fx, type = "l", main = "PDF", col = "red")
+```
+
+<img src="04_probability_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+
+Plot the cdf for x $\in$ [-3, 3].
+
+```r
+x <- seq(-3, 3, by = 0.1)
+x
+```
+
+```
+##  [1] -3.0 -2.9 -2.8 -2.7 -2.6 -2.5 -2.4 -2.3 -2.2 -2.1 -2.0 -1.9 -1.8 -1.7 -1.6
+## [16] -1.5 -1.4 -1.3 -1.2 -1.1 -1.0 -0.9 -0.8 -0.7 -0.6 -0.5 -0.4 -0.3 -0.2 -0.1
+## [31]  0.0  0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1.0  1.1  1.2  1.3  1.4
+## [46]  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3  2.4  2.5  2.6  2.7  2.8  2.9
+## [61]  3.0
+```
+
+```r
+fx <- pnorm(q = x)
+plot(x, fx, type = "l", main = "CDF", col = "red")
+```
+
+<img src="04_probability_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+
+What value of $x$ is at the 97.5th percentile of the standard normal?
+
+```r
+qnorm(p = 0.975)
+```
+
+```
+## [1] 1.959964
+```
+
+4. Simulating from a normal distribution. 
+
+
+```r
+n <- 1000
+x <- rnorm(n)
+hist(x)
+```
+
+<img src="04_probability_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+
+Simulating from a uniform distribution. 
+
+
+```r
+n <- 1000
+x <- runif(n, min = 0, max = 1)
+hist(x)
+```
+
+<img src="04_probability_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+
+Now take those values between 0 and 1, and feed them into the `qnorm` function to get the values at which we see those quantiles:
+
+
+```r
+y <- qnorm(p = x, mean = 0, sd = 1)
+hist(y)
+```
+
+<img src="04_probability_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+
+These values are normally distributed around 0. This plot is saying that most of the probability (in fact ~95%) lies between -2 < y < 2 (2 standard deviations). 
+
+
+```r
+r <- seq(-3, 3, length.out = 1000)
+cdf <- pnorm(r)
+#Draw the normal cumulative distribution function.
+plot(r, cdf, type = "l", xaxs = "i", yaxs = "i", xlim = c(-3,
+3), xlab = expression(italic(x)), ylab =
+expression(paste(italic(F[X]), "(", italic(x), ")", sep = "")),
+lwd = 2)
+#Draw light grey lines representing random samples from the
+#standard normal distribution.
+x <- rnorm(100)
+for(i in x){
+  lines(c(i,i), c(min(x), pnorm(i)), col = rgb(190, 190, 190,
+     alpha = 60, max = 255))
+  lines(c(min(x)-1,i), c(pnorm(i), pnorm(i)), col = rgb(190,
+     190, 190, alpha = 60, max = 255))
+}
+```
+
+<img src="04_probability_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
