@@ -1,0 +1,45 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Properties of random variables {#randomvars}
+
+```{r load-packages}
+library(tidyverse)
+theme_set(theme_bw(base_size = 12) + 
+            theme(strip.background = element_blank(), 
+                  panel.grid = element_blank())) 
+```
+
+## Expected values and the law of large numbers
+
+### Exercise set 5-1
+
+1. On paper
+
+2.
+
+```{r}
+samp.size <- 1
+n.samps <- 1000
+samps <- rnorm(samp.size * n.samps, mean = 0, sd = 1)
+samp.mat <- matrix(samps, ncol = n.samps)
+samp.means <- colMeans(samp.mat)
+hist(samp.means)
+```
+
+
+```{r}
+samp.size <- 100
+n.samps <- 1000
+samps <-matrix(rexp(samp.size*n.samps, rate = 1), ncol = n.samps)
+samp.means <- colMeans(samps)
+hist(samp.means)
+```
+
