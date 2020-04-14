@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Properties of random variables | Notes on Statistical Thinking from Scratch</title>
+  <meta name="description" content="Cliff notes for Statistical Thinking from Scratch, by Doc Edge." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Properties of random variables | Notes on Statistical Thinking from Scratch" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Cliff notes for Statistical Thinking from Scratch, by Doc Edge." />
+  <meta name="github-repo" content="elahi/stats_from_scratch_edge" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Properties of random variables | Notes on Statistical Thinking from Scratch" />
+  
+  <meta name="twitter:description" content="Cliff notes for Statistical Thinking from Scratch, by Doc Edge." />
+  
+
+<meta name="author" content="Robin Elahi" />
+
+
+<meta name="date" content="2020-04-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="probability.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121894527-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121894527-4');
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Notes on Statistical Thinking from Scratch</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="r-eda.html"><a href="r-eda.html"><i class="fa fa-check"></i><b>2</b> R and exploratory data analysis</a><ul>
+<li class="chapter" data-level="2.1" data-path="r-eda.html"><a href="r-eda.html#inspecting-the-dataframe"><i class="fa fa-check"></i><b>2.1</b> Inspecting the dataframe</a></li>
+<li class="chapter" data-level="2.2" data-path="r-eda.html"><a href="r-eda.html#histograms"><i class="fa fa-check"></i><b>2.2</b> Histograms</a></li>
+<li class="chapter" data-level="2.3" data-path="r-eda.html"><a href="r-eda.html#summarising-data"><i class="fa fa-check"></i><b>2.3</b> Summarising data</a></li>
+<li class="chapter" data-level="2.4" data-path="r-eda.html"><a href="r-eda.html#loops"><i class="fa fa-check"></i><b>2.4</b> Loops</a></li>
+<li class="chapter" data-level="2.5" data-path="r-eda.html"><a href="r-eda.html#functions"><i class="fa fa-check"></i><b>2.5</b> Functions</a></li>
+<li class="chapter" data-level="2.6" data-path="r-eda.html"><a href="r-eda.html#boxplots"><i class="fa fa-check"></i><b>2.6</b> Boxplots</a></li>
+<li class="chapter" data-level="2.7" data-path="r-eda.html"><a href="r-eda.html#scatterplots"><i class="fa fa-check"></i><b>2.7</b> Scatterplots</a></li>
+<li class="chapter" data-level="2.8" data-path="r-eda.html"><a href="r-eda.html#exercise-set-2-2"><i class="fa fa-check"></i><b>2.8</b> Exercise set 2-2</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="best-fit-line.html"><a href="best-fit-line.html"><i class="fa fa-check"></i><b>3</b> Line of best fit</a><ul>
+<li class="chapter" data-level="3.1" data-path="best-fit-line.html"><a href="best-fit-line.html#exercise-set-3-1"><i class="fa fa-check"></i><b>3.1</b> Exercise set 3-1</a></li>
+<li class="chapter" data-level="3.2" data-path="best-fit-line.html"><a href="best-fit-line.html#exercise-set-3-2"><i class="fa fa-check"></i><b>3.2</b> Exercise set 3-2</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>4</b> Probability and random variables</a><ul>
+<li class="chapter" data-level="4.0.1" data-path="probability.html"><a href="probability.html#probability-vs-estimation"><i class="fa fa-check"></i><b>4.0.1</b> Probability vs estimation</a></li>
+<li class="chapter" data-level="4.0.2" data-path="probability.html"><a href="probability.html#what-is-a-probability"><i class="fa fa-check"></i><b>4.0.2</b> What is a probability?</a></li>
+<li class="chapter" data-level="4.0.3" data-path="probability.html"><a href="probability.html#set-notation"><i class="fa fa-check"></i><b>4.0.3</b> Set notation</a></li>
+<li class="chapter" data-level="4.1" data-path="probability.html"><a href="probability.html#kolmogorovs-three-axioms-of-probability"><i class="fa fa-check"></i><b>4.1</b> Kolmogorov’s three axioms of probability</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="probability.html"><a href="probability.html#exercise-set-4-1"><i class="fa fa-check"></i><b>4.1.1</b> Exercise set 4-1</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="probability.html"><a href="probability.html#conditional-probability-and-independence"><i class="fa fa-check"></i><b>4.2</b> Conditional probability and independence</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="probability.html"><a href="probability.html#exercise-set-4-2"><i class="fa fa-check"></i><b>4.2.1</b> Exercise set 4-2</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="probability.html"><a href="probability.html#bayes-theorem"><i class="fa fa-check"></i><b>4.3</b> Bayes’ Theorem</a></li>
+<li class="chapter" data-level="4.4" data-path="probability.html"><a href="probability.html#discrete-random-variables-and-distributions"><i class="fa fa-check"></i><b>4.4</b> Discrete random variables and distributions</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="probability.html"><a href="probability.html#exercise-set-4-3"><i class="fa fa-check"></i><b>4.4.1</b> Exercise set 4-3</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="probability.html"><a href="probability.html#continuous-random-variables-and-distributions"><i class="fa fa-check"></i><b>4.5</b> Continuous random variables and distributions</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="probability.html"><a href="probability.html#exercise-set-4-4"><i class="fa fa-check"></i><b>4.5.1</b> Exercise set 4-4</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="probability.html"><a href="probability.html#probability-density-functions"><i class="fa fa-check"></i><b>4.6</b> Probability density functions</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="probability.html"><a href="probability.html#exercise-set-4-6"><i class="fa fa-check"></i><b>4.6.1</b> Exercise set 4-6</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="probability.html"><a href="probability.html#families-of-distributions"><i class="fa fa-check"></i><b>4.7</b> Families of distributions</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="probability.html"><a href="probability.html#exercise-set-4-6-1"><i class="fa fa-check"></i><b>4.7.1</b> Exercise set 4-6</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="randomvars.html"><a href="randomvars.html"><i class="fa fa-check"></i><b>5</b> Properties of random variables</a><ul>
+<li class="chapter" data-level="5.1" data-path="randomvars.html"><a href="randomvars.html#expected-values-and-the-law-of-large-numbers"><i class="fa fa-check"></i><b>5.1</b> Expected values and the law of large numbers</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-1"><i class="fa fa-check"></i><b>5.1.1</b> Exercise set 5-1</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="randomvars.html"><a href="randomvars.html#variance-and-standard-deviation"><i class="fa fa-check"></i><b>5.2</b> Variance and standard deviation</a></li>
+<li class="chapter" data-level="5.3" data-path="randomvars.html"><a href="randomvars.html#joint-distributions-covariance-and-correlation"><i class="fa fa-check"></i><b>5.3</b> Joint distributions, covariance, and correlation</a></li>
+<li class="chapter" data-level="5.4" data-path="randomvars.html"><a href="randomvars.html#conditional-distribution-expectation-variance"><i class="fa fa-check"></i><b>5.4</b> Conditional distribution, expectation, variance</a></li>
+<li class="chapter" data-level="5.5" data-path="randomvars.html"><a href="randomvars.html#the-central-limit-theorem"><i class="fa fa-check"></i><b>5.5</b> The central limit theorem</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-4"><i class="fa fa-check"></i><b>5.5.1</b> Exercise set 5-4</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="randomvars.html"><a href="randomvars.html#a-probabilistic-model-for-simple-linear-regression"><i class="fa fa-check"></i><b>5.6</b> A probabilistic model for simple linear regression</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes on Statistical Thinking from Scratch</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="randomvars" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Properties of random variables</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>(<span class="dt">base_size =</span> <span class="dv">12</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="st">            </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_blank</span>(), </a>
+<a class="sourceLine" id="cb1-4" title="4">                  <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>())) </a></code></pre></div>
+<div id="expected-values-and-the-law-of-large-numbers" class="section level2">
+<h2><span class="header-section-number">5.1</span> Expected values and the law of large numbers</h2>
+<div id="exercise-set-5-1" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Exercise set 5-1</h3>
+<ol style="list-style-type: decimal">
+<li><p>On paper</p></li>
+<li></li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">samp.size &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-2" title="2">n.samps &lt;-<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb2-3" title="3">samps &lt;-<span class="st"> </span><span class="kw">rnorm</span>(samp.size <span class="op">*</span><span class="st"> </span>n.samps, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-4" title="4">samp.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(samps, <span class="dt">ncol =</span> n.samps)</a>
+<a class="sourceLine" id="cb2-5" title="5">samp.means &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samp.mat)</a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="kw">hist</span>(samp.means)</a></code></pre></div>
+<p><img src="05_random_variables_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">samp.size &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb3-2" title="2">n.samps &lt;-<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb3-3" title="3">samps &lt;-<span class="kw">matrix</span>(<span class="kw">rexp</span>(samp.size<span class="op">*</span>n.samps, <span class="dt">rate =</span> <span class="dv">1</span>), <span class="dt">ncol =</span> n.samps)</a>
+<a class="sourceLine" id="cb3-4" title="4">samp.means &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samps)</a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="kw">hist</span>(samp.means)</a></code></pre></div>
+<p><img src="05_random_variables_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+</div>
+<div id="variance-and-standard-deviation" class="section level2">
+<h2><span class="header-section-number">5.2</span> Variance and standard deviation</h2>
+</div>
+<div id="joint-distributions-covariance-and-correlation" class="section level2">
+<h2><span class="header-section-number">5.3</span> Joint distributions, covariance, and correlation</h2>
+</div>
+<div id="conditional-distribution-expectation-variance" class="section level2">
+<h2><span class="header-section-number">5.4</span> Conditional distribution, expectation, variance</h2>
+</div>
+<div id="the-central-limit-theorem" class="section level2">
+<h2><span class="header-section-number">5.5</span> The central limit theorem</h2>
+<div id="exercise-set-5-4" class="section level3">
+<h3><span class="header-section-number">5.5.1</span> Exercise set 5-4</h3>
+<ol style="list-style-type: decimal">
+<li>Bean machine in action!</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">library</span>(animation)</a>
+<a class="sourceLine" id="cb4-2" title="2">nball &lt;-<span class="st"> </span><span class="dv">500</span> <span class="co">#change the number of balls</span></a>
+<a class="sourceLine" id="cb4-3" title="3">nlayer &lt;-<span class="st"> </span><span class="dv">10</span> <span class="co">#change the number of rows of pegs on the board</span></a>
+<a class="sourceLine" id="cb4-4" title="4">rate &lt;-<span class="st"> </span><span class="dv">10</span> <span class="co">#change the speed at which the balls fall </span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="kw">ani.options</span>(<span class="dt">nmax =</span> nball <span class="op">+</span><span class="st"> </span>nlayer <span class="op">-</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">interval =</span> <span class="dv">1</span><span class="op">/</span>rate) </a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="kw">quincunx</span>(<span class="dt">balls =</span> nball, <span class="dt">layers =</span> nlayer)</a></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Exploring the beta distribution</li>
+</ol>
+<p>To see what the beta distribution looks like for a given set of shape parameters, set the sample size to 1. For example:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">library</span>(stfspack)</a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="co"># dosm.beta.hist(n = 1, nsim = 10000, shape1 = 1, shape2 = 1)</span></a>
+<a class="sourceLine" id="cb5-3" title="3">dosm.beta.hist</a></code></pre></div>
+<pre><code>## function (n, nsim, shape1 = 1, shape2 = 1, ...) 
+## {
+##     samps &lt;- rbeta(n * nsim, shape1, shape2)
+##     sim.mat &lt;- matrix(samps, nrow = nsim)
+##     dosm &lt;- rowMeans(sim.mat)
+##     hist(dosm, freq = FALSE, ...)
+##     x &lt;- seq(0, 1, length.out = 1000)
+##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
+##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
+## }
+## &lt;bytecode: 0x7fa3d5e854a0&gt;
+## &lt;environment: namespace:stfspack&gt;</code></pre>
+<p>will give you a histogram of 10,000 observations from a beta distribution with parameters 1 and 1. If you increase the sample size, then the distribution of the sample mean gets closer to normality. Try this — starting with samples of size 1 and increasing the sample size—with the following sets of parameter values: (1, 1), (0.2, 0.2), (2, 0.5), (0.5, 2), (3, 3). Feel free to try other parameter sets—it’s fun. What do you notice?</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">sims &lt;-<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb7-2" title="2">s1 &lt;-<span class="st"> </span><span class="fl">0.2</span> <span class="co"># change this</span></a>
+<a class="sourceLine" id="cb7-3" title="3">s2 &lt;-<span class="st"> </span><span class="fl">0.2</span> <span class="co"># change this</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
+<pre><code>## mean of DOSM   SD of DOSM  var of DOSM 
+##    0.4990109    0.4228197    0.1787765</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">8</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
+<pre><code>## mean of DOSM   SD of DOSM  var of DOSM 
+##    0.4995383    0.1503004    0.0225902</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">16</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
+<pre><code>## mean of DOSM   SD of DOSM  var of DOSM 
+##   0.50007775   0.10551245   0.01113288</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">32</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
+<pre><code>## mean of DOSM   SD of DOSM  var of DOSM 
+##  0.501064679  0.074632731  0.005570045</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">64</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
+<pre><code>## mean of DOSM   SD of DOSM  var of DOSM 
+##   0.49972645   0.05220469   0.00272533</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">128</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
+<p><img src="05_random_variables_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre><code>## mean of DOSM   SD of DOSM  var of DOSM 
+##  0.500424795  0.037352264  0.001395192</code></pre>
+<p>Let’s deconstruct what is going on with this function, where n = 1 (we simulate 10000 observations from a single set of parameter values).</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">nsim &lt;-<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb19-2" title="2">n &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb19-3" title="3">s1 &lt;-<span class="st"> </span><span class="fl">0.2</span> <span class="co"># change this</span></a>
+<a class="sourceLine" id="cb19-4" title="4">s2 &lt;-<span class="st"> </span><span class="fl">0.2</span> <span class="co"># change this</span></a>
+<a class="sourceLine" id="cb19-5" title="5">samps &lt;-<span class="st"> </span><span class="kw">rbeta</span>(n <span class="op">*</span><span class="st"> </span>nsim, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a>
+<a class="sourceLine" id="cb19-6" title="6"><span class="kw">str</span>(samps) <span class="co"># here are 10,000</span></a></code></pre></div>
+<pre><code>##  num [1:10000] 0.26 0.99 0.916 0.231 0.767 ...</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="co"># We are just converting the vector into a matrix</span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="co"># So that we can easily calculate the mean of each row</span></a>
+<a class="sourceLine" id="cb21-3" title="3">sim.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(samps, <span class="dt">nrow =</span> nsim)</a>
+<a class="sourceLine" id="cb21-4" title="4"><span class="kw">dim</span>(sim.mat)</a></code></pre></div>
+<pre><code>## [1] 10000     1</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">head</span>(sim.mat) </a></code></pre></div>
+<pre><code>##           [,1]
+## [1,] 0.2596638
+## [2,] 0.9902874
+## [3,] 0.9162283
+## [4,] 0.2309883
+## [5,] 0.7674306
+## [6,] 0.5669877</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="co"># Calculate rowmeans - with n=1, this doesn&#39;t change anything</span></a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="co"># But change n to anything bigger and inspect the dimensions of the objects</span></a>
+<a class="sourceLine" id="cb25-3" title="3">dosm &lt;-<span class="st"> </span><span class="kw">rowMeans</span>(sim.mat)</a>
+<a class="sourceLine" id="cb25-4" title="4"><span class="kw">str</span>(dosm)</a></code></pre></div>
+<pre><code>##  num [1:10000] 0.26 0.99 0.916 0.231 0.767 ...</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">head</span>(dosm) <span class="co"># compare these values to sim.mat</span></a></code></pre></div>
+<pre><code>## [1] 0.2596638 0.9902874 0.9162283 0.2309883 0.7674306 0.5669877</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb29-2" title="2"><span class="kw">hist</span>(dosm, <span class="dt">freq =</span> <span class="ot">FALSE</span>) <span class="co"># plotting the simulated values</span></a>
+<a class="sourceLine" id="cb29-3" title="3"><span class="co"># Set up a vector that goes from 0 to 1 to overlay a normal distribution on the histogram</span></a>
+<a class="sourceLine" id="cb29-4" title="4">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> <span class="dv">1000</span>) </a>
+<a class="sourceLine" id="cb29-5" title="5"><span class="co"># Now plot a normal distribution, using the mean and sd of the simulated values</span></a>
+<a class="sourceLine" id="cb29-6" title="6"><span class="kw">lines</span>(x, <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> <span class="kw">mean</span>(dosm), <span class="dt">sd =</span> <span class="kw">sd</span>(dosm)), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="05_random_variables_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+</div>
+<div id="a-probabilistic-model-for-simple-linear-regression" class="section level2">
+<h2><span class="header-section-number">5.6</span> A probabilistic model for simple linear regression</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="probability.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
