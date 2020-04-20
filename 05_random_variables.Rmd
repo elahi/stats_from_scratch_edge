@@ -122,8 +122,119 @@ lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)), col = "red")
 
 3. 
 
-```{r}
+The Pareto distribution is a skewed, heavy-tailed, power-law distribution used in description of social, scientific, geophysical, actuarial, and many other types of observable phenomena. It was applied originally to the distribution of wealth in a society, fitting the observation that a large portion of wealth is held by a small fraction of the population. Named after the Italian civil engineer, economist, and sociologist Vilfredo Pareto. 
 
+Parameters of the `rpareto` function:
+
+  - a: shape (on the web as $\alpha$)
+  - b: scale (on the web as $x_m$)
+  
+If the shape parameter is $\leq$ 1, $E(X)$ is $\infty$. 
+If the shape parameter is $\leq$ 2, $Var(X)$ is $\infty$. 
+
+First we simulate many sampes of size 1000 from a Pareto distribution with shape = 4. 
+
+```{r}
+# experiment with n and the parameters a and b
+n <- 100     
+n_sims <- 10000
+a <- 1
+b <- 4
+
+x <- rpareto(n = n, a = a, b = b)
+summary(x)
+
+# Calculate mean and sd
+mu <- mean(x)
+stdev <- sd(x)
+
+hist(x, freq = FALSE)
+# Set up a vector that goes from 0 to 1 to overlay a normal distribution on the histogram
+x_vals <- seq(min(x), max(x), length.out = 1000) 
+# Now plot a normal distribution, using the mean and sd of the simulated values
+lines(x_vals, dnorm(x_vals, mean = mu, sd = stdev), col = "red")
+```
+
+```{r}
+# Compare tail to normal
+compare.tail.to.normal
+k <- 2 # sds
+compare.tail.to.normal(x = x, k = k, mu = mu, sigma = stdev)
+
+summary(x)
+mu
+stdev
+
+# This gives the value of the mean, minus the value k*stdev 
+# (i.e., an extreme negative value)
+# Below I will use my object stdev in place of sigma (the parameter from Edge's function)
+(mu - k * stdev)
+
+# Extreme positive value
+(mu + k * stdev)
+
+# This statement asks whether the value in x is an extreme value
+# The operator '|' is 'OR'
+# Is x extreme negative OR extreme positive?
+x < (mu - k * stdev) | x > (mu + k * stdev)
+
+# We can get the frequencies of this logical vector using table
+table(x < (mu - k * stdev) | x > (mu + k * stdev))
+# Or, as Edge, does, calculate the average of TRUEs - which is simply the proportion of TRUEs
+mean(x < (mu - k * stdev) | x > (mu + k * stdev))
+
+# What proportion/probability of TRUEs would we expect under a normal probability distribution?
+pnorm(k) # probability of observing a value less than k standard deviations above the mean
+pnorm(-k) # probability of observing a value less than k standard deviations below the mean
+(1 - (pnorm(k) - pnorm(-k))) # probability of observing an extreme value
+
+# So putting it all together, we have the ratio of:
+# the probability of observing an extreme value in the data, over the
+# the probability of observing an extreme value in a normal distribution:
+mean(x < (mu - k * stdev) | x > (mu + k * stdev))/(1 - (pnorm(k) - pnorm(-k)))
+compare.tail.to.normal(x = x, k = k, mu = mu, sigma = stdev)
+
+# If this ratio is < 1, then the data have fewer extreme values than suggested by a normal
+# If this ratio is > 1, then the data have more extreme values than suggested by a normal
+```
+
+Above, I haven't computed the means of many simulations - which is the crux of the question! So here I just paste Edge's solution. In it, he calculates $E(X)$ and $Var(X)$ using the Pareto probability distribution. I have changed `n` and `n.sim` to match my values above. 
+
+```{r}
+#Sample size per simulation (n) and number of simulations.
+n <- 100
+n.sim <- 10000
+#Pareto parameters. Variance is finite, and so
+#CLT applies, if a > 2. For large a, convergence to
+#normal is better. With small a, convergence is slow,
+#especially in the tails.
+a <- 4
+b <- 1
+#Compute the expectation and variance of the distribution
+#of the sample mean. a must be above 2 for these expressions
+#to hold.
+expec.par <- a*b/(a-1)
+var.par <- a*b^2 / ((a-1)^2 * (a-2))
+sd.mean <- sqrt(var.par / n)
+#Simulate data
+sim <- matrix(rpareto(n*n.sim, a, b), nrow = n.sim)
+# Each column represents ith sample taken per simulation
+# Each row represents a different simulation
+sim[1:3, 1:10]
+# Compute sample means.
+means.sim <- rowMeans(sim)
+str(means.sim)
+#Draw a histogram of the sample means along with the approximate
+#normal pdf that follows from the CLT.
+hist(means.sim, prob = TRUE)
+curve(dnorm(x, expec.par, sd.mean), add = TRUE, col = 'red')
+compare.tail.to.normal(means.sim, 1/2, expec.par, sd.mean)
+compare.tail.to.normal(means.sim, 1, expec.par, sd.mean)
+compare.tail.to.normal(means.sim, 2, expec.par, sd.mean)
+compare.tail.to.normal(means.sim, 3, expec.par, sd.mean)
+compare.tail.to.normal(means.sim, 4, expec.par, sd.mean)
+compare.tail.to.normal(means.sim, 5, expec.par, sd.mean)
+compare.tail.to.normal(means.sim, 6, expec.par, sd.mean)
 ```
 
 
