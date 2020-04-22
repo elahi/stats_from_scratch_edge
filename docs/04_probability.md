@@ -116,13 +116,89 @@ $$
 \end{aligned}
 $$
 
-2. On paper
+2. On paper. 
 
-3. See book github page for solution. 
+3. Below I've pasted an image of my handwritten version of Edge's solution - I found it easier to think about once I visualized it using a Venn diagram. 
+
+![](images/edge_4_1_3.png)
 
 ## Conditional probability and independence
 
+The law of conditional probability states that: 
+
+$$
+\begin{aligned}
+\ [A \mid B] = \frac{[A \cap B]}{[B]} \\ 
+\end{aligned}
+$$
+
+If A and B are independent, then: 
+
+$$
+\begin{aligned}
+\ [A \mid B] = [A] \\ 
+\end{aligned}
+$$
+
 ### Exercise set 4-2
+
+1. If we rearrange the law of probability, we get:
+
+$$
+\begin{aligned}
+\ [A \mid B] [B] = [A \cap B] \\ 
+\end{aligned}
+$$
+
+By definition, if A and B are independent, then we can replace $[A \mid B]$ with $[A]$ and get:
+
+$$
+\begin{aligned}
+\ [A \cap B] = [A] [B] \\ 
+\end{aligned}
+$$
+
+If we divide both sides by $[A]$, we get:
+
+$$
+\begin{aligned}
+\ [B] = \frac{[A \cap B]}{[A]} \\ 
+\end{aligned}
+$$
+
+The right-hand side of the above equation is, by the law of conditional probability, equal to $[B \mid A]$ and thus:
+
+$$
+\begin{aligned}
+\ [B] = [B \mid A]\\ 
+\end{aligned}
+$$
+
+2. Suppose you know $[A \mid B]$, $[A]$, and $[B]$. Calculate $[B \mid A]$. 
+
+$$
+\begin{aligned}
+\ [A \mid B] = \frac{[A \cap B]}{[B]} \\ 
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\ [A \mid B] [B] = [A \cap B] \\ 
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\ [B \mid A] = \frac{[A \cap B]}{[A]} \\ 
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\ [B \mid A] = \frac{[A \mid B] [B]}{[A]} \\ 
+\end{aligned}
+$$
 
 ## Bayes' Theorem
 

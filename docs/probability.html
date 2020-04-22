@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-04-20" />
+<meta name="date" content="2020-04-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -310,15 +310,77 @@ The intersection between <span class="math inline">\(A\)</span> and <span class=
 \end{aligned}
 \]</span></p>
 <ol start="2" style="list-style-type: decimal">
-<li><p>On paper</p></li>
-<li><p>See book github page for solution.</p></li>
+<li><p>On paper.</p></li>
+<li><p>Below I’ve pasted an image of my handwritten version of Edge’s solution - I found it easier to think about once I visualized it using a Venn diagram.</p></li>
 </ol>
+<p><img src="images/edge_4_1_3.png" /></p>
 </div>
 </div>
 <div id="conditional-probability-and-independence" class="section level2">
 <h2><span class="header-section-number">4.2</span> Conditional probability and independence</h2>
+<p>The law of conditional probability states that:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\ [A \mid B] = \frac{[A \cap B]}{[B]} \\ 
+\end{aligned}
+\]</span></p>
+<p>If A and B are independent, then:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\ [A \mid B] = [A] \\ 
+\end{aligned}
+\]</span></p>
 <div id="exercise-set-4-2" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Exercise set 4-2</h3>
+<ol style="list-style-type: decimal">
+<li>If we rearrange the law of probability, we get:</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+\ [A \mid B] [B] = [A \cap B] \\ 
+\end{aligned}
+\]</span></p>
+<p>By definition, if A and B are independent, then we can replace <span class="math inline">\([A \mid B]\)</span> with <span class="math inline">\([A]\)</span> and get:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\ [A \cap B] = [A] [B] \\ 
+\end{aligned}
+\]</span></p>
+<p>If we divide both sides by <span class="math inline">\([A]\)</span>, we get:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\ [B] = \frac{[A \cap B]}{[A]} \\ 
+\end{aligned}
+\]</span></p>
+<p>The right-hand side of the above equation is, by the law of conditional probability, equal to <span class="math inline">\([B \mid A]\)</span> and thus:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\ [B] = [B \mid A]\\ 
+\end{aligned}
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Suppose you know <span class="math inline">\([A \mid B]\)</span>, <span class="math inline">\([A]\)</span>, and <span class="math inline">\([B]\)</span>. Calculate <span class="math inline">\([B \mid A]\)</span>.</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+\ [A \mid B] = \frac{[A \cap B]}{[B]} \\ 
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\ [A \mid B] [B] = [A \cap B] \\ 
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\ [B \mid A] = \frac{[A \cap B]}{[A]} \\ 
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\ [B \mid A] = \frac{[A \mid B] [B]}{[A]} \\ 
+\end{aligned}
+\]</span></p>
 </div>
 </div>
 <div id="bayes-theorem" class="section level2">

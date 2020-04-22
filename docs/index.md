@@ -1,7 +1,7 @@
 --- 
 title: "Notes on Statistical Thinking from Scratch"
 author: "Robin Elahi"
-date: "2020-04-20"
+date: "2020-04-21"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -29,7 +29,7 @@ library(stfspack)
 
 
 
-As Edge points out in his **Prelude**, the typical introductory course in biological statistics (including my own) revolves around learning a series of *tests*: t-tests, regression, ANOVA . In *STFS*, the focus instead is on one procedure - simple linear regression - and takes 'little for granted' (translation: we'll be working through the math, lightly). The primary dataset consists of 11 observations. To heck with big data. So in this project, you will find mostly code - I'll leave the exposition to Edge, who does a nice job explaining the concepts in his textbook. I'll chime in whenever it seems useful - I welcome your comments (send them to my twitter handle: elahi_r). 
+As Edge points out in his **Prelude**, the typical introductory course in biological statistics (including my own) revolves around learning a series of *tests*: t-tests, regression, ANOVA . In *STFS*, the focus instead is on one procedure - simple linear regression - and takes 'little for granted' (translation: we'll be working through the math, lightly). The primary dataset consists of 11 observations. To heck with big data. So in this project, you will find mostly code - I'll leave the exposition to Edge, who does a nice job explaining the concepts in his textbook. I'll chime in whenever it seems useful.
 
 The chapters will work through the following:    
 1. Probability  
