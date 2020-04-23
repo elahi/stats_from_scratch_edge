@@ -93,7 +93,7 @@ dosm.beta.hist(n = 1, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##    0.4884180    0.4233709    0.1792429
+##    0.4899736    0.4209460    0.1771955
 ```
 
 ```r
@@ -102,7 +102,7 @@ dosm.beta.hist(n = 4, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##   0.50439769   0.20992249   0.04406745
+##   0.50144237   0.20766420   0.04312442
 ```
 
 ```r
@@ -111,7 +111,7 @@ dosm.beta.hist(n = 8, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##   0.50906331   0.14961257   0.02238392
+##   0.48819651   0.14883897   0.02215304
 ```
 
 ```r
@@ -120,7 +120,7 @@ dosm.beta.hist(n = 16, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##    0.4994362    0.1042027    0.0108582
+##   0.50294463   0.10765186   0.01158892
 ```
 
 ```r
@@ -129,7 +129,7 @@ dosm.beta.hist(n = 32, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##  0.499661901  0.073121628  0.005346772
+##  0.500572992  0.073641756  0.005423108
 ```
 
 ```r
@@ -140,7 +140,7 @@ dosm.beta.hist(n = 64, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##  0.501353999  0.053045941  0.002813872
+##  0.501692807  0.053155822  0.002825541
 ```
 
 Let's deconstruct what is going on with this function, where n = 1 (we simulate 10000 observations from a single set of parameter values). 
@@ -161,7 +161,7 @@ dosm.beta.hist
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## <bytecode: 0x7fe67ff5f3f0>
+## <bytecode: 0x7fc2364a8cf0>
 ## <environment: namespace:stfspack>
 ```
 
@@ -175,7 +175,7 @@ str(samps) # here are 10,000
 ```
 
 ```
-##  num [1:10000] 0.9999 0.2447 0.0106 0.8416 0.0137 ...
+##  num [1:10000] 0.9997 0.3062 0.8319 0.961 0.0797 ...
 ```
 
 ```r
@@ -194,13 +194,13 @@ head(sim.mat)
 ```
 
 ```
-##             [,1]
-## [1,] 0.999899081
-## [2,] 0.244689075
-## [3,] 0.010648884
-## [4,] 0.841629918
-## [5,] 0.013737826
-## [6,] 0.003054541
+##            [,1]
+## [1,] 0.99973974
+## [2,] 0.30620613
+## [3,] 0.83193250
+## [4,] 0.96099348
+## [5,] 0.07970673
+## [6,] 0.98667533
 ```
 
 ```r
@@ -211,7 +211,7 @@ str(dosm)
 ```
 
 ```
-##  num [1:10000] 0.9999 0.2447 0.0106 0.8416 0.0137 ...
+##  num [1:10000] 0.9997 0.3062 0.8319 0.961 0.0797 ...
 ```
 
 ```r
@@ -219,7 +219,7 @@ head(dosm) # compare these values to sim.mat
 ```
 
 ```
-## [1] 0.999899081 0.244689075 0.010648884 0.841629918 0.013737826 0.003054541
+## [1] 0.99973974 0.30620613 0.83193250 0.96099348 0.07970673 0.98667533
 ```
 
 ```r
@@ -233,9 +233,7 @@ lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)), col = "red")
 
 <img src="05_random_variables_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
-3. 
-
-The Pareto distribution is a skewed, heavy-tailed, power-law distribution used in description of social, scientific, geophysical, actuarial, and many other types of observable phenomena. It was applied originally to the distribution of wealth in a society, fitting the observation that a large portion of wealth is held by a small fraction of the population. Named after the Italian civil engineer, economist, and sociologist Vilfredo Pareto. 
+3. The Pareto distribution is a skewed, heavy-tailed, power-law distribution used in description of social, scientific, geophysical, actuarial, and many other types of observable phenomena. It was applied originally to the distribution of wealth in a society, fitting the observation that a large portion of wealth is held by a small fraction of the population. Named after the Italian civil engineer, economist, and sociologist Vilfredo Pareto. 
 
 Parameters of the `rpareto` function:
 
@@ -261,7 +259,7 @@ summary(x)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   4.006   4.976   7.461  12.704  11.825 205.233
+##   4.011   5.518   8.593  14.564  14.669 174.217
 ```
 
 ```r
@@ -290,7 +288,7 @@ compare.tail.to.normal
 ##     mean(x < (mu - k * sigma) | x > (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## <bytecode: 0x7fe685ad9578>
+## <bytecode: 0x7fc22fd28138>
 ## <environment: namespace:stfspack>
 ```
 
@@ -300,7 +298,7 @@ compare.tail.to.normal(x = x, k = k, mu = mu, sigma = stdev)
 ```
 
 ```
-## [1] 0.4395579
+## [1] 0.6593368
 ```
 
 ```r
@@ -309,7 +307,7 @@ summary(x)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   4.006   4.976   7.461  12.704  11.825 205.233
+##   4.011   5.518   8.593  14.564  14.669 174.217
 ```
 
 ```r
@@ -317,7 +315,7 @@ mu
 ```
 
 ```
-## [1] 12.70401
+## [1] 14.56421
 ```
 
 ```r
@@ -325,7 +323,7 @@ stdev
 ```
 
 ```
-## [1] 21.92673
+## [1] 21.4814
 ```
 
 ```r
@@ -336,7 +334,7 @@ stdev
 ```
 
 ```
-## [1] -31.14946
+## [1] -28.39859
 ```
 
 ```r
@@ -345,7 +343,7 @@ stdev
 ```
 
 ```
-## [1] 56.55747
+## [1] 57.52701
 ```
 
 ```r
@@ -356,14 +354,14 @@ x < (mu - k * stdev) | x > (mu + k * stdev)
 ```
 
 ```
-##   [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##   [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
 ##  [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
+##  [37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
 ##  [49] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [61] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [73] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [85] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+##  [73] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [85] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [97] FALSE FALSE FALSE FALSE
 ```
 
@@ -375,7 +373,7 @@ table(x < (mu - k * stdev) | x > (mu + k * stdev))
 ```
 ## 
 ## FALSE  TRUE 
-##    98     2
+##    97     3
 ```
 
 ```r
@@ -384,7 +382,7 @@ mean(x < (mu - k * stdev) | x > (mu + k * stdev))
 ```
 
 ```
-## [1] 0.02
+## [1] 0.03
 ```
 
 ```r
@@ -420,7 +418,7 @@ mean(x < (mu - k * stdev) | x > (mu + k * stdev))/(1 - (pnorm(k) - pnorm(-k)))
 ```
 
 ```
-## [1] 0.4395579
+## [1] 0.6593368
 ```
 
 ```r
@@ -428,7 +426,7 @@ compare.tail.to.normal(x = x, k = k, mu = mu, sigma = stdev)
 ```
 
 ```
-## [1] 0.4395579
+## [1] 0.6593368
 ```
 
 ```r
@@ -464,13 +462,13 @@ sim[1:3, 1:10]
 
 ```
 ##          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]     [,7]     [,8]
-## [1,] 1.091542 1.212704 1.122221 1.085845 1.076390 1.134369 1.200106 1.610465
-## [2,] 1.830714 1.106657 1.732160 1.051676 1.024350 1.163516 1.166097 1.611679
-## [3,] 1.543268 1.306341 1.780674 1.351779 1.283364 1.135167 1.216708 1.373239
+## [1,] 1.045810 1.115826 1.285527 1.007430 1.337020 2.118968 1.008379 1.577746
+## [2,] 1.132998 1.268665 1.084002 1.244079 1.216772 1.385577 1.268523 1.481353
+## [3,] 1.588239 1.189361 1.017061 1.145074 1.053308 1.079629 1.014789 1.008207
 ##          [,9]    [,10]
-## [1,] 1.039057 1.018510
-## [2,] 1.110646 1.456685
-## [3,] 1.016994 1.036580
+## [1,] 1.623480 1.538905
+## [2,] 1.164438 1.104984
+## [3,] 1.448589 1.017469
 ```
 
 ```r
@@ -480,7 +478,7 @@ str(means.sim)
 ```
 
 ```
-##  num [1:10000] 1.34 1.33 1.33 1.3 1.28 ...
+##  num [1:10000] 1.4 1.34 1.29 1.34 1.32 ...
 ```
 
 ```r
@@ -497,7 +495,7 @@ compare.tail.to.normal(means.sim, 1/2, expec.par, sd.mean)
 ```
 
 ```
-## [1] 0.9700602
+## [1] 0.9865898
 ```
 
 ```r
@@ -505,7 +503,7 @@ compare.tail.to.normal(means.sim, 1, expec.par, sd.mean)
 ```
 
 ```
-## [1] 0.9558461
+## [1] 0.9255918
 ```
 
 ```r
@@ -513,7 +511,7 @@ compare.tail.to.normal(means.sim, 2, expec.par, sd.mean)
 ```
 
 ```
-## [1] 0.9296649
+## [1] 0.8813136
 ```
 
 ```r
@@ -521,7 +519,7 @@ compare.tail.to.normal(means.sim, 3, expec.par, sd.mean)
 ```
 
 ```
-## [1] 2.18535
+## [1] 2.370549
 ```
 
 ```r
@@ -529,7 +527,7 @@ compare.tail.to.normal(means.sim, 4, expec.par, sd.mean)
 ```
 
 ```
-## [1] 20.52335
+## [1] 25.25951
 ```
 
 ```r
@@ -537,7 +535,7 @@ compare.tail.to.normal(means.sim, 5, expec.par, sd.mean)
 ```
 
 ```
-## [1] 523.2834
+## [1] 872.1389
 ```
 
 ```r
@@ -545,10 +543,149 @@ compare.tail.to.normal(means.sim, 6, expec.par, sd.mean)
 ```
 
 ```
-## [1] 0
+## [1] 101359.5
 ```
 
 
 ## A probabilistic model for simple linear regression
 
+### Exercise set 5-5
 
+1. Write the square of the correlation coefficient (eq. 5.30) in terms of the variance of Y (eq. 5.32) and the conditional variance of Y given X (eq. 5.31). 
+
+$$
+\begin{aligned}
+\text{eq. 5.30: } \rho_{X,Y} = \beta \frac{\sigma_X}{\sigma_Y} \\
+\text{eq. 5.31: } Var(Y) = \beta^2 \sigma_X^2 + \sigma_{\epsilon}^2 \\
+\text{eq. 5.32: } Var(Y \mid X = x) = \sigma_{\epsilon}^2  \\
+\end{aligned}
+$$
+
+Squaring $\rho_{X,Y}$, and expressing $Var(Y)$ using the definition from above:
+
+$$
+\begin{aligned}
+\rho_{X,Y}^2 = \beta^2 \frac{\sigma_X^2}{\sigma_Y^2} = \beta^2 \frac{\sigma_X^2}{Var(Y)} \\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\rho_{X,Y}^2 =  \beta^2 \frac{\sigma_X^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\
+\end{aligned}
+$$
+
+Some algebra...
+
+$$
+\begin{aligned}
+\rho_{X,Y}^2 = 1 - \frac{\sigma_{\epsilon}^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\
+\end{aligned}
+$$
+
+And we use the formulas from above again to restate as:
+
+$$
+\begin{aligned}
+\rho_{X,Y}^2 = 1 - \frac{Var(Y \mid X = x)}{Var(Y)} \\
+\end{aligned}
+$$
+
+which gives us the 'proportion of variance explained'. So if there isn't much variance left in $Y$ after conditioning on $X$ (i.e., the numerator is small relative to the denominator), if we subtract it from 1, we get a high $r^2$. And vice versa. 
+
+2. Simulating a regression. 
+
+
+```r
+library(stfspack)
+sim.lm
+```
+
+```
+## function (n, a, b, sigma.disturb = 1, mu.x = 8, sigma.x = 2, 
+##     rdisturb = rnorm, rx = rnorm, het.coef = 0) 
+## {
+##     x <- sort(rx(n, mu.x, sigma.x))
+##     disturbs <- rdisturb(n, 0, sapply(sigma.disturb + scale(x) * 
+##         het.coef, max, 0))
+##     y <- a + b * x + disturbs
+##     cbind(x, y)
+## }
+## <bytecode: 0x7fc235353730>
+## <environment: namespace:stfspack>
+```
+
+```r
+sim_0_1 <- sim.lm(n = 50, a = 0, b = 1)
+head(sim_0_1)
+```
+
+```
+##             x        y
+## [1,] 4.737662 5.901336
+## [2,] 4.751068 4.712086
+## [3,] 4.786227 4.857548
+## [4,] 5.045494 5.083184
+## [5,] 5.427010 5.690239
+## [6,] 5.721143 2.353452
+```
+
+```r
+plot(sim_0_1[,1], sim_0_1[,2])
+```
+
+<img src="05_random_variables_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+
+Still using all the default values for parameters:
+
+
+```r
+sim_0_1 <- sim.lm(n = 50, a = 0, b = 1, 
+                  sigma.disturb = 1, mu.x = 8, sigma.x = 2, 
+                  rdisturb = rnorm, rx = rnorm, het.coef = 0)
+plot(sim_0_1[,1], sim_0_1[,2])
+```
+
+<img src="05_random_variables_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+
+Now I'll change one at a time:
+
+
+```r
+sim_0_1 <- sim.lm(n = 50, a = 0, b = 1, 
+                  sigma.disturb = 2, mu.x = 8, sigma.x = 2, 
+                  rdisturb = rnorm, rx = rnorm, het.coef = 0)
+plot(sim_0_1[,1], sim_0_1[,2])
+```
+
+<img src="05_random_variables_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+
+
+```r
+sim_0_1 <- sim.lm(n = 50, a = 0, b = 1, 
+                  sigma.disturb = 1, mu.x = 16, sigma.x = 2, 
+                  rdisturb = rnorm, rx = rnorm, het.coef = 0)
+plot(sim_0_1[,1], sim_0_1[,2])
+```
+
+<img src="05_random_variables_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+
+
+```r
+sim_0_1 <- sim.lm(n = 50, a = 0, b = 1, 
+                  sigma.disturb = 1, mu.x = 8, sigma.x = 4, 
+                  rdisturb = rnorm, rx = rnorm, het.coef = 0)
+plot(sim_0_1[,1], sim_0_1[,2])
+```
+
+<img src="05_random_variables_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+
+
+```r
+sim_0_1 <- sim.lm(n = 50, a = 0, b = 1, 
+                  sigma.disturb = 1, mu.x = 8, sigma.x = 2, 
+                  rdisturb = rlaplace, rx = rnorm, het.coef = 0)
+plot(sim_0_1[,1], sim_0_1[,2])
+```
+
+<img src="05_random_variables_files/figure-html/unnamed-chunk-15-1.png" width="672" />

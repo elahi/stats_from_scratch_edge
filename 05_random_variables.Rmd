@@ -120,9 +120,7 @@ x <- seq(0, 1, length.out = 1000)
 lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)), col = "red")
 ```
 
-3. 
-
-The Pareto distribution is a skewed, heavy-tailed, power-law distribution used in description of social, scientific, geophysical, actuarial, and many other types of observable phenomena. It was applied originally to the distribution of wealth in a society, fitting the observation that a large portion of wealth is held by a small fraction of the population. Named after the Italian civil engineer, economist, and sociologist Vilfredo Pareto. 
+3. The Pareto distribution is a skewed, heavy-tailed, power-law distribution used in description of social, scientific, geophysical, actuarial, and many other types of observable phenomena. It was applied originally to the distribution of wealth in a society, fitting the observation that a large portion of wealth is held by a small fraction of the population. Named after the Italian civil engineer, economist, and sociologist Vilfredo Pareto. 
 
 Parameters of the `rpareto` function:
 
@@ -240,4 +238,95 @@ compare.tail.to.normal(means.sim, 6, expec.par, sd.mean)
 
 ## A probabilistic model for simple linear regression
 
+### Exercise set 5-5
 
+1. Write the square of the correlation coefficient (eq. 5.30) in terms of the variance of Y (eq. 5.32) and the conditional variance of Y given X (eq. 5.31). 
+
+$$
+\begin{aligned}
+\text{eq. 5.30: } \rho_{X,Y} = \beta \frac{\sigma_X}{\sigma_Y} \\
+\text{eq. 5.31: } Var(Y) = \beta^2 \sigma_X^2 + \sigma_{\epsilon}^2 \\
+\text{eq. 5.32: } Var(Y \mid X = x) = \sigma_{\epsilon}^2  \\
+\end{aligned}
+$$
+
+Squaring $\rho_{X,Y}$, and expressing $Var(Y)$ using the definition from above:
+
+$$
+\begin{aligned}
+\rho_{X,Y}^2 = \beta^2 \frac{\sigma_X^2}{\sigma_Y^2} = \beta^2 \frac{\sigma_X^2}{Var(Y)} \\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\rho_{X,Y}^2 =  \beta^2 \frac{\sigma_X^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\
+\end{aligned}
+$$
+
+Some algebra...
+
+$$
+\begin{aligned}
+\rho_{X,Y}^2 = 1 - \frac{\sigma_{\epsilon}^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\
+\end{aligned}
+$$
+
+And we use the formulas from above again to restate as:
+
+$$
+\begin{aligned}
+\rho_{X,Y}^2 = 1 - \frac{Var(Y \mid X = x)}{Var(Y)} \\
+\end{aligned}
+$$
+
+which gives us the 'proportion of variance explained'. So if there isn't much variance left in $Y$ after conditioning on $X$ (i.e., the numerator is small relative to the denominator), if we subtract it from 1, we get a high $r^2$. And vice versa. 
+
+2. Simulating a regression. 
+
+```{r}
+library(stfspack)
+sim.lm
+sim_0_1 <- sim.lm(n = 50, a = 0, b = 1)
+head(sim_0_1)
+plot(sim_0_1[,1], sim_0_1[,2])
+```
+
+Still using all the default values for parameters:
+
+```{r}
+sim_0_1 <- sim.lm(n = 50, a = 0, b = 1, 
+                  sigma.disturb = 1, mu.x = 8, sigma.x = 2, 
+                  rdisturb = rnorm, rx = rnorm, het.coef = 0)
+plot(sim_0_1[,1], sim_0_1[,2])
+```
+
+Now I'll change one at a time:
+
+```{r}
+sim_0_1 <- sim.lm(n = 50, a = 0, b = 1, 
+                  sigma.disturb = 2, mu.x = 8, sigma.x = 2, 
+                  rdisturb = rnorm, rx = rnorm, het.coef = 0)
+plot(sim_0_1[,1], sim_0_1[,2])
+```
+
+```{r}
+sim_0_1 <- sim.lm(n = 50, a = 0, b = 1, 
+                  sigma.disturb = 1, mu.x = 16, sigma.x = 2, 
+                  rdisturb = rnorm, rx = rnorm, het.coef = 0)
+plot(sim_0_1[,1], sim_0_1[,2])
+```
+
+```{r}
+sim_0_1 <- sim.lm(n = 50, a = 0, b = 1, 
+                  sigma.disturb = 1, mu.x = 8, sigma.x = 4, 
+                  rdisturb = rnorm, rx = rnorm, het.coef = 0)
+plot(sim_0_1[,1], sim_0_1[,2])
+```
+
+```{r}
+sim_0_1 <- sim.lm(n = 50, a = 0, b = 1, 
+                  sigma.disturb = 1, mu.x = 8, sigma.x = 2, 
+                  rdisturb = rlaplace, rx = rnorm, het.coef = 0)
+plot(sim_0_1[,1], sim_0_1[,2])
+```
