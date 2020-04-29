@@ -232,6 +232,26 @@ and increases monotonically in $x$.
 
 ### Exercise set 4-3
 
+1. Flipping a fair coin 3 times. X is a random variable that represents the number of heads observed, and the sample space $\Omega$ contains the elements {0, 1, 2, 3}. Here are all of the ways we can observe these elements:
+
+> x = 0: (T, T, T)
+> x = 1: (H, T, T); (T, H, T); (T, T, H)
+> x = 2: (H, H, T); (H, T, H); (T, H, H)
+> x = 3: (H, H, H)
+
+There are 8 possible instances. Thus, the probability mass function is:
+
+$$
+\begin{aligned}
+f_X(0) =& f_X(3) = 1/8 \\
+f_X(1) =& f_X(2) = 3/8 \\
+f_X(x) =& 0 \text{ for all other } x \\
+\end{aligned}
+$$
+
+2. 
+
+
 ## Continuous random variables and distributions
 
 What about values that are not countable - anything with a decimal? Impossible to get a specific number, or instance, and thus we cannot use the pmf. But we can still use the cdf!
@@ -457,6 +477,8 @@ for(i in x){
 <img src="04_probability_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 ### Additional exercise 
+
+(Courtesy Blondin & Goodman)  
 
 Assume that destructive earthquakes occur in California every 20 years. You’d like to know how probable an earthquake is between now and some future date.
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-04-28" />
+<meta name="date" content="2020-04-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -415,6 +415,26 @@ F_X(x) = P(X \leq x) = \sum_{x_i \leq x} f_X(x_i)
 and increases monotonically in <span class="math inline">\(x\)</span>.</p>
 <div id="exercise-set-4-3" class="section level3">
 <h3><span class="header-section-number">4.4.1</span> Exercise set 4-3</h3>
+<ol style="list-style-type: decimal">
+<li>Flipping a fair coin 3 times. X is a random variable that represents the number of heads observed, and the sample space <span class="math inline">\(\Omega\)</span> contains the elements {0, 1, 2, 3}. Here are all of the ways we can observe these elements:</li>
+</ol>
+<blockquote>
+<p>x = 0: (T, T, T)
+x = 1: (H, T, T); (T, H, T); (T, T, H)
+x = 2: (H, H, T); (H, T, H); (T, H, H)
+x = 3: (H, H, H)</p>
+</blockquote>
+<p>There are 8 possible instances. Thus, the probability mass function is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f_X(0) =&amp; f_X(3) = 1/8 \\
+f_X(1) =&amp; f_X(2) = 3/8 \\
+f_X(x) =&amp; 0 \text{ for all other } x \\
+\end{aligned}
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li></li>
+</ol>
 </div>
 </div>
 <div id="continuous-random-variables-and-distributions" class="section level2">
@@ -554,6 +574,7 @@ and increases monotonically in <span class="math inline">\(x\)</span>.</p>
 </div>
 <div id="additional-exercise" class="section level3">
 <h3><span class="header-section-number">4.7.2</span> Additional exercise</h3>
+<p>(Courtesy Blondin &amp; Goodman)</p>
 <p>Assume that destructive earthquakes occur in California every 20 years. You’d like to know how probable an earthquake is between now and some future date.</p>
 <ol style="list-style-type: decimal">
 <li>What distribution family describes the waiting time until California’s next earthquake? What value should we use for this distribution’s parameter? [Hint: convert 20 years to a rate]</li>
