@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-04-22" />
+<meta name="date" content="2020-04-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -178,6 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="probability.html"><a href="probability.html#families-of-distributions"><i class="fa fa-check"></i><b>4.7</b> Families of distributions</a><ul>
 <li class="chapter" data-level="4.7.1" data-path="probability.html"><a href="probability.html#exercise-set-4-6-1"><i class="fa fa-check"></i><b>4.7.1</b> Exercise set 4-6</a></li>
+<li class="chapter" data-level="4.7.2" data-path="probability.html"><a href="probability.html#additional-exercise"><i class="fa fa-check"></i><b>4.7.2</b> Additional exercise</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="randomvars.html"><a href="randomvars.html"><i class="fa fa-check"></i><b>5</b> Properties of random variables</a><ul>
@@ -216,10 +217,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="randomvars" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Properties of random variables</h1>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb78-2" title="2"><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>(<span class="dt">base_size =</span> <span class="dv">12</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb78-3" title="3"><span class="st">            </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_blank</span>(), </a>
-<a class="sourceLine" id="cb78-4" title="4">                  <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>())) </a></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb85-2" title="2"><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>(<span class="dt">base_size =</span> <span class="dv">12</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb85-3" title="3"><span class="st">            </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_blank</span>(), </a>
+<a class="sourceLine" id="cb85-4" title="4">                  <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>())) </a></code></pre></div>
 <div id="expected-values-and-the-law-of-large-numbers" class="section level2">
 <h2><span class="header-section-number">5.1</span> Expected values and the law of large numbers</h2>
 <div id="exercise-set-5-1" class="section level3">
@@ -228,18 +229,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>On paper</p></li>
 <li></li>
 </ol>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1">samp.size &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb79-2" title="2">n.samps &lt;-<span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb79-3" title="3">samps &lt;-<span class="st"> </span><span class="kw">rnorm</span>(samp.size <span class="op">*</span><span class="st"> </span>n.samps, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb79-4" title="4">samp.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(samps, <span class="dt">ncol =</span> n.samps)</a>
-<a class="sourceLine" id="cb79-5" title="5">samp.means &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samp.mat)</a>
-<a class="sourceLine" id="cb79-6" title="6"><span class="kw">hist</span>(samp.means)</a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1">samp.size &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb86-2" title="2">n.samps &lt;-<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb86-3" title="3">samps &lt;-<span class="st"> </span><span class="kw">rnorm</span>(samp.size <span class="op">*</span><span class="st"> </span>n.samps, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb86-4" title="4">samp.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(samps, <span class="dt">ncol =</span> n.samps)</a>
+<a class="sourceLine" id="cb86-5" title="5">samp.means &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samp.mat)</a>
+<a class="sourceLine" id="cb86-6" title="6"><span class="kw">hist</span>(samp.means)</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1">samp.size &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb80-2" title="2">n.samps &lt;-<span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb80-3" title="3">samps &lt;-<span class="kw">matrix</span>(<span class="kw">rexp</span>(samp.size<span class="op">*</span>n.samps, <span class="dt">rate =</span> <span class="dv">1</span>), <span class="dt">ncol =</span> n.samps)</a>
-<a class="sourceLine" id="cb80-4" title="4">samp.means &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samps)</a>
-<a class="sourceLine" id="cb80-5" title="5"><span class="kw">hist</span>(samp.means)</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1">samp.size &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb87-2" title="2">n.samps &lt;-<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb87-3" title="3">samps &lt;-<span class="kw">matrix</span>(<span class="kw">rexp</span>(samp.size<span class="op">*</span>n.samps, <span class="dt">rate =</span> <span class="dv">1</span>), <span class="dt">ncol =</span> n.samps)</a>
+<a class="sourceLine" id="cb87-4" title="4">samp.means &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samps)</a>
+<a class="sourceLine" id="cb87-5" title="5"><span class="kw">hist</span>(samp.means)</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 </div>
@@ -259,44 +260,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>Bean machine in action!</li>
 </ol>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="kw">library</span>(animation)</a>
-<a class="sourceLine" id="cb81-2" title="2">nball &lt;-<span class="st"> </span><span class="dv">500</span> <span class="co">#change the number of balls</span></a>
-<a class="sourceLine" id="cb81-3" title="3">nlayer &lt;-<span class="st"> </span><span class="dv">10</span> <span class="co">#change the number of rows of pegs on the board</span></a>
-<a class="sourceLine" id="cb81-4" title="4">rate &lt;-<span class="st"> </span><span class="dv">10</span> <span class="co">#change the speed at which the balls fall </span></a>
-<a class="sourceLine" id="cb81-5" title="5"><span class="kw">ani.options</span>(<span class="dt">nmax =</span> nball <span class="op">+</span><span class="st"> </span>nlayer <span class="op">-</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">interval =</span> <span class="dv">1</span><span class="op">/</span>rate) </a>
-<a class="sourceLine" id="cb81-6" title="6"><span class="kw">quincunx</span>(<span class="dt">balls =</span> nball, <span class="dt">layers =</span> nlayer)</a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1"><span class="kw">library</span>(animation)</a>
+<a class="sourceLine" id="cb88-2" title="2">nball &lt;-<span class="st"> </span><span class="dv">500</span> <span class="co">#change the number of balls</span></a>
+<a class="sourceLine" id="cb88-3" title="3">nlayer &lt;-<span class="st"> </span><span class="dv">10</span> <span class="co">#change the number of rows of pegs on the board</span></a>
+<a class="sourceLine" id="cb88-4" title="4">rate &lt;-<span class="st"> </span><span class="dv">10</span> <span class="co">#change the speed at which the balls fall </span></a>
+<a class="sourceLine" id="cb88-5" title="5"><span class="kw">ani.options</span>(<span class="dt">nmax =</span> nball <span class="op">+</span><span class="st"> </span>nlayer <span class="op">-</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">interval =</span> <span class="dv">1</span><span class="op">/</span>rate) </a>
+<a class="sourceLine" id="cb88-6" title="6"><span class="kw">quincunx</span>(<span class="dt">balls =</span> nball, <span class="dt">layers =</span> nlayer)</a></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Exploring the beta distribution</li>
 </ol>
 <p>To see what the beta distribution looks like for a given set of shape parameters, set the sample size to 1. For example:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">library</span>(stfspack)</a>
-<a class="sourceLine" id="cb82-2" title="2"><span class="co"># dosm.beta.hist(n = 1, nsim = 10000, shape1 = 1, shape2 = 1)</span></a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="kw">library</span>(stfspack)</a>
+<a class="sourceLine" id="cb89-2" title="2"><span class="co"># dosm.beta.hist(n = 1, nsim = 10000, shape1 = 1, shape2 = 1)</span></a></code></pre></div>
 <p>will give you a histogram of 10,000 observations from a beta distribution with parameters 1 and 1. If you increase the sample size, then the distribution of the sample mean gets closer to normality. Try this — starting with samples of size 1 and increasing the sample size — with the following sets of parameter values: (1, 1), (0.2, 0.2), (2, 0.5), (0.5, 2), (3, 3). Feel free to try other parameter sets — it’s fun. What do you notice?</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1">sims &lt;-<span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb83-2" title="2">s1 &lt;-<span class="st"> </span><span class="fl">0.2</span> <span class="co"># change this</span></a>
-<a class="sourceLine" id="cb83-3" title="3">s2 &lt;-<span class="st"> </span><span class="fl">0.2</span> <span class="co"># change this</span></a>
-<a class="sourceLine" id="cb83-4" title="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb83-5" title="5"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1">sims &lt;-<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb90-2" title="2">s1 &lt;-<span class="st"> </span><span class="fl">0.2</span> <span class="co"># change this</span></a>
+<a class="sourceLine" id="cb90-3" title="3">s2 &lt;-<span class="st"> </span><span class="fl">0.2</span> <span class="co"># change this</span></a>
+<a class="sourceLine" id="cb90-4" title="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb90-5" title="5"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
 <pre><code>## mean of DOSM   SD of DOSM  var of DOSM 
-##    0.4899736    0.4209460    0.1771955</code></pre>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">4</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
+##    0.5100520    0.4243966    0.1801125</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">4</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
 <pre><code>## mean of DOSM   SD of DOSM  var of DOSM 
-##   0.50144237   0.20766420   0.04312442</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">8</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
+##   0.50319716   0.21751683   0.04731357</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">8</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
 <pre><code>## mean of DOSM   SD of DOSM  var of DOSM 
-##   0.48819651   0.14883897   0.02215304</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">16</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
+##   0.49872078   0.15084669   0.02275472</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">16</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
 <pre><code>## mean of DOSM   SD of DOSM  var of DOSM 
-##   0.50294463   0.10765186   0.01158892</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">32</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
+##   0.50290870   0.10529962   0.01108801</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">32</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
 <pre><code>## mean of DOSM   SD of DOSM  var of DOSM 
-##  0.500572992  0.073641756  0.005423108</code></pre>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">64</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
+##   0.50447446   0.07454308   0.00555667</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1"><span class="kw">dosm.beta.hist</span>(<span class="dt">n =</span> <span class="dv">64</span>, <span class="dt">nsim =</span> sims, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <pre><code>## mean of DOSM   SD of DOSM  var of DOSM 
-##  0.501692807  0.053155822  0.002825541</code></pre>
+##  0.498934648  0.050912703  0.002592103</code></pre>
 <p>Let’s deconstruct what is going on with this function, where n = 1 (we simulate 10000 observations from a single set of parameter values).</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1">dosm.beta.hist</a></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1">dosm.beta.hist</a></code></pre></div>
 <pre><code>## function (n, nsim, shape1 = 1, shape2 = 1, ...) 
 ## {
 ##     samps &lt;- rbeta(n * nsim, shape1, shape2)
@@ -307,41 +308,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## &lt;bytecode: 0x7fc2364a8cf0&gt;
+## &lt;bytecode: 0x7fd5e6b5bd58&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1">nsim &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb97-2" title="2">n &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb97-3" title="3">s1 &lt;-<span class="st"> </span><span class="fl">0.2</span> <span class="co"># change this</span></a>
-<a class="sourceLine" id="cb97-4" title="4">s2 &lt;-<span class="st"> </span><span class="fl">0.2</span> <span class="co"># change this</span></a>
-<a class="sourceLine" id="cb97-5" title="5">samps &lt;-<span class="st"> </span><span class="kw">rbeta</span>(n <span class="op">*</span><span class="st"> </span>nsim, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a>
-<a class="sourceLine" id="cb97-6" title="6"><span class="kw">str</span>(samps) <span class="co"># here are 10,000</span></a></code></pre></div>
-<pre><code>##  num [1:10000] 0.9997 0.3062 0.8319 0.961 0.0797 ...</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1"><span class="co"># We are converting the vector into a matrix</span></a>
-<a class="sourceLine" id="cb99-2" title="2"><span class="co"># So that we can easily calculate the mean of each row</span></a>
-<a class="sourceLine" id="cb99-3" title="3">sim.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(samps, <span class="dt">nrow =</span> nsim)</a>
-<a class="sourceLine" id="cb99-4" title="4"><span class="kw">dim</span>(sim.mat)</a></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1">nsim &lt;-<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb104-2" title="2">n &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb104-3" title="3">s1 &lt;-<span class="st"> </span><span class="fl">0.2</span> <span class="co"># change this</span></a>
+<a class="sourceLine" id="cb104-4" title="4">s2 &lt;-<span class="st"> </span><span class="fl">0.2</span> <span class="co"># change this</span></a>
+<a class="sourceLine" id="cb104-5" title="5">samps &lt;-<span class="st"> </span><span class="kw">rbeta</span>(n <span class="op">*</span><span class="st"> </span>nsim, <span class="dt">shape1 =</span> s1, <span class="dt">shape2 =</span> s2)</a>
+<a class="sourceLine" id="cb104-6" title="6"><span class="kw">str</span>(samps) <span class="co"># here are 10,000</span></a></code></pre></div>
+<pre><code>##  num [1:10000] 0.1939 0.9668 0.0882 1 0.859 ...</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" title="1"><span class="co"># We are converting the vector into a matrix</span></a>
+<a class="sourceLine" id="cb106-2" title="2"><span class="co"># So that we can easily calculate the mean of each row</span></a>
+<a class="sourceLine" id="cb106-3" title="3">sim.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(samps, <span class="dt">nrow =</span> nsim)</a>
+<a class="sourceLine" id="cb106-4" title="4"><span class="kw">dim</span>(sim.mat)</a></code></pre></div>
 <pre><code>## [1] 10000     1</code></pre>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1"><span class="kw">head</span>(sim.mat) </a></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" title="1"><span class="kw">head</span>(sim.mat) </a></code></pre></div>
 <pre><code>##            [,1]
-## [1,] 0.99973974
-## [2,] 0.30620613
-## [3,] 0.83193250
-## [4,] 0.96099348
-## [5,] 0.07970673
-## [6,] 0.98667533</code></pre>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" title="1"><span class="co"># Calculate rowmeans - with n=1, this doesn&#39;t change anything</span></a>
-<a class="sourceLine" id="cb103-2" title="2"><span class="co"># But change n to anything bigger and inspect the dimensions of the objects</span></a>
-<a class="sourceLine" id="cb103-3" title="3">dosm &lt;-<span class="st"> </span><span class="kw">rowMeans</span>(sim.mat)</a>
-<a class="sourceLine" id="cb103-4" title="4"><span class="kw">str</span>(dosm)</a></code></pre></div>
-<pre><code>##  num [1:10000] 0.9997 0.3062 0.8319 0.961 0.0797 ...</code></pre>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1"><span class="kw">head</span>(dosm) <span class="co"># compare these values to sim.mat</span></a></code></pre></div>
-<pre><code>## [1] 0.99973974 0.30620613 0.83193250 0.96099348 0.07970673 0.98667533</code></pre>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb107-2" title="2"><span class="kw">hist</span>(dosm, <span class="dt">freq =</span> <span class="ot">FALSE</span>) <span class="co"># plotting the simulated values</span></a>
-<a class="sourceLine" id="cb107-3" title="3"><span class="co"># Set up a vector that goes from 0 to 1 to overlay a normal distribution on the histogram</span></a>
-<a class="sourceLine" id="cb107-4" title="4">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> <span class="dv">1000</span>) </a>
-<a class="sourceLine" id="cb107-5" title="5"><span class="co"># Now plot a normal distribution, using the mean and sd of the simulated values</span></a>
-<a class="sourceLine" id="cb107-6" title="6"><span class="kw">lines</span>(x, <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> <span class="kw">mean</span>(dosm), <span class="dt">sd =</span> <span class="kw">sd</span>(dosm)), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+## [1,] 0.19391831
+## [2,] 0.96680424
+## [3,] 0.08824953
+## [4,] 0.99999999
+## [5,] 0.85896948
+## [6,] 0.67504700</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" title="1"><span class="co"># Calculate rowmeans - with n=1, this doesn&#39;t change anything</span></a>
+<a class="sourceLine" id="cb110-2" title="2"><span class="co"># But change n to anything bigger and inspect the dimensions of the objects</span></a>
+<a class="sourceLine" id="cb110-3" title="3">dosm &lt;-<span class="st"> </span><span class="kw">rowMeans</span>(sim.mat)</a>
+<a class="sourceLine" id="cb110-4" title="4"><span class="kw">str</span>(dosm)</a></code></pre></div>
+<pre><code>##  num [1:10000] 0.1939 0.9668 0.0882 1 0.859 ...</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" title="1"><span class="kw">head</span>(dosm) <span class="co"># compare these values to sim.mat</span></a></code></pre></div>
+<pre><code>## [1] 0.19391831 0.96680424 0.08824953 0.99999999 0.85896948 0.67504700</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb114-2" title="2"><span class="kw">hist</span>(dosm, <span class="dt">freq =</span> <span class="ot">FALSE</span>) <span class="co"># plotting the simulated values</span></a>
+<a class="sourceLine" id="cb114-3" title="3"><span class="co"># Set up a vector that goes from 0 to 1 to overlay a normal distribution on the histogram</span></a>
+<a class="sourceLine" id="cb114-4" title="4">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> <span class="dv">1000</span>) </a>
+<a class="sourceLine" id="cb114-5" title="5"><span class="co"># Now plot a normal distribution, using the mean and sd of the simulated values</span></a>
+<a class="sourceLine" id="cb114-6" title="6"><span class="kw">lines</span>(x, <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> <span class="kw">mean</span>(dosm), <span class="dt">sd =</span> <span class="kw">sd</span>(dosm)), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li>The Pareto distribution is a skewed, heavy-tailed, power-law distribution used in description of social, scientific, geophysical, actuarial, and many other types of observable phenomena. It was applied originally to the distribution of wealth in a society, fitting the observation that a large portion of wealth is held by a small fraction of the population. Named after the Italian civil engineer, economist, and sociologist Vilfredo Pareto.</li>
@@ -354,142 +355,142 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>If the shape parameter is <span class="math inline">\(\leq\)</span> 1, <span class="math inline">\(E(X)\)</span> is <span class="math inline">\(\infty\)</span>.
 If the shape parameter is <span class="math inline">\(\leq\)</span> 2, <span class="math inline">\(Var(X)\)</span> is <span class="math inline">\(\infty\)</span>.</p>
 <p>First we simulate many sampes of size 1000 from a Pareto distribution with shape = 4.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" title="1"><span class="co"># experiment with n and the parameters a and b</span></a>
-<a class="sourceLine" id="cb108-2" title="2">n &lt;-<span class="st"> </span><span class="dv">100</span>     </a>
-<a class="sourceLine" id="cb108-3" title="3">n_sims &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb108-4" title="4">a &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb108-5" title="5">b &lt;-<span class="st"> </span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb108-6" title="6"></a>
-<a class="sourceLine" id="cb108-7" title="7">x &lt;-<span class="st"> </span><span class="kw">rpareto</span>(<span class="dt">n =</span> n, <span class="dt">a =</span> a, <span class="dt">b =</span> b)</a>
-<a class="sourceLine" id="cb108-8" title="8"><span class="kw">summary</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" title="1"><span class="co"># experiment with n and the parameters a and b</span></a>
+<a class="sourceLine" id="cb115-2" title="2">n &lt;-<span class="st"> </span><span class="dv">100</span>     </a>
+<a class="sourceLine" id="cb115-3" title="3">n_sims &lt;-<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb115-4" title="4">a &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb115-5" title="5">b &lt;-<span class="st"> </span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb115-6" title="6"></a>
+<a class="sourceLine" id="cb115-7" title="7">x &lt;-<span class="st"> </span><span class="kw">rpareto</span>(<span class="dt">n =</span> n, <span class="dt">a =</span> a, <span class="dt">b =</span> b)</a>
+<a class="sourceLine" id="cb115-8" title="8"><span class="kw">summary</span>(x)</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   4.011   5.518   8.593  14.564  14.669 174.217</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" title="1"><span class="co"># Calculate mean and sd</span></a>
-<a class="sourceLine" id="cb110-2" title="2">mu &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</a>
-<a class="sourceLine" id="cb110-3" title="3">stdev &lt;-<span class="st"> </span><span class="kw">sd</span>(x)</a>
-<a class="sourceLine" id="cb110-4" title="4"></a>
-<a class="sourceLine" id="cb110-5" title="5"><span class="kw">hist</span>(x, <span class="dt">freq =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb110-6" title="6"><span class="co"># Set up a vector that goes from 0 to 1 to overlay a normal distribution on the histogram</span></a>
-<a class="sourceLine" id="cb110-7" title="7">x_vals &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(x), <span class="kw">max</span>(x), <span class="dt">length.out =</span> <span class="dv">1000</span>) </a>
-<a class="sourceLine" id="cb110-8" title="8"><span class="co"># Now plot a normal distribution, using the mean and sd of the simulated values</span></a>
-<a class="sourceLine" id="cb110-9" title="9"><span class="kw">lines</span>(x_vals, <span class="kw">dnorm</span>(x_vals, <span class="dt">mean =</span> mu, <span class="dt">sd =</span> stdev), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+##   4.009   5.853   7.842  17.168  14.367 227.799</code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" title="1"><span class="co"># Calculate mean and sd</span></a>
+<a class="sourceLine" id="cb117-2" title="2">mu &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</a>
+<a class="sourceLine" id="cb117-3" title="3">stdev &lt;-<span class="st"> </span><span class="kw">sd</span>(x)</a>
+<a class="sourceLine" id="cb117-4" title="4"></a>
+<a class="sourceLine" id="cb117-5" title="5"><span class="kw">hist</span>(x, <span class="dt">freq =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb117-6" title="6"><span class="co"># Set up a vector that goes from 0 to 1 to overlay a normal distribution on the histogram</span></a>
+<a class="sourceLine" id="cb117-7" title="7">x_vals &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(x), <span class="kw">max</span>(x), <span class="dt">length.out =</span> <span class="dv">1000</span>) </a>
+<a class="sourceLine" id="cb117-8" title="8"><span class="co"># Now plot a normal distribution, using the mean and sd of the simulated values</span></a>
+<a class="sourceLine" id="cb117-9" title="9"><span class="kw">lines</span>(x_vals, <span class="kw">dnorm</span>(x_vals, <span class="dt">mean =</span> mu, <span class="dt">sd =</span> stdev), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" title="1"><span class="co"># Compare tail to normal</span></a>
-<a class="sourceLine" id="cb111-2" title="2">compare.tail.to.normal</a></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" title="1"><span class="co"># Compare tail to normal</span></a>
+<a class="sourceLine" id="cb118-2" title="2">compare.tail.to.normal</a></code></pre></div>
 <pre><code>## function (x, k, mu, sigma) 
 ## {
 ##     mean(x &lt; (mu - k * sigma) | x &gt; (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## &lt;bytecode: 0x7fc22fd28138&gt;
+## &lt;bytecode: 0x7fd5e63dca18&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" title="1">k &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"># sds</span></a>
-<a class="sourceLine" id="cb113-2" title="2"><span class="kw">compare.tail.to.normal</span>(<span class="dt">x =</span> x, <span class="dt">k =</span> k, <span class="dt">mu =</span> mu, <span class="dt">sigma =</span> stdev)</a></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" title="1">k &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"># sds</span></a>
+<a class="sourceLine" id="cb120-2" title="2"><span class="kw">compare.tail.to.normal</span>(<span class="dt">x =</span> x, <span class="dt">k =</span> k, <span class="dt">mu =</span> mu, <span class="dt">sigma =</span> stdev)</a></code></pre></div>
 <pre><code>## [1] 0.6593368</code></pre>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" title="1"><span class="kw">summary</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" title="1"><span class="kw">summary</span>(x)</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   4.011   5.518   8.593  14.564  14.669 174.217</code></pre>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" title="1">mu</a></code></pre></div>
-<pre><code>## [1] 14.56421</code></pre>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" title="1">stdev</a></code></pre></div>
-<pre><code>## [1] 21.4814</code></pre>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" title="1"><span class="co"># This gives the value of the mean, minus the value k*stdev </span></a>
-<a class="sourceLine" id="cb121-2" title="2"><span class="co"># (i.e., an extreme negative value)</span></a>
-<a class="sourceLine" id="cb121-3" title="3"><span class="co"># Below I will use my object stdev in place of sigma (the parameter from Edge&#39;s function)</span></a>
-<a class="sourceLine" id="cb121-4" title="4">(mu <span class="op">-</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev)</a></code></pre></div>
-<pre><code>## [1] -28.39859</code></pre>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" title="1"><span class="co"># Extreme positive value</span></a>
-<a class="sourceLine" id="cb123-2" title="2">(mu <span class="op">+</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev)</a></code></pre></div>
-<pre><code>## [1] 57.52701</code></pre>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" title="1"><span class="co"># This statement asks whether the value in x is an extreme value</span></a>
-<a class="sourceLine" id="cb125-2" title="2"><span class="co"># The operator &#39;|&#39; is &#39;OR&#39;</span></a>
-<a class="sourceLine" id="cb125-3" title="3"><span class="co"># Is x extreme negative OR extreme positive?</span></a>
-<a class="sourceLine" id="cb125-4" title="4">x <span class="op">&lt;</span><span class="st"> </span>(mu <span class="op">-</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev) <span class="op">|</span><span class="st"> </span>x <span class="op">&gt;</span><span class="st"> </span>(mu <span class="op">+</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev)</a></code></pre></div>
-<pre><code>##   [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+##   4.009   5.853   7.842  17.168  14.367 227.799</code></pre>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" title="1">mu</a></code></pre></div>
+<pre><code>## [1] 17.16811</code></pre>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" title="1">stdev</a></code></pre></div>
+<pre><code>## [1] 29.47463</code></pre>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" title="1"><span class="co"># This gives the value of the mean, minus the value k*stdev </span></a>
+<a class="sourceLine" id="cb128-2" title="2"><span class="co"># (i.e., an extreme negative value)</span></a>
+<a class="sourceLine" id="cb128-3" title="3"><span class="co"># Below I will use my object stdev in place of sigma (the parameter from Edge&#39;s function)</span></a>
+<a class="sourceLine" id="cb128-4" title="4">(mu <span class="op">-</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev)</a></code></pre></div>
+<pre><code>## [1] -41.78115</code></pre>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1"><span class="co"># Extreme positive value</span></a>
+<a class="sourceLine" id="cb130-2" title="2">(mu <span class="op">+</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev)</a></code></pre></div>
+<pre><code>## [1] 76.11737</code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" title="1"><span class="co"># This statement asks whether the value in x is an extreme value</span></a>
+<a class="sourceLine" id="cb132-2" title="2"><span class="co"># The operator &#39;|&#39; is &#39;OR&#39;</span></a>
+<a class="sourceLine" id="cb132-3" title="3"><span class="co"># Is x extreme negative OR extreme positive?</span></a>
+<a class="sourceLine" id="cb132-4" title="4">x <span class="op">&lt;</span><span class="st"> </span>(mu <span class="op">-</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev) <span class="op">|</span><span class="st"> </span>x <span class="op">&gt;</span><span class="st"> </span>(mu <span class="op">+</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev)</a></code></pre></div>
+<pre><code>##   [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+##  [25] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [49] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [61] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [73] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [73] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [85] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [97] FALSE FALSE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" title="1"><span class="co"># We can get the frequencies of this logical vector using table</span></a>
-<a class="sourceLine" id="cb127-2" title="2"><span class="kw">table</span>(x <span class="op">&lt;</span><span class="st"> </span>(mu <span class="op">-</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev) <span class="op">|</span><span class="st"> </span>x <span class="op">&gt;</span><span class="st"> </span>(mu <span class="op">+</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev))</a></code></pre></div>
+##  [97] FALSE FALSE FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" title="1"><span class="co"># We can get the frequencies of this logical vector using table</span></a>
+<a class="sourceLine" id="cb134-2" title="2"><span class="kw">table</span>(x <span class="op">&lt;</span><span class="st"> </span>(mu <span class="op">-</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev) <span class="op">|</span><span class="st"> </span>x <span class="op">&gt;</span><span class="st"> </span>(mu <span class="op">+</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev))</a></code></pre></div>
 <pre><code>## 
 ## FALSE  TRUE 
 ##    97     3</code></pre>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" title="1"><span class="co"># Or, as Edge, does, calculate the average of TRUEs - which is simply the proportion of TRUEs</span></a>
-<a class="sourceLine" id="cb129-2" title="2"><span class="kw">mean</span>(x <span class="op">&lt;</span><span class="st"> </span>(mu <span class="op">-</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev) <span class="op">|</span><span class="st"> </span>x <span class="op">&gt;</span><span class="st"> </span>(mu <span class="op">+</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev))</a></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" title="1"><span class="co"># Or, as Edge, does, calculate the average of TRUEs - which is simply the proportion of TRUEs</span></a>
+<a class="sourceLine" id="cb136-2" title="2"><span class="kw">mean</span>(x <span class="op">&lt;</span><span class="st"> </span>(mu <span class="op">-</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev) <span class="op">|</span><span class="st"> </span>x <span class="op">&gt;</span><span class="st"> </span>(mu <span class="op">+</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev))</a></code></pre></div>
 <pre><code>## [1] 0.03</code></pre>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" title="1"><span class="co"># What proportion/probability of TRUEs would we expect under a normal probability distribution?</span></a>
-<a class="sourceLine" id="cb131-2" title="2"><span class="kw">pnorm</span>(k) <span class="co"># probability of observing a value less than k standard deviations above the mean</span></a></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" title="1"><span class="co"># What proportion/probability of TRUEs would we expect under a normal probability distribution?</span></a>
+<a class="sourceLine" id="cb138-2" title="2"><span class="kw">pnorm</span>(k) <span class="co"># probability of observing a value less than k standard deviations above the mean</span></a></code></pre></div>
 <pre><code>## [1] 0.9772499</code></pre>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" title="1"><span class="kw">pnorm</span>(<span class="op">-</span>k) <span class="co"># probability of observing a value less than k standard deviations below the mean</span></a></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" title="1"><span class="kw">pnorm</span>(<span class="op">-</span>k) <span class="co"># probability of observing a value less than k standard deviations below the mean</span></a></code></pre></div>
 <pre><code>## [1] 0.02275013</code></pre>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" title="1">(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="kw">pnorm</span>(k) <span class="op">-</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="op">-</span>k))) <span class="co"># probability of observing an extreme value</span></a></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1">(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="kw">pnorm</span>(k) <span class="op">-</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="op">-</span>k))) <span class="co"># probability of observing an extreme value</span></a></code></pre></div>
 <pre><code>## [1] 0.04550026</code></pre>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" title="1"><span class="co"># So putting it all together, we have the ratio of:</span></a>
-<a class="sourceLine" id="cb137-2" title="2"><span class="co"># the probability of observing an extreme value in the data, over the</span></a>
-<a class="sourceLine" id="cb137-3" title="3"><span class="co"># the probability of observing an extreme value in a normal distribution:</span></a>
-<a class="sourceLine" id="cb137-4" title="4"><span class="kw">mean</span>(x <span class="op">&lt;</span><span class="st"> </span>(mu <span class="op">-</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev) <span class="op">|</span><span class="st"> </span>x <span class="op">&gt;</span><span class="st"> </span>(mu <span class="op">+</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev))<span class="op">/</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="kw">pnorm</span>(k) <span class="op">-</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="op">-</span>k)))</a></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" title="1"><span class="co"># So putting it all together, we have the ratio of:</span></a>
+<a class="sourceLine" id="cb144-2" title="2"><span class="co"># the probability of observing an extreme value in the data, over the</span></a>
+<a class="sourceLine" id="cb144-3" title="3"><span class="co"># the probability of observing an extreme value in a normal distribution:</span></a>
+<a class="sourceLine" id="cb144-4" title="4"><span class="kw">mean</span>(x <span class="op">&lt;</span><span class="st"> </span>(mu <span class="op">-</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev) <span class="op">|</span><span class="st"> </span>x <span class="op">&gt;</span><span class="st"> </span>(mu <span class="op">+</span><span class="st"> </span>k <span class="op">*</span><span class="st"> </span>stdev))<span class="op">/</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="kw">pnorm</span>(k) <span class="op">-</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="op">-</span>k)))</a></code></pre></div>
 <pre><code>## [1] 0.6593368</code></pre>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" title="1"><span class="kw">compare.tail.to.normal</span>(<span class="dt">x =</span> x, <span class="dt">k =</span> k, <span class="dt">mu =</span> mu, <span class="dt">sigma =</span> stdev)</a></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" title="1"><span class="kw">compare.tail.to.normal</span>(<span class="dt">x =</span> x, <span class="dt">k =</span> k, <span class="dt">mu =</span> mu, <span class="dt">sigma =</span> stdev)</a></code></pre></div>
 <pre><code>## [1] 0.6593368</code></pre>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" title="1"><span class="co"># If this ratio is &lt; 1, then the data have fewer extreme values than suggested by a normal</span></a>
-<a class="sourceLine" id="cb141-2" title="2"><span class="co"># If this ratio is &gt; 1, then the data have more extreme values than suggested by a normal</span></a></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" title="1"><span class="co"># If this ratio is &lt; 1, then the data have fewer extreme values than suggested by a normal</span></a>
+<a class="sourceLine" id="cb148-2" title="2"><span class="co"># If this ratio is &gt; 1, then the data have more extreme values than suggested by a normal</span></a></code></pre></div>
 <p>Above, I haven’t computed the means of many simulations - which is the crux of the question! So here I just paste Edge’s solution. In it, he calculates <span class="math inline">\(E(X)\)</span> and <span class="math inline">\(Var(X)\)</span> using the Pareto probability distribution. I have changed <code>n</code> and <code>n.sim</code> to match my values above.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1"><span class="co">#Sample size per simulation (n) and number of simulations.</span></a>
-<a class="sourceLine" id="cb142-2" title="2">n &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb142-3" title="3">n.sim &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb142-4" title="4"><span class="co">#Pareto parameters. Variance is finite, and so</span></a>
-<a class="sourceLine" id="cb142-5" title="5"><span class="co">#CLT applies, if a &gt; 2. For large a, convergence to</span></a>
-<a class="sourceLine" id="cb142-6" title="6"><span class="co">#normal is better. With small a, convergence is slow,</span></a>
-<a class="sourceLine" id="cb142-7" title="7"><span class="co">#especially in the tails.</span></a>
-<a class="sourceLine" id="cb142-8" title="8">a &lt;-<span class="st"> </span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb142-9" title="9">b &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb142-10" title="10"><span class="co">#Compute the expectation and variance of the distribution</span></a>
-<a class="sourceLine" id="cb142-11" title="11"><span class="co">#of the sample mean. a must be above 2 for these expressions</span></a>
-<a class="sourceLine" id="cb142-12" title="12"><span class="co">#to hold.</span></a>
-<a class="sourceLine" id="cb142-13" title="13">expec.par &lt;-<span class="st"> </span>a<span class="op">*</span>b<span class="op">/</span>(a<span class="dv">-1</span>)</a>
-<a class="sourceLine" id="cb142-14" title="14">var.par &lt;-<span class="st"> </span>a<span class="op">*</span>b<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>((a<span class="dv">-1</span>)<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(a<span class="dv">-2</span>))</a>
-<a class="sourceLine" id="cb142-15" title="15">sd.mean &lt;-<span class="st"> </span><span class="kw">sqrt</span>(var.par <span class="op">/</span><span class="st"> </span>n)</a>
-<a class="sourceLine" id="cb142-16" title="16"><span class="co">#Simulate data</span></a>
-<a class="sourceLine" id="cb142-17" title="17">sim &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rpareto</span>(n<span class="op">*</span>n.sim, a, b), <span class="dt">nrow =</span> n.sim)</a>
-<a class="sourceLine" id="cb142-18" title="18"><span class="co"># Each column represents ith sample taken per simulation</span></a>
-<a class="sourceLine" id="cb142-19" title="19"><span class="co"># Each row represents a different simulation</span></a>
-<a class="sourceLine" id="cb142-20" title="20">sim[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" title="1"><span class="co">#Sample size per simulation (n) and number of simulations.</span></a>
+<a class="sourceLine" id="cb149-2" title="2">n &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb149-3" title="3">n.sim &lt;-<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb149-4" title="4"><span class="co">#Pareto parameters. Variance is finite, and so</span></a>
+<a class="sourceLine" id="cb149-5" title="5"><span class="co">#CLT applies, if a &gt; 2. For large a, convergence to</span></a>
+<a class="sourceLine" id="cb149-6" title="6"><span class="co">#normal is better. With small a, convergence is slow,</span></a>
+<a class="sourceLine" id="cb149-7" title="7"><span class="co">#especially in the tails.</span></a>
+<a class="sourceLine" id="cb149-8" title="8">a &lt;-<span class="st"> </span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb149-9" title="9">b &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb149-10" title="10"><span class="co">#Compute the expectation and variance of the distribution</span></a>
+<a class="sourceLine" id="cb149-11" title="11"><span class="co">#of the sample mean. a must be above 2 for these expressions</span></a>
+<a class="sourceLine" id="cb149-12" title="12"><span class="co">#to hold.</span></a>
+<a class="sourceLine" id="cb149-13" title="13">expec.par &lt;-<span class="st"> </span>a<span class="op">*</span>b<span class="op">/</span>(a<span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb149-14" title="14">var.par &lt;-<span class="st"> </span>a<span class="op">*</span>b<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>((a<span class="dv">-1</span>)<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(a<span class="dv">-2</span>))</a>
+<a class="sourceLine" id="cb149-15" title="15">sd.mean &lt;-<span class="st"> </span><span class="kw">sqrt</span>(var.par <span class="op">/</span><span class="st"> </span>n)</a>
+<a class="sourceLine" id="cb149-16" title="16"><span class="co">#Simulate data</span></a>
+<a class="sourceLine" id="cb149-17" title="17">sim &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rpareto</span>(n<span class="op">*</span>n.sim, a, b), <span class="dt">nrow =</span> n.sim)</a>
+<a class="sourceLine" id="cb149-18" title="18"><span class="co"># Each column represents ith sample taken per simulation</span></a>
+<a class="sourceLine" id="cb149-19" title="19"><span class="co"># Each row represents a different simulation</span></a>
+<a class="sourceLine" id="cb149-20" title="20">sim[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a></code></pre></div>
 <pre><code>##          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]     [,7]     [,8]
-## [1,] 1.045810 1.115826 1.285527 1.007430 1.337020 2.118968 1.008379 1.577746
-## [2,] 1.132998 1.268665 1.084002 1.244079 1.216772 1.385577 1.268523 1.481353
-## [3,] 1.588239 1.189361 1.017061 1.145074 1.053308 1.079629 1.014789 1.008207
+## [1,] 1.020980 2.256865 1.097602 1.390036 1.004845 1.188772 1.673925 1.151197
+## [2,] 1.137380 1.181952 1.101579 1.076421 1.133138 1.103452 1.372299 1.076058
+## [3,] 1.144218 1.021020 1.153482 1.076443 1.168448 1.164245 1.033774 1.379783
 ##          [,9]    [,10]
-## [1,] 1.623480 1.538905
-## [2,] 1.164438 1.104984
-## [3,] 1.448589 1.017469</code></pre>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" title="1"><span class="co"># Compute sample means.</span></a>
-<a class="sourceLine" id="cb144-2" title="2">means.sim &lt;-<span class="st"> </span><span class="kw">rowMeans</span>(sim)</a>
-<a class="sourceLine" id="cb144-3" title="3"><span class="kw">str</span>(means.sim)</a></code></pre></div>
-<pre><code>##  num [1:10000] 1.4 1.34 1.29 1.34 1.32 ...</code></pre>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" title="1"><span class="co">#Draw a histogram of the sample means along with the approximate</span></a>
-<a class="sourceLine" id="cb146-2" title="2"><span class="co">#normal pdf that follows from the CLT.</span></a>
-<a class="sourceLine" id="cb146-3" title="3"><span class="kw">hist</span>(means.sim, <span class="dt">prob =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb146-4" title="4"><span class="kw">curve</span>(<span class="kw">dnorm</span>(x, expec.par, sd.mean), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>)</a></code></pre></div>
+## [1,] 1.700126 1.062628
+## [2,] 1.087723 1.178737
+## [3,] 1.163065 1.247889</code></pre>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" title="1"><span class="co"># Compute sample means.</span></a>
+<a class="sourceLine" id="cb151-2" title="2">means.sim &lt;-<span class="st"> </span><span class="kw">rowMeans</span>(sim)</a>
+<a class="sourceLine" id="cb151-3" title="3"><span class="kw">str</span>(means.sim)</a></code></pre></div>
+<pre><code>##  num [1:10000] 1.38 1.31 1.31 1.31 1.23 ...</code></pre>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" title="1"><span class="co">#Draw a histogram of the sample means along with the approximate</span></a>
+<a class="sourceLine" id="cb153-2" title="2"><span class="co">#normal pdf that follows from the CLT.</span></a>
+<a class="sourceLine" id="cb153-3" title="3"><span class="kw">hist</span>(means.sim, <span class="dt">prob =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb153-4" title="4"><span class="kw">curve</span>(<span class="kw">dnorm</span>(x, expec.par, sd.mean), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>)</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" title="1"><span class="kw">compare.tail.to.normal</span>(means.sim, <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, expec.par, sd.mean)</a></code></pre></div>
-<pre><code>## [1] 0.9865898</code></pre>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" title="1"><span class="kw">compare.tail.to.normal</span>(means.sim, <span class="dv">1</span>, expec.par, sd.mean)</a></code></pre></div>
-<pre><code>## [1] 0.9255918</code></pre>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" title="1"><span class="kw">compare.tail.to.normal</span>(means.sim, <span class="dv">2</span>, expec.par, sd.mean)</a></code></pre></div>
-<pre><code>## [1] 0.8813136</code></pre>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" title="1"><span class="kw">compare.tail.to.normal</span>(means.sim, <span class="dv">3</span>, expec.par, sd.mean)</a></code></pre></div>
-<pre><code>## [1] 2.370549</code></pre>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" title="1"><span class="kw">compare.tail.to.normal</span>(means.sim, <span class="dv">4</span>, expec.par, sd.mean)</a></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" title="1"><span class="kw">compare.tail.to.normal</span>(means.sim, <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, expec.par, sd.mean)</a></code></pre></div>
+<pre><code>## [1] 0.9891827</code></pre>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1"><span class="kw">compare.tail.to.normal</span>(means.sim, <span class="dv">1</span>, expec.par, sd.mean)</a></code></pre></div>
+<pre><code>## [1] 0.9378826</code></pre>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" title="1"><span class="kw">compare.tail.to.normal</span>(means.sim, <span class="dv">2</span>, expec.par, sd.mean)</a></code></pre></div>
+<pre><code>## [1] 0.9098848</code></pre>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1"><span class="kw">compare.tail.to.normal</span>(means.sim, <span class="dv">3</span>, expec.par, sd.mean)</a></code></pre></div>
+<pre><code>## [1] 2.815027</code></pre>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1"><span class="kw">compare.tail.to.normal</span>(means.sim, <span class="dv">4</span>, expec.par, sd.mean)</a></code></pre></div>
 <pre><code>## [1] 25.25951</code></pre>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" title="1"><span class="kw">compare.tail.to.normal</span>(means.sim, <span class="dv">5</span>, expec.par, sd.mean)</a></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1"><span class="kw">compare.tail.to.normal</span>(means.sim, <span class="dv">5</span>, expec.par, sd.mean)</a></code></pre></div>
 <pre><code>## [1] 872.1389</code></pre>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" title="1"><span class="kw">compare.tail.to.normal</span>(means.sim, <span class="dv">6</span>, expec.par, sd.mean)</a></code></pre></div>
-<pre><code>## [1] 101359.5</code></pre>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1"><span class="kw">compare.tail.to.normal</span>(means.sim, <span class="dv">6</span>, expec.par, sd.mean)</a></code></pre></div>
+<pre><code>## [1] 202718.9</code></pre>
 </div>
 </div>
 <div id="a-probabilistic-model-for-simple-linear-regression" class="section level2">
@@ -533,8 +534,8 @@ If the shape parameter is <span class="math inline">\(\leq\)</span> 2, <span cla
 <ol start="2" style="list-style-type: decimal">
 <li>Simulating a regression.</li>
 </ol>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" title="1"><span class="kw">library</span>(stfspack)</a>
-<a class="sourceLine" id="cb161-2" title="2">sim.lm</a></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1"><span class="kw">library</span>(stfspack)</a>
+<a class="sourceLine" id="cb168-2" title="2">sim.lm</a></code></pre></div>
 <pre><code>## function (n, a, b, sigma.disturb = 1, mu.x = 8, sigma.x = 2, 
 ##     rdisturb = rnorm, rx = rnorm, het.coef = 0) 
 ## {
@@ -544,45 +545,45 @@ If the shape parameter is <span class="math inline">\(\leq\)</span> 2, <span cla
 ##     y &lt;- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## &lt;bytecode: 0x7fc235353730&gt;
+## &lt;bytecode: 0x7fd5e5d1c3a0&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb163-2" title="2"><span class="kw">head</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb170-2" title="2"><span class="kw">head</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>)</a></code></pre></div>
 <pre><code>##             x        y
-## [1,] 4.737662 5.901336
-## [2,] 4.751068 4.712086
-## [3,] 4.786227 4.857548
-## [4,] 5.045494 5.083184
-## [5,] 5.427010 5.690239
-## [6,] 5.721143 2.353452</code></pre>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" title="1"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
+## [1,] 5.343529 6.164700
+## [2,] 5.350238 5.605923
+## [3,] 5.534549 5.220183
+## [4,] 5.914306 5.660254
+## [5,] 6.117602 6.031751
+## [6,] 6.416627 7.596970</code></pre>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Still using all the default values for parameters:</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb166-2" title="2">                  <span class="dt">sigma.disturb =</span> <span class="dv">1</span>, <span class="dt">mu.x =</span> <span class="dv">8</span>, <span class="dt">sigma.x =</span> <span class="dv">2</span>, </a>
-<a class="sourceLine" id="cb166-3" title="3">                  <span class="dt">rdisturb =</span> rnorm, <span class="dt">rx =</span> rnorm, <span class="dt">het.coef =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb166-4" title="4"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb173-2" title="2">                  <span class="dt">sigma.disturb =</span> <span class="dv">1</span>, <span class="dt">mu.x =</span> <span class="dv">8</span>, <span class="dt">sigma.x =</span> <span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb173-3" title="3">                  <span class="dt">rdisturb =</span> rnorm, <span class="dt">rx =</span> rnorm, <span class="dt">het.coef =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb173-4" title="4"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Now I’ll change one at a time:</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb167-2" title="2">                  <span class="dt">sigma.disturb =</span> <span class="dv">2</span>, <span class="dt">mu.x =</span> <span class="dv">8</span>, <span class="dt">sigma.x =</span> <span class="dv">2</span>, </a>
-<a class="sourceLine" id="cb167-3" title="3">                  <span class="dt">rdisturb =</span> rnorm, <span class="dt">rx =</span> rnorm, <span class="dt">het.coef =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb167-4" title="4"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb174-2" title="2">                  <span class="dt">sigma.disturb =</span> <span class="dv">2</span>, <span class="dt">mu.x =</span> <span class="dv">8</span>, <span class="dt">sigma.x =</span> <span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb174-3" title="3">                  <span class="dt">rdisturb =</span> rnorm, <span class="dt">rx =</span> rnorm, <span class="dt">het.coef =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb174-4" title="4"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb168-2" title="2">                  <span class="dt">sigma.disturb =</span> <span class="dv">1</span>, <span class="dt">mu.x =</span> <span class="dv">16</span>, <span class="dt">sigma.x =</span> <span class="dv">2</span>, </a>
-<a class="sourceLine" id="cb168-3" title="3">                  <span class="dt">rdisturb =</span> rnorm, <span class="dt">rx =</span> rnorm, <span class="dt">het.coef =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb168-4" title="4"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb175-2" title="2">                  <span class="dt">sigma.disturb =</span> <span class="dv">1</span>, <span class="dt">mu.x =</span> <span class="dv">16</span>, <span class="dt">sigma.x =</span> <span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb175-3" title="3">                  <span class="dt">rdisturb =</span> rnorm, <span class="dt">rx =</span> rnorm, <span class="dt">het.coef =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb175-4" title="4"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb169-2" title="2">                  <span class="dt">sigma.disturb =</span> <span class="dv">1</span>, <span class="dt">mu.x =</span> <span class="dv">8</span>, <span class="dt">sigma.x =</span> <span class="dv">4</span>, </a>
-<a class="sourceLine" id="cb169-3" title="3">                  <span class="dt">rdisturb =</span> rnorm, <span class="dt">rx =</span> rnorm, <span class="dt">het.coef =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb169-4" title="4"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb176-2" title="2">                  <span class="dt">sigma.disturb =</span> <span class="dv">1</span>, <span class="dt">mu.x =</span> <span class="dv">8</span>, <span class="dt">sigma.x =</span> <span class="dv">4</span>, </a>
+<a class="sourceLine" id="cb176-3" title="3">                  <span class="dt">rdisturb =</span> rnorm, <span class="dt">rx =</span> rnorm, <span class="dt">het.coef =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb176-4" title="4"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb170-2" title="2">                  <span class="dt">sigma.disturb =</span> <span class="dv">1</span>, <span class="dt">mu.x =</span> <span class="dv">8</span>, <span class="dt">sigma.x =</span> <span class="dv">2</span>, </a>
-<a class="sourceLine" id="cb170-3" title="3">                  <span class="dt">rdisturb =</span> rlaplace, <span class="dt">rx =</span> rnorm, <span class="dt">het.coef =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb170-4" title="4"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb177-2" title="2">                  <span class="dt">sigma.disturb =</span> <span class="dv">1</span>, <span class="dt">mu.x =</span> <span class="dv">8</span>, <span class="dt">sigma.x =</span> <span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb177-3" title="3">                  <span class="dt">rdisturb =</span> rlaplace, <span class="dt">rx =</span> rnorm, <span class="dt">het.coef =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb177-4" title="4"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 
 </div>

@@ -288,6 +288,7 @@ Below I have re-created Fig 4-4, with a pdf in the upper panel and a cdf in the 
 
 2. On paper
 
+
 ## Families of distributions
 
 Two requirements for mass or density functions:
@@ -455,3 +456,89 @@ for(i in x){
 
 <img src="04_probability_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
+### Additional exercise 
+
+Assume that destructive earthquakes occur in California every 20 years. You’d like to know how probable an earthquake is between now and some future date.
+
+1. What distribution family describes the waiting time until California’s next earthquake? What value should we use for this distribution’s parameter? [Hint: convert 20 years to a rate]
+
+Use the exponential distribution, where $\lambda = 1/20$:
+
+$$
+\begin{aligned}
+f_X(x) = \lambda e ^{-\lambda x} \\
+\end{aligned}
+$$
+
+2. What is the probability that an earthquake will happen in the next 10 years? [Hint: You need to find a cumulative distribution function for the distribution you chose, either online or by integration].
+
+Rules for integrating "e raised to the x power":
+
+$$
+\begin{aligned}
+\int e^xdx =& e^x + c \\
+\int e^{ax}dx =& \frac{1}{a} e^{ax} + c \\
+\int be^{ax}dx =& \frac{b}{a} e^{ax} + c \\
+\end{aligned}
+$$
+
+With these rules in hand, we can get the cdf by integrating the pdf for the exponential distribution:
+
+$$
+\begin{aligned}
+f_X(x) =& \lambda e ^{-\lambda x} \\
+F_X(X = x) =& \int_{0}^{x} \lambda e^{-\lambda x} dx \\
+=& \frac{1}{- \lambda} \lambda e^{-\lambda x} \bigg\rvert_{0}^{x} \\ 
+=& -e^{-\lambda x} \rvert_{0}^{x} \\ 
+=& -e^{-\lambda x} \rvert_{0}^{x} \\ 
+=& -e^{-\lambda x} - (-e^{-\lambda 0}) \\
+=& -e^{-\lambda x} - (-1) \\
+=& 1 -e^{-\lambda x}  \\
+\end{aligned}
+$$
+
+Then, plug in $x = 10$ and $\lambda = 1/20$: 
+
+
+```r
+1 - exp(-(1/20) * (10))
+```
+
+```
+## [1] 0.3934693
+```
+
+Check to make sure we've done this right using the `pexp` function in R:
+
+
+```r
+pexp(q = 10, rate = 1/20)
+```
+
+```
+## [1] 0.3934693
+```
+
+
+3. What is the probability that an earthquake will occur between 10 and 20 years from now?
+
+
+```r
+pexp(q = 20, rate = 1/20) - pexp(q = 10, rate = 1/20)
+```
+
+```
+## [1] 0.2386512
+```
+
+4. If you have time, write the CDF of your chosen distribution as an R function. It should take a value x and a parameter, and return a probability P(X ≤ x). Use your function to plot the cumulative distribution as a function of x. 
+
+
+```r
+exp_cdf <- function(x, lambda) 1 - exp(-lambda * x)
+x <- seq(0, 80, by = 0.1)
+p <- exp_cdf(x = x, lambda = 1/20)
+plot(p ~ x, type = "l", xlab = "x", ylab = "FX(x)")
+```
+
+<img src="04_probability_files/figure-html/unnamed-chunk-17-1.png" width="672" />

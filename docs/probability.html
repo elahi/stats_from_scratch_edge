@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-04-22" />
+<meta name="date" content="2020-04-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -178,6 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="probability.html"><a href="probability.html#families-of-distributions"><i class="fa fa-check"></i><b>4.7</b> Families of distributions</a><ul>
 <li class="chapter" data-level="4.7.1" data-path="probability.html"><a href="probability.html#exercise-set-4-6-1"><i class="fa fa-check"></i><b>4.7.1</b> Exercise set 4-6</a></li>
+<li class="chapter" data-level="4.7.2" data-path="probability.html"><a href="probability.html#additional-exercise"><i class="fa fa-check"></i><b>4.7.2</b> Additional exercise</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="randomvars.html"><a href="randomvars.html"><i class="fa fa-check"></i><b>5</b> Properties of random variables</a><ul>
@@ -550,6 +551,62 @@ and increases monotonically in <span class="math inline">\(x\)</span>.</p>
 <a class="sourceLine" id="cb77-15" title="15">     <span class="dv">190</span>, <span class="dv">190</span>, <span class="dt">alpha =</span> <span class="dv">60</span>, <span class="dt">max =</span> <span class="dv">255</span>))</a>
 <a class="sourceLine" id="cb77-16" title="16">}</a></code></pre></div>
 <p><img src="04_probability_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+<div id="additional-exercise" class="section level3">
+<h3><span class="header-section-number">4.7.2</span> Additional exercise</h3>
+<p>Assume that destructive earthquakes occur in California every 20 years. You’d like to know how probable an earthquake is between now and some future date.</p>
+<ol style="list-style-type: decimal">
+<li>What distribution family describes the waiting time until California’s next earthquake? What value should we use for this distribution’s parameter? [Hint: convert 20 years to a rate]</li>
+</ol>
+<p>Use the exponential distribution, where <span class="math inline">\(\lambda = 1/20\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f_X(x) = \lambda e ^{-\lambda x} \\
+\end{aligned}
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>What is the probability that an earthquake will happen in the next 10 years? [Hint: You need to find a cumulative distribution function for the distribution you chose, either online or by integration].</li>
+</ol>
+<p>Rules for integrating “e raised to the x power”:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\int e^xdx =&amp; e^x + c \\
+\int e^{ax}dx =&amp; \frac{1}{a} e^{ax} + c \\
+\int be^{ax}dx =&amp; \frac{b}{a} e^{ax} + c \\
+\end{aligned}
+\]</span></p>
+<p>With these rules in hand, we can get the cdf by integrating the pdf for the exponential distribution:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f_X(x) =&amp; \lambda e ^{-\lambda x} \\
+F_X(X = x) =&amp; \int_{0}^{x} \lambda e^{-\lambda x} dx \\
+=&amp; \frac{1}{- \lambda} \lambda e^{-\lambda x} \bigg\rvert_{0}^{x} \\ 
+=&amp; -e^{-\lambda x} \rvert_{0}^{x} \\ 
+=&amp; -e^{-\lambda x} \rvert_{0}^{x} \\ 
+=&amp; -e^{-\lambda x} - (-e^{-\lambda 0}) \\
+=&amp; -e^{-\lambda x} - (-1) \\
+=&amp; 1 -e^{-\lambda x}  \\
+\end{aligned}
+\]</span></p>
+<p>Then, plug in <span class="math inline">\(x = 10\)</span> and <span class="math inline">\(\lambda = 1/20\)</span>:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">20</span>) <span class="op">*</span><span class="st"> </span>(<span class="dv">10</span>))</a></code></pre></div>
+<pre><code>## [1] 0.3934693</code></pre>
+<p>Check to make sure we’ve done this right using the <code>pexp</code> function in R:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="kw">pexp</span>(<span class="dt">q =</span> <span class="dv">10</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>)</a></code></pre></div>
+<pre><code>## [1] 0.3934693</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>What is the probability that an earthquake will occur between 10 and 20 years from now?</li>
+</ol>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">pexp</span>(<span class="dt">q =</span> <span class="dv">20</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>) <span class="op">-</span><span class="st"> </span><span class="kw">pexp</span>(<span class="dt">q =</span> <span class="dv">10</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>)</a></code></pre></div>
+<pre><code>## [1] 0.2386512</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>If you have time, write the CDF of your chosen distribution as an R function. It should take a value x and a parameter, and return a probability P(X ≤ x). Use your function to plot the cumulative distribution as a function of x.</li>
+</ol>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1">exp_cdf &lt;-<span class="st"> </span><span class="cf">function</span>(x, lambda) <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>lambda <span class="op">*</span><span class="st"> </span>x)</a>
+<a class="sourceLine" id="cb84-2" title="2">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">80</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb84-3" title="3">p &lt;-<span class="st"> </span><span class="kw">exp_cdf</span>(<span class="dt">x =</span> x, <span class="dt">lambda =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb84-4" title="4"><span class="kw">plot</span>(p <span class="op">~</span><span class="st"> </span>x, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;FX(x)&quot;</span>)</a></code></pre></div>
+<p><img src="04_probability_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 
 </div>
 </div>

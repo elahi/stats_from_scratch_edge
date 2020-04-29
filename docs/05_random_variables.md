@@ -93,7 +93,7 @@ dosm.beta.hist(n = 1, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##    0.4899736    0.4209460    0.1771955
+##    0.5100520    0.4243966    0.1801125
 ```
 
 ```r
@@ -102,7 +102,7 @@ dosm.beta.hist(n = 4, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##   0.50144237   0.20766420   0.04312442
+##   0.50319716   0.21751683   0.04731357
 ```
 
 ```r
@@ -111,7 +111,7 @@ dosm.beta.hist(n = 8, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##   0.48819651   0.14883897   0.02215304
+##   0.49872078   0.15084669   0.02275472
 ```
 
 ```r
@@ -120,7 +120,7 @@ dosm.beta.hist(n = 16, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##   0.50294463   0.10765186   0.01158892
+##   0.50290870   0.10529962   0.01108801
 ```
 
 ```r
@@ -129,7 +129,7 @@ dosm.beta.hist(n = 32, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##  0.500572992  0.073641756  0.005423108
+##   0.50447446   0.07454308   0.00555667
 ```
 
 ```r
@@ -140,7 +140,7 @@ dosm.beta.hist(n = 64, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##  0.501692807  0.053155822  0.002825541
+##  0.498934648  0.050912703  0.002592103
 ```
 
 Let's deconstruct what is going on with this function, where n = 1 (we simulate 10000 observations from a single set of parameter values). 
@@ -161,7 +161,7 @@ dosm.beta.hist
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## <bytecode: 0x7fc2364a8cf0>
+## <bytecode: 0x7fd5e6b5bd58>
 ## <environment: namespace:stfspack>
 ```
 
@@ -175,7 +175,7 @@ str(samps) # here are 10,000
 ```
 
 ```
-##  num [1:10000] 0.9997 0.3062 0.8319 0.961 0.0797 ...
+##  num [1:10000] 0.1939 0.9668 0.0882 1 0.859 ...
 ```
 
 ```r
@@ -195,12 +195,12 @@ head(sim.mat)
 
 ```
 ##            [,1]
-## [1,] 0.99973974
-## [2,] 0.30620613
-## [3,] 0.83193250
-## [4,] 0.96099348
-## [5,] 0.07970673
-## [6,] 0.98667533
+## [1,] 0.19391831
+## [2,] 0.96680424
+## [3,] 0.08824953
+## [4,] 0.99999999
+## [5,] 0.85896948
+## [6,] 0.67504700
 ```
 
 ```r
@@ -211,7 +211,7 @@ str(dosm)
 ```
 
 ```
-##  num [1:10000] 0.9997 0.3062 0.8319 0.961 0.0797 ...
+##  num [1:10000] 0.1939 0.9668 0.0882 1 0.859 ...
 ```
 
 ```r
@@ -219,7 +219,7 @@ head(dosm) # compare these values to sim.mat
 ```
 
 ```
-## [1] 0.99973974 0.30620613 0.83193250 0.96099348 0.07970673 0.98667533
+## [1] 0.19391831 0.96680424 0.08824953 0.99999999 0.85896948 0.67504700
 ```
 
 ```r
@@ -259,7 +259,7 @@ summary(x)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   4.011   5.518   8.593  14.564  14.669 174.217
+##   4.009   5.853   7.842  17.168  14.367 227.799
 ```
 
 ```r
@@ -288,7 +288,7 @@ compare.tail.to.normal
 ##     mean(x < (mu - k * sigma) | x > (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## <bytecode: 0x7fc22fd28138>
+## <bytecode: 0x7fd5e63dca18>
 ## <environment: namespace:stfspack>
 ```
 
@@ -307,7 +307,7 @@ summary(x)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   4.011   5.518   8.593  14.564  14.669 174.217
+##   4.009   5.853   7.842  17.168  14.367 227.799
 ```
 
 ```r
@@ -315,7 +315,7 @@ mu
 ```
 
 ```
-## [1] 14.56421
+## [1] 17.16811
 ```
 
 ```r
@@ -323,7 +323,7 @@ stdev
 ```
 
 ```
-## [1] 21.4814
+## [1] 29.47463
 ```
 
 ```r
@@ -334,7 +334,7 @@ stdev
 ```
 
 ```
-## [1] -28.39859
+## [1] -41.78115
 ```
 
 ```r
@@ -343,7 +343,7 @@ stdev
 ```
 
 ```
-## [1] 57.52701
+## [1] 76.11737
 ```
 
 ```r
@@ -354,15 +354,15 @@ x < (mu - k * stdev) | x > (mu + k * stdev)
 ```
 
 ```
-##   [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+##   [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+##  [25] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [49] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [61] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [73] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [73] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [85] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [97] FALSE FALSE FALSE FALSE
+##  [97] FALSE FALSE FALSE  TRUE
 ```
 
 ```r
@@ -462,13 +462,13 @@ sim[1:3, 1:10]
 
 ```
 ##          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]     [,7]     [,8]
-## [1,] 1.045810 1.115826 1.285527 1.007430 1.337020 2.118968 1.008379 1.577746
-## [2,] 1.132998 1.268665 1.084002 1.244079 1.216772 1.385577 1.268523 1.481353
-## [3,] 1.588239 1.189361 1.017061 1.145074 1.053308 1.079629 1.014789 1.008207
+## [1,] 1.020980 2.256865 1.097602 1.390036 1.004845 1.188772 1.673925 1.151197
+## [2,] 1.137380 1.181952 1.101579 1.076421 1.133138 1.103452 1.372299 1.076058
+## [3,] 1.144218 1.021020 1.153482 1.076443 1.168448 1.164245 1.033774 1.379783
 ##          [,9]    [,10]
-## [1,] 1.623480 1.538905
-## [2,] 1.164438 1.104984
-## [3,] 1.448589 1.017469
+## [1,] 1.700126 1.062628
+## [2,] 1.087723 1.178737
+## [3,] 1.163065 1.247889
 ```
 
 ```r
@@ -478,7 +478,7 @@ str(means.sim)
 ```
 
 ```
-##  num [1:10000] 1.4 1.34 1.29 1.34 1.32 ...
+##  num [1:10000] 1.38 1.31 1.31 1.31 1.23 ...
 ```
 
 ```r
@@ -495,7 +495,7 @@ compare.tail.to.normal(means.sim, 1/2, expec.par, sd.mean)
 ```
 
 ```
-## [1] 0.9865898
+## [1] 0.9891827
 ```
 
 ```r
@@ -503,7 +503,7 @@ compare.tail.to.normal(means.sim, 1, expec.par, sd.mean)
 ```
 
 ```
-## [1] 0.9255918
+## [1] 0.9378826
 ```
 
 ```r
@@ -511,7 +511,7 @@ compare.tail.to.normal(means.sim, 2, expec.par, sd.mean)
 ```
 
 ```
-## [1] 0.8813136
+## [1] 0.9098848
 ```
 
 ```r
@@ -519,7 +519,7 @@ compare.tail.to.normal(means.sim, 3, expec.par, sd.mean)
 ```
 
 ```
-## [1] 2.370549
+## [1] 2.815027
 ```
 
 ```r
@@ -543,7 +543,7 @@ compare.tail.to.normal(means.sim, 6, expec.par, sd.mean)
 ```
 
 ```
-## [1] 101359.5
+## [1] 202718.9
 ```
 
 
@@ -611,7 +611,7 @@ sim.lm
 ##     y <- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## <bytecode: 0x7fc235353730>
+## <bytecode: 0x7fd5e5d1c3a0>
 ## <environment: namespace:stfspack>
 ```
 
@@ -622,12 +622,12 @@ head(sim_0_1)
 
 ```
 ##             x        y
-## [1,] 4.737662 5.901336
-## [2,] 4.751068 4.712086
-## [3,] 4.786227 4.857548
-## [4,] 5.045494 5.083184
-## [5,] 5.427010 5.690239
-## [6,] 5.721143 2.353452
+## [1,] 5.343529 6.164700
+## [2,] 5.350238 5.605923
+## [3,] 5.534549 5.220183
+## [4,] 5.914306 5.660254
+## [5,] 6.117602 6.031751
+## [6,] 6.416627 7.596970
 ```
 
 ```r
