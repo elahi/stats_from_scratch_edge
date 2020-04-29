@@ -234,10 +234,10 @@ and increases monotonically in $x$.
 
 1. Flipping a fair coin 3 times. X is a random variable that represents the number of heads observed, and the sample space $\Omega$ contains the elements {0, 1, 2, 3}. Here are all of the ways we can observe these elements:
 
-> x = 0: (T, T, T)
-> x = 1: (H, T, T); (T, H, T); (T, T, H)
-> x = 2: (H, H, T); (H, T, H); (T, H, H)
-> x = 3: (H, H, H)
+> x = 0: (T, T, T)  
+> x = 1: (H, T, T); (T, H, T); (T, T, H)  
+> x = 2: (H, H, T); (H, T, H); (T, H, H)  
+> x = 3: (H, H, H)  
 
 There are 8 possible instances. Thus, the probability mass function is:
 
@@ -249,12 +249,38 @@ f_X(x) =& 0 \text{ for all other } x \\
 \end{aligned}
 $$
 
-2. 
+2. If we sum $f_X(x_i)$ for all possible $x_i$, the sum would be 1 (1/8 + 1/8 + 3/8 + 3/8). 
 
+3. In terms of $F_X$, what is $P(a \lt X \le b)$, if $b \gt a$? Hint: notice that $a \lt X \le b$ if and only if $X \leq b$ and $X > a$. 
+
+Note that the cdf, $F_X$, for $x = a$ and $x = b$ are given by the following:
+
+$$
+\begin{aligned}
+F_X(a) =& P(X \le a) \\
+F_X(b) =& P(X \le b) \\
+\end{aligned}
+$$
+
+We want the probability of observing a value $x$ between $a$ and $b$, so:
+
+$$
+\begin{aligned}
+P(a \lt X \le b) = F_X(b) - F_X(a) \\
+\end{aligned}
+$$
 
 ## Continuous random variables and distributions
 
-What about values that are not countable - anything with a decimal? Impossible to get a specific number, or instance, and thus we cannot use the pmf. But we can still use the cdf!
+What about values that are not countable - anything with a decimal? Impossible to get a specific number, or instance (e.g., the probability a person weighs exactly 70kg), and thus we cannot use the pmf. But we can still use the cdf:
+
+$$
+\begin{aligned}
+F_X(x) = P(X \leq x)
+\end{aligned}
+$$
+
+That is, we can ask about the probability that a person will weigh 70kg or less, or whether a person will weigh between 70 and 71kg. 
 
 ### Exercise set 4-4
 
@@ -295,18 +321,39 @@ lines(c(1,2), c(1, 1))
 
 **For a continuous random variable, the pdf is the derivative of the cdf**
 
+Recall that the cdf for a discrete random variable is a series of partial sums, given by: 
+
+$$
+\begin{aligned}
+F_X(x) = P(X \leq x) = \sum_{x_i \leq x} f_X(x_i)
+\end{aligned}
+$$
+
+In an analogous fashion, we can integrate a continuous function to get the cdf of a continous random variable. We define the probability density function $f_X$ (pdf) of a continuous random variable as:
+
+$$
+\begin{aligned}
+F_X(x) =& \int_{- \infty}^{x} f_X(u) du \\
+\end{aligned}
+$$
+
 Below I have re-created Fig 4-4, with a pdf in the upper panel and a cdf in the lower panel - for an *exponential* random variable with rate 1. 
 
 
 
 <img src="04_probability_files/figure-html/unnamed-chunk-3-1.png" width="672" /><img src="04_probability_files/figure-html/unnamed-chunk-3-2.png" width="672" />
 
+### Additional viz
 
-### Exercise set 4-6
+We can visualize the principle of question 3 from Exercise Set 4-3 using the cdf of a standard normal distribution, where $a = -1$ and $b = 1$:
 
-1. On paper
+<img src="04_probability_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
-2. On paper
+
+### Exercise set 4-5
+
+1. If $f_X(x)$ is a probability density funcion, then total area under $f_X(x)$ is 1. 
+2. Yes, $f_x$ can be a probability density funcion, because the area under the function is 1. This situation is different from a probability mass function, because the y-axis values for a pdf can be > 1 (in this case, the maximum y is 10). 
 
 
 ## Families of distributions
@@ -325,9 +372,13 @@ Distribution family
 
 ### Exercise set 4-6
 
-1. On paper
+1. The probability mass function of the Poisson distribution is $P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}$. Plugging in the appropriate values for $k$ and $\lambda$ gives: 
 
-2. On paper
+(i). $e^{-5}$  
+(ii). $5e^{-5}$  
+(iii). $\frac{25}{2}e^{-5}$  
+
+2. Use the probability mass function of the geometric distribution with parameter 1/2. If our first “heads” occurs on the 6th flip, then we have five tails before it. We plug $p$ = 1/2 and $k$ = 5 into $P(X = k) = (1-p)^kp$ to get 1/64.  
 
 3. Consider a Poisson distribution with parameter $\lambda$ = 5. If we want to know the value of the probability mass function for x = 2, $f_X(2)$, we use the `dpois()` function:
 
@@ -362,53 +413,26 @@ qpois(0.124652, lambda = 5)
 ## [1] 2
 ```
 
-The inverse of the cdf is also called the quantile function. 
+The inverse of the cdf is also called the quantile function. Using the standard normal distribution (mean = 0, sd = 1), plot the probability density function for x $\in$ [-3, 3]. 
 
-Using the standard normal distribution (mean = 0, sd = 1):
-
-Plot the probability density function for x $\in$ [-3, 3]. 
 
 ```r
 x <- seq(-3, 3, by = 0.1)
-x
-```
-
-```
-##  [1] -3.0 -2.9 -2.8 -2.7 -2.6 -2.5 -2.4 -2.3 -2.2 -2.1 -2.0 -1.9 -1.8 -1.7 -1.6
-## [16] -1.5 -1.4 -1.3 -1.2 -1.1 -1.0 -0.9 -0.8 -0.7 -0.6 -0.5 -0.4 -0.3 -0.2 -0.1
-## [31]  0.0  0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1.0  1.1  1.2  1.3  1.4
-## [46]  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3  2.4  2.5  2.6  2.7  2.8  2.9
-## [61]  3.0
-```
-
-```r
 fx <- dnorm(x = x)
 plot(x, fx, type = "l", main = "PDF", col = "red")
 ```
 
-<img src="04_probability_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="04_probability_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 Plot the cdf for x $\in$ [-3, 3].
 
 ```r
 x <- seq(-3, 3, by = 0.1)
-x
-```
-
-```
-##  [1] -3.0 -2.9 -2.8 -2.7 -2.6 -2.5 -2.4 -2.3 -2.2 -2.1 -2.0 -1.9 -1.8 -1.7 -1.6
-## [16] -1.5 -1.4 -1.3 -1.2 -1.1 -1.0 -0.9 -0.8 -0.7 -0.6 -0.5 -0.4 -0.3 -0.2 -0.1
-## [31]  0.0  0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1.0  1.1  1.2  1.3  1.4
-## [46]  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3  2.4  2.5  2.6  2.7  2.8  2.9
-## [61]  3.0
-```
-
-```r
 fx <- pnorm(q = x)
 plot(x, fx, type = "l", main = "CDF", col = "red")
 ```
 
-<img src="04_probability_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="04_probability_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 What value of $x$ is at the 97.5th percentile of the standard normal?
 
@@ -420,7 +444,7 @@ qnorm(p = 0.975)
 ## [1] 1.959964
 ```
 
-4. Simulating from a normal distribution. 
+4. Simulating from a normal distribution and from a uniform distribution:
 
 
 ```r
@@ -429,18 +453,14 @@ x <- rnorm(n)
 hist(x)
 ```
 
-<img src="04_probability_files/figure-html/unnamed-chunk-10-1.png" width="672" />
-
-Simulating from a uniform distribution. 
-
+<img src="04_probability_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 ```r
-n <- 1000
 x <- runif(n, min = 0, max = 1)
 hist(x)
 ```
 
-<img src="04_probability_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="04_probability_files/figure-html/unnamed-chunk-11-2.png" width="672" />
 
 Now take those values between 0 and 1, and feed them into the `qnorm` function to get the values at which we see those quantiles:
 

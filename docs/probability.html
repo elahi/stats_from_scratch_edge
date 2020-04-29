@@ -174,10 +174,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.1" data-path="probability.html"><a href="probability.html#exercise-set-4-4"><i class="fa fa-check"></i><b>4.5.1</b> Exercise set 4-4</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="probability.html"><a href="probability.html#probability-density-functions"><i class="fa fa-check"></i><b>4.6</b> Probability density functions</a><ul>
-<li class="chapter" data-level="4.6.1" data-path="probability.html"><a href="probability.html#exercise-set-4-6"><i class="fa fa-check"></i><b>4.6.1</b> Exercise set 4-6</a></li>
+<li class="chapter" data-level="4.6.1" data-path="probability.html"><a href="probability.html#additional-viz"><i class="fa fa-check"></i><b>4.6.1</b> Additional viz</a></li>
+<li class="chapter" data-level="4.6.2" data-path="probability.html"><a href="probability.html#exercise-set-4-5"><i class="fa fa-check"></i><b>4.6.2</b> Exercise set 4-5</a></li>
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="probability.html"><a href="probability.html#families-of-distributions"><i class="fa fa-check"></i><b>4.7</b> Families of distributions</a><ul>
-<li class="chapter" data-level="4.7.1" data-path="probability.html"><a href="probability.html#exercise-set-4-6-1"><i class="fa fa-check"></i><b>4.7.1</b> Exercise set 4-6</a></li>
+<li class="chapter" data-level="4.7.1" data-path="probability.html"><a href="probability.html#exercise-set-4-6"><i class="fa fa-check"></i><b>4.7.1</b> Exercise set 4-6</a></li>
 <li class="chapter" data-level="4.7.2" data-path="probability.html"><a href="probability.html#additional-exercise"><i class="fa fa-check"></i><b>4.7.2</b> Additional exercise</a></li>
 </ul></li>
 </ul></li>
@@ -419,9 +420,9 @@ and increases monotonically in <span class="math inline">\(x\)</span>.</p>
 <li>Flipping a fair coin 3 times. X is a random variable that represents the number of heads observed, and the sample space <span class="math inline">\(\Omega\)</span> contains the elements {0, 1, 2, 3}. Here are all of the ways we can observe these elements:</li>
 </ol>
 <blockquote>
-<p>x = 0: (T, T, T)
-x = 1: (H, T, T); (T, H, T); (T, T, H)
-x = 2: (H, H, T); (H, T, H); (T, H, H)
+<p>x = 0: (T, T, T)<br />
+x = 1: (H, T, T); (T, H, T); (T, T, H)<br />
+x = 2: (H, H, T); (H, T, H); (T, H, H)<br />
 x = 3: (H, H, H)</p>
 </blockquote>
 <p>There are 8 possible instances. Thus, the probability mass function is:</p>
@@ -433,13 +434,33 @@ f_X(x) =&amp; 0 \text{ for all other } x \\
 \end{aligned}
 \]</span></p>
 <ol start="2" style="list-style-type: decimal">
-<li></li>
+<li><p>If we sum <span class="math inline">\(f_X(x_i)\)</span> for all possible <span class="math inline">\(x_i\)</span>, the sum would be 1 (1/8 + 1/8 + 3/8 + 3/8).</p></li>
+<li><p>In terms of <span class="math inline">\(F_X\)</span>, what is <span class="math inline">\(P(a \lt X \le b)\)</span>, if <span class="math inline">\(b \gt a\)</span>? Hint: notice that <span class="math inline">\(a \lt X \le b\)</span> if and only if <span class="math inline">\(X \leq b\)</span> and <span class="math inline">\(X &gt; a\)</span>.</p></li>
 </ol>
+<p>Note that the cdf, <span class="math inline">\(F_X\)</span>, for <span class="math inline">\(x = a\)</span> and <span class="math inline">\(x = b\)</span> are given by the following:</p>
+<p><span class="math display">\[
+\begin{aligned}
+F_X(a) =&amp; P(X \le a) \\
+F_X(b) =&amp; P(X \le b) \\
+\end{aligned}
+\]</span></p>
+<p>We want the probability of observing a value <span class="math inline">\(x\)</span> between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, so:</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(a \lt X \le b) = F_X(b) - F_X(a) \\
+\end{aligned}
+\]</span></p>
 </div>
 </div>
 <div id="continuous-random-variables-and-distributions" class="section level2">
 <h2><span class="header-section-number">4.5</span> Continuous random variables and distributions</h2>
-<p>What about values that are not countable - anything with a decimal? Impossible to get a specific number, or instance, and thus we cannot use the pmf. But we can still use the cdf!</p>
+<p>What about values that are not countable - anything with a decimal? Impossible to get a specific number, or instance (e.g., the probability a person weighs exactly 70kg), and thus we cannot use the pmf. But we can still use the cdf:</p>
+<p><span class="math display">\[
+\begin{aligned}
+F_X(x) = P(X \leq x)
+\end{aligned}
+\]</span></p>
+<p>That is, we can ask about the probability that a person will weigh 70kg or less, or whether a person will weigh between 70 and 71kg.</p>
 <div id="exercise-set-4-4" class="section level3">
 <h3><span class="header-section-number">4.5.1</span> Exercise set 4-4</h3>
 <ol style="list-style-type: decimal">
@@ -472,13 +493,30 @@ f_X(x) =&amp; 0 \text{ for all other } x \\
 <div id="probability-density-functions" class="section level2">
 <h2><span class="header-section-number">4.6</span> Probability density functions</h2>
 <p><strong>For a continuous random variable, the pdf is the derivative of the cdf</strong></p>
+<p>Recall that the cdf for a discrete random variable is a series of partial sums, given by:</p>
+<p><span class="math display">\[
+\begin{aligned}
+F_X(x) = P(X \leq x) = \sum_{x_i \leq x} f_X(x_i)
+\end{aligned}
+\]</span></p>
+<p>In an analogous fashion, we can integrate a continuous function to get the cdf of a continous random variable. We define the probability density function <span class="math inline">\(f_X\)</span> (pdf) of a continuous random variable as:</p>
+<p><span class="math display">\[
+\begin{aligned}
+F_X(x) =&amp; \int_{- \infty}^{x} f_X(u) du \\
+\end{aligned}
+\]</span></p>
 <p>Below I have re-created Fig 4-4, with a pdf in the upper panel and a cdf in the lower panel - for an <em>exponential</em> random variable with rate 1.</p>
 <p><img src="04_probability_files/figure-html/unnamed-chunk-3-1.png" width="672" /><img src="04_probability_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
-<div id="exercise-set-4-6" class="section level3">
-<h3><span class="header-section-number">4.6.1</span> Exercise set 4-6</h3>
+<div id="additional-viz" class="section level3">
+<h3><span class="header-section-number">4.6.1</span> Additional viz</h3>
+<p>We can visualize the principle of question 3 from Exercise Set 4-3 using the cdf of a standard normal distribution, where <span class="math inline">\(a = -1\)</span> and <span class="math inline">\(b = 1\)</span>:</p>
+<p><img src="04_probability_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="exercise-set-4-5" class="section level3">
+<h3><span class="header-section-number">4.6.2</span> Exercise set 4-5</h3>
 <ol style="list-style-type: decimal">
-<li><p>On paper</p></li>
-<li><p>On paper</p></li>
+<li>If <span class="math inline">\(f_X(x)\)</span> is a probability density funcion, then total area under <span class="math inline">\(f_X(x)\)</span> is 1.</li>
+<li>Yes, <span class="math inline">\(f_x\)</span> can be a probability density funcion, because the area under the function is 1. This situation is different from a probability mass function, because the y-axis values for a pdf can be &gt; 1 (in this case, the maximum y is 10).</li>
 </ol>
 </div>
 </div>
@@ -495,11 +533,16 @@ f_X(x) =&amp; 0 \text{ for all other } x \\
 <li>summaries of their behavior can be computed from the same functions</li>
 <li>but <strong>parameter</strong> values differ</li>
 </ul>
-<div id="exercise-set-4-6-1" class="section level3">
+<div id="exercise-set-4-6" class="section level3">
 <h3><span class="header-section-number">4.7.1</span> Exercise set 4-6</h3>
 <ol style="list-style-type: decimal">
-<li><p>On paper</p></li>
-<li><p>On paper</p></li>
+<li>The probability mass function of the Poisson distribution is <span class="math inline">\(P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}\)</span>. Plugging in the appropriate values for <span class="math inline">\(k\)</span> and <span class="math inline">\(\lambda\)</span> gives:</li>
+</ol>
+<p>(i). <span class="math inline">\(e^{-5}\)</span><br />
+(ii). <span class="math inline">\(5e^{-5}\)</span><br />
+(iii). <span class="math inline">\(\frac{25}{2}e^{-5}\)</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Use the probability mass function of the geometric distribution with parameter 1/2. If our first “heads” occurs on the 6th flip, then we have five tails before it. We plug <span class="math inline">\(p\)</span> = 1/2 and <span class="math inline">\(k\)</span> = 5 into <span class="math inline">\(P(X = k) = (1-p)^kp\)</span> to get 1/64.</p></li>
 <li><p>Consider a Poisson distribution with parameter <span class="math inline">\(\lambda\)</span> = 5. If we want to know the value of the probability mass function for x = 2, <span class="math inline">\(f_X(2)\)</span>, we use the <code>dpois()</code> function:</p></li>
 </ol>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="kw">dpois</span>(<span class="dv">2</span>, <span class="dt">lambda =</span> <span class="dv">5</span>)</a></code></pre></div>
@@ -510,66 +553,50 @@ f_X(x) =&amp; 0 \text{ for all other } x \\
 <p>If we want to know the <em>inverse</em> of the cumulative distribution function. That is, we want to know the value of <span class="math inline">\(q\)</span> that solves the equation <span class="math inline">\(F_X(q) = p\)</span>. What is the number <span class="math inline">\(q\)</span> such that the probability tha the random variable is less than or equal to <span class="math inline">\(q\)</span> is <span class="math inline">\(p\)</span>; <span class="math inline">\(q\)</span> is the <span class="math inline">\(pth\)</span> percentile of the distribution. We can get this using <code>qpois()</code>:</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">qpois</span>(<span class="fl">0.124652</span>, <span class="dt">lambda =</span> <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<p>The inverse of the cdf is also called the quantile function.</p>
-<p>Using the standard normal distribution (mean = 0, sd = 1):</p>
-<p>Plot the probability density function for x <span class="math inline">\(\in\)</span> [-3, 3].</p>
+<p>The inverse of the cdf is also called the quantile function. Using the standard normal distribution (mean = 0, sd = 1), plot the probability density function for x <span class="math inline">\(\in\)</span> [-3, 3].</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb66-2" title="2">x</a></code></pre></div>
-<pre><code>##  [1] -3.0 -2.9 -2.8 -2.7 -2.6 -2.5 -2.4 -2.3 -2.2 -2.1 -2.0 -1.9 -1.8 -1.7 -1.6
-## [16] -1.5 -1.4 -1.3 -1.2 -1.1 -1.0 -0.9 -0.8 -0.7 -0.6 -0.5 -0.4 -0.3 -0.2 -0.1
-## [31]  0.0  0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1.0  1.1  1.2  1.3  1.4
-## [46]  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3  2.4  2.5  2.6  2.7  2.8  2.9
-## [61]  3.0</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1">fx &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> x)</a>
-<a class="sourceLine" id="cb68-2" title="2"><span class="kw">plot</span>(x, fx, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;PDF&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
-<p><img src="04_probability_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>Plot the cdf for x <span class="math inline">\(\in\)</span> [-3, 3].</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb69-2" title="2">x</a></code></pre></div>
-<pre><code>##  [1] -3.0 -2.9 -2.8 -2.7 -2.6 -2.5 -2.4 -2.3 -2.2 -2.1 -2.0 -1.9 -1.8 -1.7 -1.6
-## [16] -1.5 -1.4 -1.3 -1.2 -1.1 -1.0 -0.9 -0.8 -0.7 -0.6 -0.5 -0.4 -0.3 -0.2 -0.1
-## [31]  0.0  0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1.0  1.1  1.2  1.3  1.4
-## [46]  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3  2.4  2.5  2.6  2.7  2.8  2.9
-## [61]  3.0</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1">fx &lt;-<span class="st"> </span><span class="kw">pnorm</span>(<span class="dt">q =</span> x)</a>
-<a class="sourceLine" id="cb71-2" title="2"><span class="kw">plot</span>(x, fx, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;CDF&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb66-2" title="2">fx &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> x)</a>
+<a class="sourceLine" id="cb66-3" title="3"><span class="kw">plot</span>(x, fx, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;PDF&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="04_probability_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Plot the cdf for x <span class="math inline">\(\in\)</span> [-3, 3].</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb67-2" title="2">fx &lt;-<span class="st"> </span><span class="kw">pnorm</span>(<span class="dt">q =</span> x)</a>
+<a class="sourceLine" id="cb67-3" title="3"><span class="kw">plot</span>(x, fx, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;CDF&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="04_probability_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>What value of <span class="math inline">\(x\)</span> is at the 97.5th percentile of the standard normal?</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"><span class="kw">qnorm</span>(<span class="dt">p =</span> <span class="fl">0.975</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="kw">qnorm</span>(<span class="dt">p =</span> <span class="fl">0.975</span>)</a></code></pre></div>
 <pre><code>## [1] 1.959964</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>Simulating from a normal distribution.</li>
+<li>Simulating from a normal distribution and from a uniform distribution:</li>
 </ol>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1">n &lt;-<span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb74-2" title="2">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n)</a>
-<a class="sourceLine" id="cb74-3" title="3"><span class="kw">hist</span>(x)</a></code></pre></div>
-<p><img src="04_probability_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>Simulating from a uniform distribution.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1">n &lt;-<span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb75-2" title="2">x &lt;-<span class="st"> </span><span class="kw">runif</span>(n, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb75-3" title="3"><span class="kw">hist</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1">n &lt;-<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb70-2" title="2">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n)</a>
+<a class="sourceLine" id="cb70-3" title="3"><span class="kw">hist</span>(x)</a></code></pre></div>
 <p><img src="04_probability_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1">x &lt;-<span class="st"> </span><span class="kw">runif</span>(n, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb71-2" title="2"><span class="kw">hist</span>(x)</a></code></pre></div>
+<p><img src="04_probability_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
 <p>Now take those values between 0 and 1, and feed them into the <code>qnorm</code> function to get the values at which we see those quantiles:</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1">y &lt;-<span class="st"> </span><span class="kw">qnorm</span>(<span class="dt">p =</span> x, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb76-2" title="2"><span class="kw">hist</span>(y)</a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1">y &lt;-<span class="st"> </span><span class="kw">qnorm</span>(<span class="dt">p =</span> x, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb72-2" title="2"><span class="kw">hist</span>(y)</a></code></pre></div>
 <p><img src="04_probability_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>These values are normally distributed around 0. This plot is saying that most of the probability (in fact ~95%) lies between -2 &lt; y &lt; 2 (2 standard deviations).</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1">r &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">length.out =</span> <span class="dv">1000</span>)</a>
-<a class="sourceLine" id="cb77-2" title="2">cdf &lt;-<span class="st"> </span><span class="kw">pnorm</span>(r)</a>
-<a class="sourceLine" id="cb77-3" title="3"><span class="co">#Draw the normal cumulative distribution function.</span></a>
-<a class="sourceLine" id="cb77-4" title="4"><span class="kw">plot</span>(r, cdf, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="dt">yaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb77-5" title="5"><span class="dv">3</span>), <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">italic</span>(x)), <span class="dt">ylab =</span></a>
-<a class="sourceLine" id="cb77-6" title="6"><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="kw">italic</span>(F[X]), <span class="st">&quot;(&quot;</span>, <span class="kw">italic</span>(x), <span class="st">&quot;)&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)),</a>
-<a class="sourceLine" id="cb77-7" title="7"><span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb77-8" title="8"><span class="co">#Draw light grey lines representing random samples from the</span></a>
-<a class="sourceLine" id="cb77-9" title="9"><span class="co">#standard normal distribution.</span></a>
-<a class="sourceLine" id="cb77-10" title="10">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb77-11" title="11"><span class="cf">for</span>(i <span class="cf">in</span> x){</a>
-<a class="sourceLine" id="cb77-12" title="12">  <span class="kw">lines</span>(<span class="kw">c</span>(i,i), <span class="kw">c</span>(<span class="kw">min</span>(x), <span class="kw">pnorm</span>(i)), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dv">190</span>, <span class="dv">190</span>, <span class="dv">190</span>,</a>
-<a class="sourceLine" id="cb77-13" title="13">     <span class="dt">alpha =</span> <span class="dv">60</span>, <span class="dt">max =</span> <span class="dv">255</span>))</a>
-<a class="sourceLine" id="cb77-14" title="14">  <span class="kw">lines</span>(<span class="kw">c</span>(<span class="kw">min</span>(x)<span class="op">-</span><span class="dv">1</span>,i), <span class="kw">c</span>(<span class="kw">pnorm</span>(i), <span class="kw">pnorm</span>(i)), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dv">190</span>,</a>
-<a class="sourceLine" id="cb77-15" title="15">     <span class="dv">190</span>, <span class="dv">190</span>, <span class="dt">alpha =</span> <span class="dv">60</span>, <span class="dt">max =</span> <span class="dv">255</span>))</a>
-<a class="sourceLine" id="cb77-16" title="16">}</a></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1">r &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">length.out =</span> <span class="dv">1000</span>)</a>
+<a class="sourceLine" id="cb73-2" title="2">cdf &lt;-<span class="st"> </span><span class="kw">pnorm</span>(r)</a>
+<a class="sourceLine" id="cb73-3" title="3"><span class="co">#Draw the normal cumulative distribution function.</span></a>
+<a class="sourceLine" id="cb73-4" title="4"><span class="kw">plot</span>(r, cdf, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="dt">yaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb73-5" title="5"><span class="dv">3</span>), <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">italic</span>(x)), <span class="dt">ylab =</span></a>
+<a class="sourceLine" id="cb73-6" title="6"><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="kw">italic</span>(F[X]), <span class="st">&quot;(&quot;</span>, <span class="kw">italic</span>(x), <span class="st">&quot;)&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)),</a>
+<a class="sourceLine" id="cb73-7" title="7"><span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb73-8" title="8"><span class="co">#Draw light grey lines representing random samples from the</span></a>
+<a class="sourceLine" id="cb73-9" title="9"><span class="co">#standard normal distribution.</span></a>
+<a class="sourceLine" id="cb73-10" title="10">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb73-11" title="11"><span class="cf">for</span>(i <span class="cf">in</span> x){</a>
+<a class="sourceLine" id="cb73-12" title="12">  <span class="kw">lines</span>(<span class="kw">c</span>(i,i), <span class="kw">c</span>(<span class="kw">min</span>(x), <span class="kw">pnorm</span>(i)), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dv">190</span>, <span class="dv">190</span>, <span class="dv">190</span>,</a>
+<a class="sourceLine" id="cb73-13" title="13">     <span class="dt">alpha =</span> <span class="dv">60</span>, <span class="dt">max =</span> <span class="dv">255</span>))</a>
+<a class="sourceLine" id="cb73-14" title="14">  <span class="kw">lines</span>(<span class="kw">c</span>(<span class="kw">min</span>(x)<span class="op">-</span><span class="dv">1</span>,i), <span class="kw">c</span>(<span class="kw">pnorm</span>(i), <span class="kw">pnorm</span>(i)), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dv">190</span>,</a>
+<a class="sourceLine" id="cb73-15" title="15">     <span class="dv">190</span>, <span class="dv">190</span>, <span class="dt">alpha =</span> <span class="dv">60</span>, <span class="dt">max =</span> <span class="dv">255</span>))</a>
+<a class="sourceLine" id="cb73-16" title="16">}</a></code></pre></div>
 <p><img src="04_probability_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
 <div id="additional-exercise" class="section level3">
@@ -610,23 +637,23 @@ F_X(X = x) =&amp; \int_{0}^{x} \lambda e^{-\lambda x} dx \\
 \end{aligned}
 \]</span></p>
 <p>Then, plug in <span class="math inline">\(x = 10\)</span> and <span class="math inline">\(\lambda = 1/20\)</span>:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">20</span>) <span class="op">*</span><span class="st"> </span>(<span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">20</span>) <span class="op">*</span><span class="st"> </span>(<span class="dv">10</span>))</a></code></pre></div>
 <pre><code>## [1] 0.3934693</code></pre>
 <p>Check to make sure we’ve done this right using the <code>pexp</code> function in R:</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="kw">pexp</span>(<span class="dt">q =</span> <span class="dv">10</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1"><span class="kw">pexp</span>(<span class="dt">q =</span> <span class="dv">10</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>)</a></code></pre></div>
 <pre><code>## [1] 0.3934693</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>What is the probability that an earthquake will occur between 10 and 20 years from now?</li>
 </ol>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">pexp</span>(<span class="dt">q =</span> <span class="dv">20</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>) <span class="op">-</span><span class="st"> </span><span class="kw">pexp</span>(<span class="dt">q =</span> <span class="dv">10</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">pexp</span>(<span class="dt">q =</span> <span class="dv">20</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>) <span class="op">-</span><span class="st"> </span><span class="kw">pexp</span>(<span class="dt">q =</span> <span class="dv">10</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>)</a></code></pre></div>
 <pre><code>## [1] 0.2386512</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>If you have time, write the CDF of your chosen distribution as an R function. It should take a value x and a parameter, and return a probability P(X ≤ x). Use your function to plot the cumulative distribution as a function of x.</li>
 </ol>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1">exp_cdf &lt;-<span class="st"> </span><span class="cf">function</span>(x, lambda) <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>lambda <span class="op">*</span><span class="st"> </span>x)</a>
-<a class="sourceLine" id="cb84-2" title="2">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">80</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb84-3" title="3">p &lt;-<span class="st"> </span><span class="kw">exp_cdf</span>(<span class="dt">x =</span> x, <span class="dt">lambda =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb84-4" title="4"><span class="kw">plot</span>(p <span class="op">~</span><span class="st"> </span>x, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;FX(x)&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1">exp_cdf &lt;-<span class="st"> </span><span class="cf">function</span>(x, lambda) <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>lambda <span class="op">*</span><span class="st"> </span>x)</a>
+<a class="sourceLine" id="cb80-2" title="2">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">80</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb80-3" title="3">p &lt;-<span class="st"> </span><span class="kw">exp_cdf</span>(<span class="dt">x =</span> x, <span class="dt">lambda =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb80-4" title="4"><span class="kw">plot</span>(p <span class="op">~</span><span class="st"> </span>x, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;FX(x)&quot;</span>)</a></code></pre></div>
 <p><img src="04_probability_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 
 </div>
