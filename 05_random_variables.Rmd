@@ -19,9 +19,140 @@ theme_set(theme_bw(base_size = 12) +
 
 ## Expected values and the law of large numbers
 
+When summarizing a probability distribution, it is useful to have a measure of:
+
+  - Location (*Expectation*; E($X$))
+  - Dispersal (*Variance*; Var($X$))
+  
+The expectation of a discrete random variable is the average:
+
+$$
+\begin{aligned}
+\text{E}(X) =& \sum_{i = 1}^{k}x_i P(X = x_i) \\
+=& \sum_{i = 1}^{k}x_i f_X(x_i) \\
+\end{aligned}
+$$
+
+If $Y$ represents a six-sided die, then:
+
+$$
+\begin{aligned}
+\text{E}(Y) =& \sum_{i = 1}^{k}y_i f_Y(y_i) \\
+=& 1(1/6) + 2(1/6) + 3(1/6) + 4(1/6) + 5(1/6) + 6(1/6) \\
+=& 21/6 \\ 
+=& 7/2 \\
+\end{aligned}
+$$
+
+If $X$ is continuous:
+
+$$
+\begin{aligned}
+\text{E}(X) =& \int_{- \infty}^{\infty} x f_X(x) dx \\
+\end{aligned}
+$$
+
+Here we are integrating over the probability density function, rather than summing over the mass density function. 
+
+### Weak law of large numbers
+
+The expectation is more like a long-term average, rather than an actual instance (7/2 is not a possible instance of a dice roll). 
+
+$X_i$ are i.i.d.
+
+Assume E($X_1$) = E($X_2$) = ... = E($X_n$) = $\mu$
+
+Define $\overline{X}_n$ as the mean of the observations:
+
+$$
+\begin{aligned}
+\overline{X}_n = \frac{1}{n} (X_1 + X_2 + X_3 + ... + X_n)
+\end{aligned}
+$$
+
+As $n \rightarrow \infty$, $\overline{X}_n$ "converges in probability" to $\mu$. This means for any positive constant $\delta$, 
+
+$$
+\begin{aligned}
+lim_{n \rightarrow \infty} \text{P}(|\overline{X}_n - \mu| > \delta) = 0
+\end{aligned}
+$$
+
+### Handy facts about expectations
+
+The expectation of a constant times a random variable is the constant times the expecation of the random variable:
+
+$$ 
+\begin{aligned}
+\text{E}(aX) = a \text{E}(X)
+\end{aligned}
+$$
+The expectation of a constant is the constant:
+
+$$ 
+\begin{aligned}
+\text{E}(c) = c
+\end{aligned}
+$$
+
+The expectation of a sum of random variables is the sum of the expectations of those random variables: 
+
+$$ 
+\begin{aligned}
+\text{E}(X + Y) = \text{E}(X) + \text{E}(Y)
+\end{aligned}
+$$
+
+Putting all these facts together, we can calculate the expectation of two random variables $X$ and $Y$ as:
+
+$$ 
+\begin{aligned}
+\text{E}(aX + bY + c) = a \text{E}(X) + b \text{E}(Y) + c
+\end{aligned}
+$$
+
+This is called the **linearity of expectation**, which we will use freqeuently in the exercises. Linearity does not hold for other measures of location (e.g., median, mode). This fact accounts, in part, for the privileged status of the mean in statistics. 
+
+To calculate the expectation of a function:
+
+$$ 
+\begin{aligned}
+\text{E}[g(X)] = \sum_{i = 1}^{k} g(x_i)f_X(x_i)
+\end{aligned}
+$$
+
+$$ 
+\begin{aligned}
+\text{E}[g(X)] = \int_{-\infty}^{\infty} g(x)f_X(x)dx
+\end{aligned}
+$$
+
+
 ### Exercise set 5-1
 
-1. On paper
+1a. Expected value of a Bernoulli random variable with parameter *p*?
+
+$$ 
+\begin{aligned}
+f_X(x) = \text{P}(X = x) = p^x(1 - p)^{1-x} \text{ for } x \in \text{{0, 1}} \\
+\end{aligned}
+$$
+
+Because there are only two outcomes (0 or 1), we can compute the expectation directly:
+
+$$ 
+\begin{aligned}
+\text{E}(X) =& \sum_0^1 x f_X(x) \\
+=& \sum_0^1 x p^x(1 - p)^{1-x} \\ 
+=& 0 p^0(1 - p)^{1-0} + 1 p^1(1 - p)^{1-1} \\
+=& 0 p^0(1 - p)^{1} + 1 p^1(1 - p)^{0} \\
+=& 0 (1) (1-p) + p(1) \\ 
+=& 0 + p \\
+=& p
+\end{aligned}
+$$
+
+1b. 
 
 2.
 
