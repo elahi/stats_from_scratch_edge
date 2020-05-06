@@ -22,6 +22,8 @@ When summarizing a probability distribution, it is useful to have a measure of:
 
   - Location (*Expectation*; E($X$))
   - Dispersal (*Variance*; Var($X$))
+
+In this section, we're focusing on the expectation. 
   
 The expectation of a discrete random variable is the average:
 
@@ -151,9 +153,107 @@ $$
 \end{aligned}
 $$
 
-1b. 
+1b. The binomial is the sum of $n$ independent Bernoulli trials ($X_i$). 
 
-2.
+$$ 
+\begin{aligned}
+\text{E}(X) =& \text{E}(\sum_{i=1}^nX_i)
+\end{aligned}
+$$
+
+Because the expectation is linear, the expectation of the sum is the sum of the expectations; we can rearrange:
+
+$$ 
+\begin{aligned}
+\text{E}(X) =& \sum_{i=1}^n \text{E}(X_i)
+\end{aligned}
+$$
+
+From 1a, we can substitute $p$ for $\text{E}(X_i)$:
+
+$$ 
+\begin{aligned}
+\text{E}(X) =& \sum_{i=1}^n p \\
+=& np
+\end{aligned}
+$$
+
+1c. What is the expected value of a discrete uniform random variable with parameters $a$ and $b$?
+
+The probability mass function is:
+
+$$ 
+\begin{aligned}
+\text{P}(X = k) =& \frac{1}{b - a + 1} \\
+\end{aligned}
+$$
+The expectation is:
+
+$$ 
+\begin{aligned}
+\text{E}(X) =& \sum_{x = a}^b x f_X(x) \\
+=& \sum_{x = a}^b x \frac{1}{b - a + 1}  \\
+=& \frac{1}{b - a + 1} \sum_{x = a}^b x \\
+\end{aligned}
+$$
+
+We were given a hint that is useful now: for integers $a$ and $b$ with $b > a$, the sum of all the integers including $a$ and $b$, is:
+
+$$ 
+\begin{aligned}
+\sum_{k = a}^b k  =& \frac{(a + b)(b - a + 1)}{2} \\
+\end{aligned}
+$$
+
+So, plugging that hint in we get:
+
+$$ 
+\begin{aligned}
+=& \frac{1}{b - a + 1} \times \frac{(a + b)(b - a + 1)}{2} \\
+=& \frac{a + b}{2} \\
+\end{aligned}
+$$
+
+1d. What is the expected value of a continuous uniform random variable with parameters $a$ and $b$?
+
+The probability density function is:
+
+$$ 
+\begin{aligned}
+\text{P}(X) =& \frac{1}{b - a} \\
+\end{aligned}
+$$
+
+The expectation is:
+
+$$ 
+\begin{aligned}
+\text{E}(X) =& \int_{a}^b x f_X(x) dx \\
+=& \int_{a}^b x \frac{1}{b - a} dx  \\
+=& \frac{1}{b - a} \int_{a}^b x  dx  \\
+\end{aligned}
+$$
+
+Now we have to integrate the 2nd term:
+
+$$ 
+\begin{aligned}
+=& \frac{1}{b - a} \times (\frac{b^2}{2} - \frac{a^2}{2}) \\
+=& \frac{1}{b - a} \times (\frac{b^2 - a^2}{2}) \\
+\end{aligned}
+$$
+
+We use the hint from earlier, that $b^2 - a^2 = (b-a)(b+a)$:
+
+$$ 
+\begin{aligned}
+=& \frac{1}{b - a} \times (\frac{(b-a)(b+a)}{2}) \\
+=& \frac{a + b}{2} \\
+\end{aligned}
+$$
+
+
+2. 
 
 
 ```r
@@ -224,7 +324,7 @@ dosm.beta.hist(n = 1, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##    0.4947472    0.4225966    0.1785878
+##    0.4905639    0.4239290    0.1797158
 ```
 
 ```r
@@ -233,7 +333,7 @@ dosm.beta.hist(n = 4, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##   0.50657492   0.21206281   0.04497064
+##   0.50484307   0.21569016   0.04652225
 ```
 
 ```r
@@ -242,7 +342,7 @@ dosm.beta.hist(n = 8, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##   0.51226131   0.14659183   0.02148917
+##   0.49802703   0.14717817   0.02166141
 ```
 
 ```r
@@ -251,7 +351,7 @@ dosm.beta.hist(n = 16, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##   0.49665753   0.10533252   0.01109494
+##   0.50325853   0.10590815   0.01121654
 ```
 
 ```r
@@ -260,7 +360,7 @@ dosm.beta.hist(n = 32, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##  0.506001053  0.074539023  0.005556066
+##  0.502245956  0.072823432  0.005303252
 ```
 
 ```r
@@ -271,7 +371,7 @@ dosm.beta.hist(n = 64, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##  0.499587363  0.052092720  0.002713652
+##  0.500242864  0.051946961  0.002698487
 ```
 
 Let's deconstruct what is going on with this function, where n = 1 (we simulate 10000 observations from a single set of parameter values). 
@@ -292,7 +392,7 @@ dosm.beta.hist
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## <bytecode: 0x7ff09fe398f8>
+## <bytecode: 0x7fa960f8e118>
 ## <environment: namespace:stfspack>
 ```
 
@@ -306,7 +406,7 @@ str(samps) # here are 10,000
 ```
 
 ```
-##  num [1:10000] 0.849 0.995 0.258 1 0.917 ...
+##  num [1:10000] 0.8798 0.9837 0.0603 0.9617 0.0338 ...
 ```
 
 ```r
@@ -325,13 +425,13 @@ head(sim.mat)
 ```
 
 ```
-##           [,1]
-## [1,] 0.8485321
-## [2,] 0.9948809
-## [3,] 0.2582725
-## [4,] 0.9996426
-## [5,] 0.9166422
-## [6,] 0.1991812
+##            [,1]
+## [1,] 0.87983330
+## [2,] 0.98365475
+## [3,] 0.06034645
+## [4,] 0.96167153
+## [5,] 0.03375116
+## [6,] 0.14584808
 ```
 
 ```r
@@ -342,7 +442,7 @@ str(dosm)
 ```
 
 ```
-##  num [1:10000] 0.849 0.995 0.258 1 0.917 ...
+##  num [1:10000] 0.8798 0.9837 0.0603 0.9617 0.0338 ...
 ```
 
 ```r
@@ -350,7 +450,7 @@ head(dosm) # compare these values to sim.mat
 ```
 
 ```
-## [1] 0.8485321 0.9948809 0.2582725 0.9996426 0.9166422 0.1991812
+## [1] 0.87983330 0.98365475 0.06034645 0.96167153 0.03375116 0.14584808
 ```
 
 ```r
@@ -389,8 +489,8 @@ summary(x)
 ```
 
 ```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   4.001   5.537   7.556  25.398  14.362 532.678
+##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+##    4.102    5.417    9.051   34.243   17.752 1352.779
 ```
 
 ```r
@@ -419,7 +519,7 @@ compare.tail.to.normal
 ##     mean(x < (mu - k * sigma) | x > (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## <bytecode: 0x7ff09f931578>
+## <bytecode: 0x7fa9643d2840>
 ## <environment: namespace:stfspack>
 ```
 
@@ -429,7 +529,7 @@ compare.tail.to.normal(x = x, k = k, mu = mu, sigma = stdev)
 ```
 
 ```
-## [1] 0.8791158
+## [1] 0.2197789
 ```
 
 ```r
@@ -437,8 +537,8 @@ summary(x)
 ```
 
 ```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   4.001   5.537   7.556  25.398  14.362 532.678
+##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+##    4.102    5.417    9.051   34.243   17.752 1352.779
 ```
 
 ```r
@@ -446,7 +546,7 @@ mu
 ```
 
 ```
-## [1] 25.39793
+## [1] 34.24311
 ```
 
 ```r
@@ -454,7 +554,7 @@ stdev
 ```
 
 ```
-## [1] 66.30965
+## [1] 140.0943
 ```
 
 ```r
@@ -465,7 +565,7 @@ stdev
 ```
 
 ```
-## [1] -107.2214
+## [1] -245.9455
 ```
 
 ```r
@@ -474,7 +574,7 @@ stdev
 ```
 
 ```
-## [1] 158.0172
+## [1] 314.4317
 ```
 
 ```r
@@ -486,13 +586,13 @@ x < (mu - k * stdev) | x > (mu + k * stdev)
 
 ```
 ##   [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+##  [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [49] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
+##  [49] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [61] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [73] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [85] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [73] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [85] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [97] FALSE FALSE FALSE FALSE
 ```
 
@@ -504,7 +604,7 @@ table(x < (mu - k * stdev) | x > (mu + k * stdev))
 ```
 ## 
 ## FALSE  TRUE 
-##    96     4
+##    99     1
 ```
 
 ```r
@@ -513,7 +613,7 @@ mean(x < (mu - k * stdev) | x > (mu + k * stdev))
 ```
 
 ```
-## [1] 0.04
+## [1] 0.01
 ```
 
 ```r
@@ -549,7 +649,7 @@ mean(x < (mu - k * stdev) | x > (mu + k * stdev))/(1 - (pnorm(k) - pnorm(-k)))
 ```
 
 ```
-## [1] 0.8791158
+## [1] 0.2197789
 ```
 
 ```r
@@ -557,7 +657,7 @@ compare.tail.to.normal(x = x, k = k, mu = mu, sigma = stdev)
 ```
 
 ```
-## [1] 0.8791158
+## [1] 0.2197789
 ```
 
 ```r
@@ -593,13 +693,13 @@ sim[1:3, 1:10]
 
 ```
 ##          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]     [,7]     [,8]
-## [1,] 1.439617 1.536618 1.005086 1.068854 1.579818 1.570121 1.184395 1.018211
-## [2,] 1.438014 1.361763 1.213814 1.401818 1.872971 1.695931 1.144809 2.902138
-## [3,] 2.347026 1.071645 1.190611 1.160193 1.089018 1.182749 1.099244 1.557061
+## [1,] 1.889909 1.085900 1.089756 1.640610 1.923989 1.041729 1.070553 1.490547
+## [2,] 1.297604 1.307880 1.098949 1.167674 1.215636 1.102386 1.146567 1.536356
+## [3,] 2.912986 1.100677 1.005402 1.071907 1.096299 1.047743 1.252361 1.358419
 ##          [,9]    [,10]
-## [1,] 1.162403 1.395817
-## [2,] 1.228103 1.326563
-## [3,] 1.222384 1.037988
+## [1,] 1.140005 1.056888
+## [2,] 1.026892 1.038052
+## [3,] 1.261705 1.155686
 ```
 
 ```r
@@ -609,7 +709,7 @@ str(means.sim)
 ```
 
 ```
-##  num [1:10000] 1.28 1.33 1.35 1.35 1.35 ...
+##  num [1:10000] 1.35 1.29 1.31 1.3 1.44 ...
 ```
 
 ```r
@@ -626,7 +726,7 @@ compare.tail.to.normal(means.sim, 1/2, expec.par, sd.mean)
 ```
 
 ```
-## [1] 0.9796215
+## [1] 0.9904792
 ```
 
 ```r
@@ -634,7 +734,7 @@ compare.tail.to.normal(means.sim, 1, expec.par, sd.mean)
 ```
 
 ```
-## [1] 0.9445007
+## [1] 0.9438704
 ```
 
 ```r
@@ -642,7 +742,7 @@ compare.tail.to.normal(means.sim, 2, expec.par, sd.mean)
 ```
 
 ```
-## [1] 0.9340605
+## [1] 0.907687
 ```
 
 ```r
@@ -650,7 +750,7 @@ compare.tail.to.normal(means.sim, 3, expec.par, sd.mean)
 ```
 
 ```
-## [1] 2.074231
+## [1] 2.33351
 ```
 
 ```r
@@ -658,7 +758,7 @@ compare.tail.to.normal(means.sim, 4, expec.par, sd.mean)
 ```
 
 ```
-## [1] 15.78719
+## [1] 18.94463
 ```
 
 ```r
@@ -666,7 +766,7 @@ compare.tail.to.normal(means.sim, 5, expec.par, sd.mean)
 ```
 
 ```
-## [1] 697.7112
+## [1] 1395.422
 ```
 
 ```r
@@ -674,7 +774,7 @@ compare.tail.to.normal(means.sim, 6, expec.par, sd.mean)
 ```
 
 ```
-## [1] 50679.73
+## [1] 304078.4
 ```
 
 
@@ -742,7 +842,7 @@ sim.lm
 ##     y <- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## <bytecode: 0x7ff09e037270>
+## <bytecode: 0x7fa95ff12d60>
 ## <environment: namespace:stfspack>
 ```
 
@@ -752,13 +852,13 @@ head(sim_0_1)
 ```
 
 ```
-##             x        y
-## [1,] 3.872151 4.665735
-## [2,] 4.552216 4.218760
-## [3,] 4.619204 3.729991
-## [4,] 5.241229 5.111264
-## [5,] 5.268996 5.984025
-## [6,] 5.412779 5.464499
+##             x          y
+## [1,] 1.862561 -0.0956455
+## [2,] 3.879985  2.6680322
+## [3,] 4.410383  6.1375117
+## [4,] 4.657252  5.9613380
+## [5,] 4.905583  4.7733734
+## [6,] 4.972923  4.5133317
 ```
 
 ```r

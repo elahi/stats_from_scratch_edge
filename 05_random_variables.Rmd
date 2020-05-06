@@ -23,6 +23,8 @@ When summarizing a probability distribution, it is useful to have a measure of:
 
   - Location (*Expectation*; E($X$))
   - Dispersal (*Variance*; Var($X$))
+
+In this section, we're focusing on the expectation. 
   
 The expectation of a discrete random variable is the average:
 
@@ -152,9 +154,107 @@ $$
 \end{aligned}
 $$
 
-1b. 
+1b. The binomial is the sum of $n$ independent Bernoulli trials ($X_i$). 
 
-2.
+$$ 
+\begin{aligned}
+\text{E}(X) =& \text{E}(\sum_{i=1}^nX_i)
+\end{aligned}
+$$
+
+Because the expectation is linear, the expectation of the sum is the sum of the expectations; we can rearrange:
+
+$$ 
+\begin{aligned}
+\text{E}(X) =& \sum_{i=1}^n \text{E}(X_i)
+\end{aligned}
+$$
+
+From 1a, we can substitute $p$ for $\text{E}(X_i)$:
+
+$$ 
+\begin{aligned}
+\text{E}(X) =& \sum_{i=1}^n p \\
+=& np
+\end{aligned}
+$$
+
+1c. What is the expected value of a discrete uniform random variable with parameters $a$ and $b$?
+
+The probability mass function is:
+
+$$ 
+\begin{aligned}
+\text{P}(X = k) =& \frac{1}{b - a + 1} \\
+\end{aligned}
+$$
+The expectation is:
+
+$$ 
+\begin{aligned}
+\text{E}(X) =& \sum_{x = a}^b x f_X(x) \\
+=& \sum_{x = a}^b x \frac{1}{b - a + 1}  \\
+=& \frac{1}{b - a + 1} \sum_{x = a}^b x \\
+\end{aligned}
+$$
+
+We were given a hint that is useful now: for integers $a$ and $b$ with $b > a$, the sum of all the integers including $a$ and $b$, is:
+
+$$ 
+\begin{aligned}
+\sum_{k = a}^b k  =& \frac{(a + b)(b - a + 1)}{2} \\
+\end{aligned}
+$$
+
+So, plugging that hint in we get:
+
+$$ 
+\begin{aligned}
+=& \frac{1}{b - a + 1} \times \frac{(a + b)(b - a + 1)}{2} \\
+=& \frac{a + b}{2} \\
+\end{aligned}
+$$
+
+1d. What is the expected value of a continuous uniform random variable with parameters $a$ and $b$?
+
+The probability density function is:
+
+$$ 
+\begin{aligned}
+\text{P}(X) =& \frac{1}{b - a} \\
+\end{aligned}
+$$
+
+The expectation is:
+
+$$ 
+\begin{aligned}
+\text{E}(X) =& \int_{a}^b x f_X(x) dx \\
+=& \int_{a}^b x \frac{1}{b - a} dx  \\
+=& \frac{1}{b - a} \int_{a}^b x  dx  \\
+\end{aligned}
+$$
+
+Now we have to integrate the 2nd term:
+
+$$ 
+\begin{aligned}
+=& \frac{1}{b - a} \times (\frac{b^2}{2} - \frac{a^2}{2}) \\
+=& \frac{1}{b - a} \times (\frac{b^2 - a^2}{2}) \\
+\end{aligned}
+$$
+
+We use the hint from earlier, that $b^2 - a^2 = (b-a)(b+a)$:
+
+$$ 
+\begin{aligned}
+=& \frac{1}{b - a} \times (\frac{(b-a)(b+a)}{2}) \\
+=& \frac{a + b}{2} \\
+\end{aligned}
+$$
+
+
+2. 
 
 ```{r}
 samp.size <- 1
