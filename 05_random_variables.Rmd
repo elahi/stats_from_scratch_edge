@@ -254,24 +254,67 @@ $$
 $$
 
 
-2. 
-
+2. Exploring the law of large numbers by simulation. In Edge's code block below, `samp.size` represents $n$ in the weak law of large numbers (above); `n.samps` represents independent random variables $X_n$. The expectation for all $X_i$ is $\mu$. 
 ```{r}
-samp.size <- 1
+samp.size <- 20
 n.samps <- 1000
 samps <- rnorm(samp.size * n.samps, mean = 0, sd = 1)
-samp.mat <- matrix(samps, ncol = n.samps)
+# Each column represents a random variable, X_i
+# Each row represents a sample (instance) drawn from X_i
+samp.mat <- matrix(samps, ncol = n.samps) 
+str(samp.mat)
+# Here we calculate the sample mean for each X_i (column)
 samp.means <- colMeans(samp.mat)
+str(samp.means)
 hist(samp.means)
 ```
 
+2a. What happens if we change `samp.size` (i.e., $n$)? 
 
-```{r}
-samp.size <- 100
-n.samps <- 1000
-samps <-matrix(rexp(samp.size*n.samps, rate = 1), ncol = n.samps)
-samp.means <- colMeans(samps)
-hist(samp.means)
+```{r, fig.width = 7, fig.height = 7}
+n_vector <- c(1, 5, 20, 50, 100, 1000)
+samp_means_mat <- matrix(data = NA, nrow = n.samps, ncol = length(n_vector))
+
+calculate_sample_means <- function(samp.size = 20, n.samps = 1000){
+  samps <- rnorm(samp.size * n.samps, mean = 0, sd = 1)
+  samp.mat <- matrix(samps, ncol = n.samps) 
+  samp.means <- colMeans(samp.mat)
+  return(samp.means)
+}
+
+par(mfrow = c(2,3))
+set.seed(21)
+for(i in 1:length(n_vector)){
+  samp_size_i <- n_vector[i]
+  samp_means_i <- calculate_sample_means(samp.size = samp_size_i)
+  hist(samp_means_i, xlim = c(-3, 3), ylim = c(0, 250), 
+       xlab = "Sample mean", 
+       main = paste("n = ", samp_size_i, sep = ""), col = "red")
+}
+```
+
+2b. Using the exponential distribution. 
+
+```{r, fig.width = 7, fig.height = 7}
+n_vector <- c(1, 5, 20, 50, 100, 1000)
+samp_means_mat <- matrix(data = NA, nrow = n.samps, ncol = length(n_vector))
+
+calculate_sample_means_exp <- function(samp.size = 20, n.samps = 1000){
+  samps <- rexp(samp.size * n.samps, rate = 1)
+  samp.mat <- matrix(samps, ncol = n.samps) 
+  samp.means <- colMeans(samp.mat)
+  return(samp.means)
+}
+
+par(mfrow = c(2,3))
+set.seed(21)
+for(i in 1:length(n_vector)){
+  samp_size_i <- n_vector[i]
+  samp_means_i <- calculate_sample_means_exp(samp.size = samp_size_i)
+  hist(samp_means_i, 
+       xlab = "Sample mean", 
+       main = paste("n = ", samp_size_i, sep = ""), col = "red")
+}
 ```
 
 ## Variance and standard deviation

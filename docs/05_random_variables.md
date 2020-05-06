@@ -253,31 +253,91 @@ $$
 $$
 
 
-2. 
-
+2. Exploring the law of large numbers by simulation. In Edge's code block below, `samp.size` represents $n$ in the weak law of large numbers (above); `n.samps` represents independent random variables $X_n$. The expectation for all $X_i$ is $\mu$. 
 
 ```r
-samp.size <- 1
+samp.size <- 20
 n.samps <- 1000
 samps <- rnorm(samp.size * n.samps, mean = 0, sd = 1)
-samp.mat <- matrix(samps, ncol = n.samps)
+# Each column represents a random variable, X_i
+# Each row represents a sample (instance) drawn from X_i
+samp.mat <- matrix(samps, ncol = n.samps) 
+str(samp.mat)
+```
+
+```
+##  num [1:20, 1:1000] 0.035 0.6 0.481 1.337 1.052 ...
+```
+
+```r
+# Here we calculate the sample mean for each X_i (column)
 samp.means <- colMeans(samp.mat)
+str(samp.means)
+```
+
+```
+##  num [1:1000] 0.1866 0.0313 -0.1661 -0.1346 -0.0387 ...
+```
+
+```r
 hist(samp.means)
 ```
 
 <img src="05_random_variables_files/figure-html/unnamed-chunk-1-1.png" width="672" />
 
+2a. What happens if we change `samp.size` (i.e., $n$)? 
 
 
 ```r
-samp.size <- 100
-n.samps <- 1000
-samps <-matrix(rexp(samp.size*n.samps, rate = 1), ncol = n.samps)
-samp.means <- colMeans(samps)
-hist(samp.means)
+n_vector <- c(1, 5, 20, 50, 100, 1000)
+samp_means_mat <- matrix(data = NA, nrow = n.samps, ncol = length(n_vector))
+
+calculate_sample_means <- function(samp.size = 20, n.samps = 1000){
+  samps <- rnorm(samp.size * n.samps, mean = 0, sd = 1)
+  samp.mat <- matrix(samps, ncol = n.samps) 
+  samp.means <- colMeans(samp.mat)
+  return(samp.means)
+}
+
+par(mfrow = c(2,3))
+set.seed(21)
+for(i in 1:length(n_vector)){
+  samp_size_i <- n_vector[i]
+  samp_means_i <- calculate_sample_means(samp.size = samp_size_i)
+  hist(samp_means_i, xlim = c(-3, 3), ylim = c(0, 250), 
+       xlab = "Sample mean", 
+       main = paste("n = ", samp_size_i, sep = ""), col = "red")
+}
 ```
 
 <img src="05_random_variables_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+
+2b. Using the exponential distribution. 
+
+
+```r
+n_vector <- c(1, 5, 20, 50, 100, 1000)
+samp_means_mat <- matrix(data = NA, nrow = n.samps, ncol = length(n_vector))
+
+calculate_sample_means_exp <- function(samp.size = 20, n.samps = 1000){
+  samps <- rexp(samp.size * n.samps, rate = 1)
+  samp.mat <- matrix(samps, ncol = n.samps) 
+  samp.means <- colMeans(samp.mat)
+  return(samp.means)
+}
+
+par(mfrow = c(2,3))
+set.seed(21)
+for(i in 1:length(n_vector)){
+  samp_size_i <- n_vector[i]
+  samp_means_i <- calculate_sample_means_exp(samp.size = samp_size_i)
+  hist(samp_means_i, 
+       xlab = "Sample mean", 
+       main = paste("n = ", samp_size_i, sep = ""), col = "red")
+}
+```
+
+<img src="05_random_variables_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 ## Variance and standard deviation
 
@@ -324,7 +384,7 @@ dosm.beta.hist(n = 1, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##    0.4905639    0.4239290    0.1797158
+##    0.4976551    0.4193736    0.1758742
 ```
 
 ```r
@@ -333,7 +393,7 @@ dosm.beta.hist(n = 4, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##   0.50484307   0.21569016   0.04652225
+##   0.51873441   0.21324943   0.04547532
 ```
 
 ```r
@@ -342,7 +402,7 @@ dosm.beta.hist(n = 8, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##   0.49802703   0.14717817   0.02166141
+##   0.50331631   0.14985449   0.02245637
 ```
 
 ```r
@@ -351,7 +411,7 @@ dosm.beta.hist(n = 16, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##   0.50325853   0.10590815   0.01121654
+##   0.49738079   0.10502289   0.01102981
 ```
 
 ```r
@@ -360,18 +420,18 @@ dosm.beta.hist(n = 32, nsim = sims, shape1 = s1, shape2 = s2)
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##  0.502245956  0.072823432  0.005303252
+##  0.500954728  0.075780685  0.005742712
 ```
 
 ```r
 dosm.beta.hist(n = 64, nsim = sims, shape1 = s1, shape2 = s2)
 ```
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="05_random_variables_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 ```
 ## mean of DOSM   SD of DOSM  var of DOSM 
-##  0.500242864  0.051946961  0.002698487
+##  0.500007026  0.053298265  0.002840705
 ```
 
 Let's deconstruct what is going on with this function, where n = 1 (we simulate 10000 observations from a single set of parameter values). 
@@ -392,7 +452,7 @@ dosm.beta.hist
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## <bytecode: 0x7fa960f8e118>
+## <bytecode: 0x7ff057586c60>
 ## <environment: namespace:stfspack>
 ```
 
@@ -406,7 +466,7 @@ str(samps) # here are 10,000
 ```
 
 ```
-##  num [1:10000] 0.8798 0.9837 0.0603 0.9617 0.0338 ...
+##  num [1:10000] 0.13472 0.70805 0.99361 0.00268 0.58459 ...
 ```
 
 ```r
@@ -426,12 +486,12 @@ head(sim.mat)
 
 ```
 ##            [,1]
-## [1,] 0.87983330
-## [2,] 0.98365475
-## [3,] 0.06034645
-## [4,] 0.96167153
-## [5,] 0.03375116
-## [6,] 0.14584808
+## [1,] 0.13471512
+## [2,] 0.70804823
+## [3,] 0.99361002
+## [4,] 0.00268066
+## [5,] 0.58459079
+## [6,] 0.99641568
 ```
 
 ```r
@@ -442,7 +502,7 @@ str(dosm)
 ```
 
 ```
-##  num [1:10000] 0.8798 0.9837 0.0603 0.9617 0.0338 ...
+##  num [1:10000] 0.13472 0.70805 0.99361 0.00268 0.58459 ...
 ```
 
 ```r
@@ -450,7 +510,7 @@ head(dosm) # compare these values to sim.mat
 ```
 
 ```
-## [1] 0.87983330 0.98365475 0.06034645 0.96167153 0.03375116 0.14584808
+## [1] 0.13471512 0.70804823 0.99361002 0.00268066 0.58459079 0.99641568
 ```
 
 ```r
@@ -462,7 +522,7 @@ x <- seq(0, 1, length.out = 1000)
 lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)), col = "red")
 ```
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="05_random_variables_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 3. The Pareto distribution is a skewed, heavy-tailed, power-law distribution used in description of social, scientific, geophysical, actuarial, and many other types of observable phenomena. It was applied originally to the distribution of wealth in a society, fitting the observation that a large portion of wealth is held by a small fraction of the population. Named after the Italian civil engineer, economist, and sociologist Vilfredo Pareto. 
 
@@ -489,8 +549,8 @@ summary(x)
 ```
 
 ```
-##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-##    4.102    5.417    9.051   34.243   17.752 1352.779
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   4.076   6.120   9.899  29.924  20.622 928.145
 ```
 
 ```r
@@ -505,7 +565,7 @@ x_vals <- seq(min(x), max(x), length.out = 1000)
 lines(x_vals, dnorm(x_vals, mean = mu, sd = stdev), col = "red")
 ```
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="05_random_variables_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 
 ```r
@@ -519,7 +579,7 @@ compare.tail.to.normal
 ##     mean(x < (mu - k * sigma) | x > (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## <bytecode: 0x7fa9643d2840>
+## <bytecode: 0x7ff05523b820>
 ## <environment: namespace:stfspack>
 ```
 
@@ -537,8 +597,8 @@ summary(x)
 ```
 
 ```
-##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-##    4.102    5.417    9.051   34.243   17.752 1352.779
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   4.076   6.120   9.899  29.924  20.622 928.145
 ```
 
 ```r
@@ -546,7 +606,7 @@ mu
 ```
 
 ```
-## [1] 34.24311
+## [1] 29.92446
 ```
 
 ```r
@@ -554,7 +614,7 @@ stdev
 ```
 
 ```
-## [1] 140.0943
+## [1] 95.49789
 ```
 
 ```r
@@ -565,7 +625,7 @@ stdev
 ```
 
 ```
-## [1] -245.9455
+## [1] -161.0713
 ```
 
 ```r
@@ -574,7 +634,7 @@ stdev
 ```
 
 ```
-## [1] 314.4317
+## [1] 220.9202
 ```
 
 ```r
@@ -590,8 +650,8 @@ x < (mu - k * stdev) | x > (mu + k * stdev)
 ##  [25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [49] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [61] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [73] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [61] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [73] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [85] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [97] FALSE FALSE FALSE FALSE
 ```
@@ -693,13 +753,13 @@ sim[1:3, 1:10]
 
 ```
 ##          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]     [,7]     [,8]
-## [1,] 1.889909 1.085900 1.089756 1.640610 1.923989 1.041729 1.070553 1.490547
-## [2,] 1.297604 1.307880 1.098949 1.167674 1.215636 1.102386 1.146567 1.536356
-## [3,] 2.912986 1.100677 1.005402 1.071907 1.096299 1.047743 1.252361 1.358419
+## [1,] 1.146496 1.029705 1.334946 1.060409 1.013868 1.038984 1.804409 1.299151
+## [2,] 1.342433 1.205436 1.003869 3.416952 2.248103 1.023516 1.006624 1.044363
+## [3,] 1.076866 1.027499 1.061844 1.071026 1.425200 1.069973 1.456830 1.757125
 ##          [,9]    [,10]
-## [1,] 1.140005 1.056888
-## [2,] 1.026892 1.038052
-## [3,] 1.261705 1.155686
+## [1,] 1.153548 1.276303
+## [2,] 1.074918 1.304583
+## [3,] 1.042708 1.099849
 ```
 
 ```r
@@ -709,7 +769,7 @@ str(means.sim)
 ```
 
 ```
-##  num [1:10000] 1.35 1.29 1.31 1.3 1.44 ...
+##  num [1:10000] 1.38 1.34 1.33 1.28 1.34 ...
 ```
 
 ```r
@@ -719,14 +779,14 @@ hist(means.sim, prob = TRUE)
 curve(dnorm(x, expec.par, sd.mean), add = TRUE, col = 'red')
 ```
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="05_random_variables_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 ```r
 compare.tail.to.normal(means.sim, 1/2, expec.par, sd.mean)
 ```
 
 ```
-## [1] 0.9904792
+## [1] 0.9639022
 ```
 
 ```r
@@ -734,7 +794,7 @@ compare.tail.to.normal(means.sim, 1, expec.par, sd.mean)
 ```
 
 ```
-## [1] 0.9438704
+## [1] 0.9407189
 ```
 
 ```r
@@ -742,7 +802,7 @@ compare.tail.to.normal(means.sim, 2, expec.par, sd.mean)
 ```
 
 ```
-## [1] 0.907687
+## [1] 0.9384561
 ```
 
 ```r
@@ -750,7 +810,7 @@ compare.tail.to.normal(means.sim, 3, expec.par, sd.mean)
 ```
 
 ```
-## [1] 2.33351
+## [1] 2.18535
 ```
 
 ```r
@@ -758,7 +818,7 @@ compare.tail.to.normal(means.sim, 4, expec.par, sd.mean)
 ```
 
 ```
-## [1] 18.94463
+## [1] 25.25951
 ```
 
 ```r
@@ -766,7 +826,7 @@ compare.tail.to.normal(means.sim, 5, expec.par, sd.mean)
 ```
 
 ```
-## [1] 1395.422
+## [1] 348.8556
 ```
 
 ```r
@@ -774,7 +834,7 @@ compare.tail.to.normal(means.sim, 6, expec.par, sd.mean)
 ```
 
 ```
-## [1] 304078.4
+## [1] 0
 ```
 
 
@@ -842,7 +902,7 @@ sim.lm
 ##     y <- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## <bytecode: 0x7fa95ff12d60>
+## <bytecode: 0x7ff056617758>
 ## <environment: namespace:stfspack>
 ```
 
@@ -852,20 +912,20 @@ head(sim_0_1)
 ```
 
 ```
-##             x          y
-## [1,] 1.862561 -0.0956455
-## [2,] 3.879985  2.6680322
-## [3,] 4.410383  6.1375117
-## [4,] 4.657252  5.9613380
-## [5,] 4.905583  4.7733734
-## [6,] 4.972923  4.5133317
+##             x        y
+## [1,] 3.427344 2.949380
+## [2,] 3.616894 3.644965
+## [3,] 3.815677 4.193751
+## [4,] 3.912910 3.364430
+## [5,] 4.458928 6.025582
+## [6,] 5.078764 3.985045
 ```
 
 ```r
 plot(sim_0_1[,1], sim_0_1[,2])
 ```
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="05_random_variables_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 Still using all the default values for parameters:
 
@@ -877,7 +937,7 @@ sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,
 plot(sim_0_1[,1], sim_0_1[,2])
 ```
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="05_random_variables_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 Now I'll change one at a time:
 
@@ -889,7 +949,7 @@ sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,
 plot(sim_0_1[,1], sim_0_1[,2])
 ```
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="05_random_variables_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 
 ```r
@@ -899,7 +959,7 @@ sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,
 plot(sim_0_1[,1], sim_0_1[,2])
 ```
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="05_random_variables_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 
 ```r
@@ -909,7 +969,7 @@ sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,
 plot(sim_0_1[,1], sim_0_1[,2])
 ```
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="05_random_variables_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 
 ```r
@@ -919,4 +979,4 @@ sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,
 plot(sim_0_1[,1], sim_0_1[,2])
 ```
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="05_random_variables_files/figure-html/unnamed-chunk-16-1.png" width="672" />

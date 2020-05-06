@@ -1,7 +1,7 @@
 --- 
 title: "Notes on Statistical Thinking from Scratch"
 author: "Robin Elahi"
-date: "2020-04-29"
+date: "2020-05-05"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
