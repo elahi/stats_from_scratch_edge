@@ -81,7 +81,7 @@ $$
 
 ### Handy facts about expectations
 
-The expectation of a constant times a random variable is the constant times the expecation of the random variable:
+The expectation of a constant times a random variable is the constant times the expectation of the random variable:
 
 $$ 
 \begin{aligned}
@@ -112,7 +112,7 @@ $$
 \end{aligned}
 $$
 
-This is called the **linearity of expectation**, which we will use freqeuently in the exercises. Linearity does not hold for other measures of location (e.g., median, mode). This fact accounts, in part, for the privileged status of the mean in statistics. 
+This is called the **linearity of expectation**, which we will use frequently in the exercises. Linearity does not hold for other measures of location (e.g., median, mode). This fact accounts, in part, for the privileged status of the mean in statistics. 
 
 To calculate the expectation of a function:
 
@@ -153,7 +153,25 @@ $$
 \end{aligned}
 $$
 
-1b. The binomial is the sum of $n$ independent Bernoulli trials ($X_i$). 
+1b. What is the expected value of a binomial random variable with parameters $n$ and $p$?
+
+Here's the pmf for the binomial distribution:
+
+$$ 
+\begin{aligned}
+f_X(x) = \text{P}(X = x) = \binom{n}{x} p^x(1 - p)^{n - x} \text{ for } x \in \text{{0, 1, 2, ..., n}} \\
+\end{aligned}
+$$
+
+If we plug that into the equation for E($X$), we get:
+
+$$ 
+\begin{aligned}
+\text{E}(X) =& \sum_0^n x f_X(x) \\
+=& \sum_0^n x \binom{n}{x} p^x(1 - p)^{n - x} \\ 
+\end{aligned}
+$$
+Well, I don't know how to evaluate this sum directly, considering the upper limit of $n$ is infinite. So we'll use the fact that the binomial is the sum of $n$ independent Bernoulli trials ($X_i$). 
 
 $$ 
 \begin{aligned}
@@ -266,7 +284,7 @@ str(samp.mat)
 ```
 
 ```
-##  num [1:20, 1:1000] 0.035 0.6 0.481 1.337 1.052 ...
+##  num [1:20, 1:1000] 0.539 0.339 -1.548 0.287 0.536 ...
 ```
 
 ```r
@@ -276,7 +294,7 @@ str(samp.means)
 ```
 
 ```
-##  num [1:1000] 0.1866 0.0313 -0.1661 -0.1346 -0.0387 ...
+##  num [1:1000] 0.171 -0.598 -0.318 0.518 0.286 ...
 ```
 
 ```r
@@ -452,7 +470,7 @@ dosm.beta.hist
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## <bytecode: 0x7ff057586c60>
+## <bytecode: 0x7ff300ba32b0>
 ## <environment: namespace:stfspack>
 ```
 
@@ -579,7 +597,7 @@ compare.tail.to.normal
 ##     mean(x < (mu - k * sigma) | x > (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## <bytecode: 0x7ff05523b820>
+## <bytecode: 0x7ff3005eb440>
 ## <environment: namespace:stfspack>
 ```
 
@@ -902,7 +920,7 @@ sim.lm
 ##     y <- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## <bytecode: 0x7ff056617758>
+## <bytecode: 0x7ff3044dddd8>
 ## <environment: namespace:stfspack>
 ```
 

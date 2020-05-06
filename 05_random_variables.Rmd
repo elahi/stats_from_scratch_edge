@@ -82,7 +82,7 @@ $$
 
 ### Handy facts about expectations
 
-The expectation of a constant times a random variable is the constant times the expecation of the random variable:
+The expectation of a constant times a random variable is the constant times the expectation of the random variable:
 
 $$ 
 \begin{aligned}
@@ -113,7 +113,7 @@ $$
 \end{aligned}
 $$
 
-This is called the **linearity of expectation**, which we will use freqeuently in the exercises. Linearity does not hold for other measures of location (e.g., median, mode). This fact accounts, in part, for the privileged status of the mean in statistics. 
+This is called the **linearity of expectation**, which we will use frequently in the exercises. Linearity does not hold for other measures of location (e.g., median, mode). This fact accounts, in part, for the privileged status of the mean in statistics. 
 
 To calculate the expectation of a function:
 
@@ -154,7 +154,25 @@ $$
 \end{aligned}
 $$
 
-1b. The binomial is the sum of $n$ independent Bernoulli trials ($X_i$). 
+1b. What is the expected value of a binomial random variable with parameters $n$ and $p$?
+
+Here's the pmf for the binomial distribution:
+
+$$ 
+\begin{aligned}
+f_X(x) = \text{P}(X = x) = \binom{n}{x} p^x(1 - p)^{n - x} \text{ for } x \in \text{{0, 1, 2, ..., n}} \\
+\end{aligned}
+$$
+
+If we plug that into the equation for E($X$), we get:
+
+$$ 
+\begin{aligned}
+\text{E}(X) =& \sum_0^n x f_X(x) \\
+=& \sum_0^n x \binom{n}{x} p^x(1 - p)^{n - x} \\ 
+\end{aligned}
+$$
+Well, I don't know how to evaluate this sum directly, considering the upper limit of $n$ is infinite. So we'll use the fact that the binomial is the sum of $n$ independent Bernoulli trials ($X_i$). 
 
 $$ 
 \begin{aligned}
