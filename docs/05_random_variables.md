@@ -256,6 +256,7 @@ Now we have to integrate the 2nd term:
 
 $$ 
 \begin{aligned}
+=& \frac{1}{b - a} \times \frac{1}{2} x^2 \bigg\rvert_{a}^{b} \\
 =& \frac{1}{b - a} \times (\frac{b^2}{2} - \frac{a^2}{2}) \\
 =& \frac{1}{b - a} \times (\frac{b^2 - a^2}{2}) \\
 \end{aligned}
@@ -284,7 +285,7 @@ str(samp.mat)
 ```
 
 ```
-##  num [1:20, 1:1000] 0.539 0.339 -1.548 0.287 0.536 ...
+##  num [1:20, 1:1000] 0.4234 0.3341 1.03 -0.4948 -0.0199 ...
 ```
 
 ```r
@@ -294,7 +295,7 @@ str(samp.means)
 ```
 
 ```
-##  num [1:1000] 0.171 -0.598 -0.318 0.518 0.286 ...
+##  num [1:1000] 0.1384 -0.1609 0.0639 -0.1334 0.2572 ...
 ```
 
 ```r
@@ -359,7 +360,80 @@ for(i in 1:length(n_vector)){
 
 ## Variance and standard deviation
 
+The variance is a measurement of dispersal - i.e., how spread out is the distribution? And spread out from what, exactly? It is useful to think about the distance $X_i$ takes from the expectation, E$(X)$: $X - \text{E}(X)$. What if we took the expectation of this - i.e., the average value of the distance from the mean?
+
+$$ 
+\begin{aligned}
+\text{E}(X - \text{E}(X)) \\
+\text{by linearity of expectation, we get:} \\
+\text{E}(X) - \text{E}(\text{E}(X)) \\
+\text{E}(X) - \text{E}(X) \\
+0
+\end{aligned}
+$$
+
+This won't work - we need to find a way to constrain the expression inside the parentheses to be non-negative. One way to do this is to use the mean absolute deviation, $|X - \text{E}(X)|$. Another way is to use the mean squared deviation, $[X - \text{E}(X)]^2$. The squared term constrains the variance to be $\ge 0$:  
+
+$$ 
+\begin{aligned}
+\text{Var}(X) =& \text{E}([X - \text{E}(X)]^2) \\
+\end{aligned}
+$$
+
+The mean squared deviation has two mathematical advantages:
+
+1. It is easier to compute mathematically than an analogous quanitity using absolute deviations (but why?)
+
+2. The variances of linear functions of random variables are 'beautifully behaved', whereas the analogous quantities for absolute deviations can be a hassle. 
+
+I will just take Edge's word on these two points for now. 
+
+### Beautiful properties of the variance
+
+The variance can be rewritten as:
+
+$$ 
+\begin{aligned}
+\text{Var}(X) = \text{E}(X^2) - [\text{E}(X)]^2 \\
+\end{aligned}
+$$
+
+which is generally easier to compute. 
+
+Adding a constant to a random variable does *not* affect the variance:
+
+$$ 
+\begin{aligned}
+\text{Var}(a + cX) = c^2\text{Var}(X) \\
+\end{aligned}
+$$
+where $a$ and $c$ are constants. 
+
+If $X$ and $Y$ are independent random variables, then: 
+
+$$ 
+\begin{aligned}
+\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y) \\
+\end{aligned}
+$$
+
+One big problem with the variance is that is in the wrong ($X^2$) units. To fix this, we calculate the *standard deviation*: 
+
+$$ 
+\begin{aligned}
+\text{SD}(X) = \sqrt{\text{Var}(X)} \\
+\end{aligned}
+$$
+
+SD is usually larger (never smaller) than MAD, and is more sensitive to large deviations. 
+
+### Exercise set 5-2
+
+
+
 ## Joint distributions, covariance, and correlation
+
+### Exercise set 5-3
 
 ## Conditional distribution, expectation, variance
 
@@ -470,7 +544,7 @@ dosm.beta.hist
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## <bytecode: 0x7ff300ba32b0>
+## <bytecode: 0x7fc1fe3d8278>
 ## <environment: namespace:stfspack>
 ```
 
@@ -597,7 +671,7 @@ compare.tail.to.normal
 ##     mean(x < (mu - k * sigma) | x > (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## <bytecode: 0x7ff3005eb440>
+## <bytecode: 0x7fc1fc0f4ad0>
 ## <environment: namespace:stfspack>
 ```
 
@@ -920,7 +994,7 @@ sim.lm
 ##     y <- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## <bytecode: 0x7ff3044dddd8>
+## <bytecode: 0x7fc1fec1d378>
 ## <environment: namespace:stfspack>
 ```
 
