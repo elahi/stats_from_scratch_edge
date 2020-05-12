@@ -285,7 +285,7 @@ str(samp.mat)
 ```
 
 ```
-##  num [1:20, 1:1000] 0.4234 0.3341 1.03 -0.4948 -0.0199 ...
+##  num [1:20, 1:1000] -1.607 -1.981 1.476 -0.995 0.427 ...
 ```
 
 ```r
@@ -295,7 +295,7 @@ str(samp.means)
 ```
 
 ```
-##  num [1:1000] 0.1384 -0.1609 0.0639 -0.1334 0.2572 ...
+##  num [1:1000] -0.1783 0.0407 -0.2019 -0.0175 0.0235 ...
 ```
 
 ```r
@@ -429,7 +429,7 @@ SD is usually larger (never smaller) than MAD, and is more sensitive to large de
 
 ### Exercise set 5-2
 
-
+I had to walk through Edge's solutions bit by bit; my handwritten version is [here](images/edge_4_1_3.pdf). 
 
 ## Joint distributions, covariance, and correlation
 
@@ -544,7 +544,7 @@ dosm.beta.hist
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## <bytecode: 0x7fc1fe3d8278>
+## <bytecode: 0x7fcdf93d5d40>
 ## <environment: namespace:stfspack>
 ```
 
@@ -671,7 +671,7 @@ compare.tail.to.normal
 ##     mean(x < (mu - k * sigma) | x > (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## <bytecode: 0x7fc1fc0f4ad0>
+## <bytecode: 0x7fcdf54a19c8>
 ## <environment: namespace:stfspack>
 ```
 
@@ -994,7 +994,7 @@ sim.lm
 ##     y <- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## <bytecode: 0x7fc1fec1d378>
+## <bytecode: 0x7fcdf870ebf0>
 ## <environment: namespace:stfspack>
 ```
 

@@ -407,7 +407,7 @@ SD is usually larger (never smaller) than MAD, and is more sensitive to large de
 
 ### Exercise set 5-2
 
-
+I had to walk through Edge's solutions bit by bit; my handwritten version is [here](images/edge_4_1_3.pdf). 
 
 ## Joint distributions, covariance, and correlation
 
