@@ -285,7 +285,7 @@ str(samp.mat)
 ```
 
 ```
-##  num [1:20, 1:1000] -0.991 1.346 -1.875 0.837 -1.752 ...
+##  num [1:20, 1:1000] 0.744 -0.986 0.232 1.045 -0.825 ...
 ```
 
 ```r
@@ -295,7 +295,7 @@ str(samp.means)
 ```
 
 ```
-##  num [1:1000] -0.1163 -0.0826 -0.0936 -0.2568 0.2235 ...
+##  num [1:1000] -0.00745 0.24901 0.09418 -0.28426 -0.05159 ...
 ```
 
 ```r
@@ -431,68 +431,68 @@ SD is usually larger (never smaller) than MAD, and is more sensitive to large de
 
 I had to walk through Edge's solutions bit by bit; my handwritten version is [here](images/edge_4_1_3.pdf). 
 
-## Joint distributions, covariance, and correlation
+<!-- ## Joint distributions, covariance, and correlation -->
 
-This section covers four key concepts:
+<!-- This section covers four key concepts: -->
 
-1. Joint probability distribution: the probability distribution of the joint occurrence of $X$ and $Y$
+<!-- 1. Joint probability distribution: the probability distribution of the joint occurrence of $X$ and $Y$ -->
 
-2. Marginal distribution of X: the probability distribution of $X$, summing (integrating) over all values of $Y$
+<!-- 2. Marginal distribution of X: the probability distribution of $X$, summing (integrating) over all values of $Y$ -->
 
-3. Covariance: a measurement of the extent to which $X$ and $Y$ depart from independence
+<!-- 3. Covariance: a measurement of the extent to which $X$ and $Y$ depart from independence -->
 
-4. Correlation: covariance rescaled to go from -1 to 1
+<!-- 4. Correlation: covariance rescaled to go from -1 to 1 -->
 
-### Joint probability distributions
+<!-- ### Joint probability distributions -->
 
-Joint probability distribution: the probability distribution of the joint occurrence of $X$ and $Y$
+<!-- Joint probability distribution: the probability distribution of the joint occurrence of $X$ and $Y$ -->
 
-The joint cumulative probability distribution of two random variables $X$ and $Y$ is given by:
+<!-- The joint cumulative probability distribution of two random variables $X$ and $Y$ is given by: -->
 
-$$
-\begin{aligned}
-F_{X,Y}(x, y) = \text{P} (X \leq x ~\cap ~ Y \leq y) 
-\end{aligned}
-$$
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- F_{X,Y}(x, y) = \text{P} (X \leq x ~\cap ~ Y \leq y)  -->
+<!-- \end{aligned} -->
+<!-- $$ -->
 
-Here is the corresponding joint probability mass function: 
+<!-- Here is the corresponding joint probability mass function:  -->
 
-$$
-\begin{aligned}
-f_{X,Y}(x, y) = \text{P} (X = x ~\cap ~ Y = y) 
-\end{aligned}
-$$
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- f_{X,Y}(x, y) = \text{P} (X = x ~\cap ~ Y = y)  -->
+<!-- \end{aligned} -->
+<!-- $$ -->
 
-And for two continuous variables, we can recover the cumulative distribution function by integrating the probability density function with respect to $X$ and $Y$:
+<!-- And for two continuous variables, we can recover the cumulative distribution function by integrating the probability density function with respect to $X$ and $Y$: -->
 
-$$
-\begin{aligned}
-F_{X,Y}(x, y) =& ~ \text{P}(X \leq x ~\cap ~ Y \leq y) \\
-=& \int_{- \infty}^{x} \int_{- \infty}^{y} f_{X,Y}(x, y) dx dy
-\end{aligned}
-$$
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- F_{X,Y}(x, y) =& ~ \text{P}(X \leq x ~\cap ~ Y \leq y) \\ -->
+<!-- =& \int_{- \infty}^{x} \int_{- \infty}^{y} f_{X,Y}(x, y) dx dy -->
+<!-- \end{aligned} -->
+<!-- $$ -->
 
-### Marginal distributions
+<!-- ### Marginal distributions -->
 
-Marginal distribution of X: the probability distribution of $X$, summing (integrating) over all values of $Y$
+<!-- Marginal distribution of X: the probability distribution of $X$, summing (integrating) over all values of $Y$ -->
 
-For discrete random variables, the marginal distribution of $X$ is:
+<!-- For discrete random variables, the marginal distribution of $X$ is: -->
 
-$$
-\begin{aligned}
-f_{X}(x) =& ~ \text{P} (X = x) \\
-         =& ~ \sum_{y} \text{P} (X = x ~\cap ~ Y = y) \\
-         =& \sum_{y} f_{X,Y}(x,y)
-\end{aligned}
-$$
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- f_{X}(x) =& ~ \text{P} (X = x) \\ -->
+<!--          =& ~ \sum_{y} \text{P} (X = x ~\cap ~ Y = y) \\ -->
+<!--          =& \sum_{y} f_{X,Y}(x,y) -->
+<!-- \end{aligned} -->
+<!-- $$ -->
 
-For continuous random variables, the marginal distribution of $X$ is:
+<!-- For continuous random variables, the marginal distribution of $X$ is: -->
 
-$$
-\begin{aligned}
-f_{X}(x) =& \int_{- \infty}^{\infty} f_{X,Y}(x, y) dy
-\end{aligned}
-$$
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- f_{X}(x) =& \int_{- \infty}^{\infty} f_{X,Y}(x, y) dy -->
+<!-- \end{aligned} -->
+<!-- $$ -->
 
 <!-- ### Covariance -->
 
@@ -811,145 +811,97 @@ $$
 <!-- ``` -->
 
 
-## A probabilistic model for simple linear regression
+<!-- ## A probabilistic model for simple linear regression -->
 
-### Exercise set 5-5
+<!-- ### Exercise set 5-5 -->
 
-1. Write the square of the correlation coefficient (eq. 5.30) in terms of the variance of Y (eq. 5.32) and the conditional variance of Y given X (eq. 5.31). 
+<!-- 1. Write the square of the correlation coefficient (eq. 5.30) in terms of the variance of Y (eq. 5.32) and the conditional variance of Y given X (eq. 5.31).  -->
 
-$$
-\begin{aligned}
-\text{eq. 5.30: } \rho_{X,Y} = \beta \frac{\sigma_X}{\sigma_Y} \\
-\text{eq. 5.31: } Var(Y) = \beta^2 \sigma_X^2 + \sigma_{\epsilon}^2 \\
-\text{eq. 5.32: } Var(Y \mid X = x) = \sigma_{\epsilon}^2  \\
-\end{aligned}
-$$
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- \text{eq. 5.30: } \rho_{X,Y} = \beta \frac{\sigma_X}{\sigma_Y} \\ -->
+<!-- \text{eq. 5.31: } Var(Y) = \beta^2 \sigma_X^2 + \sigma_{\epsilon}^2 \\ -->
+<!-- \text{eq. 5.32: } Var(Y \mid X = x) = \sigma_{\epsilon}^2  \\ -->
+<!-- \end{aligned} -->
+<!-- $$ -->
 
-Squaring $\rho_{X,Y}$, and expressing $Var(Y)$ using the definition from above:
+<!-- Squaring $\rho_{X,Y}$, and expressing $Var(Y)$ using the definition from above: -->
 
-$$
-\begin{aligned}
-\rho_{X,Y}^2 = \beta^2 \frac{\sigma_X^2}{\sigma_Y^2} = \beta^2 \frac{\sigma_X^2}{Var(Y)} \\
-\end{aligned}
-$$
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- \rho_{X,Y}^2 = \beta^2 \frac{\sigma_X^2}{\sigma_Y^2} = \beta^2 \frac{\sigma_X^2}{Var(Y)} \\ -->
+<!-- \end{aligned} -->
+<!-- $$ -->
 
-$$
-\begin{aligned}
-\rho_{X,Y}^2 =  \beta^2 \frac{\sigma_X^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\
-\end{aligned}
-$$
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- \rho_{X,Y}^2 =  \beta^2 \frac{\sigma_X^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\ -->
+<!-- \end{aligned} -->
+<!-- $$ -->
 
-Some algebra...
+<!-- Some algebra... -->
 
-$$
-\begin{aligned}
-\rho_{X,Y}^2 = 1 - \frac{\sigma_{\epsilon}^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\
-\end{aligned}
-$$
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- \rho_{X,Y}^2 = 1 - \frac{\sigma_{\epsilon}^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\ -->
+<!-- \end{aligned} -->
+<!-- $$ -->
 
-And we use the formulas from above again to restate as:
+<!-- And we use the formulas from above again to restate as: -->
 
-$$
-\begin{aligned}
-\rho_{X,Y}^2 = 1 - \frac{Var(Y \mid X = x)}{Var(Y)} \\
-\end{aligned}
-$$
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- \rho_{X,Y}^2 = 1 - \frac{Var(Y \mid X = x)}{Var(Y)} \\ -->
+<!-- \end{aligned} -->
+<!-- $$ -->
 
-which gives us the 'proportion of variance explained'. So if there isn't much variance left in $Y$ after conditioning on $X$ (i.e., the numerator is small relative to the denominator), if we subtract it from 1, we get a high $r^2$. And vice versa. 
+<!-- which gives us the 'proportion of variance explained'. So if there isn't much variance left in $Y$ after conditioning on $X$ (i.e., the numerator is small relative to the denominator), if we subtract it from 1, we get a high $r^2$. And vice versa.  -->
 
-2. Simulating a regression. 
+<!-- 2. Simulating a regression.  -->
 
+<!-- ```{r} -->
+<!-- library(stfspack) -->
+<!-- sim.lm -->
+<!-- sim_0_1 <- sim.lm(n = 50, a = 0, b = 1) -->
+<!-- head(sim_0_1) -->
+<!-- plot(sim_0_1[,1], sim_0_1[,2]) -->
+<!-- ``` -->
 
-```r
-library(stfspack)
-sim.lm
-```
+<!-- Still using all the default values for parameters: -->
 
-```
-## function (n, a, b, sigma.disturb = 1, mu.x = 8, sigma.x = 2, 
-##     rdisturb = rnorm, rx = rnorm, het.coef = 0) 
-## {
-##     x <- sort(rx(n, mu.x, sigma.x))
-##     disturbs <- rdisturb(n, 0, sapply(sigma.disturb + scale(x) * 
-##         het.coef, max, 0))
-##     y <- a + b * x + disturbs
-##     cbind(x, y)
-## }
-## <bytecode: 0x7ffed0285250>
-## <environment: namespace:stfspack>
-```
+<!-- ```{r} -->
+<!-- sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,  -->
+<!--                   sigma.disturb = 1, mu.x = 8, sigma.x = 2,  -->
+<!--                   rdisturb = rnorm, rx = rnorm, het.coef = 0) -->
+<!-- plot(sim_0_1[,1], sim_0_1[,2]) -->
+<!-- ``` -->
 
-```r
-sim_0_1 <- sim.lm(n = 50, a = 0, b = 1)
-head(sim_0_1)
-```
+<!-- Now I'll change one at a time: -->
 
-```
-##             x        y
-## [1,] 1.312981 2.282448
-## [2,] 3.367952 2.370127
-## [3,] 4.384247 4.303164
-## [4,] 4.392481 5.054339
-## [5,] 4.453625 5.516265
-## [6,] 4.592029 5.214258
-```
+<!-- ```{r} -->
+<!-- sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,  -->
+<!--                   sigma.disturb = 2, mu.x = 8, sigma.x = 2,  -->
+<!--                   rdisturb = rnorm, rx = rnorm, het.coef = 0) -->
+<!-- plot(sim_0_1[,1], sim_0_1[,2]) -->
+<!-- ``` -->
 
-```r
-plot(sim_0_1[,1], sim_0_1[,2])
-```
+<!-- ```{r} -->
+<!-- sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,  -->
+<!--                   sigma.disturb = 1, mu.x = 16, sigma.x = 2,  -->
+<!--                   rdisturb = rnorm, rx = rnorm, het.coef = 0) -->
+<!-- plot(sim_0_1[,1], sim_0_1[,2]) -->
+<!-- ``` -->
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<!-- ```{r} -->
+<!-- sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,  -->
+<!--                   sigma.disturb = 1, mu.x = 8, sigma.x = 4,  -->
+<!--                   rdisturb = rnorm, rx = rnorm, het.coef = 0) -->
+<!-- plot(sim_0_1[,1], sim_0_1[,2]) -->
+<!-- ``` -->
 
-Still using all the default values for parameters:
-
-
-```r
-sim_0_1 <- sim.lm(n = 50, a = 0, b = 1, 
-                  sigma.disturb = 1, mu.x = 8, sigma.x = 2, 
-                  rdisturb = rnorm, rx = rnorm, het.coef = 0)
-plot(sim_0_1[,1], sim_0_1[,2])
-```
-
-<img src="05_random_variables_files/figure-html/unnamed-chunk-5-1.png" width="672" />
-
-Now I'll change one at a time:
-
-
-```r
-sim_0_1 <- sim.lm(n = 50, a = 0, b = 1, 
-                  sigma.disturb = 2, mu.x = 8, sigma.x = 2, 
-                  rdisturb = rnorm, rx = rnorm, het.coef = 0)
-plot(sim_0_1[,1], sim_0_1[,2])
-```
-
-<img src="05_random_variables_files/figure-html/unnamed-chunk-6-1.png" width="672" />
-
-
-```r
-sim_0_1 <- sim.lm(n = 50, a = 0, b = 1, 
-                  sigma.disturb = 1, mu.x = 16, sigma.x = 2, 
-                  rdisturb = rnorm, rx = rnorm, het.coef = 0)
-plot(sim_0_1[,1], sim_0_1[,2])
-```
-
-<img src="05_random_variables_files/figure-html/unnamed-chunk-7-1.png" width="672" />
-
-
-```r
-sim_0_1 <- sim.lm(n = 50, a = 0, b = 1, 
-                  sigma.disturb = 1, mu.x = 8, sigma.x = 4, 
-                  rdisturb = rnorm, rx = rnorm, het.coef = 0)
-plot(sim_0_1[,1], sim_0_1[,2])
-```
-
-<img src="05_random_variables_files/figure-html/unnamed-chunk-8-1.png" width="672" />
-
-
-```r
-sim_0_1 <- sim.lm(n = 50, a = 0, b = 1, 
-                  sigma.disturb = 1, mu.x = 8, sigma.x = 2, 
-                  rdisturb = rlaplace, rx = rnorm, het.coef = 0)
-plot(sim_0_1[,1], sim_0_1[,2])
-```
-
-<img src="05_random_variables_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<!-- ```{r} -->
+<!-- sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,  -->
+<!--                   sigma.disturb = 1, mu.x = 8, sigma.x = 2,  -->
+<!--                   rdisturb = rlaplace, rx = rnorm, het.coef = 0) -->
+<!-- plot(sim_0_1[,1], sim_0_1[,2]) -->
+<!-- ``` -->

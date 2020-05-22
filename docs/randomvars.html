@@ -192,13 +192,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.1" data-path="randomvars.html"><a href="randomvars.html#beautiful-properties-of-the-variance"><i class="fa fa-check"></i><b>5.2.1</b> Beautiful properties of the variance</a></li>
 <li class="chapter" data-level="5.2.2" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-2"><i class="fa fa-check"></i><b>5.2.2</b> Exercise set 5-2</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="randomvars.html"><a href="randomvars.html#joint-distributions-covariance-and-correlation"><i class="fa fa-check"></i><b>5.3</b> Joint distributions, covariance, and correlation</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="randomvars.html"><a href="randomvars.html#joint-probability-distributions"><i class="fa fa-check"></i><b>5.3.1</b> Joint probability distributions</a></li>
-<li class="chapter" data-level="5.3.2" data-path="randomvars.html"><a href="randomvars.html#marginal-distributions"><i class="fa fa-check"></i><b>5.3.2</b> Marginal distributions</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="randomvars.html"><a href="randomvars.html#a-probabilistic-model-for-simple-linear-regression"><i class="fa fa-check"></i><b>5.4</b> A probabilistic model for simple linear regression</a><ul>
-<li class="chapter" data-level="5.4.1" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-5"><i class="fa fa-check"></i><b>5.4.1</b> Exercise set 5-5</a></li>
-</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -435,11 +428,11 @@ The expectation is:</p>
 <a class="sourceLine" id="cb82-5" title="5"><span class="co"># Each row represents a sample (instance) drawn from X_i</span></a>
 <a class="sourceLine" id="cb82-6" title="6">samp.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(samps, <span class="dt">ncol =</span> n.samps) </a>
 <a class="sourceLine" id="cb82-7" title="7"><span class="kw">str</span>(samp.mat)</a></code></pre></div>
-<pre><code>##  num [1:20, 1:1000] -0.991 1.346 -1.875 0.837 -1.752 ...</code></pre>
+<pre><code>##  num [1:20, 1:1000] 0.744 -0.986 0.232 1.045 -0.825 ...</code></pre>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="co"># Here we calculate the sample mean for each X_i (column)</span></a>
 <a class="sourceLine" id="cb84-2" title="2">samp.means &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samp.mat)</a>
 <a class="sourceLine" id="cb84-3" title="3"><span class="kw">str</span>(samp.means)</a></code></pre></div>
-<pre><code>##  num [1:1000] -0.1163 -0.0826 -0.0936 -0.2568 0.2235 ...</code></pre>
+<pre><code>##  num [1:1000] -0.00745 0.24901 0.09418 -0.28426 -0.05159 ...</code></pre>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">hist</span>(samp.means)</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>2a. What happens if we change <code>samp.size</code> (i.e., <span class="math inline">\(n\)</span>)?</p>
@@ -543,57 +536,49 @@ where <span class="math inline">\(a\)</span> and <span class="math inline">\(c\)
 <div id="exercise-set-5-2" class="section level3">
 <h3><span class="header-section-number">5.2.2</span> Exercise set 5-2</h3>
 <p>I had to walk through Edge’s solutions bit by bit; my handwritten version is <a href="images/edge_4_1_3.pdf">here</a>.</p>
-</div>
-</div>
-<div id="joint-distributions-covariance-and-correlation" class="section level2">
-<h2><span class="header-section-number">5.3</span> Joint distributions, covariance, and correlation</h2>
-<p>This section covers four key concepts:</p>
-<ol style="list-style-type: decimal">
-<li><p>Joint probability distribution: the probability distribution of the joint occurrence of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></p></li>
-<li><p>Marginal distribution of X: the probability distribution of <span class="math inline">\(X\)</span>, summing (integrating) over all values of <span class="math inline">\(Y\)</span></p></li>
-<li><p>Covariance: a measurement of the extent to which <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> depart from independence</p></li>
-<li><p>Correlation: covariance rescaled to go from -1 to 1</p></li>
-</ol>
-<div id="joint-probability-distributions" class="section level3">
-<h3><span class="header-section-number">5.3.1</span> Joint probability distributions</h3>
-<p>Joint probability distribution: the probability distribution of the joint occurrence of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></p>
-<p>The joint cumulative probability distribution of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is given by:</p>
-<p><span class="math display">\[
-\begin{aligned}
-F_{X,Y}(x, y) = \text{P} (X \leq x ~\cap ~ Y \leq y) 
-\end{aligned}
-\]</span></p>
-<p>Here is the corresponding joint probability mass function:</p>
-<p><span class="math display">\[
-\begin{aligned}
-f_{X,Y}(x, y) = \text{P} (X = x ~\cap ~ Y = y) 
-\end{aligned}
-\]</span></p>
-<p>And for two continuous variables, we can recover the cumulative distribution function by integrating the probability density function with respect to <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
-<p><span class="math display">\[
-\begin{aligned}
-F_{X,Y}(x, y) =&amp; ~ \text{P}(X \leq x ~\cap ~ Y \leq y) \\
-=&amp; \int_{- \infty}^{x} \int_{- \infty}^{y} f_{X,Y}(x, y) dx dy
-\end{aligned}
-\]</span></p>
-</div>
-<div id="marginal-distributions" class="section level3">
-<h3><span class="header-section-number">5.3.2</span> Marginal distributions</h3>
-<p>Marginal distribution of X: the probability distribution of <span class="math inline">\(X\)</span>, summing (integrating) over all values of <span class="math inline">\(Y\)</span></p>
-<p>For discrete random variables, the marginal distribution of <span class="math inline">\(X\)</span> is:</p>
-<p><span class="math display">\[
-\begin{aligned}
-f_{X}(x) =&amp; ~ \text{P} (X = x) \\
-         =&amp; ~ \sum_{y} \text{P} (X = x ~\cap ~ Y = y) \\
-         =&amp; \sum_{y} f_{X,Y}(x,y)
-\end{aligned}
-\]</span></p>
-<p>For continuous random variables, the marginal distribution of <span class="math inline">\(X\)</span> is:</p>
-<p><span class="math display">\[
-\begin{aligned}
-f_{X}(x) =&amp; \int_{- \infty}^{\infty} f_{X,Y}(x, y) dy
-\end{aligned}
-\]</span></p>
+<!-- ## Joint distributions, covariance, and correlation -->
+<!-- This section covers four key concepts: -->
+<!-- 1. Joint probability distribution: the probability distribution of the joint occurrence of $X$ and $Y$ -->
+<!-- 2. Marginal distribution of X: the probability distribution of $X$, summing (integrating) over all values of $Y$ -->
+<!-- 3. Covariance: a measurement of the extent to which $X$ and $Y$ depart from independence -->
+<!-- 4. Correlation: covariance rescaled to go from -1 to 1 -->
+<!-- ### Joint probability distributions -->
+<!-- Joint probability distribution: the probability distribution of the joint occurrence of $X$ and $Y$ -->
+<!-- The joint cumulative probability distribution of two random variables $X$ and $Y$ is given by: -->
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- F_{X,Y}(x, y) = \text{P} (X \leq x ~\cap ~ Y \leq y)  -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+<!-- Here is the corresponding joint probability mass function:  -->
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- f_{X,Y}(x, y) = \text{P} (X = x ~\cap ~ Y = y)  -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+<!-- And for two continuous variables, we can recover the cumulative distribution function by integrating the probability density function with respect to $X$ and $Y$: -->
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- F_{X,Y}(x, y) =& ~ \text{P}(X \leq x ~\cap ~ Y \leq y) \\ -->
+<!-- =& \int_{- \infty}^{x} \int_{- \infty}^{y} f_{X,Y}(x, y) dx dy -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+<!-- ### Marginal distributions -->
+<!-- Marginal distribution of X: the probability distribution of $X$, summing (integrating) over all values of $Y$ -->
+<!-- For discrete random variables, the marginal distribution of $X$ is: -->
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- f_{X}(x) =& ~ \text{P} (X = x) \\ -->
+<!--          =& ~ \sum_{y} \text{P} (X = x ~\cap ~ Y = y) \\ -->
+<!--          =& \sum_{y} f_{X,Y}(x,y) -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+<!-- For continuous random variables, the marginal distribution of $X$ is: -->
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- f_{X}(x) =& \int_{- \infty}^{\infty} f_{X,Y}(x, y) dy -->
+<!-- \end{aligned} -->
+<!-- $$ -->
 <!-- ### Covariance -->
 <!-- Covariance is a measurement of the extent to which $X$ and $Y$ depart from independence -->
 <!-- Such a measure should have two basic properties: -->
@@ -829,100 +814,80 @@ f_{X}(x) =&amp; \int_{- \infty}^{\infty} f_{X,Y}(x, y) dy
 <!-- compare.tail.to.normal(means.sim, 5, expec.par, sd.mean) -->
 <!-- compare.tail.to.normal(means.sim, 6, expec.par, sd.mean) -->
 <!-- ``` -->
-</div>
-</div>
-<div id="a-probabilistic-model-for-simple-linear-regression" class="section level2">
-<h2><span class="header-section-number">5.4</span> A probabilistic model for simple linear regression</h2>
-<div id="exercise-set-5-5" class="section level3">
-<h3><span class="header-section-number">5.4.1</span> Exercise set 5-5</h3>
-<ol style="list-style-type: decimal">
-<li>Write the square of the correlation coefficient (eq. 5.30) in terms of the variance of Y (eq. 5.32) and the conditional variance of Y given X (eq. 5.31).</li>
-</ol>
-<p><span class="math display">\[
-\begin{aligned}
-\text{eq. 5.30: } \rho_{X,Y} = \beta \frac{\sigma_X}{\sigma_Y} \\
-\text{eq. 5.31: } Var(Y) = \beta^2 \sigma_X^2 + \sigma_{\epsilon}^2 \\
-\text{eq. 5.32: } Var(Y \mid X = x) = \sigma_{\epsilon}^2  \\
-\end{aligned}
-\]</span></p>
-<p>Squaring <span class="math inline">\(\rho_{X,Y}\)</span>, and expressing <span class="math inline">\(Var(Y)\)</span> using the definition from above:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\rho_{X,Y}^2 = \beta^2 \frac{\sigma_X^2}{\sigma_Y^2} = \beta^2 \frac{\sigma_X^2}{Var(Y)} \\
-\end{aligned}
-\]</span></p>
-<p><span class="math display">\[
-\begin{aligned}
-\rho_{X,Y}^2 =  \beta^2 \frac{\sigma_X^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\
-\end{aligned}
-\]</span></p>
-<p>Some algebra…</p>
-<p><span class="math display">\[
-\begin{aligned}
-\rho_{X,Y}^2 = 1 - \frac{\sigma_{\epsilon}^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\
-\end{aligned}
-\]</span></p>
-<p>And we use the formulas from above again to restate as:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\rho_{X,Y}^2 = 1 - \frac{Var(Y \mid X = x)}{Var(Y)} \\
-\end{aligned}
-\]</span></p>
-<p>which gives us the ‘proportion of variance explained’. So if there isn’t much variance left in <span class="math inline">\(Y\)</span> after conditioning on <span class="math inline">\(X\)</span> (i.e., the numerator is small relative to the denominator), if we subtract it from 1, we get a high <span class="math inline">\(r^2\)</span>. And vice versa.</p>
-<ol start="2" style="list-style-type: decimal">
-<li>Simulating a regression.</li>
-</ol>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="kw">library</span>(stfspack)</a>
-<a class="sourceLine" id="cb89-2" title="2">sim.lm</a></code></pre></div>
-<pre><code>## function (n, a, b, sigma.disturb = 1, mu.x = 8, sigma.x = 2, 
-##     rdisturb = rnorm, rx = rnorm, het.coef = 0) 
-## {
-##     x &lt;- sort(rx(n, mu.x, sigma.x))
-##     disturbs &lt;- rdisturb(n, 0, sapply(sigma.disturb + scale(x) * 
-##         het.coef, max, 0))
-##     y &lt;- a + b * x + disturbs
-##     cbind(x, y)
-## }
-## &lt;bytecode: 0x7ffed0285250&gt;
-## &lt;environment: namespace:stfspack&gt;</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb91-2" title="2"><span class="kw">head</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>)</a></code></pre></div>
-<pre><code>##             x        y
-## [1,] 1.312981 2.282448
-## [2,] 3.367952 2.370127
-## [3,] 4.384247 4.303164
-## [4,] 4.392481 5.054339
-## [5,] 4.453625 5.516265
-## [6,] 4.592029 5.214258</code></pre>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
-<p><img src="05_random_variables_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>Still using all the default values for parameters:</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb94-2" title="2">                  <span class="dt">sigma.disturb =</span> <span class="dv">1</span>, <span class="dt">mu.x =</span> <span class="dv">8</span>, <span class="dt">sigma.x =</span> <span class="dv">2</span>, </a>
-<a class="sourceLine" id="cb94-3" title="3">                  <span class="dt">rdisturb =</span> rnorm, <span class="dt">rx =</span> rnorm, <span class="dt">het.coef =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb94-4" title="4"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
-<p><img src="05_random_variables_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p>Now I’ll change one at a time:</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb95-2" title="2">                  <span class="dt">sigma.disturb =</span> <span class="dv">2</span>, <span class="dt">mu.x =</span> <span class="dv">8</span>, <span class="dt">sigma.x =</span> <span class="dv">2</span>, </a>
-<a class="sourceLine" id="cb95-3" title="3">                  <span class="dt">rdisturb =</span> rnorm, <span class="dt">rx =</span> rnorm, <span class="dt">het.coef =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb95-4" title="4"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
-<p><img src="05_random_variables_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb96-2" title="2">                  <span class="dt">sigma.disturb =</span> <span class="dv">1</span>, <span class="dt">mu.x =</span> <span class="dv">16</span>, <span class="dt">sigma.x =</span> <span class="dv">2</span>, </a>
-<a class="sourceLine" id="cb96-3" title="3">                  <span class="dt">rdisturb =</span> rnorm, <span class="dt">rx =</span> rnorm, <span class="dt">het.coef =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb96-4" title="4"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
-<p><img src="05_random_variables_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb97-2" title="2">                  <span class="dt">sigma.disturb =</span> <span class="dv">1</span>, <span class="dt">mu.x =</span> <span class="dv">8</span>, <span class="dt">sigma.x =</span> <span class="dv">4</span>, </a>
-<a class="sourceLine" id="cb97-3" title="3">                  <span class="dt">rdisturb =</span> rnorm, <span class="dt">rx =</span> rnorm, <span class="dt">het.coef =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb97-4" title="4"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
-<p><img src="05_random_variables_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb98-2" title="2">                  <span class="dt">sigma.disturb =</span> <span class="dv">1</span>, <span class="dt">mu.x =</span> <span class="dv">8</span>, <span class="dt">sigma.x =</span> <span class="dv">2</span>, </a>
-<a class="sourceLine" id="cb98-3" title="3">                  <span class="dt">rdisturb =</span> rlaplace, <span class="dt">rx =</span> rnorm, <span class="dt">het.coef =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb98-4" title="4"><span class="kw">plot</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">1</span>], sim_<span class="dv">0</span>_<span class="dv">1</span>[,<span class="dv">2</span>])</a></code></pre></div>
-<p><img src="05_random_variables_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<!-- ## A probabilistic model for simple linear regression -->
+<!-- ### Exercise set 5-5 -->
+<!-- 1. Write the square of the correlation coefficient (eq. 5.30) in terms of the variance of Y (eq. 5.32) and the conditional variance of Y given X (eq. 5.31).  -->
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- \text{eq. 5.30: } \rho_{X,Y} = \beta \frac{\sigma_X}{\sigma_Y} \\ -->
+<!-- \text{eq. 5.31: } Var(Y) = \beta^2 \sigma_X^2 + \sigma_{\epsilon}^2 \\ -->
+<!-- \text{eq. 5.32: } Var(Y \mid X = x) = \sigma_{\epsilon}^2  \\ -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+<!-- Squaring $\rho_{X,Y}$, and expressing $Var(Y)$ using the definition from above: -->
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- \rho_{X,Y}^2 = \beta^2 \frac{\sigma_X^2}{\sigma_Y^2} = \beta^2 \frac{\sigma_X^2}{Var(Y)} \\ -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- \rho_{X,Y}^2 =  \beta^2 \frac{\sigma_X^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\ -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+<!-- Some algebra... -->
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- \rho_{X,Y}^2 = 1 - \frac{\sigma_{\epsilon}^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\ -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+<!-- And we use the formulas from above again to restate as: -->
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- \rho_{X,Y}^2 = 1 - \frac{Var(Y \mid X = x)}{Var(Y)} \\ -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+<!-- which gives us the 'proportion of variance explained'. So if there isn't much variance left in $Y$ after conditioning on $X$ (i.e., the numerator is small relative to the denominator), if we subtract it from 1, we get a high $r^2$. And vice versa.  -->
+<!-- 2. Simulating a regression.  -->
+<!-- ```{r} -->
+<!-- library(stfspack) -->
+<!-- sim.lm -->
+<!-- sim_0_1 <- sim.lm(n = 50, a = 0, b = 1) -->
+<!-- head(sim_0_1) -->
+<!-- plot(sim_0_1[,1], sim_0_1[,2]) -->
+<!-- ``` -->
+<!-- Still using all the default values for parameters: -->
+<!-- ```{r} -->
+<!-- sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,  -->
+<!--                   sigma.disturb = 1, mu.x = 8, sigma.x = 2,  -->
+<!--                   rdisturb = rnorm, rx = rnorm, het.coef = 0) -->
+<!-- plot(sim_0_1[,1], sim_0_1[,2]) -->
+<!-- ``` -->
+<!-- Now I'll change one at a time: -->
+<!-- ```{r} -->
+<!-- sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,  -->
+<!--                   sigma.disturb = 2, mu.x = 8, sigma.x = 2,  -->
+<!--                   rdisturb = rnorm, rx = rnorm, het.coef = 0) -->
+<!-- plot(sim_0_1[,1], sim_0_1[,2]) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,  -->
+<!--                   sigma.disturb = 1, mu.x = 16, sigma.x = 2,  -->
+<!--                   rdisturb = rnorm, rx = rnorm, het.coef = 0) -->
+<!-- plot(sim_0_1[,1], sim_0_1[,2]) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,  -->
+<!--                   sigma.disturb = 1, mu.x = 8, sigma.x = 4,  -->
+<!--                   rdisturb = rnorm, rx = rnorm, het.coef = 0) -->
+<!-- plot(sim_0_1[,1], sim_0_1[,2]) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,  -->
+<!--                   sigma.disturb = 1, mu.x = 8, sigma.x = 2,  -->
+<!--                   rdisturb = rlaplace, rx = rnorm, het.coef = 0) -->
+<!-- plot(sim_0_1[,1], sim_0_1[,2]) -->
+<!-- ``` -->
 
 </div>
 </div>
