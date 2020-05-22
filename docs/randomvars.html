@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-05-21" />
+<meta name="date" content="2020-05-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -193,8 +193,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.2" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-2"><i class="fa fa-check"></i><b>5.2.2</b> Exercise set 5-2</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="randomvars.html"><a href="randomvars.html#joint-distributions-covariance-and-correlation"><i class="fa fa-check"></i><b>5.3</b> Joint distributions, covariance, and correlation</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="randomvars.html"><a href="randomvars.html#additional-exercise-1"><i class="fa fa-check"></i><b>5.3.1</b> Additional exercise</a></li>
-<li class="chapter" data-level="5.3.2" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-3"><i class="fa fa-check"></i><b>5.3.2</b> Exercise set 5-3</a></li>
+<li class="chapter" data-level="5.3.1" data-path="randomvars.html"><a href="randomvars.html#joint-probability-distribution-the-probability-distribution-of-the-joint-occurrence-of-x-and-y"><i class="fa fa-check"></i><b>5.3.1</b> Joint probability distribution: the probability distribution of the joint occurrence of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></a></li>
+<li class="chapter" data-level="5.3.2" data-path="randomvars.html"><a href="randomvars.html#marginal-distribution-of-x-the-probability-distribution-of-x-summing-integrating-over-all-values-of-y"><i class="fa fa-check"></i><b>5.3.2</b> Marginal distribution of X: the probability distribution of <span class="math inline">\(X\)</span>, summing (integrating) over all values of <span class="math inline">\(Y\)</span></a></li>
+<li class="chapter" data-level="5.3.3" data-path="randomvars.html"><a href="randomvars.html#covariance-a-measurement-of-the-extent-to-which-x-and-y-depart-from-independence"><i class="fa fa-check"></i><b>5.3.3</b> Covariance: a measurement of the extent to which <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> depart from independence</a></li>
+<li class="chapter" data-level="5.3.4" data-path="randomvars.html"><a href="randomvars.html#correlation-covariance-rescaled-to-go-from--1-to-1"><i class="fa fa-check"></i><b>5.3.4</b> Correlation: covariance rescaled to go from -1 to 1</a></li>
+<li class="chapter" data-level="5.3.5" data-path="randomvars.html"><a href="randomvars.html#additional-exercise-1"><i class="fa fa-check"></i><b>5.3.5</b> Additional exercise</a></li>
+<li class="chapter" data-level="5.3.6" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-3"><i class="fa fa-check"></i><b>5.3.6</b> Exercise set 5-3</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="randomvars.html"><a href="randomvars.html#conditional-distribution-expectation-variance"><i class="fa fa-check"></i><b>5.4</b> Conditional distribution, expectation, variance</a></li>
 <li class="chapter" data-level="5.5" data-path="randomvars.html"><a href="randomvars.html#the-central-limit-theorem"><i class="fa fa-check"></i><b>5.5</b> The central limit theorem</a><ul>
@@ -439,11 +443,11 @@ The expectation is:</p>
 <a class="sourceLine" id="cb82-5" title="5"><span class="co"># Each row represents a sample (instance) drawn from X_i</span></a>
 <a class="sourceLine" id="cb82-6" title="6">samp.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(samps, <span class="dt">ncol =</span> n.samps) </a>
 <a class="sourceLine" id="cb82-7" title="7"><span class="kw">str</span>(samp.mat)</a></code></pre></div>
-<pre><code>##  num [1:20, 1:1000] -1.39 -1.19 1.01 1.24 1.72 ...</code></pre>
+<pre><code>##  num [1:20, 1:1000] -0.493 0.578 1.239 0.418 -0.804 ...</code></pre>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="co"># Here we calculate the sample mean for each X_i (column)</span></a>
 <a class="sourceLine" id="cb84-2" title="2">samp.means &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samp.mat)</a>
 <a class="sourceLine" id="cb84-3" title="3"><span class="kw">str</span>(samp.means)</a></code></pre></div>
-<pre><code>##  num [1:1000] -0.3037 0.0342 0.2018 -0.4387 -0.2038 ...</code></pre>
+<pre><code>##  num [1:1000] 0.0614 0.0965 0.2138 0.2723 0.117 ...</code></pre>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">hist</span>(samp.means)</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>2a. What happens if we change <code>samp.size</code> (i.e., <span class="math inline">\(n\)</span>)?</p>
@@ -553,14 +557,105 @@ where <span class="math inline">\(a\)</span> and <span class="math inline">\(c\)
 <h2><span class="header-section-number">5.3</span> Joint distributions, covariance, and correlation</h2>
 <p>This section covers four key concepts:</p>
 <ol style="list-style-type: decimal">
-<li><p>Joint probability distribution: the probability distribution of the joint occurrence of X and Y</p></li>
-<li><p>Marginal distribution of X: the probability distribution of X, summing (integrating) over all values of Y</p></li>
-<li><p>Covariance: a measurement of the extent to which X and Y depart from independence</p></li>
+<li><p>Joint probability distribution: the probability distribution of the joint occurrence of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></p></li>
+<li><p>Marginal distribution of X: the probability distribution of <span class="math inline">\(X\)</span>, summing (integrating) over all values of <span class="math inline">\(Y\)</span></p></li>
+<li><p>Covariance: a measurement of the extent to which <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> depart from independence</p></li>
 <li><p>Correlation: covariance rescaled to go from -1 to 1</p></li>
 </ol>
-<p>I think Edge does a good job, so I am not going to spend the time recreating his equations here. I will add one problem, to reinforce the concepts of joint and marginal distributions, with two discrete random variables. This problem covers similar ideas to Edge’s first exercise in set 5-3.</p>
+<div id="joint-probability-distribution-the-probability-distribution-of-the-joint-occurrence-of-x-and-y" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Joint probability distribution: the probability distribution of the joint occurrence of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></h3>
+<p>The joint cumulative probability distribution of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is given by:</p>
+<p><span class="math display">\[
+\begin{aligned}
+F_{X,Y}(x, y) = \text{P} (X \leq x ~\cap ~ Y \leq y) 
+\end{aligned}
+\]</span></p>
+<p>Here is the corresponding joint probability mass function:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f_{X,Y}(x, y) = \text{P} (X = x ~\cap ~ Y = y) 
+\end{aligned}
+\]</span></p>
+<p>And for two continuous variables, we can recover the cumulative distribution function by integrating the probability density function with respect to <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+F_{X,Y}(x, y) =&amp; ~ \text{P}(X \leq x ~\cap ~ Y \leq y) \\
+=&amp; \int_{- \infty}^{x} \int_{- \infty}^{y} f_{X,Y}(x, y) dx dy
+\end{aligned}
+\]</span></p>
+</div>
+<div id="marginal-distribution-of-x-the-probability-distribution-of-x-summing-integrating-over-all-values-of-y" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Marginal distribution of X: the probability distribution of <span class="math inline">\(X\)</span>, summing (integrating) over all values of <span class="math inline">\(Y\)</span></h3>
+<p>For discrete random variables, the marginal distribution of <span class="math inline">\(X\)</span> is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f_{X}(x) =&amp; ~ \text{P} (X = x) \\
+         =&amp; ~ \sum_{y} \text{P} (X = x ~\cap ~ Y = y) \\
+         =&amp; \sum_{y} f_{X,Y}(x,y)
+\end{aligned}
+\]</span></p>
+<p>For continuous random variables, the marginal distribution of <span class="math inline">\(X\)</span> is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f_{X}(x) =&amp; \int_{- \infty}^{\infty} f_{X,Y}(x, y) dy
+\end{aligned}
+\]</span></p>
+</div>
+<div id="covariance-a-measurement-of-the-extent-to-which-x-and-y-depart-from-independence" class="section level3">
+<h3><span class="header-section-number">5.3.3</span> Covariance: a measurement of the extent to which <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> depart from independence</h3>
+<p>Such a measure should have two basic properties:</p>
+<ul>
+<li>The number should be positive when <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> increase or decrease together</li>
+<li>The number should be negative when <span class="math inline">\(X\)</span> increases and <span class="math inline">\(Y\)</span> decreases (and vice versa).</li>
+</ul>
+<p>Consider the random variable <span class="math inline">\([X - \text{E}(X)][Y - \text{E}(Y)]\)</span>. If we sample a joint probability distribution, resulting in a set (<span class="math inline">\(\Omega\)</span>) of pairs of <span class="math inline">\((x, y)\)</span>, ask yourself:</p>
+<ul>
+<li>Is the sign positive or negative when most of the pairs <span class="math inline">\((x, y)\)</span> are such that <span class="math inline">\(x &gt; \text{E}(X)\)</span> and <span class="math inline">\(y &gt; \text{E}(Y)\)</span>?</li>
+<li>Is the sign positive or negative when most of the pairs <span class="math inline">\((x, y)\)</span> are such that <span class="math inline">\(x &lt; \text{E}(X)\)</span> and <span class="math inline">\(y &lt; \text{E}(Y)\)</span>?</li>
+<li>Is the sign positive or negative when most of the pairs <span class="math inline">\((x, y)\)</span> are such that <span class="math inline">\(x &gt; \text{E}(X)\)</span> and <span class="math inline">\(y &lt; \text{E}(Y)\)</span>?</li>
+<li>Is the sign positive or negative when most of the pairs <span class="math inline">\((x, y)\)</span> are such that <span class="math inline">\(x &lt; \text{E}(X)\)</span> and <span class="math inline">\(y &gt; \text{E}(Y)\)</span>?</li>
+</ul>
+<p>Hopefully, you have convinced yourself that the random variable <span class="math inline">\([X - \text{E}(X)][Y - \text{E}(Y)]\)</span> satisfies the two aforementioned properties. Now we take the expectation of this random variable to arrive at the covariance.</p>
+<p>Conveniently (or purposefully?), the covariance is an extension of the variance:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Cov}(X,Y) =&amp; ~ \text{E}([X - \text{E}(X)][Y - \text{E}(Y)]) \\
+                =&amp; ~ \text{E}(XY) - \text{E}(X)\text{E}(Y)
+\end{aligned}
+\]</span></p>
+<p>If you replace <span class="math inline">\(\text{E}(Y)\)</span> with <span class="math inline">\(\text{E}(X)\)</span> in the above equation, you should recover the definition of Var<span class="math inline">\((X)\)</span>, <span class="math inline">\(\text{E}(X^2) - [\text{E}(X)]^2\)</span>.</p>
+<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, then <span class="math inline">\(\text{Cov}(X,Y) = 0\)</span> (we showed this in an earlier problem set).</p>
+<p>However, if <span class="math inline">\(\text{Cov}(X,Y) = 0\)</span>, that does not necessarily imply that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent.</p>
+</div>
+<div id="correlation-covariance-rescaled-to-go-from--1-to-1" class="section level3">
+<h3><span class="header-section-number">5.3.4</span> Correlation: covariance rescaled to go from -1 to 1</h3>
+<p>The covariance is not a pure measure of the linear dependence between two variables, because it is sensitive to the scaling of the variables. Therefore, we cannot use the covariance to compare the strengths of different bivariate relationships. In other words, we cannot use the covariance to answer the question: <em>Is the relationship between cereal yield and fertilizer consumption stronger than the relationship between career earnings and college GPA?</em>. Instead, we calculate the correlation:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Cor}(X,Y) =&amp; ~ \rho_{X,Y} \\
+                =&amp; ~ \frac{\text{Cov}(X,Y)}{\sqrt{\text{Var}(X)\text{Var}(Y)}} \\
+                =&amp; ~ \frac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y}\\
+\end{aligned}
+\]</span></p>
+<p>You can prove to yourself that the correlation is bounded from -1 to 1 using a simple heuristic. Which variable should be the most correlated with <span class="math inline">\(X\)</span>? Well, that would be <span class="math inline">\(X\)</span>. Plugging in <span class="math inline">\(X\)</span> for <span class="math inline">\(Y\)</span>, we get:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Cor}(X,X) =&amp; ~ \frac{\text{Cov}(X,X)}{\sigma_X \sigma_X} \\
+                 =&amp; ~ \frac{\text{Var}(X)}{\text{Var}(X)} \\
+                 =&amp; ~ 1
+\end{aligned}
+\]</span></p>
+<p>Using the same logic, <span class="math inline">\(-X\)</span>, is the least correlated with <span class="math inline">\(X\)</span>. Try working through the algebra, you should get -1:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Cor}(X,-X) =&amp; ~ \frac{\text{Cov}(X,-X)}{\sqrt{\text{Var}(X)\text{Var}(-X)}} \\
+                =&amp; ~ \frac{\text{E}(X \times -X) - \text{E}(X)\text{E}(-X)}{\sqrt{\text{Var}(X)\text{Var}(-X)}} \\
+\end{aligned}
+\]</span></p>
+</div>
 <div id="additional-exercise-1" class="section level3">
-<h3><span class="header-section-number">5.3.1</span> Additional exercise</h3>
+<h3><span class="header-section-number">5.3.5</span> Additional exercise</h3>
+<p>I will add one problem, to reinforce the concepts of joint and marginal distributions, with two discrete random variables. This problem covers similar ideas to Edge’s first exercise in set 5-3.</p>
 <p>You watched 100 female birds last spring, and recorded the number of offspring per bird (X; 1, 2, or 3 chicks). You also recorded the age of each mom (Y; 1, 2, or 3 years).</p>
 <p>You observed:
 10 1-yr olds, all with one chick.
@@ -580,15 +675,33 @@ where <span class="math inline">\(a\)</span> and <span class="math inline">\(c\)
 <p>The key here is to recognize that yellow represents the joint probabilities of X and Y; the green and blue represents the marginal probabilities of X and Y, respectively. Stare at this until it clicks. A similar principle applies to continuous distributions, but rather than summing across Y, we integrate across Y to get the marginal distribution of X.</p>
 </div>
 <div id="exercise-set-5-3" class="section level3">
-<h3><span class="header-section-number">5.3.2</span> Exercise set 5-3</h3>
+<h3><span class="header-section-number">5.3.6</span> Exercise set 5-3</h3>
 <p>I had to walk through Edge’s solutions bit by bit; my handwritten version is <a href="images/edge_5_3.pdf">here</a>.</p>
 </div>
 </div>
 <div id="conditional-distribution-expectation-variance" class="section level2">
 <h2><span class="header-section-number">5.4</span> Conditional distribution, expectation, variance</h2>
+<p>For two discrete random variables, the conditional probability mass function is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f_{X|Y}(x |Y = y) =&amp; \text{P}(X = x | Y = y) \\
+                  =&amp; \frac{\text{P} (X = x ~\cap ~ Y = y)}{\text{P}(Y = y)} \\
+                  =&amp; \frac{f_{X,Y}(x,y)}{f_{Y}(y)}
+\end{aligned}
+\]</span></p>
+<p>For two continuous random variables, the conditional probability density function is defined similarly:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f_{X|Y}(x |Y = y) =&amp; \frac{f_{X,Y}(x,y)}{f_{Y}(y)}
+\end{aligned}
+\]</span></p>
+<p>Edge has a nice visualization and explanation of conditional distribution in his Fig 5-5.</p>
 </div>
 <div id="the-central-limit-theorem" class="section level2">
 <h2><span class="header-section-number">5.5</span> The central limit theorem</h2>
+<p>Natural populations are large, so we usually gather just a sample and use that as a surrogate for the whole population. If we take <span class="math inline">\(n\)</span> samples, then another <span class="math inline">\(n\)</span> samples, and then another <span class="math inline">\(n\)</span> samples, and calculate <span class="math inline">\(\overline{X}_1\)</span>, <span class="math inline">\(\overline{X}_2\)</span>, and <span class="math inline">\(\overline{X}_3\)</span>, differences in our estimate of <span class="math inline">\(\overline{X}\)</span> are due to sampling variation. The weak law of large numbers (above) tells us that as <span class="math inline">\(n\)</span> approaches <span class="math inline">\(\infty\)</span>, our estimate of <span class="math inline">\(\overline{X}_n\)</span> approaches the true population mean, <span class="math inline">\(\mu\)</span>, and that the Var(<span class="math inline">\(\overline{X}_n\)</span>) = <span class="math inline">\(\sigma^2 / n\)</span>, approaches 0.</p>
+<p>But what is the <em>shape</em> of this distribution? That is where the central limit theorem (CLT) comes in. As <span class="math inline">\(n\)</span> approaches <span class="math inline">\(\infty\)</span>, the distribution of <span class="math inline">\(\overline{X}_n\)</span> converges to a normal distribution with expectation <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2 / n\)</span>.</p>
+<p>An importance consequences of the CLT is the surpising result that the distribution of sample means <span class="math inline">\(\overline{X}_n\)</span> is <em>approximately</em> normal even when the distribution of the individual observations are not normally distributed! The implications of the CLT are huge: it allows us to use the normal distribution (and the powerful set of analytical tools that depend on it) in real-world situations where the underlying data are not normally distributed, as long as we have enough samples. What is enough? A general rule of thumb is 30, but will vary with the underlying probability distribution of the population. You will explore this using simulations in the problem set below.</p>
 <div id="exercise-set-5-4" class="section level3">
 <h3><span class="header-section-number">5.5.1</span> Exercise set 5-4</h3>
 <ol style="list-style-type: decimal">
@@ -642,7 +755,7 @@ where <span class="math inline">\(a\)</span> and <span class="math inline">\(c\)
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## &lt;bytecode: 0x7f9c0a3b8640&gt;
+## &lt;bytecode: 0x7ff609564cf8&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1">nsim &lt;-<span class="st"> </span><span class="dv">10000</span></a>
 <a class="sourceLine" id="cb105-2" title="2">n &lt;-<span class="st"> </span><span class="dv">1</span></a>
@@ -716,7 +829,7 @@ If the shape parameter is <span class="math inline">\(\leq\)</span> 2, <span cla
 ##     mean(x &lt; (mu - k * sigma) | x &gt; (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## &lt;bytecode: 0x7f9c0888a588&gt;
+## &lt;bytecode: 0x7ff60bd2c070&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" title="1">k &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"># sds</span></a>
 <a class="sourceLine" id="cb121-2" title="2"><span class="kw">compare.tail.to.normal</span>(<span class="dt">x =</span> x, <span class="dt">k =</span> k, <span class="dt">mu =</span> mu, <span class="dt">sigma =</span> stdev)</a></code></pre></div>
@@ -879,7 +992,7 @@ If the shape parameter is <span class="math inline">\(\leq\)</span> 2, <span cla
 ##     y &lt;- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## &lt;bytecode: 0x7f9c0bc01700&gt;
+## &lt;bytecode: 0x7ff60d0c4248&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb171-2" title="2"><span class="kw">head</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>)</a></code></pre></div>

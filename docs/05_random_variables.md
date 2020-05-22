@@ -285,7 +285,7 @@ str(samp.mat)
 ```
 
 ```
-##  num [1:20, 1:1000] -1.39 -1.19 1.01 1.24 1.72 ...
+##  num [1:20, 1:1000] -0.493 0.578 1.239 0.418 -0.804 ...
 ```
 
 ```r
@@ -295,7 +295,7 @@ str(samp.means)
 ```
 
 ```
-##  num [1:1000] -0.3037 0.0342 0.2018 -0.4387 -0.2038 ...
+##  num [1:1000] 0.0614 0.0965 0.2138 0.2723 0.117 ...
 ```
 
 ```r
@@ -435,17 +435,127 @@ I had to walk through Edge's solutions bit by bit; my handwritten version is [he
 
 This section covers four key concepts:
 
-1. Joint probability distribution: the probability distribution of the joint occurrence of X and Y
+1. Joint probability distribution: the probability distribution of the joint occurrence of $X$ and $Y$
 
-2. Marginal distribution of X: the probability distribution of X, summing (integrating) over all values of Y
+2. Marginal distribution of X: the probability distribution of $X$, summing (integrating) over all values of $Y$
 
-3. Covariance: a measurement of the extent to which X and Y depart from independence
+3. Covariance: a measurement of the extent to which $X$ and $Y$ depart from independence
 
 4. Correlation: covariance rescaled to go from -1 to 1
 
-I think Edge does a good job, so I am not going to spend the time recreating his equations here. I will add one problem, to reinforce the concepts of joint and marginal distributions, with two discrete random variables. This problem covers similar ideas to Edge's first exercise in set 5-3. 
+### Joint probability distribution: the probability distribution of the joint occurrence of $X$ and $Y$
+
+The joint cumulative probability distribution of two random variables $X$ and $Y$ is given by:
+
+$$
+\begin{aligned}
+F_{X,Y}(x, y) = \text{P} (X \leq x ~\cap ~ Y \leq y) 
+\end{aligned}
+$$
+
+Here is the corresponding joint probability mass function: 
+
+$$
+\begin{aligned}
+f_{X,Y}(x, y) = \text{P} (X = x ~\cap ~ Y = y) 
+\end{aligned}
+$$
+
+And for two continuous variables, we can recover the cumulative distribution function by integrating the probability density function with respect to $X$ and $Y$:
+
+$$
+\begin{aligned}
+F_{X,Y}(x, y) =& ~ \text{P}(X \leq x ~\cap ~ Y \leq y) \\
+=& \int_{- \infty}^{x} \int_{- \infty}^{y} f_{X,Y}(x, y) dx dy
+\end{aligned}
+$$
+
+### Marginal distribution of X: the probability distribution of $X$, summing (integrating) over all values of $Y$
+
+For discrete random variables, the marginal distribution of $X$ is:
+
+$$
+\begin{aligned}
+f_{X}(x) =& ~ \text{P} (X = x) \\
+         =& ~ \sum_{y} \text{P} (X = x ~\cap ~ Y = y) \\
+         =& \sum_{y} f_{X,Y}(x,y)
+\end{aligned}
+$$
+
+For continuous random variables, the marginal distribution of $X$ is:
+
+$$
+\begin{aligned}
+f_{X}(x) =& \int_{- \infty}^{\infty} f_{X,Y}(x, y) dy
+\end{aligned}
+$$
+
+### Covariance: a measurement of the extent to which $X$ and $Y$ depart from independence
+
+Such a measure should have two basic properties:
+
+  - The number should be positive when $X$ and $Y$ increase or decrease together
+  - The number should be negative when $X$ increases and $Y$ decreases (and vice versa). 
+
+Consider the random variable $[X - \text{E}(X)][Y - \text{E}(Y)]$. If we sample a joint probability distribution, resulting in a set ($\Omega$) of pairs of $(x, y)$, ask yourself:
+
+  - Is the sign positive or negative when most of the pairs $(x, y)$ are such that $x > \text{E}(X)$ and $y > \text{E}(Y)$?
+  - Is the sign positive or negative when most of the pairs $(x, y)$ are such that $x < \text{E}(X)$ and $y < \text{E}(Y)$?
+  - Is the sign positive or negative when most of the pairs $(x, y)$ are such that $x > \text{E}(X)$ and $y < \text{E}(Y)$?
+  - Is the sign positive or negative when most of the pairs $(x, y)$ are such that $x < \text{E}(X)$ and $y > \text{E}(Y)$?
+
+Hopefully, you have convinced yourself that the random variable $[X - \text{E}(X)][Y - \text{E}(Y)]$ satisfies the two aforementioned properties. Now we take the expectation of this random variable to arrive at the covariance. 
+  
+Conveniently (or purposefully?), the covariance is an extension of the variance:
+
+$$
+\begin{aligned}
+\text{Cov}(X,Y) =& ~ \text{E}([X - \text{E}(X)][Y - \text{E}(Y)]) \\
+                =& ~ \text{E}(XY) - \text{E}(X)\text{E}(Y)
+\end{aligned}
+$$
+
+If you replace $\text{E}(Y)$ with $\text{E}(X)$ in the above equation, you should recover the definition of Var$(X)$, $\text{E}(X^2) - [\text{E}(X)]^2$. 
+
+If $X$ and $Y$ are independent, then $\text{Cov}(X,Y) = 0$ (we showed this in an earlier problem set). 
+
+However, if $\text{Cov}(X,Y) = 0$, that does not necessarily imply that $X$ and $Y$ are independent. 
+
+### Correlation: covariance rescaled to go from -1 to 1
+
+The covariance is not a pure measure of the linear dependence between two variables, because it is sensitive to the scaling of the variables. Therefore, we cannot use the covariance to compare the strengths of different bivariate relationships. In other words, we cannot use the covariance to answer the question: *Is the relationship between cereal yield and fertilizer consumption stronger than the relationship between career earnings and college GPA?*. Instead, we calculate the correlation:
+
+
+$$
+\begin{aligned}
+\text{Cor}(X,Y) =& ~ \rho_{X,Y} \\
+                =& ~ \frac{\text{Cov}(X,Y)}{\sqrt{\text{Var}(X)\text{Var}(Y)}} \\
+                =& ~ \frac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y}\\
+\end{aligned}
+$$
+
+You can prove to yourself that the correlation is bounded from -1 to 1 using a simple heuristic. Which variable should be the most correlated with $X$? Well, that would be $X$. Plugging in $X$ for $Y$, we get:
+
+$$
+\begin{aligned}
+\text{Cor}(X,X) =& ~ \frac{\text{Cov}(X,X)}{\sigma_X \sigma_X} \\
+                 =& ~ \frac{\text{Var}(X)}{\text{Var}(X)} \\
+                 =& ~ 1
+\end{aligned}
+$$
+
+Using the same logic, $-X$, is the least correlated with $X$. Try working through the algebra, you should get -1:
+
+$$
+\begin{aligned}
+\text{Cor}(X,-X) =& ~ \frac{\text{Cov}(X,-X)}{\sqrt{\text{Var}(X)\text{Var}(-X)}} \\
+                =& ~ \frac{\text{E}(X \times -X) - \text{E}(X)\text{E}(-X)}{\sqrt{\text{Var}(X)\text{Var}(-X)}} \\
+\end{aligned}
+$$
 
 ### Additional exercise
+
+I will add one problem, to reinforce the concepts of joint and marginal distributions, with two discrete random variables. This problem covers similar ideas to Edge's first exercise in set 5-3. 
 
 You watched 100 female birds last spring, and recorded the number of offspring per bird (X; 1, 2, or 3 chicks). You also recorded the age of each mom (Y; 1, 2, or 3 years). 
 
@@ -480,7 +590,33 @@ I had to walk through Edge's solutions bit by bit; my handwritten version is [he
 
 ## Conditional distribution, expectation, variance
 
+For two discrete random variables, the conditional probability mass function is:
+
+$$
+\begin{aligned}
+f_{X|Y}(x |Y = y) =& \text{P}(X = x | Y = y) \\
+                  =& \frac{\text{P} (X = x ~\cap ~ Y = y)}{\text{P}(Y = y)} \\
+                  =& \frac{f_{X,Y}(x,y)}{f_{Y}(y)}
+\end{aligned}
+$$
+
+For two continuous random variables, the conditional probability density function is defined similarly:
+
+$$
+\begin{aligned}
+f_{X|Y}(x |Y = y) =& \frac{f_{X,Y}(x,y)}{f_{Y}(y)}
+\end{aligned}
+$$
+
+Edge has a nice visualization and explanation of conditional distribution in his Fig 5-5. 
+
 ## The central limit theorem
+
+Natural populations are large, so we usually gather just a sample and use that as a surrogate for the whole population. If we take $n$ samples, then another $n$ samples, and then another $n$ samples, and calculate $\overline{X}_1$, $\overline{X}_2$, and $\overline{X}_3$, differences in our estimate of $\overline{X}$ are due to sampling variation. The weak law of large numbers (above) tells us that as $n$ approaches $\infty$, our estimate of $\overline{X}_n$ approaches the true population mean, $\mu$, and that the Var($\overline{X}_n$) = $\sigma^2 / n$, approaches 0. 
+
+But what is the *shape* of this distribution? That is where the central limit theorem (CLT) comes in. As $n$ approaches $\infty$, the distribution of $\overline{X}_n$ converges to a normal distribution with expectation $\mu$ and variance $\sigma^2 / n$. 
+
+An importance consequences of the CLT is the surpising result that the distribution of sample means $\overline{X}_n$ is *approximately* normal even when the distribution of the individual observations are not normally distributed! The implications of the CLT are huge: it allows us to use the normal distribution (and the powerful set of analytical tools that depend on it) in real-world situations where the underlying data are not normally distributed, as long as we have enough samples. What is enough? A general rule of thumb is 30, but will vary with the underlying probability distribution of the population. You will explore this using simulations in the problem set below. 
 
 ### Exercise set 5-4
 
@@ -587,7 +723,7 @@ dosm.beta.hist
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## <bytecode: 0x7f9c0a3b8640>
+## <bytecode: 0x7ff609564cf8>
 ## <environment: namespace:stfspack>
 ```
 
@@ -714,7 +850,7 @@ compare.tail.to.normal
 ##     mean(x < (mu - k * sigma) | x > (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## <bytecode: 0x7f9c0888a588>
+## <bytecode: 0x7ff60bd2c070>
 ## <environment: namespace:stfspack>
 ```
 
@@ -1037,7 +1173,7 @@ sim.lm
 ##     y <- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## <bytecode: 0x7f9c0bc01700>
+## <bytecode: 0x7ff60d0c4248>
 ## <environment: namespace:stfspack>
 ```
 
