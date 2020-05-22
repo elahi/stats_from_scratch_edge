@@ -443,11 +443,11 @@ The expectation is:</p>
 <a class="sourceLine" id="cb82-5" title="5"><span class="co"># Each row represents a sample (instance) drawn from X_i</span></a>
 <a class="sourceLine" id="cb82-6" title="6">samp.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(samps, <span class="dt">ncol =</span> n.samps) </a>
 <a class="sourceLine" id="cb82-7" title="7"><span class="kw">str</span>(samp.mat)</a></code></pre></div>
-<pre><code>##  num [1:20, 1:1000] -0.493 0.578 1.239 0.418 -0.804 ...</code></pre>
+<pre><code>##  num [1:20, 1:1000] 0.3503 -0.0338 -2.6342 -0.8477 -1.4981 ...</code></pre>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="co"># Here we calculate the sample mean for each X_i (column)</span></a>
 <a class="sourceLine" id="cb84-2" title="2">samp.means &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samp.mat)</a>
 <a class="sourceLine" id="cb84-3" title="3"><span class="kw">str</span>(samp.means)</a></code></pre></div>
-<pre><code>##  num [1:1000] 0.0614 0.0965 0.2138 0.2723 0.117 ...</code></pre>
+<pre><code>##  num [1:1000] -0.1989 -0.0435 -0.0255 0.2326 -0.2432 ...</code></pre>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">hist</span>(samp.means)</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>2a. What happens if we change <code>samp.size</code> (i.e., <span class="math inline">\(n\)</span>)?</p>
@@ -755,7 +755,7 @@ f_{X|Y}(x |Y = y) =&amp; \frac{f_{X,Y}(x,y)}{f_{Y}(y)}
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## &lt;bytecode: 0x7ff609564cf8&gt;
+## &lt;bytecode: 0x7f9b56bde410&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1">nsim &lt;-<span class="st"> </span><span class="dv">10000</span></a>
 <a class="sourceLine" id="cb105-2" title="2">n &lt;-<span class="st"> </span><span class="dv">1</span></a>
@@ -829,7 +829,7 @@ If the shape parameter is <span class="math inline">\(\leq\)</span> 2, <span cla
 ##     mean(x &lt; (mu - k * sigma) | x &gt; (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## &lt;bytecode: 0x7ff60bd2c070&gt;
+## &lt;bytecode: 0x7f9b546d2e68&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" title="1">k &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"># sds</span></a>
 <a class="sourceLine" id="cb121-2" title="2"><span class="kw">compare.tail.to.normal</span>(<span class="dt">x =</span> x, <span class="dt">k =</span> k, <span class="dt">mu =</span> mu, <span class="dt">sigma =</span> stdev)</a></code></pre></div>
@@ -992,7 +992,7 @@ If the shape parameter is <span class="math inline">\(\leq\)</span> 2, <span cla
 ##     y &lt;- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## &lt;bytecode: 0x7ff60d0c4248&gt;
+## &lt;bytecode: 0x7f9b578b1be0&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb171-2" title="2"><span class="kw">head</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>)</a></code></pre></div>
