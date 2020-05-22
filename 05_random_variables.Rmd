@@ -421,7 +421,7 @@ This section covers four key concepts:
 
 4. Correlation: covariance rescaled to go from -1 to 1
 
-### Joint probability distribution: the probability distribution of the joint occurrence of $X$ and $Y$
+### Joint probability distribution - the probability distribution of the joint occurrence of $X$ and $Y$
 
 The joint cumulative probability distribution of two random variables $X$ and $Y$ is given by:
 
@@ -448,7 +448,7 @@ F_{X,Y}(x, y) =& ~ \text{P}(X \leq x ~\cap ~ Y \leq y) \\
 \end{aligned}
 $$
 
-### Marginal distribution of X: the probability distribution of $X$, summing (integrating) over all values of $Y$
+### Marginal distribution of X - the probability distribution of $X$, summing (integrating) over all values of $Y$
 
 For discrete random variables, the marginal distribution of $X$ is:
 
@@ -468,7 +468,7 @@ f_{X}(x) =& \int_{- \infty}^{\infty} f_{X,Y}(x, y) dy
 \end{aligned}
 $$
 
-### Covariance: a measurement of the extent to which $X$ and $Y$ depart from independence
+### Covariance - a measurement of the extent to which $X$ and $Y$ depart from independence
 
 Such a measure should have two basic properties:
 
@@ -499,7 +499,7 @@ If $X$ and $Y$ are independent, then $\text{Cov}(X,Y) = 0$ (we showed this in an
 
 However, if $\text{Cov}(X,Y) = 0$, that does not necessarily imply that $X$ and $Y$ are independent. 
 
-### Correlation: covariance rescaled to go from -1 to 1
+### Correlation - covariance rescaled to go from -1 to 1
 
 The covariance is not a pure measure of the linear dependence between two variables, because it is sensitive to the scaling of the variables. Therefore, we cannot use the covariance to compare the strengths of different bivariate relationships. In other words, we cannot use the covariance to answer the question: *Is the relationship between cereal yield and fertilizer consumption stronger than the relationship between career earnings and college GPA?*. Instead, we calculate the correlation:
 
