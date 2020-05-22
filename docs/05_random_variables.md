@@ -285,7 +285,7 @@ str(samp.mat)
 ```
 
 ```
-##  num [1:20, 1:1000] -2.281 1.82 -0.524 -0.49 -1.617 ...
+##  num [1:20, 1:1000] 0.098 -0.581 1.378 0.545 -0.811 ...
 ```
 
 ```r
@@ -295,7 +295,7 @@ str(samp.means)
 ```
 
 ```
-##  num [1:1000] -0.0423 0.1454 -0.1504 0.0922 0.2461 ...
+##  num [1:1000] 0.142 -0.224 -0.134 0.066 -0.392 ...
 ```
 
 ```r
@@ -723,7 +723,7 @@ dosm.beta.hist
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## <bytecode: 0x7fa56c77e8d8>
+## <bytecode: 0x7f8a81966dd8>
 ## <environment: namespace:stfspack>
 ```
 
@@ -850,7 +850,7 @@ compare.tail.to.normal
 ##     mean(x < (mu - k * sigma) | x > (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## <bytecode: 0x7fa56cb97480>
+## <bytecode: 0x7f8a828ae290>
 ## <environment: namespace:stfspack>
 ```
 
@@ -1173,7 +1173,7 @@ sim.lm
 ##     y <- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## <bytecode: 0x7fa56e3b6c70>
+## <bytecode: 0x7f8a839e5358>
 ## <environment: namespace:stfspack>
 ```
 
