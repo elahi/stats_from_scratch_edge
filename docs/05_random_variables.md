@@ -285,7 +285,7 @@ str(samp.mat)
 ```
 
 ```
-##  num [1:20, 1:1000] -1.607 -1.981 1.476 -0.995 0.427 ...
+##  num [1:20, 1:1000] -1.39 -1.19 1.01 1.24 1.72 ...
 ```
 
 ```r
@@ -295,7 +295,7 @@ str(samp.means)
 ```
 
 ```
-##  num [1:1000] -0.1783 0.0407 -0.2019 -0.0175 0.0235 ...
+##  num [1:1000] -0.3037 0.0342 0.2018 -0.4387 -0.2038 ...
 ```
 
 ```r
@@ -433,7 +433,50 @@ I had to walk through Edge's solutions bit by bit; my handwritten version is [he
 
 ## Joint distributions, covariance, and correlation
 
+This section covers four key concepts:
+
+1. Joint probability distribution: the probability distribution of the joint occurrence of X and Y
+
+2. Marginal distribution of X: the probability distribution of X, summing (integrating) over all values of Y
+
+3. Covariance: a measurement of the extent to which X and Y depart from independence
+
+4. Correlation: covariance rescaled to go from -1 to 1
+
+I think Edge does a good job, so I am not going to spend the time recreating his equations here. I will add one problem, to reinforce the concepts of joint and marginal distributions, with two discrete random variables. This problem covers similar ideas to Edge's first exercise in set 5-3. 
+
+### Additional exercise
+
+You watched 100 female birds last spring, and recorded the number of offspring per bird (X; 1, 2, or 3 chicks). You also recorded the age of each mom (Y; 1, 2, or 3 years). 
+
+You observed:
+10 1-yr olds, all with one chick. 
+27 2-yr olds; 13 had one chick, 12 had two chicks, and 2 had three chicks. 
+63 3-yr olds; 23 had one chick, 36 had two chicks, and 4 had three chicks. 
+
+Calculate:
+
+1. The probability of observing each possible outcome (e.g., a 1-yr old bird has 1 chick; a 1-yr old bird has 2 chicks; etc.).
+
+2. The probability of observing a 1-yr old bird; a 2-yr old bird; and a 3-yr old bird.
+
+3. The probability of observing 1 chick per mom; 2 chicks per mom; 3 chicks per mom. 
+
+STOP! NO PEEKING ! ANSWER IS BELOW:
+
+Wait for it...
+
+...wait for it ...
+
+...here it is: an excel (gasp!) plot!
+
+![](images/birbs_for_rmd.png){width=200%}
+
+The key here is to recognize that yellow represents the joint probabilities of X and Y; the green and blue represents the marginal probabilities of X and Y, respectively. Stare at this until it clicks. A similar principle applies to continuous distributions, but rather than summing across Y, we integrate across Y to get the marginal distribution of X. 
+
 ### Exercise set 5-3
+
+I had to walk through Edge's solutions bit by bit; my handwritten version is [here](images/edge_5_3.pdf). 
 
 ## Conditional distribution, expectation, variance
 
@@ -544,7 +587,7 @@ dosm.beta.hist
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## <bytecode: 0x7fcdf93d5d40>
+## <bytecode: 0x7f9c0a3b8640>
 ## <environment: namespace:stfspack>
 ```
 
@@ -671,7 +714,7 @@ compare.tail.to.normal
 ##     mean(x < (mu - k * sigma) | x > (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## <bytecode: 0x7fcdf54a19c8>
+## <bytecode: 0x7f9c0888a588>
 ## <environment: namespace:stfspack>
 ```
 
@@ -994,7 +1037,7 @@ sim.lm
 ##     y <- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## <bytecode: 0x7fcdf870ebf0>
+## <bytecode: 0x7f9c0bc01700>
 ## <environment: namespace:stfspack>
 ```
 

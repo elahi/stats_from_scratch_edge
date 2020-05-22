@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-05-11" />
+<meta name="date" content="2020-05-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -193,7 +193,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.2" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-2"><i class="fa fa-check"></i><b>5.2.2</b> Exercise set 5-2</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="randomvars.html"><a href="randomvars.html#joint-distributions-covariance-and-correlation"><i class="fa fa-check"></i><b>5.3</b> Joint distributions, covariance, and correlation</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-3"><i class="fa fa-check"></i><b>5.3.1</b> Exercise set 5-3</a></li>
+<li class="chapter" data-level="5.3.1" data-path="randomvars.html"><a href="randomvars.html#additional-exercise-1"><i class="fa fa-check"></i><b>5.3.1</b> Additional exercise</a></li>
+<li class="chapter" data-level="5.3.2" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-3"><i class="fa fa-check"></i><b>5.3.2</b> Exercise set 5-3</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="randomvars.html"><a href="randomvars.html#conditional-distribution-expectation-variance"><i class="fa fa-check"></i><b>5.4</b> Conditional distribution, expectation, variance</a></li>
 <li class="chapter" data-level="5.5" data-path="randomvars.html"><a href="randomvars.html#the-central-limit-theorem"><i class="fa fa-check"></i><b>5.5</b> The central limit theorem</a><ul>
@@ -438,11 +439,11 @@ The expectation is:</p>
 <a class="sourceLine" id="cb82-5" title="5"><span class="co"># Each row represents a sample (instance) drawn from X_i</span></a>
 <a class="sourceLine" id="cb82-6" title="6">samp.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(samps, <span class="dt">ncol =</span> n.samps) </a>
 <a class="sourceLine" id="cb82-7" title="7"><span class="kw">str</span>(samp.mat)</a></code></pre></div>
-<pre><code>##  num [1:20, 1:1000] -1.607 -1.981 1.476 -0.995 0.427 ...</code></pre>
+<pre><code>##  num [1:20, 1:1000] -1.39 -1.19 1.01 1.24 1.72 ...</code></pre>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="co"># Here we calculate the sample mean for each X_i (column)</span></a>
 <a class="sourceLine" id="cb84-2" title="2">samp.means &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samp.mat)</a>
 <a class="sourceLine" id="cb84-3" title="3"><span class="kw">str</span>(samp.means)</a></code></pre></div>
-<pre><code>##  num [1:1000] -0.1783 0.0407 -0.2019 -0.0175 0.0235 ...</code></pre>
+<pre><code>##  num [1:1000] -0.3037 0.0342 0.2018 -0.4387 -0.2038 ...</code></pre>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">hist</span>(samp.means)</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>2a. What happens if we change <code>samp.size</code> (i.e., <span class="math inline">\(n\)</span>)?</p>
@@ -550,8 +551,37 @@ where <span class="math inline">\(a\)</span> and <span class="math inline">\(c\)
 </div>
 <div id="joint-distributions-covariance-and-correlation" class="section level2">
 <h2><span class="header-section-number">5.3</span> Joint distributions, covariance, and correlation</h2>
+<p>This section covers four key concepts:</p>
+<ol style="list-style-type: decimal">
+<li><p>Joint probability distribution: the probability distribution of the joint occurrence of X and Y</p></li>
+<li><p>Marginal distribution of X: the probability distribution of X, summing (integrating) over all values of Y</p></li>
+<li><p>Covariance: a measurement of the extent to which X and Y depart from independence</p></li>
+<li><p>Correlation: covariance rescaled to go from -1 to 1</p></li>
+</ol>
+<p>I think Edge does a good job, so I am not going to spend the time recreating his equations here. I will add one problem, to reinforce the concepts of joint and marginal distributions, with two discrete random variables. This problem covers similar ideas to Edge’s first exercise in set 5-3.</p>
+<div id="additional-exercise-1" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Additional exercise</h3>
+<p>You watched 100 female birds last spring, and recorded the number of offspring per bird (X; 1, 2, or 3 chicks). You also recorded the age of each mom (Y; 1, 2, or 3 years).</p>
+<p>You observed:
+10 1-yr olds, all with one chick.
+27 2-yr olds; 13 had one chick, 12 had two chicks, and 2 had three chicks.
+63 3-yr olds; 23 had one chick, 36 had two chicks, and 4 had three chicks.</p>
+<p>Calculate:</p>
+<ol style="list-style-type: decimal">
+<li><p>The probability of observing each possible outcome (e.g., a 1-yr old bird has 1 chick; a 1-yr old bird has 2 chicks; etc.).</p></li>
+<li><p>The probability of observing a 1-yr old bird; a 2-yr old bird; and a 3-yr old bird.</p></li>
+<li><p>The probability of observing 1 chick per mom; 2 chicks per mom; 3 chicks per mom.</p></li>
+</ol>
+<p>STOP! NO PEEKING ! ANSWER IS BELOW:</p>
+<p>Wait for it…</p>
+<p>…wait for it …</p>
+<p>…here it is: an excel (gasp!) plot!</p>
+<p><img src="images/birbs_for_rmd.png" style="width:200.0%" /></p>
+<p>The key here is to recognize that yellow represents the joint probabilities of X and Y; the green and blue represents the marginal probabilities of X and Y, respectively. Stare at this until it clicks. A similar principle applies to continuous distributions, but rather than summing across Y, we integrate across Y to get the marginal distribution of X.</p>
+</div>
 <div id="exercise-set-5-3" class="section level3">
-<h3><span class="header-section-number">5.3.1</span> Exercise set 5-3</h3>
+<h3><span class="header-section-number">5.3.2</span> Exercise set 5-3</h3>
+<p>I had to walk through Edge’s solutions bit by bit; my handwritten version is <a href="images/edge_5_3.pdf">here</a>.</p>
 </div>
 </div>
 <div id="conditional-distribution-expectation-variance" class="section level2">
@@ -612,7 +642,7 @@ where <span class="math inline">\(a\)</span> and <span class="math inline">\(c\)
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## &lt;bytecode: 0x7fcdf93d5d40&gt;
+## &lt;bytecode: 0x7f9c0a3b8640&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1">nsim &lt;-<span class="st"> </span><span class="dv">10000</span></a>
 <a class="sourceLine" id="cb105-2" title="2">n &lt;-<span class="st"> </span><span class="dv">1</span></a>
@@ -686,7 +716,7 @@ If the shape parameter is <span class="math inline">\(\leq\)</span> 2, <span cla
 ##     mean(x &lt; (mu - k * sigma) | x &gt; (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## &lt;bytecode: 0x7fcdf54a19c8&gt;
+## &lt;bytecode: 0x7f9c0888a588&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" title="1">k &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"># sds</span></a>
 <a class="sourceLine" id="cb121-2" title="2"><span class="kw">compare.tail.to.normal</span>(<span class="dt">x =</span> x, <span class="dt">k =</span> k, <span class="dt">mu =</span> mu, <span class="dt">sigma =</span> stdev)</a></code></pre></div>
@@ -849,7 +879,7 @@ If the shape parameter is <span class="math inline">\(\leq\)</span> 2, <span cla
 ##     y &lt;- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## &lt;bytecode: 0x7fcdf870ebf0&gt;
+## &lt;bytecode: 0x7f9c0bc01700&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb171-2" title="2"><span class="kw">head</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>)</a></code></pre></div>
