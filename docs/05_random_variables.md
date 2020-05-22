@@ -285,7 +285,7 @@ str(samp.mat)
 ```
 
 ```
-##  num [1:20, 1:1000] 0.098 -0.581 1.378 0.545 -0.811 ...
+##  num [1:20, 1:1000] -0.447 -1.155 1.073 1.305 -1.497 ...
 ```
 
 ```r
@@ -295,7 +295,7 @@ str(samp.means)
 ```
 
 ```
-##  num [1:1000] 0.142 -0.224 -0.134 0.066 -0.392 ...
+##  num [1:1000] -0.1024 -0.0623 0.1028 0.473 0.4912 ...
 ```
 
 ```r
@@ -443,7 +443,9 @@ This section covers four key concepts:
 
 4. Correlation: covariance rescaled to go from -1 to 1
 
-### Joint probability distribution - the probability distribution of the joint occurrence of $X$ and $Y$
+### Joint probability distributions
+
+Joint probability distribution: the probability distribution of the joint occurrence of $X$ and $Y$
 
 The joint cumulative probability distribution of two random variables $X$ and $Y$ is given by:
 
@@ -470,7 +472,9 @@ F_{X,Y}(x, y) =& ~ \text{P}(X \leq x ~\cap ~ Y \leq y) \\
 \end{aligned}
 $$
 
-### Marginal distribution of X - the probability distribution of $X$, summing (integrating) over all values of $Y$
+### Marginal distributions
+
+Marginal distribution of X: the probability distribution of $X$, summing (integrating) over all values of $Y$
 
 For discrete random variables, the marginal distribution of $X$ is:
 
@@ -490,7 +494,9 @@ f_{X}(x) =& \int_{- \infty}^{\infty} f_{X,Y}(x, y) dy
 \end{aligned}
 $$
 
-### Covariance - a measurement of the extent to which $X$ and $Y$ depart from independence
+### Covariance
+
+Covariance is a measurement of the extent to which $X$ and $Y$ depart from independence
 
 Such a measure should have two basic properties:
 
@@ -521,7 +527,9 @@ If $X$ and $Y$ are independent, then $\text{Cov}(X,Y) = 0$ (we showed this in an
 
 However, if $\text{Cov}(X,Y) = 0$, that does not necessarily imply that $X$ and $Y$ are independent. 
 
-### Correlation - covariance rescaled to go from -1 to 1
+### Correlation 
+
+Correlation: covariance rescaled to go from -1 to 1
 
 The covariance is not a pure measure of the linear dependence between two variables, because it is sensitive to the scaling of the variables. Therefore, we cannot use the covariance to compare the strengths of different bivariate relationships. In other words, we cannot use the covariance to answer the question: *Is the relationship between cereal yield and fertilizer consumption stronger than the relationship between career earnings and college GPA?*. Instead, we calculate the correlation:
 
@@ -723,7 +731,7 @@ dosm.beta.hist
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## <bytecode: 0x7f8a81966dd8>
+## <bytecode: 0x7fef338d4da0>
 ## <environment: namespace:stfspack>
 ```
 
@@ -850,7 +858,7 @@ compare.tail.to.normal
 ##     mean(x < (mu - k * sigma) | x > (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## <bytecode: 0x7f8a828ae290>
+## <bytecode: 0x7fef379fd608>
 ## <environment: namespace:stfspack>
 ```
 
@@ -1173,7 +1181,7 @@ sim.lm
 ##     y <- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## <bytecode: 0x7f8a839e5358>
+## <bytecode: 0x7fef37ac8e30>
 ## <environment: namespace:stfspack>
 ```
 

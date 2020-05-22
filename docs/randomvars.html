@@ -193,10 +193,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.2" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-2"><i class="fa fa-check"></i><b>5.2.2</b> Exercise set 5-2</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="randomvars.html"><a href="randomvars.html#joint-distributions-covariance-and-correlation"><i class="fa fa-check"></i><b>5.3</b> Joint distributions, covariance, and correlation</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="randomvars.html"><a href="randomvars.html#joint-probability-distribution---the-probability-distribution-of-the-joint-occurrence-of-x-and-y"><i class="fa fa-check"></i><b>5.3.1</b> Joint probability distribution - the probability distribution of the joint occurrence of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></a></li>
-<li class="chapter" data-level="5.3.2" data-path="randomvars.html"><a href="randomvars.html#marginal-distribution-of-x---the-probability-distribution-of-x-summing-integrating-over-all-values-of-y"><i class="fa fa-check"></i><b>5.3.2</b> Marginal distribution of X - the probability distribution of <span class="math inline">\(X\)</span>, summing (integrating) over all values of <span class="math inline">\(Y\)</span></a></li>
-<li class="chapter" data-level="5.3.3" data-path="randomvars.html"><a href="randomvars.html#covariance---a-measurement-of-the-extent-to-which-x-and-y-depart-from-independence"><i class="fa fa-check"></i><b>5.3.3</b> Covariance - a measurement of the extent to which <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> depart from independence</a></li>
-<li class="chapter" data-level="5.3.4" data-path="randomvars.html"><a href="randomvars.html#correlation---covariance-rescaled-to-go-from--1-to-1"><i class="fa fa-check"></i><b>5.3.4</b> Correlation - covariance rescaled to go from -1 to 1</a></li>
+<li class="chapter" data-level="5.3.1" data-path="randomvars.html"><a href="randomvars.html#joint-probability-distributions"><i class="fa fa-check"></i><b>5.3.1</b> Joint probability distributions</a></li>
+<li class="chapter" data-level="5.3.2" data-path="randomvars.html"><a href="randomvars.html#marginal-distributions"><i class="fa fa-check"></i><b>5.3.2</b> Marginal distributions</a></li>
+<li class="chapter" data-level="5.3.3" data-path="randomvars.html"><a href="randomvars.html#covariance"><i class="fa fa-check"></i><b>5.3.3</b> Covariance</a></li>
+<li class="chapter" data-level="5.3.4" data-path="randomvars.html"><a href="randomvars.html#correlation"><i class="fa fa-check"></i><b>5.3.4</b> Correlation</a></li>
 <li class="chapter" data-level="5.3.5" data-path="randomvars.html"><a href="randomvars.html#additional-exercise-1"><i class="fa fa-check"></i><b>5.3.5</b> Additional exercise</a></li>
 <li class="chapter" data-level="5.3.6" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-3"><i class="fa fa-check"></i><b>5.3.6</b> Exercise set 5-3</a></li>
 </ul></li>
@@ -443,11 +443,11 @@ The expectation is:</p>
 <a class="sourceLine" id="cb82-5" title="5"><span class="co"># Each row represents a sample (instance) drawn from X_i</span></a>
 <a class="sourceLine" id="cb82-6" title="6">samp.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(samps, <span class="dt">ncol =</span> n.samps) </a>
 <a class="sourceLine" id="cb82-7" title="7"><span class="kw">str</span>(samp.mat)</a></code></pre></div>
-<pre><code>##  num [1:20, 1:1000] 0.098 -0.581 1.378 0.545 -0.811 ...</code></pre>
+<pre><code>##  num [1:20, 1:1000] -0.447 -1.155 1.073 1.305 -1.497 ...</code></pre>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="co"># Here we calculate the sample mean for each X_i (column)</span></a>
 <a class="sourceLine" id="cb84-2" title="2">samp.means &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samp.mat)</a>
 <a class="sourceLine" id="cb84-3" title="3"><span class="kw">str</span>(samp.means)</a></code></pre></div>
-<pre><code>##  num [1:1000] 0.142 -0.224 -0.134 0.066 -0.392 ...</code></pre>
+<pre><code>##  num [1:1000] -0.1024 -0.0623 0.1028 0.473 0.4912 ...</code></pre>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">hist</span>(samp.means)</a></code></pre></div>
 <p><img src="05_random_variables_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>2a. What happens if we change <code>samp.size</code> (i.e., <span class="math inline">\(n\)</span>)?</p>
@@ -562,8 +562,9 @@ where <span class="math inline">\(a\)</span> and <span class="math inline">\(c\)
 <li><p>Covariance: a measurement of the extent to which <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> depart from independence</p></li>
 <li><p>Correlation: covariance rescaled to go from -1 to 1</p></li>
 </ol>
-<div id="joint-probability-distribution---the-probability-distribution-of-the-joint-occurrence-of-x-and-y" class="section level3">
-<h3><span class="header-section-number">5.3.1</span> Joint probability distribution - the probability distribution of the joint occurrence of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></h3>
+<div id="joint-probability-distributions" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Joint probability distributions</h3>
+<p>Joint probability distribution: the probability distribution of the joint occurrence of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></p>
 <p>The joint cumulative probability distribution of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is given by:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -584,8 +585,9 @@ F_{X,Y}(x, y) =&amp; ~ \text{P}(X \leq x ~\cap ~ Y \leq y) \\
 \end{aligned}
 \]</span></p>
 </div>
-<div id="marginal-distribution-of-x---the-probability-distribution-of-x-summing-integrating-over-all-values-of-y" class="section level3">
-<h3><span class="header-section-number">5.3.2</span> Marginal distribution of X - the probability distribution of <span class="math inline">\(X\)</span>, summing (integrating) over all values of <span class="math inline">\(Y\)</span></h3>
+<div id="marginal-distributions" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Marginal distributions</h3>
+<p>Marginal distribution of X: the probability distribution of <span class="math inline">\(X\)</span>, summing (integrating) over all values of <span class="math inline">\(Y\)</span></p>
 <p>For discrete random variables, the marginal distribution of <span class="math inline">\(X\)</span> is:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -601,8 +603,9 @@ f_{X}(x) =&amp; \int_{- \infty}^{\infty} f_{X,Y}(x, y) dy
 \end{aligned}
 \]</span></p>
 </div>
-<div id="covariance---a-measurement-of-the-extent-to-which-x-and-y-depart-from-independence" class="section level3">
-<h3><span class="header-section-number">5.3.3</span> Covariance - a measurement of the extent to which <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> depart from independence</h3>
+<div id="covariance" class="section level3">
+<h3><span class="header-section-number">5.3.3</span> Covariance</h3>
+<p>Covariance is a measurement of the extent to which <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> depart from independence</p>
 <p>Such a measure should have two basic properties:</p>
 <ul>
 <li>The number should be positive when <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> increase or decrease together</li>
@@ -627,8 +630,9 @@ f_{X}(x) =&amp; \int_{- \infty}^{\infty} f_{X,Y}(x, y) dy
 <p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, then <span class="math inline">\(\text{Cov}(X,Y) = 0\)</span> (we showed this in an earlier problem set).</p>
 <p>However, if <span class="math inline">\(\text{Cov}(X,Y) = 0\)</span>, that does not necessarily imply that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent.</p>
 </div>
-<div id="correlation---covariance-rescaled-to-go-from--1-to-1" class="section level3">
-<h3><span class="header-section-number">5.3.4</span> Correlation - covariance rescaled to go from -1 to 1</h3>
+<div id="correlation" class="section level3">
+<h3><span class="header-section-number">5.3.4</span> Correlation</h3>
+<p>Correlation: covariance rescaled to go from -1 to 1</p>
 <p>The covariance is not a pure measure of the linear dependence between two variables, because it is sensitive to the scaling of the variables. Therefore, we cannot use the covariance to compare the strengths of different bivariate relationships. In other words, we cannot use the covariance to answer the question: <em>Is the relationship between cereal yield and fertilizer consumption stronger than the relationship between career earnings and college GPA?</em>. Instead, we calculate the correlation:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -755,7 +759,7 @@ f_{X|Y}(x |Y = y) =&amp; \frac{f_{X,Y}(x,y)}{f_{Y}(y)}
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## &lt;bytecode: 0x7f8a81966dd8&gt;
+## &lt;bytecode: 0x7fef338d4da0&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1">nsim &lt;-<span class="st"> </span><span class="dv">10000</span></a>
 <a class="sourceLine" id="cb105-2" title="2">n &lt;-<span class="st"> </span><span class="dv">1</span></a>
@@ -829,7 +833,7 @@ If the shape parameter is <span class="math inline">\(\leq\)</span> 2, <span cla
 ##     mean(x &lt; (mu - k * sigma) | x &gt; (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## &lt;bytecode: 0x7f8a828ae290&gt;
+## &lt;bytecode: 0x7fef379fd608&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" title="1">k &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"># sds</span></a>
 <a class="sourceLine" id="cb121-2" title="2"><span class="kw">compare.tail.to.normal</span>(<span class="dt">x =</span> x, <span class="dt">k =</span> k, <span class="dt">mu =</span> mu, <span class="dt">sigma =</span> stdev)</a></code></pre></div>
@@ -992,7 +996,7 @@ If the shape parameter is <span class="math inline">\(\leq\)</span> 2, <span cla
 ##     y &lt;- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## &lt;bytecode: 0x7f8a839e5358&gt;
+## &lt;bytecode: 0x7fef37ac8e30&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1">sim_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sim.lm</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb171-2" title="2"><span class="kw">head</span>(sim_<span class="dv">0</span>_<span class="dv">1</span>)</a></code></pre></div>
