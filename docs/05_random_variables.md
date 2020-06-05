@@ -285,7 +285,7 @@ str(samp.mat)
 ```
 
 ```
-##  num [1:20, 1:1000] 0.0956 0.5987 1.1046 0.6854 -0.3227 ...
+##  num [1:20, 1:1000] -1.433 0.327 2.583 -0.225 0.154 ...
 ```
 
 ```r
@@ -295,7 +295,7 @@ str(samp.means)
 ```
 
 ```
-##  num [1:1000] 0.2227 0.3063 -0.0555 0.387 0.2083 ...
+##  num [1:1000] 0.07392 -0.3052 0.00253 -0.47176 -0.20082 ...
 ```
 
 ```r
@@ -731,7 +731,7 @@ dosm.beta.hist
 ##     lines(x, dnorm(x, mean = mean(dosm), sd = sd(dosm)))
 ##     c(`mean of DOSM` = mean(dosm), `SD of DOSM` = sd(dosm), `var of DOSM` = var(dosm))
 ## }
-## <bytecode: 0x7fb0e8e401c8>
+## <bytecode: 0x7fa6a5baf758>
 ## <environment: namespace:stfspack>
 ```
 
@@ -848,7 +848,7 @@ compare.tail.to.normal
 ##     mean(x < (mu - k * sigma) | x > (mu + k * sigma))/(1 - (pnorm(k) - 
 ##         pnorm(-k)))
 ## }
-## <bytecode: 0x7fb0e8e49280>
+## <bytecode: 0x7fa6a5baf320>
 ## <environment: namespace:stfspack>
 ```
 
@@ -1109,15 +1109,120 @@ compare.tail.to.normal(means.sim, 6, expec.par, sd.mean)
 
 ## A probabilistic model for simple linear regression
 
+In this last section, we are going to apply the probabilistic concepts to our linear function:
+
+$$
+\begin{aligned}
+Y = \alpha + \beta X + \epsilon \\
+\end{aligned}
+$$
+
+$X, Y, \epsilon$: random variables (probability distributions)  
+
+$\alpha, \beta$: fixed coefficients (scalars)
+
+In words, we are trying to model $Y$ as a linear function of $\alpha, \beta, X$, plus a random disturbance, $\epsilon$. 
+
+In what follows, we are going to make some simplifying assumptions about the random variables $X$ and $\epsilon$.
+
+Why?
+
+Because in doing so, we can make some *claims* about $Y$ - its expectation, and variance; as well as Cov($X, Y$).   
+
+Why is it useful to make these claims? 
+
+Because in doing so, we will be able to decompose the variance of $Y$ into two components: the effect of $X$ on $Y$, and the disturbance $\epsilon$. That is, we'll be able to generate predictions for $Y$ given $X$ - maybe we can predict $Y$ really well, or maybe not. 
+
+I will briefly restate the assumptions below. 
+
+### Assumptions of the linear model
+
+1. $X$ has a known expectation, and the disturbance term has an expectation of 0: 
+
+$$
+\begin{aligned}
+\text{E}(X) =& ~ \mu_X \\
+\text{E}(\epsilon) =& ~ 0 \\
+\end{aligned}
+$$
+
+*Consequence: we know the expectation of $Y$*
+
+2. The expectation of the disturbance term is 0 for *all* values of $X$:
+
+$$
+\begin{aligned}
+\text{E}(\epsilon | X = x) =& ~ 0 \\
+\end{aligned}
+$$
+*Consequence: the conditional expectation of $Y$, given any $x$, can be predicted using a line with a slope $\beta$ and intercept $\alpha$. Let that sink in...if this is not true, then the relationship between X and Y is not linear!*
+
+3. The variance of the disturbance is constant, for every $x$: 
+
+$$
+\begin{aligned}
+\text{Var}(\epsilon | X = x) =& ~ \sigma^2_\epsilon \\
+\end{aligned}
+$$
+
+*Consequence: the variance of Y, for any x, is constant*
+
+4.$X$ and $\epsilon$ are independent. 
+
+*Consequence: the variance of Y is due to the variation in X, plus the variation due to the disturbance*
+
+### Important claims that follow from these assumptions
+
+The correlation between $X$ and $Y$ is: 
+
+$$
+\begin{aligned}
+\rho_{X, Y} = \beta \frac{\sigma_X}{\sigma_Y}\\
+\end{aligned}
+$$
+
+The proportion of variance in $Y$ that is explained by $X$ ($r^2$) is: 
+
+$$
+\begin{aligned}
+\rho_{X, Y}^2 = 1 - \frac{\text{Var}(Y|X = x)}{\text{Var}(Y)}\\
+\end{aligned}
+$$
+
+### Checking these assumptions
+
+So you have run a linear model in R using `lm()`. Now what? Check your assumptions, of course! The most important assumptions are *linearity* (# 2 above) and *homoscedasticity* (#3 above). To check these, plot the residuals of your model against the fitted values. 
+
+
+```r
+plot(y1 ~ x1, data = anscombe)
+```
+
+<img src="05_random_variables_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+
+```r
+lm1 <- lm(y1 ~ x1, data = anscombe)
+plot(lm1, which = 1)
+```
+
+<img src="05_random_variables_files/figure-html/unnamed-chunk-11-2.png" width="672" />
+
+There should be no trend in the residuals (indicative of *linearity*), and the scatter of the residuals should be consistent across the range of fitted values (indicative of *homoscedasticity*). In the plot above, both of these assumptions are satisfied. Hopefully your residuals will look like this (if not, you have more work to do!). 
+
+Here is a figure (7.5) from Faraway (2002) that illustrates clear violations of these two assumptions: 
+
+![](images/Faraway_fig7.5.png){width=150%}
+
+
 ### Exercise set 5-5
 
 1. Write the square of the correlation coefficient (eq. 5.30) in terms of the variance of Y (eq. 5.32) and the conditional variance of Y given X (eq. 5.31).
 
 $$
 \begin{aligned}
-\text{eq. 5.30: } \rho_{X,Y} = \beta \frac{\sigma_X}{\sigma_Y} \\
-\text{eq. 5.31: } Var(Y) = \beta^2 \sigma_X^2 + \sigma_{\epsilon}^2 \\
-\text{eq. 5.32: } Var(Y \mid X = x) = \sigma_{\epsilon}^2  \\
+\text{eq. 5.30: } \rho_{X,Y} =& \beta \frac{\sigma_X}{\sigma_Y} \\
+\text{eq. 5.31: } Var(Y) =& \beta^2 \sigma_X^2 + \sigma_{\epsilon}^2 \\
+\text{eq. 5.32: } Var(Y \mid X = x) =& \sigma_{\epsilon}^2  \\
 \end{aligned}
 $$
 
@@ -1135,11 +1240,14 @@ $$
 \end{aligned}
 $$
 
-Some algebra...
+Now, we have to employ an algebraic slight of hand. We rewrite the terms on the right as a single fraction, and by adding and subtracting the term $\sigma_{\epsilon}^2$ to the numerator, the numerator remains unchanged, but in a useful form to separate the single fraction into two, with the lefthand fraction equaling 1:
 
 $$
 \begin{aligned}
-\rho_{X,Y}^2 = 1 - \frac{\sigma_{\epsilon}^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\
+\rho_{X,Y}^2 =& \frac{\beta^2 \sigma_X^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\
+=& \frac{(\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2) - \sigma_{\epsilon}^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\
+=& \frac{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} - \frac{\sigma_{\epsilon}^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\
+=& 1 - \frac{\sigma_{\epsilon}^2}{\beta^2 \sigma_X^2 + \sigma_{\epsilon}^2} \\
 \end{aligned}
 $$
 
@@ -1147,7 +1255,7 @@ And we use the formulas from above again to restate as:
 
 $$
 \begin{aligned}
-\rho_{X,Y}^2 = 1 - \frac{Var(Y \mid X = x)}{Var(Y)} \\
+\rho_{X,Y}^2 =& 1 - \frac{Var(Y \mid X = x)}{Var(Y)} \\
 \end{aligned}
 $$
 
@@ -1171,7 +1279,7 @@ sim.lm
 ##     y <- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## <bytecode: 0x7fb0eca49008>
+## <bytecode: 0x7fa6aa2d2418>
 ## <environment: namespace:stfspack>
 ```
 
@@ -1194,7 +1302,7 @@ head(sim_0_1)
 plot(sim_0_1[,1], sim_0_1[,2])
 ```
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="05_random_variables_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 Still using all the default values for parameters, but I have made all the arguments explicit in the function call:
 
@@ -1206,7 +1314,7 @@ sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,
 plot(sim_0_1[,1], sim_0_1[,2])
 ```
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="05_random_variables_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 Now I'll change one at a time. Here, I've doubled `sigma.disturb`, the error term:
 
@@ -1218,7 +1326,7 @@ sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,
 plot(sim_0_1[,1], sim_0_1[,2])
 ```
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="05_random_variables_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 Next, I have doubled E($X$): 
 
@@ -1230,7 +1338,7 @@ sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,
 plot(sim_0_1[,1], sim_0_1[,2])
 ```
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="05_random_variables_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 Next, I have doubled $\sigma_X$:
 
@@ -1242,7 +1350,7 @@ sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,
 plot(sim_0_1[,1], sim_0_1[,2])
 ```
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="05_random_variables_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 Finally, here I have changed the distribution of the error term to a laplace distribution:
 
@@ -1254,4 +1362,4 @@ sim_0_1 <- sim.lm(n = 50, a = 0, b = 1,
 plot(sim_0_1[,1], sim_0_1[,2])
 ```
 
-<img src="05_random_variables_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="05_random_variables_files/figure-html/unnamed-chunk-17-1.png" width="672" />
