@@ -9,12 +9,6 @@ editor_options:
 # Line of best fit {#best-fit-line}
 
 
-```r
-library(tidyverse)
-theme_set(theme_bw(base_size = 12) + 
-            theme(strip.background = element_blank(), 
-                  panel.grid = element_blank())) 
-```
 
 ## Exercise set 3-1
 

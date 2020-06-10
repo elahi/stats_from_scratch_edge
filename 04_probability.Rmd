@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE
 
 # Probability and random variables {#probability}
 
-```{r load-packages}
+```{r load-packages, include = FALSE}
 library(tidyverse)
 theme_set(theme_bw(base_size = 12) + 
             theme(strip.background = element_blank(), 
