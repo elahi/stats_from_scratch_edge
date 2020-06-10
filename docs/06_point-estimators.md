@@ -153,3 +153,23 @@ df %>%
 <img src="06_point-estimators_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 The sample median has a larger variance than the sample mean. 
+
+## Mean squared error
+
+The *mean squared error* is a metric that combines bias (accuracy) and variance (precision) in one metric. It is the expected squared difference between the value of an estimator and the true quantity:
+
+$$
+\begin{aligned}
+\text{MSE}(\hat{\theta}_n) =& ~ E[(\hat{\theta}_n(D) - \theta)^2] \\
+=& ~ \text{B}(\hat{\theta}_n)^2 + \text{Var}(\hat{\theta}_n)
+\end{aligned}
+$$
+
+### Exercise set 6-3
+
+1. See handwritten notes or Edge solution. 
+
+2. When estimating the first parameter of a normal distribution, the sample mean will have a lower mean squared error. This is because although both are unbiased estimators, the sample median has a higher variance. If bias for both is equal to zero, then the mean square error is simply the variance of the estimator. 
+
+## Consistency
+

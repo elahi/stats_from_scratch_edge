@@ -218,6 +218,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="estimators.html"><a href="estimators.html#variance"><i class="fa fa-check"></i><b>6.2</b> Variance</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="estimators.html"><a href="estimators.html#exercise-set-6-2"><i class="fa fa-check"></i><b>6.2.1</b> Exercise set 6-2</a></li>
 </ul></li>
+<li class="chapter" data-level="6.3" data-path="estimators.html"><a href="estimators.html#mean-squared-error"><i class="fa fa-check"></i><b>6.3</b> Mean squared error</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="estimators.html"><a href="estimators.html#exercise-set-6-3"><i class="fa fa-check"></i><b>6.3.1</b> Exercise set 6-3</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="estimators.html"><a href="estimators.html#consistency"><i class="fa fa-check"></i><b>6.4</b> Consistency</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -334,8 +338,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb184-6" title="6"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>)</a></code></pre></div>
 <p><img src="06_point-estimators_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>The sample median has a larger variance than the sample mean.</p>
-
 </div>
+</div>
+<div id="mean-squared-error" class="section level2">
+<h2><span class="header-section-number">6.3</span> Mean squared error</h2>
+<p>The <em>mean squared error</em> is a metric that combines bias (accuracy) and variance (precision) in one metric. It is the expected squared difference between the value of an estimator and the true quantity:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{MSE}(\hat{\theta}_n) =&amp; ~ E[(\hat{\theta}_n(D) - \theta)^2] \\
+=&amp; ~ \text{B}(\hat{\theta}_n)^2 + \text{Var}(\hat{\theta}_n)
+\end{aligned}
+\]</span></p>
+<div id="exercise-set-6-3" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> Exercise set 6-3</h3>
+<ol style="list-style-type: decimal">
+<li><p>See handwritten notes or Edge solution.</p></li>
+<li><p>When estimating the first parameter of a normal distribution, the sample mean will have a lower mean squared error. This is because although both are unbiased estimators, the sample median has a higher variance. If bias for both is equal to zero, then the mean square error is simply the variance of the estimator.</p></li>
+</ol>
+</div>
+</div>
+<div id="consistency" class="section level2">
+<h2><span class="header-section-number">6.4</span> Consistency</h2>
+
 </div>
 </div>
             </section>
