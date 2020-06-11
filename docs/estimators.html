@@ -221,7 +221,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3" data-path="estimators.html"><a href="estimators.html#mean-squared-error"><i class="fa fa-check"></i><b>6.3</b> Mean squared error</a><ul>
 <li class="chapter" data-level="6.3.1" data-path="estimators.html"><a href="estimators.html#exercise-set-6-3"><i class="fa fa-check"></i><b>6.3.1</b> Exercise set 6-3</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="estimators.html"><a href="estimators.html#consistency"><i class="fa fa-check"></i><b>6.4</b> Consistency</a></li>
+<li class="chapter" data-level="6.4" data-path="estimators.html"><a href="estimators.html#consistency"><i class="fa fa-check"></i><b>6.4</b> Consistency</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="estimators.html"><a href="estimators.html#exercise-set-6-4"><i class="fa fa-check"></i><b>6.4.1</b> Exercise set 6-4</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -257,9 +259,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \end{aligned}
 \]</span></p>
 <p>That is, we would like to estimate the mean of our random variables, <span class="math inline">\(X_i\)</span>. We can do this in <code>R</code>, for 25 random variables that have a mean of 0 and a variance of 1:</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1"><span class="kw">set.seed</span>(<span class="dv">12</span>)</a>
-<a class="sourceLine" id="cb174-2" title="2">d &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">25</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb174-3" title="3"><span class="kw">mean</span>(d)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">set.seed</span>(<span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2">d &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">25</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">mean</span>(d)</a></code></pre></div>
 <pre><code>## [1] -0.1883626</code></pre>
 <div id="bias" class="section level2">
 <h2><span class="header-section-number">6.1</span> Bias</h2>
@@ -277,23 +279,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>The bias of the sample mean for <span class="math inline">\(X_i \sim N(\theta, 1)\)</span> is 0. See handwritten notes.</p></li>
 <li><p>Examining estimators for a normal distribution:</p></li>
 </ol>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1"><span class="kw">library</span>(stfspack)</a>
-<a class="sourceLine" id="cb176-2" title="2">s.mat &lt;-<span class="st"> </span><span class="kw">mat.samps</span>(<span class="dt">n =</span> <span class="dv">25</span>, <span class="dt">nsim =</span> <span class="dv">10000</span>)</a>
-<a class="sourceLine" id="cb176-3" title="3"><span class="kw">str</span>(s.mat)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">library</span>(stfspack)</a>
+<a class="sourceLine" id="cb3-2" title="2">s.mat &lt;-<span class="st"> </span><span class="kw">mat.samps</span>(<span class="dt">n =</span> <span class="dv">25</span>, <span class="dt">nsim =</span> <span class="dv">10000</span>)</a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="kw">str</span>(s.mat)</a></code></pre></div>
 <pre><code>##  num [1:10000, 1:25] 0.435 -1.023 -1.746 1.36 -0.642 ...</code></pre>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1"><span class="co">## Sampling distribution of means</span></a>
-<a class="sourceLine" id="cb178-2" title="2">ests.mean &lt;-<span class="st"> </span><span class="kw">apply</span>(s.mat, <span class="dv">1</span>, mean)</a>
-<a class="sourceLine" id="cb178-3" title="3">mean_of_means &lt;-<span class="st"> </span><span class="kw">mean</span>(ests.mean)</a>
-<a class="sourceLine" id="cb178-4" title="4"></a>
-<a class="sourceLine" id="cb178-5" title="5"><span class="co">## Sampling distribution of medians</span></a>
-<a class="sourceLine" id="cb178-6" title="6">ests.median &lt;-<span class="st"> </span><span class="kw">apply</span>(s.mat, <span class="dv">1</span>, median)</a>
-<a class="sourceLine" id="cb178-7" title="7">mean_of_medians &lt;-<span class="st"> </span><span class="kw">mean</span>(ests.median)</a>
-<a class="sourceLine" id="cb178-8" title="8"></a>
-<a class="sourceLine" id="cb178-9" title="9"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb178-10" title="10"><span class="kw">hist</span>(ests.mean)</a>
-<a class="sourceLine" id="cb178-11" title="11"><span class="kw">abline</span>(<span class="dt">v =</span> mean_of_means, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb178-12" title="12"><span class="kw">hist</span>(ests.median)</a>
-<a class="sourceLine" id="cb178-13" title="13"><span class="kw">abline</span>(<span class="dt">v =</span> mean_of_medians, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co">## Sampling distribution of means</span></a>
+<a class="sourceLine" id="cb5-2" title="2">ests.mean &lt;-<span class="st"> </span><span class="kw">apply</span>(s.mat, <span class="dv">1</span>, mean)</a>
+<a class="sourceLine" id="cb5-3" title="3">mean_of_means &lt;-<span class="st"> </span><span class="kw">mean</span>(ests.mean)</a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="co">## Sampling distribution of medians</span></a>
+<a class="sourceLine" id="cb5-6" title="6">ests.median &lt;-<span class="st"> </span><span class="kw">apply</span>(s.mat, <span class="dv">1</span>, median)</a>
+<a class="sourceLine" id="cb5-7" title="7">mean_of_medians &lt;-<span class="st"> </span><span class="kw">mean</span>(ests.median)</a>
+<a class="sourceLine" id="cb5-8" title="8"></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="kw">hist</span>(ests.mean)</a>
+<a class="sourceLine" id="cb5-11" title="11"><span class="kw">abline</span>(<span class="dt">v =</span> mean_of_means, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="kw">hist</span>(ests.median)</a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="kw">abline</span>(<span class="dt">v =</span> mean_of_medians, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="06_point-estimators_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>The mean and the median both appear unbiased - that is, their sampling distributions are centered on 0.</p>
 </div>
@@ -313,29 +315,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>The variance of the sample mean for <span class="math inline">\(X_i \sim N(\theta, 1)\)</span> is <span class="math inline">\(\frac{1}{n}\)</span>. If we don’t know the distribution from which <span class="math inline">\(X_i\)</span> are drawn, just that it has a finite variance, <span class="math inline">\(\sigma^2\)</span>, the variance of the sample means is <span class="math inline">\(\frac{\sigma^2}{n}\)</span>. See handwritten notes.</p></li>
 <li><p>Does the sample median have a larger or smaller variance than the mean, when data are drawn from a normal distribution?</p></li>
 </ol>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1"><span class="kw">library</span>(stfspack) </a>
-<a class="sourceLine" id="cb179-2" title="2"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb179-3" title="3">n_sims &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb179-4" title="4">s.mat &lt;-<span class="st"> </span><span class="kw">mat.samps</span>(<span class="dt">n =</span> <span class="dv">25</span>, <span class="dt">nsim =</span> n_sims)</a>
-<a class="sourceLine" id="cb179-5" title="5"><span class="kw">str</span>(s.mat)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">library</span>(stfspack) </a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb6-3" title="3">n_sims &lt;-<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb6-4" title="4">s.mat &lt;-<span class="st"> </span><span class="kw">mat.samps</span>(<span class="dt">n =</span> <span class="dv">25</span>, <span class="dt">nsim =</span> n_sims)</a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="kw">str</span>(s.mat)</a></code></pre></div>
 <pre><code>##  num [1:10000, 1:25] 1.414 0.468 -0.785 -0.257 -0.205 ...</code></pre>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" title="1"><span class="co">## Sampling distribution of means</span></a>
-<a class="sourceLine" id="cb181-2" title="2">ests.mean &lt;-<span class="st"> </span><span class="kw">apply</span>(s.mat, <span class="dv">1</span>, mean)</a>
-<a class="sourceLine" id="cb181-3" title="3">var_of_means &lt;-<span class="st"> </span><span class="kw">var</span>(ests.mean)</a>
-<a class="sourceLine" id="cb181-4" title="4"></a>
-<a class="sourceLine" id="cb181-5" title="5"><span class="co">## Sampling distribution of medians</span></a>
-<a class="sourceLine" id="cb181-6" title="6">ests.median &lt;-<span class="st"> </span><span class="kw">apply</span>(s.mat, <span class="dv">1</span>, median)</a>
-<a class="sourceLine" id="cb181-7" title="7">var_of_medians &lt;-<span class="st"> </span><span class="kw">var</span>(ests.median)</a>
-<a class="sourceLine" id="cb181-8" title="8"></a>
-<a class="sourceLine" id="cb181-9" title="9">var_of_means; var_of_medians</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co">## Sampling distribution of means</span></a>
+<a class="sourceLine" id="cb8-2" title="2">ests.mean &lt;-<span class="st"> </span><span class="kw">apply</span>(s.mat, <span class="dv">1</span>, mean)</a>
+<a class="sourceLine" id="cb8-3" title="3">var_of_means &lt;-<span class="st"> </span><span class="kw">var</span>(ests.mean)</a>
+<a class="sourceLine" id="cb8-4" title="4"></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co">## Sampling distribution of medians</span></a>
+<a class="sourceLine" id="cb8-6" title="6">ests.median &lt;-<span class="st"> </span><span class="kw">apply</span>(s.mat, <span class="dv">1</span>, median)</a>
+<a class="sourceLine" id="cb8-7" title="7">var_of_medians &lt;-<span class="st"> </span><span class="kw">var</span>(ests.median)</a>
+<a class="sourceLine" id="cb8-8" title="8"></a>
+<a class="sourceLine" id="cb8-9" title="9">var_of_means; var_of_medians</a></code></pre></div>
 <pre><code>## [1] 0.04031047</code></pre>
 <pre><code>## [1] 0.06237011</code></pre>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">estimator =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;mean&quot;</span>, n_sims), <span class="kw">rep</span>(<span class="st">&quot;median&quot;</span>, n_sims)), </a>
-<a class="sourceLine" id="cb184-2" title="2">                 <span class="dt">value =</span> <span class="kw">c</span>(ests.mean, ests.median))</a>
-<a class="sourceLine" id="cb184-3" title="3"></a>
-<a class="sourceLine" id="cb184-4" title="4">df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb184-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(value, <span class="dt">fill =</span> estimator)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb184-6" title="6"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">estimator =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;mean&quot;</span>, n_sims), <span class="kw">rep</span>(<span class="st">&quot;median&quot;</span>, n_sims)), </a>
+<a class="sourceLine" id="cb11-2" title="2">                 <span class="dt">value =</span> <span class="kw">c</span>(ests.mean, ests.median))</a>
+<a class="sourceLine" id="cb11-3" title="3"></a>
+<a class="sourceLine" id="cb11-4" title="4">df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(value, <span class="dt">fill =</span> estimator)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>)</a></code></pre></div>
 <p><img src="06_point-estimators_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>The sample median has a larger variance than the sample mean.</p>
 </div>
@@ -359,7 +361,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="consistency" class="section level2">
 <h2><span class="header-section-number">6.4</span> Consistency</h2>
+<p>As we collect more data, it would be preferable for the estimator to get closer and closer to the estimand; that is, we wish the estimator to be <em>consistent</em>. A consistent estimator is one that converges in probability to the true value, and is defined formally as:</p>
+<p><span class="math display">\[
+\begin{aligned}
+lim_{n \rightarrow \infty} \text{P}(|\hat{\theta}_n - \theta| &gt; \delta) = 0
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(\delta\)</span> is any positive number.</p>
+<p>It turns out (if we complete a proof) that an estimator <span class="math inline">\(\hat{\theta}_n\)</span> is consistent if:</p>
+<p><span class="math display">\[
+\begin{aligned}
+lim_{n \rightarrow \infty} \text{MSE}(\hat{\theta}_n) = 0
+\end{aligned}
+\]</span></p>
+<p>that is, an estimator is consistent if the mean squared error goes to zero as the sample size increases to infinity. Both biased and unbiased estimators can be consistent, Edge’s figure 6.2 demonstrates this nicely.</p>
+<div id="exercise-set-6-4" class="section level3">
+<h3><span class="header-section-number">6.4.1</span> Exercise set 6-4</h3>
+<ol style="list-style-type: decimal">
+<li>Yes, the sample mean is consistent as an estimator of the first parameter (the population mean) of a normal distribution. We know this because the MSE is the sum of the bias squared and the variance. As <span class="math inline">\(n\)</span> increases, variance goes to zero (because <span class="math inline">\(\frac{\sigma^2}{n}\)</span>). And we already showed (in ex. 6-1-2) that at large <em>n</em>, the bias of the sample mean is zero (this is also true at small <em>n</em>).</li>
+</ol>
+<ul>
+<li>The first parameter of a normal distribution is also its expectation - so can we extend the sample mean as a consistent estimator of any distribution, as long as it has a finite variance? Yes, because the law of large numbers applies to any distribution. See Edge explanation.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Use simulations to show that the sample median is a consistent estimator of the first parameter of a normal distribution. We already know that the sample median is unbiased, so the following simulations focus on the variance.</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">library</span>(stfspack)</a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb12-3" title="3">n_sims &lt;-<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb12-4" title="4">n_samps &lt;-<span class="st"> </span><span class="dv">25</span></a>
+<a class="sourceLine" id="cb12-5" title="5"></a>
+<a class="sourceLine" id="cb12-6" title="6">get_var_of_median &lt;-<span class="st"> </span><span class="cf">function</span>(n_sims, n_samps){</a>
+<a class="sourceLine" id="cb12-7" title="7">  s.mat &lt;-<span class="st"> </span><span class="kw">mat.samps</span>(<span class="dt">n =</span> n_samps, <span class="dt">nsim =</span> n_sims)</a>
+<a class="sourceLine" id="cb12-8" title="8">  ests.median &lt;-<span class="st"> </span><span class="kw">apply</span>(s.mat, <span class="dv">1</span>, median)</a>
+<a class="sourceLine" id="cb12-9" title="9">  var_of_medians &lt;-<span class="st"> </span><span class="kw">var</span>(ests.median)</a>
+<a class="sourceLine" id="cb12-10" title="10">  <span class="kw">return</span>(var_of_medians)</a>
+<a class="sourceLine" id="cb12-11" title="11">}</a>
+<a class="sourceLine" id="cb12-12" title="12"></a>
+<a class="sourceLine" id="cb12-13" title="13">n_samps_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">500</span>) </a>
+<a class="sourceLine" id="cb12-14" title="14">vector_length &lt;-<span class="st"> </span><span class="kw">length</span>(n_samps_vector)</a>
+<a class="sourceLine" id="cb12-15" title="15">var_vector &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, vector_length)</a>
+<a class="sourceLine" id="cb12-16" title="16"></a>
+<a class="sourceLine" id="cb12-17" title="17"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>vector_length){</a>
+<a class="sourceLine" id="cb12-18" title="18">  var_vector[i] &lt;-<span class="st"> </span><span class="kw">get_var_of_median</span>(n_sims, <span class="dt">n_samps =</span> n_samps_vector[i])</a>
+<a class="sourceLine" id="cb12-19" title="19">}</a>
+<a class="sourceLine" id="cb12-20" title="20"></a>
+<a class="sourceLine" id="cb12-21" title="21"><span class="kw">plot</span>(n_samps_vector, var_vector, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, </a>
+<a class="sourceLine" id="cb12-22" title="22">     <span class="dt">xlab =</span> <span class="st">&quot;Number of samples&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variance of medians&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>) </a>
+<a class="sourceLine" id="cb12-23" title="23"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;gray&quot;</span>)</a></code></pre></div>
+<p><img src="06_point-estimators_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Considering <span class="math inline">\(n\)</span> i.i.d. random variables <span class="math inline">\(X_i\)</span>, which are normally distributed with a mean <span class="math inline">\(\theta\)</span> and variance of 1 (<span class="math inline">\(X_i \sim N(\theta, 1)\)</span>), are the following estimators (i) unbiased; and (ii) consistent?</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><p>The sample mean is unbiased and consistent, we have shown these already.</p></li>
+<li><p>A shifted sample mean will be biased (e.g., because we are adding a constant to each value prior to taking the average), and will not be consistent because the mean squared error will never approach 0 (because it is biased). Also see Edge’s explanation.</p></li>
+<li><p>The first observation, <span class="math inline">\(X_1\)</span> will be an unbiased estimator because it has an expectation of <span class="math inline">\(\theta\)</span>. It has a variance of 1, and thus it is not consistent (because the variance does not approach zero as the number of samples increases).</p></li>
+<li><p>A ‘shrunk’ sample mean is biased and consistent; see handwritten notes for solution.</p></li>
+</ol>
+<ol start="4" style="list-style-type: decimal">
+<li>Prove that if Eq. 6.7 holds, then Eq. 6.6 also holds. SKIPPED; see Edge for solution.</li>
+</ol>
 
+</div>
 </div>
 </div>
             </section>

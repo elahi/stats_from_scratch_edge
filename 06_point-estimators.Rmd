@@ -148,3 +148,69 @@ $$
 
 ## Consistency
 
+As we collect more data, it would be preferable for the estimator to get closer and closer to the estimand; that is, we wish the estimator to be *consistent*. A consistent estimator is one that converges in probability to the true value, and is defined formally as:
+
+$$
+\begin{aligned}
+lim_{n \rightarrow \infty} \text{P}(|\hat{\theta}_n - \theta| > \delta) = 0
+\end{aligned}
+$$
+
+where $\delta$ is any positive number. 
+
+It turns out (if we complete a proof) that an estimator $\hat{\theta}_n$ is consistent if: 
+
+$$
+\begin{aligned}
+lim_{n \rightarrow \infty} \text{MSE}(\hat{\theta}_n) = 0
+\end{aligned}
+$$
+
+that is, an estimator is consistent if the mean squared error goes to zero as the sample size increases to infinity. Both biased and unbiased estimators can be consistent, Edge's figure 6.2 demonstrates this nicely. 
+
+### Exercise set 6-4
+
+1. Yes, the sample mean is consistent as an estimator of the first parameter (the population mean) of a normal distribution. We know this because the MSE is the sum of the bias squared and the variance. As $n$ increases, variance goes to zero (because $\frac{\sigma^2}{n}$). And we already showed (in ex. 6-1-2) that at large *n*, the bias of the sample mean is zero (this is also true at small *n*). 
+
+- The first parameter of a normal distribution is also its expectation - so can we extend the sample mean as a consistent estimator of any distribution, as long as it has a finite variance? Yes, because the law of large numbers applies to any distribution. See Edge explanation. 
+
+2. Use simulations to show that the sample median is a consistent estimator of the first parameter of a normal distribution. We already know that the sample median is unbiased, so the following simulations focus on the variance. 
+
+```{r}
+library(stfspack)
+library(tidyverse)
+n_sims <- 1000
+n_samps <- 25
+
+get_var_of_median <- function(n_sims, n_samps){
+  s.mat <- mat.samps(n = n_samps, nsim = n_sims)
+  ests.median <- apply(s.mat, 1, median)
+  var_of_medians <- var(ests.median)
+  return(var_of_medians)
+}
+
+n_samps_vector <- c(5, 10, 25, 50, 100, 200, 500) 
+vector_length <- length(n_samps_vector)
+var_vector <- rep(NA, vector_length)
+
+for(i in 1:vector_length){
+  var_vector[i] <- get_var_of_median(n_sims, n_samps = n_samps_vector[i])
+}
+
+plot(n_samps_vector, var_vector, col = "red", pch = 20, 
+     xlab = "Number of samples", ylab = "Variance of medians", type = "b") 
+abline(h = 0, lty = 2, col = "gray")
+
+```
+
+3. Considering $n$ i.i.d. random variables $X_i$, which are normally distributed with a mean $\theta$ and variance of 1 ($X_i \sim N(\theta, 1)$), are the following estimators (i) unbiased; and (ii) consistent?
+
+  a. The sample mean is unbiased and consistent, we have shown these already. 
+
+b. A shifted sample mean will be biased (e.g., because we are adding a constant to each value prior to taking the average), and will not be consistent because the mean squared error will never approach 0 (because it is biased). Also see Edge's explanation. 
+
+c. The first observation, $X_1$ will be an unbiased estimator because it has an expectation of $\theta$. It has a variance of 1, and thus it is not consistent (because the variance does not approach zero as the number of samples increases). 
+
+d. A 'shrunk' sample mean is biased and consistent; see handwritten notes for solution. 
+
+4. Prove that if Eq. 6.7 holds, then Eq. 6.6 also holds. SKIPPED; see Edge for solution. 
