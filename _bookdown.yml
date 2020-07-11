@@ -2,6 +2,6 @@ book_filename: "stats_scratch_edge"
 chapter_name: "Chapter "
 repo: https://github.com/elahi/stats_from_scratch_edge
 output_dir: docs
-rmd_files: ["index.Rmd", "01_intro.Rmd", "02_r-eda.Rmd", "03_best-fit-line.Rmd", "04_probability.Rmd", "05_random-variables.Rmd", "06_point-estimators.Rmd"]
+rmd_files: ["index.Rmd", "01_intro.Rmd", "02_r-eda.Rmd", "03_best-fit-line.Rmd", "04_probability.Rmd", "05_random-variables.Rmd", "06_point-estimators.Rmd", "07_interval-estimation.Rmd"]
 clean: [packages.bib, bookdown.bbl]
 new_session: yes

@@ -1,0 +1,95 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Interval estimation and inference {#intervals}
+
+```{r load-packages, include = FALSE}
+library(tidyverse)
+library(stfspack)
+theme_set(theme_bw(base_size = 12) + 
+            theme(strip.background = element_blank(), 
+                  panel.grid = element_blank())) 
+```
+
+A single estimate is not enough, we need uncertainty. This chapter is about estimating intervals to go with our point estimates, and the related procedures of hypothesis testing (i.e., statistical inference). 
+
+## Standard error
+
+The variance of an estimator, $\text{Var}(\hat{\theta}_n)$, describes the spread of the estimator's distribution. We define it in the same way that we defined the variance of a random variable:
+
+$$
+\begin{aligned}
+\text{Var}(\hat{\theta}_n) =& ~ E[(\hat{\theta}_n(D) - E[\hat{\theta}_n(D)])^2] \\
+=& ~ E[(\hat{\theta}_n(D)^2] - (E[\hat{\theta}_n(D)])^2 \\
+\end{aligned}
+$$
+Compared to the expectation, or mean, of the estimator, the variance is in squared units. So we'd prefer to take the square root of the variance ($\sigma^2$), otherwise known as the standard deviation ($\sigma$). Rather than call the standard deviation of an estimator's distribution the standard deviation, we call it the standard error instead:
+
+$$
+\begin{aligned}
+\text{SE}(\hat{\theta}_n) =& \sqrt{\text{Var}(\hat{\theta}_n)} \\
+\end{aligned}
+$$
+
+This is confusing, but to paraphrase Edge:
+
+> the term 'standard error' is used to describe the measure of spread of an *estimator's* sampling distribution, whereas the term 'standard deviation' is reserved to describe the spread in distribution of the *data*.
+
+For example, when we describe a dataset using the mean, median, or mode - we are applying an estimator (a function) to the data to get a point estimate of the data. But in your introductory stats class, you probably did not refer to these functions as estimators - rather, they are often described as *summary statistics*. Then, to describe the uncertainty around the mean, we can calculate the standard error of the mean, which again, is just the standard deviation of the distribution of sample means. This distribution of sample means is known as a *sampling distribution*, but this term is not restricted to the mean - it applies to any estimator. Phew. Cogitate on this until it makes sense. 
+
+### Exercise set 7-1
+
+1. See Edge solution or handwritten notes.
+
+  d. If we instead use the median, instead of the mean, as the estimator of $\theta$, $text{SE}(\hat{\theta}_n)$ is 0.25 (higher than the standard erro of the mean for 25 samples, 0.2). 
+  
+```{r}
+# the value of mu does not affect the answer
+# (adding a constant to a random variable does not affect its variance)
+mu <- 0 
+stdev <- 1
+n <- 25 
+n_sims <- 10000 
+set.seed(101)
+s.mat <- mat.samps(n = n, nsim = n_sims)
+ests.median <- apply(s.mat, 1, median)
+sd(ests.median)
+# Confirming the answer to part c:
+ests.mean <- apply(s.mat, 1, mean)
+sd(ests.mean)
+```
+
+2. See Edge solution for a cogent explanation.
+
+  a. Under a normal distribution, the probability that the estimate (still a random variable) lies between plus and minus 1 SE of the mean is ~68% - we can use old-school look up tables or the `pnorm` function in R. 
+  
+```{r}
+mu <- 0
+w <- 1 # this is the standard error of the mean
+# Pnorm gives the cumulative probability distribution, where q is the z-score
+# One tailed probabilities
+pnorm(q = 1, mean = mu, sd = w)
+pnorm(q = -1, mean = mu, sd = w)
+# To get the probability between the upper and lower w:
+pnorm(q = 1, mean = mu, sd = w) - pnorm(q = -1, mean = mu, sd = w)
+```
+
+  b. Under a normal distribution, the probability that the standard error lies between plus and minus 2 SE of the mean is ~95% - we can use old-school look up tables or the `pnorm` function in R. 
+
+```{r}
+mu <- 0
+w <- 0.5 # this is the standard error of the mean
+# Pnorm gives the cumulative probability distribution, where q is the z-score
+# One tailed probabilities
+pnorm(q = 1, mean = mu, sd = w) # note that this value of q is twice w (the SE)
+pnorm(q = -1, mean = mu, sd = w)
+# To get the probability between the upper and lower w:
+pnorm(q = 1, mean = mu, sd = w) - pnorm(q = -1, mean = mu, sd = w)
+```
