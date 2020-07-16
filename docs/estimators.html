@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-07-06" />
+<meta name="date" content="2020-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="randomvars.html"/>
-
+<link rel="next" href="intervals.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -233,6 +233,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6.8" data-path="estimators.html"><a href="estimators.html#estimators-for-simple-linear-regression"><i class="fa fa-check"></i><b>6.8</b> Estimators for simple linear regression</a><ul>
 <li class="chapter" data-level="6.8.1" data-path="estimators.html"><a href="estimators.html#exercise-set-6-9"><i class="fa fa-check"></i><b>6.8.1</b> Exercise set 6-9</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="intervals.html"><a href="intervals.html"><i class="fa fa-check"></i><b>7</b> Interval estimation and inference</a><ul>
+<li class="chapter" data-level="7.1" data-path="intervals.html"><a href="intervals.html#standard-error"><i class="fa fa-check"></i><b>7.1</b> Standard error</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="intervals.html"><a href="intervals.html#exercise-set-7-1"><i class="fa fa-check"></i><b>7.1.1</b> Exercise set 7-1</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="intervals.html"><a href="intervals.html#confidence-intervals"><i class="fa fa-check"></i><b>7.2</b> Confidence intervals</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="intervals.html"><a href="intervals.html#exercise-set-7-2"><i class="fa fa-check"></i><b>7.2.1</b> Exercise set 7-2</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -530,7 +538,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     c(rnorm(n - ncontam, mu, sigma), rnorm(ncontam, contam.mu, 
 ##         contam.sigma))
 ## }
-## &lt;bytecode: 0x7fb742236748&gt;
+## &lt;bytecode: 0x7fa5e746d858&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1">dat &lt;-<span class="st"> </span><span class="kw">mat.samps</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">nsim =</span> <span class="dv">1000</span>, <span class="dt">rx =</span> rnorm.contam, </a>
 <a class="sourceLine" id="cb189-2" title="2">                 <span class="dt">contam.p =</span> <span class="fl">0.1</span>, <span class="dt">contam.mu =</span> <span class="dv">300</span>, <span class="dt">contam.sigma =</span> <span class="dv">1</span>)</a>
@@ -567,7 +575,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     y &lt;- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## &lt;bytecode: 0x7fb73f32be80&gt;
+## &lt;bytecode: 0x7fa5e3077a80&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" title="1">ests &lt;-<span class="st"> </span><span class="kw">sim.lm.ests</span>(<span class="dt">n =</span> <span class="dv">50</span>, <span class="dt">nsim =</span> <span class="dv">1000</span>, <span class="dt">a =</span> <span class="dv">3</span>, <span class="dt">b =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb200-2" title="2"><span class="kw">colMeans</span>(ests)</a></code></pre></div>
@@ -791,7 +799,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     ymat &lt;- matrix(y, nrow = nsim)
 ##     list(xmat, ymat)
 ## }
-## &lt;bytecode: 0x7fb73e19a3f8&gt;
+## &lt;bytecode: 0x7fa5e2a57b98&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" title="1">n &lt;-<span class="st"> </span><span class="dv">50</span></a>
 <a class="sourceLine" id="cb221-2" title="2">nsims &lt;-<span class="st"> </span><span class="dv">1000</span></a>
@@ -844,8 +852,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="randomvars.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="randomvars.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intervals.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
