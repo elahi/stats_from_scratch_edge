@@ -305,4 +305,207 @@ my_z <- test_value / my_se
 ## [1] 0.04302479
 ```
   
+## Frequentist inference I: null hypotheses, test statistics, and *p* values
 
+Null hypothesis
+
+Test statistic
+
+Hypothesis test
+
+### Exercise set 7-3
+
+1. Three reasons why the outcome of the hypothesis test is indecisive about the truth of the theory (that smaller people will be attracted to hotter climates because smaller bodies shed heat more efficiently):
+
+  - Arizona may not be representative of hotter climates (i.e., need different geographic locations)
+  
+  - women may be different from men, and thus the result does not apply to people generally
+  
+  - the test does not let us say anything about the mechanism (heat shedding), but only the pattern (size variation)
+  
+  - see Edge for a general explanation that touches on some of the above
+
+2. Average nail length is 100 mm. SD is 2 mm. I measure 4 nails.
+
+  a. SE = sd / sqrt(n); SE = 2 / sqrt(4) = 1
+  b. 1.96 * SE; 95% CI for $\mu$ is (98, 102)
+  c. Anything less than 98 or more than 102, following from previous answer. Or, more precisely:
+  
+
+```r
+# left tail
+qnorm(0.025, mean = 100, sd = 1)
+```
+
+```
+## [1] 98.04004
+```
+
+```r
+# right tail
+qnorm(0.975, mean = 100, sd = 1)
+```
+
+```
+## [1] 101.96
+```
+ 
+  d. Simulating data assuming the null hypothesis is true. 
+  
+
+```r
+twotailed.p.normal <- function(x.bar, mu, stand.err){
+  abs.diff <- abs(x.bar - mu)
+  2 * pnorm(mu - abs.diff, mean = mu, sd = stand.err)
+}
+
+n <- 10000
+x <- mat.samps(n = 4, nsim = n, rx = rnorm, mean = 100, sd = 2)
+x_mean <- apply(x, MARGIN = 1, FUN = mean)
+x_p <- sapply(x_mean, FUN = twotailed.p.normal, mu = 100, stand.err = 1)
+hist(x_p)
+```
+
+<img src="07_interval-estimation_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+
+```r
+# Values less than 0.05
+length(x_p[x_p < 0.05]) / n
+```
+
+```
+## [1] 0.0516
+```
+
+```r
+mean(x_p < 0.05)
+```
+
+```
+## [1] 0.0516
+```
+
+```r
+# Values less than 0.1
+length(x_p[x_p < 0.1]) / n
+```
+
+```
+## [1] 0.0988
+```
+
+  e. Simulating data assuming the null hypothesis is false (mean = 101):
+  
+
+```r
+twotailed.p.normal <- function(x.bar, mu, stand.err){
+  abs.diff <- abs(x.bar - mu)
+  2 * pnorm(mu - abs.diff, mean = mu, sd = stand.err)
+}
+
+n <- 10000
+x <- mat.samps(n = 4, nsim = n, rx = rnorm, mean = 101, sd = 2) # CHANGED
+x_mean <- apply(x, MARGIN = 1, FUN = mean)
+x_p <- sapply(x_mean, FUN = twotailed.p.normal, mu = 100, stand.err = 1)
+hist(x_p)
+```
+
+<img src="07_interval-estimation_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+
+```r
+# Values less than 0.05
+length(x_p[x_p < 0.05]) / n
+```
+
+```
+## [1] 0.166
+```
+
+```r
+mean(x_p < 0.05) # same result!
+```
+
+```
+## [1] 0.166
+```
+
+```r
+# Values less than 0.1
+length(x_p[x_p < 0.1]) / n
+```
+
+```
+## [1] 0.2596
+```
+
+  f. Simulating data assuming the null hypothesis is false (mean = 102).
+
+
+```r
+twotailed.p.normal <- function(x.bar, mu, stand.err){
+  abs.diff <- abs(x.bar - mu)
+  2 * pnorm(mu - abs.diff, mean = mu, sd = stand.err)
+}
+
+n <- 10000
+x <- mat.samps(n = 4, nsim = n, rx = rnorm, mean = 102, sd = 2) # CHANGED
+x_mean <- apply(x, MARGIN = 1, FUN = mean)
+x_p <- sapply(x_mean, FUN = twotailed.p.normal, mu = 100, stand.err = 1)
+hist(x_p)
+```
+
+<img src="07_interval-estimation_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+
+```r
+# Values less than 0.05
+length(x_p[x_p < 0.05]) / n
+```
+
+```
+## [1] 0.5088
+```
+
+```r
+# Values less than 0.1
+length(x_p[x_p < 0.1]) / n
+```
+
+```
+## [1] 0.6352
+```
+
+  g. Simulating data assuming the null hypothesis is false (mean = 101, n = 16). This means the standard error is now 2 / sqrt(16) = 0.5
+
+
+```r
+twotailed.p.normal <- function(x.bar, mu, stand.err){
+  abs.diff <- abs(x.bar - mu)
+  2 * pnorm(mu - abs.diff, mean = mu, sd = stand.err)
+}
+
+n <- 10000
+x <- mat.samps(n = 16, nsim = n, rx = rnorm, mean = 101, sd = 2) # CHANGED
+x_mean <- apply(x, MARGIN = 1, FUN = mean)
+x_p <- sapply(x_mean, FUN = twotailed.p.normal, mu = 100, stand.err = 0.5)
+hist(x_p)
+```
+
+<img src="07_interval-estimation_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+
+```r
+# Values less than 0.05
+length(x_p[x_p < 0.05]) / n
+```
+
+```
+## [1] 0.5109
+```
+
+```r
+# Values less than 0.1
+length(x_p[x_p < 0.1]) / n
+```
+
+```
+## [1] 0.6351
+```
