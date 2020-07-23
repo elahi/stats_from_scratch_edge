@@ -338,3 +338,24 @@ length(x_p[x_p < 0.05]) / n
 # Values less than 0.1
 length(x_p[x_p < 0.1]) / n
 ```
+
+## Frequentist inference II: alternative hypotheses and the rejection framework
+
+### Exercise set 7-4
+
+All on paper. 
+
+## Connecting hypothesis tests and confidence intervals
+
+## NHST and the abuse of tests
+
+### Exercise set 7-5
+
+## Frequentist inference III: power
+
+### Exercise set 7-6
+
+## Putting it together: what happens when the sample size increases?
+
+## Chapter summary
+
