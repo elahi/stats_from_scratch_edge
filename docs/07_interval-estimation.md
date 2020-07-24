@@ -211,7 +211,7 @@ d %>%
 
 In this set of simulations, the confidence intervals estimated from 46 of 50 (92%) of the simulations overlapped with the true value of $\theta$, 0. 
 
-I am still struggling with how to articulate the meaning of an already calculated confidence interval that is consistent with the frequentist philosophy. Even after reading the explanation in Edge (and many other explanations) I do not, in my core, feel that I understand it. So you're not alone if you don't quite get it. But if you do, please, let's chat!
+I still struggle with how to articulate the meaning of an already calculated confidence interval that is consistent with the frequentist philosophy. Even after reading the explanation in Edge, I am left unsatisfied. Perhaps we can consider the calculated confidence interval as *a future confidence interval with the same upper and lower bounds that will cover the estimand*? So you're not alone if you don't quite get it. 
 
 ### Exercise set 7-2
 
@@ -527,14 +527,6 @@ All on paper.
 
 ```r
 ps <- many.outcome.sim(n = 20, nsim = 10000, n.dv = 7, correl = 0.7)
-str(ps)
-```
-
-```
-##  num [1:10000, 1:7] 0.4194 0.679 0.2968 0.986 0.0614 ...
-```
-
-```r
 sigs <- ps < 0.05
 colMeans(sigs)
 ```
@@ -560,14 +552,6 @@ mean(rowMeans(sigs) > 0)
 
 ```r
 ps <- many.outcome.sim(n = 20, nsim = 10000, n.dv = 7, correl = 0.7)
-str(ps)
-```
-
-```
-##  num [1:10000, 1:7] 0.869 0.787 0.701 0.216 0.661 ...
-```
-
-```r
 sigs <- ps < 0.05
 colMeans(sigs)
 ```
@@ -587,7 +571,7 @@ mean(rowMeans(sigs) > 0)
 
   - n = 20, n.dv = 7, correl = 0.35: 27% of simulations have > 1 significant result. 
   
-    - n = 10, n.dv = 7, correl = 0.7: 18% of simulations have > 1 significant result. 
+  - n = 10, n.dv = 7, correl = 0.7: 18% of simulations have > 1 significant result. 
 
 So in summary:
 
@@ -665,21 +649,29 @@ d
 ##    0.300000    1.470967    0.057900
 ```
 
-d = 0.1, n = 250: estimated d = 0.16, power = 0.35
-d = 0.1, n = 50: estimated d = 0.32, power = 0.11
-d = 0.1, n = 25: estimated d = 0.39, power = 0.08
-d = 0.1, n = 5: estimated d = 0.55, power = 0.05
+d = 0.1, n = 250: estimated d = 0.16, power = 0.35  
 
-d = 0.5, n = 500: estimated d = 0.50, power = 1.00
-d = 0.5, n = 50: estimated d = 0.52, power = 0.94
-d = 0.5, n = 25: estimated d = 0.60, power = 0.70
-d = 0.5, n = 5: estimated d = 1.12, power = 0.19
+d = 0.1, n = 50: estimated d = 0.32, power = 0.11  
+
+d = 0.1, n = 25: estimated d = 0.39, power = 0.08  
+
+d = 0.1, n = 5: estimated d = 0.55, power = 0.05  
+
+d = 0.5, n = 500: estimated d = 0.50, power = 1.00  
+
+d = 0.5, n = 50: estimated d = 0.52, power = 0.94  
+
+d = 0.5, n = 25: estimated d = 0.60, power = 0.70  
+
+d = 0.5, n = 5: estimated d = 1.12, power = 0.19  
 
   b. 
 
 Plotting estimated effect size vs sample size. 
 
 Plotting the size of the winner's curse effect
+
+
 
 
 ```r
@@ -695,23 +687,20 @@ for(i in 1:length(n_vector)){
 }
 ```
 
-<img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-1.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-2.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-3.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-4.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-5.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-6.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-7.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-8.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-9.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-10.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-11.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-12.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-13.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-14.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-15.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-16.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-17.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-18.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-19.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-20.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-21.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-22.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-23.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-24.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-25.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-26.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-27.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-28.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-29.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-30.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-31.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-32.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-33.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-34.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-35.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-36.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-37.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-38.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-39.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-40.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-41.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-42.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-43.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-44.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-45.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-46.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-47.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-48.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-49.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-50.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-51.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-52.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-53.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-54.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-55.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-56.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-57.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-58.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-59.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-60.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-61.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-62.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-63.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-64.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-65.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-66.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-67.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-68.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-69.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-70.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-71.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-72.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-73.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-74.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-75.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-76.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-77.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-78.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-79.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-80.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-81.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-82.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-83.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-84.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-85.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-86.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-87.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-88.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-89.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-90.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-91.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-92.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-93.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-94.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-95.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-96.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-97.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-98.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-99.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-100.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-101.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-102.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-103.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-104.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-105.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-106.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-107.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-108.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-109.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-110.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-111.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-112.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-113.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-114.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-115.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-116.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-117.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-118.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-119.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-120.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-121.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-122.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-123.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-124.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-125.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-126.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-127.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-128.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-129.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-130.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-131.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-132.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-133.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-134.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-135.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-136.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-137.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-138.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-139.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-140.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-141.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-142.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-143.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-144.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-145.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-146.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-147.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-148.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-149.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-150.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-151.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-152.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-153.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-154.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-155.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-156.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-157.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-158.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-159.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-160.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-161.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-162.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-163.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-164.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-165.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-166.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-167.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-168.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-169.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-170.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-171.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-172.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-173.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-174.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-175.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-176.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-177.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-178.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-179.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-180.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-181.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-182.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-183.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-184.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-185.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-186.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-187.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-188.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-189.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-190.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-191.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-192.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-193.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-194.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-195.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-196.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-197.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-198.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-199.png" width="672" /><img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-200.png" width="672" />
 
 ```r
 plot(n_vector, est_ds, type = "l", xlab = "Sample size (n)", ylab = "Estimated d")
 lines(n_vector, rep(true_d, length(n_vector)), lty = 2)
 ```
 
-<img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-201.png" width="672" />
+<img src="07_interval-estimation_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 ```r
 curse_size <- est_ds - true_d
 plot(pows, curse_size, type = "l", xlab = "Power", ylab = "Winner's curse effect")
 ```
 
-<img src="07_interval-estimation_files/figure-html/unnamed-chunk-20-202.png" width="672" />
-
-
+<img src="07_interval-estimation_files/figure-html/unnamed-chunk-22-2.png" width="672" />
 
 ## Putting it together: what happens when the sample size increases?
 

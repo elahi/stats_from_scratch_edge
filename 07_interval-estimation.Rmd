@@ -167,7 +167,7 @@ d %>%
 
 In this set of simulations, the confidence intervals estimated from 46 of 50 (92%) of the simulations overlapped with the true value of $\theta$, 0. 
 
-I am still struggling with how to articulate the meaning of an already calculated confidence interval that is consistent with the frequentist philosophy. Even after reading the explanation in Edge (and many other explanations) I do not, in my core, feel that I understand it. So you're not alone if you don't quite get it. But if you do, please, let's chat!
+I still struggle with how to articulate the meaning of an already calculated confidence interval that is consistent with the frequentist philosophy. Even after reading the explanation in Edge, I am left unsatisfied. Perhaps we can consider the calculated confidence interval as *a future confidence interval with the same upper and lower bounds that will cover the estimand*? So you're not alone if you don't quite get it. 
 
 ### Exercise set 7-2
 
@@ -355,7 +355,6 @@ All on paper.
 
 ```{r}
 ps <- many.outcome.sim(n = 20, nsim = 10000, n.dv = 7, correl = 0.7)
-str(ps)
 sigs <- ps < 0.05
 colMeans(sigs)
 mean(rowMeans(sigs) > 0)
@@ -369,7 +368,6 @@ mean(rowMeans(sigs) > 0)
   
 ```{r}
 ps <- many.outcome.sim(n = 20, nsim = 10000, n.dv = 7, correl = 0.7)
-str(ps)
 sigs <- ps < 0.05
 colMeans(sigs)
 mean(rowMeans(sigs) > 0)
@@ -378,7 +376,7 @@ mean(rowMeans(sigs) > 0)
 
   - n = 20, n.dv = 7, correl = 0.35: 27% of simulations have > 1 significant result. 
   
-    - n = 10, n.dv = 7, correl = 0.7: 18% of simulations have > 1 significant result. 
+  - n = 10, n.dv = 7, correl = 0.7: 18% of simulations have > 1 significant result. 
 
 So in summary:
 
@@ -429,15 +427,21 @@ d <- wincurse.sim.1sz(n = 1, nsim = 10000, d = 0.3, lev = 0.05)
 d
 ```
 
-d = 0.1, n = 250: estimated d = 0.16, power = 0.35
-d = 0.1, n = 50: estimated d = 0.32, power = 0.11
-d = 0.1, n = 25: estimated d = 0.39, power = 0.08
-d = 0.1, n = 5: estimated d = 0.55, power = 0.05
+d = 0.1, n = 250: estimated d = 0.16, power = 0.35  
 
-d = 0.5, n = 500: estimated d = 0.50, power = 1.00
-d = 0.5, n = 50: estimated d = 0.52, power = 0.94
-d = 0.5, n = 25: estimated d = 0.60, power = 0.70
-d = 0.5, n = 5: estimated d = 1.12, power = 0.19
+d = 0.1, n = 50: estimated d = 0.32, power = 0.11  
+
+d = 0.1, n = 25: estimated d = 0.39, power = 0.08  
+
+d = 0.1, n = 5: estimated d = 0.55, power = 0.05  
+
+d = 0.5, n = 500: estimated d = 0.50, power = 1.00  
+
+d = 0.5, n = 50: estimated d = 0.52, power = 0.94  
+
+d = 0.5, n = 25: estimated d = 0.60, power = 0.70  
+
+d = 0.5, n = 5: estimated d = 1.12, power = 0.19  
 
   b. 
 
@@ -445,7 +449,20 @@ Plotting estimated effect size vs sample size.
 
 Plotting the size of the winner's curse effect
 
-```{r, results = "hide"}
+```{r, include = FALSE, cache = TRUE}
+n_vector <- seq(1, 100, by = 1)
+true_d <- 0.3
+est_ds <- numeric(length(n_vector))
+pows <- numeric(length(n_vector))
+
+for(i in 1:length(n_vector)){
+  wc <- wincurse.sim.1sz(n = n_vector[i], nsim = 10000, d = true_d)
+  est_ds[i] <- wc[2]
+  pows[i] <- wc[3]
+}
+```
+
+```{r, eval = FALSE, echo = TRUE}
 n_vector <- seq(1, 100, by = 1)
 true_d <- 0.3
 est_ds <- numeric(length(n_vector))
