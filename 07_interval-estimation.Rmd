@@ -351,6 +351,56 @@ All on paper.
 
 ### Exercise set 7-5
 
+1. 
+
+```{r}
+ps <- many.outcome.sim(n = 20, nsim = 10000, n.dv = 7, correl = 0.7)
+str(ps)
+sigs <- ps < 0.05
+colMeans(sigs)
+mean(rowMeans(sigs) > 0)
+```
+
+  - n = 20, n.dv = 7, correl = 0.7: 18% of simulations have > 1 significant result. 
+  
+  a. There is a significant effect about 5% of the time for each dependent variable. 18% of the simulations have at least one significant result.
+
+  b. Changing dependent variables (n.dv) and correlation:
+  
+```{r}
+ps <- many.outcome.sim(n = 20, nsim = 10000, n.dv = 7, correl = 0.7)
+str(ps)
+sigs <- ps < 0.05
+colMeans(sigs)
+mean(rowMeans(sigs) > 0)
+```
+  - n = 20, n.dv = 15, correl = 0.7: 26% of simulations have > 1 significant result. 
+
+  - n = 20, n.dv = 7, correl = 0.35: 27% of simulations have > 1 significant result. 
+  
+    - n = 10, n.dv = 7, correl = 0.7: 18% of simulations have > 1 significant result. 
+
+So in summary:
+
+  - Increasing the # of dependent variables increases the probability of Type 1 error
+  
+  - Decreasing the correlation between variables increases the probability of Type 1 error
+  
+  - Changing the size of each group does not change the probability of Type 1 error
+
+
+2. Serial testing
+
+```{r}
+ps <- serial.testing.sim(ns = c(20, 30, 40, 50), nsim = 10000)
+ps <- serial.testing.sim(ns = seq(20, 200, by = 10), nsim = 10000)
+sigs <- ps < 0.05
+colMeans(sigs)
+mean(rowMeans(sigs) > 0)
+```
+
+If we sample at 4 times (starting with 20, ending with 50 people), there is a 12% change that at least one of those time points is significant. If we sample 19 times (20 to 200), then there is a 22% change one of the time points is significant.
+
 ## Frequentist inference III: power
 
 ### Exercise set 7-6
