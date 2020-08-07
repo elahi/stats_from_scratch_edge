@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-07-15" />
+<meta name="date" content="2020-08-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -306,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>Empirical distribution function: summarizes all the information that the data provide about a random variable’s distribution</p>
 </blockquote>
-<p>The empirical distribution function xx gives the proportion of <em>observations in a sample</em> that are less than or equal to a constant <span class="math inline">\(z\)</span>:</p>
+<p>The empirical distribution function <span class="math inline">\(\hat{F}_n(z)\)</span> gives the proportion of <em>observations in a sample</em> that are less than or equal to a constant <span class="math inline">\(z\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \hat{F}_n(z) =&amp; \frac{1}{n} \sum_{i = 1}^n I_{X_i \leq z}
@@ -321,24 +321,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: lower-alpha">
 <li>As the sample size increases, the ECDF approximates the CDF of the normal distribution.</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">n &lt;-<span class="st"> </span><span class="dv">500</span></a>
-<a class="sourceLine" id="cb1-2" title="2">x.vals &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">length.out =</span> <span class="dv">10000</span>)</a>
-<a class="sourceLine" id="cb1-3" title="3">Fx &lt;-<span class="st"> </span><span class="kw">pnorm</span>(x.vals, <span class="dv">0</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw">plot</span>(x.vals, Fx, <span class="dt">xlab =</span> <span class="st">&quot;z&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;F(z)&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a>
-<a class="sourceLine" id="cb1-5" title="5">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="kw">lines</span>(<span class="kw">ecdf</span>(x), <span class="dt">verticals =</span> <span class="ot">TRUE</span>, <span class="dt">do.points =</span> <span class="ot">FALSE</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" title="1">n &lt;-<span class="st"> </span><span class="dv">500</span></a>
+<a class="sourceLine" id="cb299-2" title="2">x.vals &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">length.out =</span> <span class="dv">10000</span>)</a>
+<a class="sourceLine" id="cb299-3" title="3">Fx &lt;-<span class="st"> </span><span class="kw">pnorm</span>(x.vals, <span class="dv">0</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb299-4" title="4"><span class="kw">plot</span>(x.vals, Fx, <span class="dt">xlab =</span> <span class="st">&quot;z&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;F(z)&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a>
+<a class="sourceLine" id="cb299-5" title="5">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb299-6" title="6"><span class="kw">lines</span>(<span class="kw">ecdf</span>(x), <span class="dt">verticals =</span> <span class="ot">TRUE</span>, <span class="dt">do.points =</span> <span class="ot">FALSE</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Comparing an ECDF with a CDF for the Poisson distribution</li>
 </ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">set.seed</span>(<span class="dv">22</span>)</a>
-<a class="sourceLine" id="cb2-2" title="2">n &lt;-<span class="st"> </span><span class="dv">30</span></a>
-<a class="sourceLine" id="cb2-3" title="3">lambda &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb2-4" title="4">x.vals &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dt">by =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb2-5" title="5">Fx &lt;-<span class="st"> </span><span class="kw">ppois</span>(x.vals, <span class="dt">lambda =</span> lambda)</a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="kw">plot</span>(x.vals, Fx, <span class="dt">xlab =</span> <span class="st">&quot;z&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;F(z)&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;p&quot;</span>)</a>
-<a class="sourceLine" id="cb2-7" title="7">x &lt;-<span class="st"> </span><span class="kw">rpois</span>(n, <span class="dt">lambda =</span> lambda)</a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="kw">lines</span>(<span class="kw">ecdf</span>(x), <span class="dt">verticals =</span> <span class="ot">TRUE</span>, <span class="dt">do.points =</span> <span class="ot">FALSE</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" title="1"><span class="kw">set.seed</span>(<span class="dv">22</span>)</a>
+<a class="sourceLine" id="cb300-2" title="2">n &lt;-<span class="st"> </span><span class="dv">30</span></a>
+<a class="sourceLine" id="cb300-3" title="3">lambda &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb300-4" title="4">x.vals &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dt">by =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb300-5" title="5">Fx &lt;-<span class="st"> </span><span class="kw">ppois</span>(x.vals, <span class="dt">lambda =</span> lambda)</a>
+<a class="sourceLine" id="cb300-6" title="6"><span class="kw">plot</span>(x.vals, Fx, <span class="dt">xlab =</span> <span class="st">&quot;z&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;F(z)&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;p&quot;</span>)</a>
+<a class="sourceLine" id="cb300-7" title="7">x &lt;-<span class="st"> </span><span class="kw">rpois</span>(n, <span class="dt">lambda =</span> lambda)</a>
+<a class="sourceLine" id="cb300-8" title="8"><span class="kw">lines</span>(<span class="kw">ecdf</span>(x), <span class="dt">verticals =</span> <span class="ot">TRUE</span>, <span class="dt">do.points =</span> <span class="ot">FALSE</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>See handwritten notes.</li>
@@ -346,8 +346,161 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="semiparametric-point-estimation-using-the-method-of-moments" class="section level2">
 <h2><span class="header-section-number">8.1</span> Semiparametric point estimation using the method of moments</h2>
+<blockquote>
+<p>Methods of moments: a semiparametric approach to estimation<br />
+Method of maximum likelihood: a parametric approach to estimation</p>
+</blockquote>
+<p>Suppose <span class="math inline">\(X\)</span> is a random variable. The <span class="math inline">\(j\)</span>th <strong>moment</strong> of the distribution is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mu_j =&amp; E(X^j)
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(\mu\)</span> is used as the symbol for a moment. For example <span class="math inline">\(\mu_1 = E(X)\)</span>. It is easy to express the first moment of <span class="math inline">\(X\)</span> as an expression using <span class="math inline">\(X\)</span> - but what about <span class="math inline">\(\mu_2\)</span>?</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mu_2 =&amp; E(X^2)
+\end{aligned}
+\]</span></p>
+<p>Now we have expressed the second moment, <span class="math inline">\(\mu_2\)</span>, as the expectation of a new random variable, <span class="math inline">\(X^2\)</span>. At least this is how I interpret it. From my reading, I gather this is not so satisfying, because the second moment is then usually rearranged in the following way.</p>
+<p>First, we need to recall the definition of Var(<span class="math inline">\(X\)</span>):</p>
+<p><span class="math display">\[ 
+\begin{aligned}
+\text{Var}(X) = \text{E}(X^2) - [\text{E}(X)]^2 \\
+\end{aligned}
+\]</span></p>
+<p>So, if we rearrange we get:</p>
+<p><span class="math display">\[ 
+\begin{aligned}
+\text{E}(X^2) = \text{Var}(X) + [\text{E}(X)]^2 \\
+\end{aligned}
+\]</span></p>
+<p>We can continue on with 3rd, 4th, 5th, etc, moments. But expressing these in terms of <span class="math inline">\(X\)</span> is, I am guessing, a harder challenge. These additional moments describe further the probability distribution, but typically knowing the first and second moments is enough for practical purposes (our purposes). As an aside, the third moment gives us the <em>skewness</em>, and the fourth moment gives us the <em>kurtosis</em>, of the distribution. Finally, it is worth noting the notation for <em>a moment</em> - here I have used <span class="math inline">\(\mu\)</span>, becuase it is often used in statistics notes (that I found online). This can be confusing, because we often use <span class="math inline">\(\mu\)</span> for the population mean. But we won’t do that here, for clarity.</p>
+<p>So, let us say that <span class="math inline">\(X\)</span> follows a Normal(<span class="math inline">\(\theta\)</span>, <span class="math inline">\(\sigma^2\)</span>) distribution. In this case, we know that E(<span class="math inline">\(X\)</span>) = <span class="math inline">\(\theta\)</span>, and that Var(<span class="math inline">\(X\)</span>) = <span class="math inline">\(\sigma^2\)</span>. So we can express the first and second moments as:</p>
+<p><span class="math display">\[ 
+\begin{aligned}
+\mu_1 =&amp; ~ \text{E}(X) \\
+=&amp; ~ \theta \\
+\mu_2 =&amp; ~ \text{E}(X^2) \\
+=&amp; \text{Var}(X) + [\text{E}(X)]^2 \\
+=&amp; ~ \sigma^2 + \theta^2 \\
+\end{aligned}
+\]</span></p>
+<p>So we have expressed the moments in terms of the parameters of the distribution we are trying estimate. We can rearrange these, to express the <em>parameters</em> in terms of <span class="math inline">\(X\)</span> - which is exactly what we want to do, since we are trying to estimate <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\sigma^2\)</span>!</p>
+<p><span class="math display">\[ 
+\begin{aligned}
+\theta =&amp; ~ \text{E}(X) \\
+\sigma^2 =&amp; ~ \text{E}(X^2) - [\text{E}(X)]^2 \\
+\end{aligned}
+\]</span></p>
+<p>To paraphrase Edge, we can estimate the moments of arbitrary distributions (i.e., distributions that are not described by parameters) by following these steps:</p>
+<ol style="list-style-type: decimal">
+<li><p>Write the equations that give the moments of a random variable in terms of the parameters being estimated</p></li>
+<li><p>Solve the equations from (1) for the desired parameters, giving expressions for the parameters in terms of the moments</p></li>
+<li><p>Estimate the moments and plug the estimates into the expressions for the parameters from (2)</p></li>
+</ol>
+<blockquote>
+<p>Plug-in estimation: perhaps I’m oversimplifying here, but this sounds like awesome jargon for ‘calculate your estimator from data’. In other words, if you want the population mean - collect some data and calculate the mean. Then ‘plug that in’ to your population mean.</p>
+</blockquote>
+<p>We can express a plug-in estimator of the <span class="math inline">\(k\)</span>th moment of <span class="math inline">\(X\)</span>, E(<span class="math inline">\(X^j\)</span>) as the <span class="math inline">\(k\)</span>th <em>sample moment</em>:</p>
+<p><span class="math display">\[ 
+\begin{aligned}
+\overline{X^k} = \frac{1}{n} \sum_{i = 1}^n X_i^k
+\end{aligned}
+\]</span></p>
+<p>So to recap: a <em>moment</em> describes the random variable <span class="math inline">\(X\)</span>. A <em>sample moment</em> is an estimate of the moment using independent samples (<span class="math inline">\(X_1, X_2, X_3\)</span>) drawn from <span class="math inline">\(X\)</span>.</p>
 <div id="exercise-set-8-2" class="section level3">
 <h3><span class="header-section-number">8.1.1</span> Exercise set 8-2</h3>
+<ol style="list-style-type: decimal">
+<li>Supose <span class="math inline">\(X_1, X_2, ..., X_n\)</span> are I.I.D observations.</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>What is the plug-in estimator of the variance of <span class="math inline">\(X\)</span>?</li>
+</ol>
+<p><span class="math display">\[ 
+\begin{aligned}
+\sigma^2 =&amp; ~ \text{E}(X^2) - [\text{E}(X)]^2 \\
+\hat\sigma^2 =&amp; ~ \frac{1}{n} \sum_{i = 1}^n X_i^2 - [\frac{1}{n} \sum_{i = 1}^n X_i]^2 \\
+\end{aligned}
+\]</span>
+b. What is the plug-in estimator for the standard deviation of <span class="math inline">\(X\)</span>?</p>
+<p><span class="math display">\[ 
+\begin{aligned}
+\hat\sigma =&amp; ~ \sqrt{\frac{1}{n} \sum_{i = 1}^n X_i^2 - [\frac{1}{n} \sum_{i = 1}^n X_i]^2} \\
+\end{aligned}
+\]</span></p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>What is the plug-in estimator of the covariance of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>?</li>
+</ol>
+<p>Here is the formula for the covariance, as a reminder:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Cov}(X,Y) =&amp; ~ \text{E}([X - \text{E}(X)][Y - \text{E}(Y)]) \\
+                =&amp; ~ \text{E}(XY) - \text{E}(X)\text{E}(Y)
+\end{aligned}
+\]</span>
+Let’s use the 2nd equation:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Cov}(X,Y) =&amp; ~ \frac{1}{n} \sum_{i = 1}^n X_iY_i - [\frac{1}{n} \sum_{i = 1}^n X_i][\frac{1}{n} \sum_{i = 1}^n Y_i] \\
+\end{aligned}
+\]</span></p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>What is the plug-in estimator of the correlation of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>?</li>
+</ol>
+<p>Here is the formula for the correlation, as a reminder:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Cor}(X,Y) =&amp; ~ \rho_{X,Y} \\
+                =&amp; ~ \frac{\text{Cov}(X,Y)}{\sqrt{\text{Var}(X)\text{Var}(Y)}} \\
+                =&amp; ~ \frac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y}\\
+\end{aligned}
+\]</span></p>
+<p>Plugging in, we get:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\rho_{X,Y}      =&amp; ~ \frac {\frac{1}{n} \sum_{i = 1}^n X_iY_i - 
+                                  [\frac{1}{n} \sum_{i = 1}^n X_i][\frac{1}{n} \sum_{i = 1}^n Y_i]}  
+                           {\sqrt{
+                                  \frac{1}{n} \sum_{i = 1}^n X_i^2 - 
+                                  [\frac{1}{n} \sum_{i = 1}^n X_i]^2}]
+                                  [\frac{1}{n} \sum_{i = 1}^n Y_i^2]
+                                  } \\
+\end{aligned}
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Though the plug-in estimator of the variance is consistent, it is biased downward.</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Demonstrate the downward bias in R with simulations.</li>
+</ol>
+<!-- # ```{r} -->
+<!-- # n_obs <- 5 -->
+<!-- # n_sims <- 10000 -->
+<!-- # x <- mat.samps(n = n_obs, nsim =  n_sims) -->
+<!-- # x <- rnorm(n = n, mean = 0, sd = 1) -->
+<!-- # x_mean <- rowMeans(x) -->
+<!-- # x_sd <- apply(X = x, MARGIN = 1, FUN = sd) -->
+<!-- # x_var <- x_sd^2 -->
+<!-- #  -->
+<!-- # mean(x_mean) -->
+<!-- # mean(x_var) -->
+<!-- # hist(x_mean) -->
+<!-- # hist(x_var) -->
+<!-- #  -->
+<!-- # n <- 5 -->
+<!-- # nsamps <- 100000 -->
+<!-- # x <- rnorm(nsamps*n,0,1) -->
+<!-- # head(x) -->
+<!-- # samps <- matrix(x, nrow = nsamps, ncol = n) -->
+<!-- # var.pi <- function(vec){ -->
+<!-- #   return(sum((vec-mean(vec))^2)/length(vec)) -->
+<!-- # } -->
+<!-- # vars.pi <- apply(samps, 1, var.pi) -->
+<!-- # mean(vars.pi) -->
+<!-- #  -->
+<!-- #  -->
+<!-- # ``` -->
 </div>
 <div id="exercise-set-8-3" class="section level3">
 <h3><span class="header-section-number">8.1.2</span> Exercise set 8-3</h3>
