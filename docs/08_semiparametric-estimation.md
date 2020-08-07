@@ -66,6 +66,8 @@ lines(ecdf(x), verticals = TRUE, do.points = FALSE, lty = 2)
 
 ## Semiparametric point estimation using the method of moments
 
+### Introduction to moments
+
 > Methods of moments: a semiparametric approach to estimation  
 > Method of maximum likelihood: a parametric approach to estimation
 
@@ -133,7 +135,9 @@ To paraphrase Edge, we can estimate the moments of arbitrary distributions (i.e.
   2. Solve the equations from (1) for the desired parameters, giving expressions for the parameters in terms of the moments
   
   3. Estimate the moments and plug the estimates into the expressions for the parameters from (2)
-  
+
+### Plug-in estimators
+
 > Plug-in estimation: perhaps I'm oversimplifying here, but this sounds like awesome jargon for 'calculate your estimator from data'. In other words, if you want the population mean -  collect some data and calculate the mean. Then 'plug that in' to your population mean. 
 
 We can express a plug-in estimator of the $k$th moment of $X$, E($X^j$) as the $k$th *sample moment*:
@@ -214,33 +218,154 @@ $$
 
   a. Demonstrate the downward bias in R with simulations. 
   
-<!-- # ```{r} -->
-<!-- # n_obs <- 5 -->
-<!-- # n_sims <- 10000 -->
-<!-- # x <- mat.samps(n = n_obs, nsim =  n_sims) -->
-<!-- # x <- rnorm(n = n, mean = 0, sd = 1) -->
-<!-- # x_mean <- rowMeans(x) -->
-<!-- # x_sd <- apply(X = x, MARGIN = 1, FUN = sd) -->
-<!-- # x_var <- x_sd^2 -->
-<!-- #  -->
-<!-- # mean(x_mean) -->
-<!-- # mean(x_var) -->
-<!-- # hist(x_mean) -->
-<!-- # hist(x_var) -->
-<!-- #  -->
-<!-- # n <- 5 -->
-<!-- # nsamps <- 100000 -->
-<!-- # x <- rnorm(nsamps*n,0,1) -->
-<!-- # head(x) -->
-<!-- # samps <- matrix(x, nrow = nsamps, ncol = n) -->
-<!-- # var.pi <- function(vec){ -->
-<!-- #   return(sum((vec-mean(vec))^2)/length(vec)) -->
-<!-- # } -->
-<!-- # vars.pi <- apply(samps, 1, var.pi) -->
-<!-- # mean(vars.pi) -->
-<!-- #  -->
-<!-- #  -->
-<!-- # ``` -->
+This is what I did first:
+
+
+```r
+n_obs <- 5
+n_sims <- 10000
+set.seed(1010)
+x <- mat.samps(n = n_obs, nsim = n_sims)
+x_var <- apply(X = x, MARGIN = 1, FUN = var)
+mean(x_var)
+```
+
+```
+## [1] 1.004699
+```
+
+The result is very close to 1. This surprised me, given that I was expecting something below 1. So I ran Edge's code, and in it, he defines a function to calculate the variance himself. 
+
+
+```r
+var.pi <- function(vec){
+  return(sum((vec-mean(vec))^2)/length(vec))
+}
+vars.pi <- apply(x, 1, var.pi)
+mean(vars.pi)
+```
+
+```
+## [1] 0.8037593
+```
+
+Why the difference? Turns out this is a great demonstration of something I had read some time ago, and then buried away because it frankly was not super relevant. Let's inspect the help function for `var`:
+
+
+```r
+?var
+```
+
+And in the details you'll see this note:
+
+> The denominator n - 1 is used which gives an unbiased estimator of the (co)variance for i.i.d. observations. These functions return NA when there is only one observation (whereas S-PLUS has been returning NaN), and fail if x has length zero.
+
+Thanks to this book, this statement make sense. Let's calculate the variance using *n* and *n-1* as the denominator:
+
+
+```r
+vec <- x[1,]
+vec
+```
+
+```
+## [1]  0.4974519  1.1826813  1.0876947 -1.3540474 -0.9988671
+```
+
+```r
+# Default function to calculate the variance in R
+var(vec)
+```
+
+```
+## [1] 1.406506
+```
+
+```r
+# Edge's function, with the denominator of n
+var.pi(vec)
+```
+
+```
+## [1] 1.125205
+```
+
+```r
+# Beating a dead horse:
+sum((vec-mean(vec))^2) / (length(vec)) 
+```
+
+```
+## [1] 1.125205
+```
+
+```r
+# But now we change the denominator from n, to n-1
+# Unbiased estimator for the variance 
+# Gives the same result as `var`
+sum((vec-mean(vec))^2) / (length(vec) - 1) 
+```
+
+```
+## [1] 1.406506
+```
+
+I have not read ahead, but I suspect Edge will discuss this discrepancy soon..
+
+  b. Repeating the simulation, but with samples sizes from 2 to 10. 
+  
+
+```r
+n_sims <- 10000
+n_vec <- 2:10
+variance_vec <- vector(length = length(n_vec))
+for(i in 1:length(n_vec)){
+  n_obs <- n_vec[i]
+  x <- mat.samps(n = n_obs, nsim = n_sims)
+  vars.pi <- apply(x, 1, var.pi)
+  variance_vec[i] <- mean(vars.pi)
+}
+variance_vec 
+```
+
+```
+## [1] 0.4879436 0.6578587 0.7378372 0.7852684 0.8369602 0.8502939 0.8715858
+## [8] 0.8900192 0.9012010
+```
+
+```r
+plot(n_vec, variance_vec, type = "b", 
+     xlab = "Number of samples", 
+     ylab = "Mean variance", 
+     ylim = c(0, 1))
+abline(h = 1, lty = 2 , col = "red")
+```
+
+<img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+
+The bias is largest with a sample size of 2, and the plug-in estimator gets closer to the true value with increasing sample size.
+
+I did not think to convert these decimal outputs to fractions as indicated in Edge's solution, even having stumbled upon the unbiased estimator above. So this result is not yet intuitive:
+
+$$ 
+\begin{aligned}
+\text{E}(\hat\sigma^2_n) =& ~ \frac{n - 1}{n} \sigma^2 \\
+\end{aligned}
+$$
+
+This equation demonstrates the bias of the plug-in estimator for the variance. If we multiply it by $n/(n-1)$, we get the sample variance ($s^2$), an unbiased estimator:
+
+$$ 
+\begin{aligned}
+s^2 =& ~ \frac{\sum_{i = 1}^n (X_i - \overline X_i)^2}{n - 1} \\
+\end{aligned}
+$$
+
+  c. See Edge solution. It explains how we get the expectation of the plug-in estimator. 
+  
+3. Did not try.
+
+### The method of moments
 
 
 ### Exercise set 8-3
