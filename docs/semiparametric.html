@@ -566,9 +566,71 @@ s^2 =&amp; ~ \frac{\sum_{i = 1}^n (X_i - \overline X_i)^2}{n - 1} \\
 </div>
 <div id="the-method-of-moments" class="section level3">
 <h3><span class="header-section-number">8.1.4</span> The method of moments</h3>
+<p>We apply the method of moments to the model for simple linear regresion:</p>
+<p><span class="math display">\[
+\begin{aligned}
+Y = \alpha + \beta X + \epsilon \\
+\end{aligned}
+\]</span></p>
+<p>If we make the assumption that the expectation of the disturbance term is 0 for <em>all</em> values of <span class="math inline">\(X\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{E}(\epsilon | X = x) =&amp; ~ 0 \\
+\end{aligned}
+\]</span></p>
+<p>then the conditional expectation of <span class="math inline">\(Y\)</span>, given any <span class="math inline">\(x\)</span>, can be predicted using a line with a slope <span class="math inline">\(\beta\)</span> and intercept <span class="math inline">\(\alpha\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{E}(Y) = \alpha + \beta_{\mu_X} \\
+\end{aligned}
+\]</span></p>
+<p>If this assumption is not true, then the relationship between X and Y is not linear! Now that we have made the linearity assumption (see Edge’s Figure 8-4), we can proceed with the MOM estimators for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>.</p>
+<p>We know that the covariance of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Cov}(X,Y) = \beta \sigma_X^2 \\
+\end{aligned}
+\]</span></p>
+<p>and that:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mu_X =&amp; ~ \text{E}(X) \\
+\sigma_X^2 =&amp; ~ \text{Var}(X) \\
+\text{Cov}(X,Y) =&amp; ~ \text{E}(XY) - \text{E}(X)\text{E}(Y) \\
+\text{Var}(X) =&amp; ~ \text{E}(X^2) - [\text{E}(X)]^2 \\
+\end{aligned}
+\]</span></p>
+<p>we can get expressions for the parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> in terms of the moments of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\alpha =&amp; ~ \text{E}(Y) - \beta \text{E}(X) \\
+\beta =&amp; ~ \frac{\text{Cov}(X,Y)}{\sigma_X^2} \\
+      =&amp; \frac{\text{E}(XY) - \text{E}(X)\text{E}(Y)}{\text{E}(X^2) - [\text{E}(X)]^2} \\
+\end{aligned}
+\]</span></p>
+<p>The expression for <span class="math inline">\(\beta\)</span> is entirely in terms of moments, as opposed to the expression for <span class="math inline">\(\alpha\)</span>. So we’ll plug in sample moments for the moments in the expression for <span class="math inline">\(\beta\)</span>, multiply the numerator and denominator by <span class="math inline">\(\frac{n}{n}\)</span>, and get:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\tilde{\beta} =&amp; \frac{\sum X_i Y_i - \frac{1}{n} (\sum X_i) (\sum Y_i)}
+                      {\sum X_i^2 - \frac{1}{n} (\sum X_i)^2 }\\
+\end{aligned}
+\]</span></p>
+<p>(try working through the algebra to get this expression yourself).</p>
+<p>Here’s the expression for <span class="math inline">\(\alpha\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\tilde{\alpha} =&amp; ~ \frac{1}{n} \sum Y_i - \tilde{\beta} \frac{1}{n} \sum X_i \\
+               =&amp; ~ \frac{\sum Y_i - \tilde{\beta} \sum X_i} {n}
+\end{aligned}
+\]</span></p>
+<p>These expressions are essentially identical to the expressions for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> that we derived for the coefficients of the least squares line in chapter 3.</p>
 </div>
 <div id="exercise-set-8-3" class="section level3">
 <h3><span class="header-section-number">8.1.5</span> Exercise set 8-3</h3>
+<ol style="list-style-type: decimal">
+<li><p>See solution on paper.</p></li>
+<li><p>See solution in Edge.</p></li>
+</ol>
 </div>
 </div>
 <div id="semiparametric-interval-estimation-using-the-bootstrap" class="section level2">

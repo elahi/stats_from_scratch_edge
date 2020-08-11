@@ -367,10 +367,92 @@ $$
 
 ### The method of moments
 
+We apply the method of moments to the model for simple linear regresion: 
+
+$$
+\begin{aligned}
+Y = \alpha + \beta X + \epsilon \\
+\end{aligned}
+$$
+
+If we make the assumption that the expectation of the disturbance term is 0 for *all* values of $X$:
+
+$$
+\begin{aligned}
+\text{E}(\epsilon | X = x) =& ~ 0 \\
+\end{aligned}
+$$
+
+then the conditional expectation of $Y$, given any $x$, can be predicted using a line with a slope $\beta$ and intercept $\alpha$:
+
+$$
+\begin{aligned}
+\text{E}(Y) = \alpha + \beta_{\mu_X} \\
+\end{aligned}
+$$
+
+If this assumption is not true, then the relationship between X and Y is not linear! Now that we have made the linearity assumption (see Edge's Figure 8-4), we can proceed with the MOM estimators for $\alpha$ and $\beta$. 
+
+We know that the covariance of $X$ and $Y$ is:
+
+$$
+\begin{aligned}
+\text{Cov}(X,Y) = \beta \sigma_X^2 \\
+\end{aligned}
+$$
+
+and that: 
+
+$$
+\begin{aligned}
+\mu_X =& ~ \text{E}(X) \\
+\sigma_X^2 =& ~ \text{Var}(X) \\
+\text{Cov}(X,Y) =& ~ \text{E}(XY) - \text{E}(X)\text{E}(Y) \\
+\text{Var}(X) =& ~ \text{E}(X^2) - [\text{E}(X)]^2 \\
+\end{aligned}
+$$
+
+we can get expressions for the parameters $\alpha$ and $\beta$ in terms of the moments of $X$ and $Y$:
+
+$$
+\begin{aligned}
+\alpha =& ~ \text{E}(Y) - \beta \text{E}(X) \\
+\beta =& ~ \frac{\text{Cov}(X,Y)}{\sigma_X^2} \\
+      =& \frac{\text{E}(XY) - \text{E}(X)\text{E}(Y)}{\text{E}(X^2) - [\text{E}(X)]^2} \\
+\end{aligned}
+$$
+
+The expression for $\beta$ is entirely in terms of moments, as opposed to the expression for $\alpha$. So we'll plug in sample moments for the moments in the expression for $\beta$, multiply the numerator and denominator by $\frac{n}{n}$, and get: 
+
+$$
+\begin{aligned}
+\tilde{\beta} =& \frac{\sum X_i Y_i - \frac{1}{n} (\sum X_i) (\sum Y_i)}
+                      {\sum X_i^2 - \frac{1}{n} (\sum X_i)^2 }\\
+\end{aligned}
+$$
+
+(try working through the algebra to get this expression yourself). 
+
+Here's the expression for $\alpha$: 
+
+$$
+\begin{aligned}
+\tilde{\alpha} =& ~ \frac{1}{n} \sum Y_i - \tilde{\beta} \frac{1}{n} \sum X_i \\
+               =& ~ \frac{\sum Y_i - \tilde{\beta} \sum X_i} {n}
+\end{aligned}
+$$
+
+These expressions are essentially identical to the expressions for $\alpha$ and $\beta$ that we derived for the coefficients of the least squares line in chapter 3. 
 
 ### Exercise set 8-3
 
+1. See solution on paper. 
+
+2. See solution in Edge. 
+
 ## Semiparametric interval estimation using the bootstrap 
+
+
 
 ### Exercise set 8-4
 
