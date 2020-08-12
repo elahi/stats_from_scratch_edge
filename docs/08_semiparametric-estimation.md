@@ -452,9 +452,317 @@ These expressions are essentially identical to the expressions for $\alpha$ and 
 
 ## Semiparametric interval estimation using the bootstrap 
 
+With enough high quality data, the empirical distribution function is a reasonable approximation to the true cumulative distribution function. We can leverage this fact to estimate uncertainty intervals to accompany our plug-in estimators. 
+
+> Bootstrap: a procedure that resamples a single dataset to create many simulated samples, which permits the calculation of standard errors and confidence intervals. 
+
+  1. Take *B* 'bootstrap' samples, with each sample being a set of *n* observations drawn **with replacement** from the original observations. Label these samples $D_1^*$, $D_1^*$, ..., $D_B^*$. 
+  
+  2. For each of the simulated amples, calculate the statistic of interest $\hat \vartheta$ for each simulated dataset. That is, calculate $\hat \vartheta(D_1^*)$, $\hat \vartheta(D_2^*)$, ..., $\hat \vartheta(D_B^*)$. These values form the *bootstrap* distribution of $\hat \vartheta(D)$. 
+
+We will apply this procedure to our dataset of paired *x, y* data to calculate the bootstrap distribution of $\tilde \beta$, the method of moments estimator of $\beta$. We need to assume that the $x, y$ pairs in the sample represent independent draws from a joint distribution. 
+
+#### Assumptions
+
+  - For all *i* and $j \neq i$, $X_i, Y_i$ are independent of $X_j, Y_j$. This is the *independence of units* assumption
+  
+  - For all *i*, $X_i, Y_i$ are drawn from the same joint distribution $F_{X,Y}(x,y)$. This is the *distribution* assumption. 
+
+#### Bootstrapping the Anscombe dataset
 
 
+```r
+# Original fertilizer use and cereal yield data
+d <- cbind(anscombe$x1, anscombe$y1) [order(anscombe$x1), ]
+# One bootstrap sample 
+set.seed(8675309)
+db <- cbind(anscombe$x1, anscombe$y1) [sample(1:11, replace = TRUE), ]
+d; db
+```
+
+```
+##       [,1]  [,2]
+##  [1,]    4  4.26
+##  [2,]    5  5.68
+##  [3,]    6  7.24
+##  [4,]    7  4.82
+##  [5,]    8  6.95
+##  [6,]    9  8.81
+##  [7,]   10  8.04
+##  [8,]   11  8.33
+##  [9,]   12 10.84
+## [10,]   13  7.58
+## [11,]   14  9.96
+```
+
+```
+##       [,1]  [,2]
+##  [1,]    8  6.95
+##  [2,]   14  9.96
+##  [3,]   12 10.84
+##  [4,]   12 10.84
+##  [5,]   13  7.58
+##  [6,]    4  4.26
+##  [7,]    5  5.68
+##  [8,]    7  4.82
+##  [9,]    7  4.82
+## [10,]   11  8.33
+## [11,]    7  4.82
+```
+
+The function `boot.samp` returns a bootstrap sample of either a vector or the rows of a matrix. The function `beta.mm` calculates the methods of moments estimate of $\beta$. 
+
+
+```r
+boot.samp
+```
+
+```
+## function (x) 
+## {
+##     if (is.null(dim(x))) {
+##         x <- matrix(x, ncol = 1)
+##     }
+##     n <- nrow(x)
+##     boot.inds <- sample(1:n, replace = TRUE)
+##     x[boot.inds, ]
+## }
+## <bytecode: 0x7faeea7b3a38>
+## <environment: namespace:stfspack>
+```
+
+```r
+beta.mm
+```
+
+```
+## function (x, y) 
+## {
+##     n <- length(x)
+##     (sum(x * y) - (1/n) * sum(x) * sum(y))/(sum(x^2) - (1/n) * 
+##         sum(x)^2)
+## }
+## <bytecode: 0x7faeea7c1590>
+## <environment: namespace:stfspack>
+```
+
+We use a `for` loop to draw the bootstrap sample:
+
+
+```r
+set.seed(8675309)
+B <- 10000
+boot.dist <- numeric(B)
+dat <- cbind(anscombe$x1, anscombe$y2)
+for(i in 1:B){
+  samp <- boot.samp(dat)
+  boot.dist[i] <- beta.mm(samp[,1], samp[,2])
+}
+```
+
+We can plot a histogram and calculate the standard error of the estimator, $\tilde \beta$ (recalling that the standard error of an estimate is its standard deviation). 
+
+
+```r
+# Plot histogram
+hist(boot.dist, xlim = c(-0.2, 1.2), breaks = 30, 
+     xlab = expression(paste("Bootstrapped ", beta)), 
+     main = "", col = "gray", border = "white")
+```
+
+<img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+
+```r
+# Estimate standard error of boostrapped beta
+sd(boot.dist)
+```
+
+```
+## [1] 0.165262
+```
+
+#### Approximating confidence intervals for $\tilde \beta$
+
+We consider three options:
+
+  1. If we assume the sampling distribution is normal, then we can use the bootstrap estimate to identify a confidence interval ($1 - \alpha$ interval).
+
+
+```r
+# Normal bootstrap interval
+a <- 0.05
+b_mm <- beta.mm(dat[,1], dat[,2])
+b_sd <- sd(boot.dist)
+z <- qnorm(p = 1 - (a / 2), mean = 0, sd = 1)
+b_mm - b_sd*z; b_mm + b_sd*z
+```
+
+```
+## [1] 0.1760924
+```
+
+```
+## [1] 0.8239076
+```
+
+  2. Use the percentiles of the bootstrap distribution to bound a confidence interval ($1 - \alpha ~ percentile$ interval). 
+  
+
+```r
+# 95% percentile interval
+quantile(boot.dist, c(0.025, 0.975))
+```
+
+```
+##      2.5%     97.5% 
+## 0.1630270 0.8459399
+```
+  
+  3. Calculate bootstrap pivotal intervals (see Box 8-1; skipped for now).
+  
 ### Exercise set 8-4
+
+1. Sensitivity of a bootstrapped mean to *n, B*. 
+
+Try the `boot.dist.1d` function:
+
+```r
+n <- 5
+B <- 10
+sim <- rnorm(n = n, mean = 0, sd = 1)
+boot.dist.1d(x = sim, B = B, FUN = mean)
+```
+
+```
+##  [1] -0.22323507 -0.01956961  0.04809411 -0.21668665  0.20288450 -0.01956961
+##  [7] -0.13718622 -0.26937485 -0.33757747 -0.10288316
+```
+
+Use the wrapper function:
+
+```r
+n <- 5
+B <- 10
+wrap.bm(n = n, B = B)
+```
+
+<img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+
+```
+## $`boot m`
+## [1] -0.7622767
+## 
+## $`boot se`
+## [1] 0.2741837
+```
+
+Changing *n*:
+
+```r
+# Adjust wrapper function
+wrap.bm2 <- function (n, B, mu = 0, sigma = 1, FUN = mean, ...){
+    sim <- rnorm(n, mu, sigma)
+    boots <- boot.dist.1d(sim, B, FUN = FUN, ...)
+    hist(boots, main = paste("n = ", n, "; ", "B = ", B, sep = ""), 
+         xlab = "Bootstrap distribution", 
+         xlim = c(-1.5, 1.5), col = "gray", border = "white")
+}
+B <- 10000
+n <- 5
+par(mfrow = c(2, 2))
+set.seed(3)
+wrap.bm2(n = n, B = B)
+n <- 10
+wrap.bm2(n = n, B = B)
+n <- 50
+wrap.bm2(n = n, B = B)
+n <- 100
+wrap.bm2(n = n, B = B)
+```
+
+<img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+
+Changing *B*:
+
+```r
+n <- 100
+B <- 10
+par(mfrow = c(2, 2))
+set.seed(101)
+wrap.bm2(n = n, B = B)
+B <- 100
+wrap.bm2(n = n, B = B)
+B <- 1000
+wrap.bm2(n = n, B = B)
+B <- 5000
+wrap.bm2(n = n, B = B)
+```
+
+<img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+
+2. Sensitivity of a bootstrapped midrange to *n, B*. 
+
+New functions:
+
+
+```r
+midrange <- function(x){
+  (min(x) + max(x)) / 2
+}
+
+wrap.bm3 <- function (n, B, mu = 0, sigma = 1, FUN = mean, ...){
+    sim <- rnorm(n, mu, sigma)
+    boots <- boot.dist.1d(sim, B, FUN = FUN, ...)
+    sd(boots)
+}
+```
+
+Changing *n*:
+
+```r
+B <- 10000
+my_seq <- seq(1:10)
+n_vector <- 2^my_seq
+se_vector <- numeric(length = length(my_seq))
+se_pred_vector <- pi / (sqrt(24 * log(n_vector)))
+
+for(i in 1:length(my_seq)){ 
+  set.seed(101)
+  se_vector[i] <- wrap.bm3(n = n_vector[i], B = B, FUN = midrange)
+}
+
+par(mfrow = c(1,1))
+plot(n_vector, se_pred_vector, type = "l", main = paste("B = ", B, sep = ""), 
+     ylim = c(0, 0.8), xlab = "Sample size (n)", ylab = "SE of midrange")
+points(n_vector, se_vector, col = "red")
+```
+
+<img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+
+Changing *B*:
+
+```r
+n <- 100
+my_seq <- seq(1:10)
+B_vector <- 2^my_seq
+se_vector <- numeric(length = length(my_seq))
+se_pred_vector <- rep(pi / (sqrt(24 * log(n))), length(my_seq))
+
+for(i in 1:length(my_seq)){ 
+  set.seed(101)
+  se_vector[i] <- wrap.bm3(n = n, B = B_vector[i], FUN = midrange)
+}
+
+par(mfrow = c(1,1))
+plot(B_vector, se_pred_vector, type = "l", main = paste("n = ", n, sep = ""), 
+     ylim = c(0, 0.5), xlab = "Bootstrap samples (B)", 
+     ylab = "SE of midrange")
+points(n_vector, se_vector, col = "red")
+```
+
+<img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+
+3. Skipped.
 
 ## Semiparametric hypothesis testing using permutation tests
 

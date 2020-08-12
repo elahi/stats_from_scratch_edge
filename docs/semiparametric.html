@@ -635,8 +635,227 @@ Y = \alpha + \beta X + \epsilon \\
 </div>
 <div id="semiparametric-interval-estimation-using-the-bootstrap" class="section level2">
 <h2><span class="header-section-number">8.2</span> Semiparametric interval estimation using the bootstrap</h2>
+<p>With enough high quality data, the empirical distribution function is a reasonable approximation to the true cumulative distribution function. We can leverage this fact to estimate uncertainty intervals to accompany our plug-in estimators.</p>
+<blockquote>
+<p>Bootstrap: a procedure that resamples a single dataset to create many simulated samples, which permits the calculation of standard errors and confidence intervals.</p>
+</blockquote>
+<ol style="list-style-type: decimal">
+<li><p>Take <em>B</em> ‘bootstrap’ samples, with each sample being a set of <em>n</em> observations drawn <strong>with replacement</strong> from the original observations. Label these samples <span class="math inline">\(D_1^*\)</span>, <span class="math inline">\(D_1^*\)</span>, …, <span class="math inline">\(D_B^*\)</span>.</p></li>
+<li><p>For each of the simulated amples, calculate the statistic of interest <span class="math inline">\(\hat \vartheta\)</span> for each simulated dataset. That is, calculate <span class="math inline">\(\hat \vartheta(D_1^*)\)</span>, <span class="math inline">\(\hat \vartheta(D_2^*)\)</span>, …, <span class="math inline">\(\hat \vartheta(D_B^*)\)</span>. These values form the <em>bootstrap</em> distribution of <span class="math inline">\(\hat \vartheta(D)\)</span>.</p></li>
+</ol>
+<p>We will apply this procedure to our dataset of paired <em>x, y</em> data to calculate the bootstrap distribution of <span class="math inline">\(\tilde \beta\)</span>, the method of moments estimator of <span class="math inline">\(\beta\)</span>. We need to assume that the <span class="math inline">\(x, y\)</span> pairs in the sample represent independent draws from a joint distribution.</p>
+<div id="assumptions" class="section level4">
+<h4><span class="header-section-number">8.2.0.1</span> Assumptions</h4>
+<ul>
+<li><p>For all <em>i</em> and <span class="math inline">\(j \neq i\)</span>, <span class="math inline">\(X_i, Y_i\)</span> are independent of <span class="math inline">\(X_j, Y_j\)</span>. This is the <em>independence of units</em> assumption</p></li>
+<li><p>For all <em>i</em>, <span class="math inline">\(X_i, Y_i\)</span> are drawn from the same joint distribution <span class="math inline">\(F_{X,Y}(x,y)\)</span>. This is the <em>distribution</em> assumption.</p></li>
+</ul>
+</div>
+<div id="bootstrapping-the-anscombe-dataset" class="section level4">
+<h4><span class="header-section-number">8.2.0.2</span> Bootstrapping the Anscombe dataset</h4>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="co"># Original fertilizer use and cereal yield data</span></a>
+<a class="sourceLine" id="cb21-2" title="2">d &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1) [<span class="kw">order</span>(anscombe<span class="op">$</span>x1), ]</a>
+<a class="sourceLine" id="cb21-3" title="3"><span class="co"># One bootstrap sample </span></a>
+<a class="sourceLine" id="cb21-4" title="4"><span class="kw">set.seed</span>(<span class="dv">8675309</span>)</a>
+<a class="sourceLine" id="cb21-5" title="5">db &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1) [<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">11</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>), ]</a>
+<a class="sourceLine" id="cb21-6" title="6">d; db</a></code></pre></div>
+<pre><code>##       [,1]  [,2]
+##  [1,]    4  4.26
+##  [2,]    5  5.68
+##  [3,]    6  7.24
+##  [4,]    7  4.82
+##  [5,]    8  6.95
+##  [6,]    9  8.81
+##  [7,]   10  8.04
+##  [8,]   11  8.33
+##  [9,]   12 10.84
+## [10,]   13  7.58
+## [11,]   14  9.96</code></pre>
+<pre><code>##       [,1]  [,2]
+##  [1,]    8  6.95
+##  [2,]   14  9.96
+##  [3,]   12 10.84
+##  [4,]   12 10.84
+##  [5,]   13  7.58
+##  [6,]    4  4.26
+##  [7,]    5  5.68
+##  [8,]    7  4.82
+##  [9,]    7  4.82
+## [10,]   11  8.33
+## [11,]    7  4.82</code></pre>
+<p>The function <code>boot.samp</code> returns a bootstrap sample of either a vector or the rows of a matrix. The function <code>beta.mm</code> calculates the methods of moments estimate of <span class="math inline">\(\beta\)</span>.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">boot.samp</a></code></pre></div>
+<pre><code>## function (x) 
+## {
+##     if (is.null(dim(x))) {
+##         x &lt;- matrix(x, ncol = 1)
+##     }
+##     n &lt;- nrow(x)
+##     boot.inds &lt;- sample(1:n, replace = TRUE)
+##     x[boot.inds, ]
+## }
+## &lt;bytecode: 0x7faeea7b3a38&gt;
+## &lt;environment: namespace:stfspack&gt;</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">beta.mm</a></code></pre></div>
+<pre><code>## function (x, y) 
+## {
+##     n &lt;- length(x)
+##     (sum(x * y) - (1/n) * sum(x) * sum(y))/(sum(x^2) - (1/n) * 
+##         sum(x)^2)
+## }
+## &lt;bytecode: 0x7faeea7c1590&gt;
+## &lt;environment: namespace:stfspack&gt;</code></pre>
+<p>We use a <code>for</code> loop to draw the bootstrap sample:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">set.seed</span>(<span class="dv">8675309</span>)</a>
+<a class="sourceLine" id="cb28-2" title="2">B &lt;-<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb28-3" title="3">boot.dist &lt;-<span class="st"> </span><span class="kw">numeric</span>(B)</a>
+<a class="sourceLine" id="cb28-4" title="4">dat &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y2)</a>
+<a class="sourceLine" id="cb28-5" title="5"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>B){</a>
+<a class="sourceLine" id="cb28-6" title="6">  samp &lt;-<span class="st"> </span><span class="kw">boot.samp</span>(dat)</a>
+<a class="sourceLine" id="cb28-7" title="7">  boot.dist[i] &lt;-<span class="st"> </span><span class="kw">beta.mm</span>(samp[,<span class="dv">1</span>], samp[,<span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb28-8" title="8">}</a></code></pre></div>
+<p>We can plot a histogram and calculate the standard error of the estimator, <span class="math inline">\(\tilde \beta\)</span> (recalling that the standard error of an estimate is its standard deviation).</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="co"># Plot histogram</span></a>
+<a class="sourceLine" id="cb29-2" title="2"><span class="kw">hist</span>(boot.dist, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1.2</span>), <span class="dt">breaks =</span> <span class="dv">30</span>, </a>
+<a class="sourceLine" id="cb29-3" title="3">     <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;Bootstrapped &quot;</span>, beta)), </a>
+<a class="sourceLine" id="cb29-4" title="4">     <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</a></code></pre></div>
+<p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co"># Estimate standard error of boostrapped beta</span></a>
+<a class="sourceLine" id="cb30-2" title="2"><span class="kw">sd</span>(boot.dist)</a></code></pre></div>
+<pre><code>## [1] 0.165262</code></pre>
+</div>
+<div id="approximating-confidence-intervals-for-tilde-beta" class="section level4">
+<h4><span class="header-section-number">8.2.0.3</span> Approximating confidence intervals for <span class="math inline">\(\tilde \beta\)</span></h4>
+<p>We consider three options:</p>
+<ol style="list-style-type: decimal">
+<li>If we assume the sampling distribution is normal, then we can use the bootstrap estimate to identify a confidence interval (<span class="math inline">\(1 - \alpha\)</span> interval).</li>
+</ol>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="co"># Normal bootstrap interval</span></a>
+<a class="sourceLine" id="cb32-2" title="2">a &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb32-3" title="3">b_mm &lt;-<span class="st"> </span><span class="kw">beta.mm</span>(dat[,<span class="dv">1</span>], dat[,<span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb32-4" title="4">b_sd &lt;-<span class="st"> </span><span class="kw">sd</span>(boot.dist)</a>
+<a class="sourceLine" id="cb32-5" title="5">z &lt;-<span class="st"> </span><span class="kw">qnorm</span>(<span class="dt">p =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(a <span class="op">/</span><span class="st"> </span><span class="dv">2</span>), <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb32-6" title="6">b_mm <span class="op">-</span><span class="st"> </span>b_sd<span class="op">*</span>z; b_mm <span class="op">+</span><span class="st"> </span>b_sd<span class="op">*</span>z</a></code></pre></div>
+<pre><code>## [1] 0.1760924</code></pre>
+<pre><code>## [1] 0.8239076</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Use the percentiles of the bootstrap distribution to bound a confidence interval (<span class="math inline">\(1 - \alpha ~ percentile\)</span> interval).</li>
+</ol>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co"># 95% percentile interval</span></a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="kw">quantile</span>(boot.dist, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a></code></pre></div>
+<pre><code>##      2.5%     97.5% 
+## 0.1630270 0.8459399</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Calculate bootstrap pivotal intervals (see Box 8-1; skipped for now).</li>
+</ol>
+</div>
 <div id="exercise-set-8-4" class="section level3">
 <h3><span class="header-section-number">8.2.1</span> Exercise set 8-4</h3>
+<ol style="list-style-type: decimal">
+<li>Sensitivity of a bootstrapped mean to <em>n, B</em>.</li>
+</ol>
+<p>Try the <code>boot.dist.1d</code> function:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">n &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb37-2" title="2">B &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb37-3" title="3">sim &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb37-4" title="4"><span class="kw">boot.dist.1d</span>(<span class="dt">x =</span> sim, <span class="dt">B =</span> B, <span class="dt">FUN =</span> mean)</a></code></pre></div>
+<pre><code>##  [1] -0.22323507 -0.01956961  0.04809411 -0.21668665  0.20288450 -0.01956961
+##  [7] -0.13718622 -0.26937485 -0.33757747 -0.10288316</code></pre>
+<p>Use the wrapper function:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">n &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb39-2" title="2">B &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb39-3" title="3"><span class="kw">wrap.bm</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a></code></pre></div>
+<p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre><code>## $`boot m`
+## [1] -0.7622767
+## 
+## $`boot se`
+## [1] 0.2741837</code></pre>
+<p>Changing <em>n</em>:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="co"># Adjust wrapper function</span></a>
+<a class="sourceLine" id="cb41-2" title="2">wrap.bm2 &lt;-<span class="st"> </span><span class="cf">function</span> (n, B, <span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">1</span>, <span class="dt">FUN =</span> mean, ...){</a>
+<a class="sourceLine" id="cb41-3" title="3">    sim &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, mu, sigma)</a>
+<a class="sourceLine" id="cb41-4" title="4">    boots &lt;-<span class="st"> </span><span class="kw">boot.dist.1d</span>(sim, B, <span class="dt">FUN =</span> FUN, ...)</a>
+<a class="sourceLine" id="cb41-5" title="5">    <span class="kw">hist</span>(boots, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;n = &quot;</span>, n, <span class="st">&quot;; &quot;</span>, <span class="st">&quot;B = &quot;</span>, B, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), </a>
+<a class="sourceLine" id="cb41-6" title="6">         <span class="dt">xlab =</span> <span class="st">&quot;Bootstrap distribution&quot;</span>, </a>
+<a class="sourceLine" id="cb41-7" title="7">         <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>), <span class="dt">col =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</a>
+<a class="sourceLine" id="cb41-8" title="8">}</a>
+<a class="sourceLine" id="cb41-9" title="9">B &lt;-<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb41-10" title="10">n &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb41-11" title="11"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb41-12" title="12"><span class="kw">set.seed</span>(<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb41-13" title="13"><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a>
+<a class="sourceLine" id="cb41-14" title="14">n &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb41-15" title="15"><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a>
+<a class="sourceLine" id="cb41-16" title="16">n &lt;-<span class="st"> </span><span class="dv">50</span></a>
+<a class="sourceLine" id="cb41-17" title="17"><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a>
+<a class="sourceLine" id="cb41-18" title="18">n &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb41-19" title="19"><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a></code></pre></div>
+<p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Changing <em>B</em>:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1">n &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb42-2" title="2">B &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb42-3" title="3"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb42-4" title="4"><span class="kw">set.seed</span>(<span class="dv">101</span>)</a>
+<a class="sourceLine" id="cb42-5" title="5"><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a>
+<a class="sourceLine" id="cb42-6" title="6">B &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb42-7" title="7"><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a>
+<a class="sourceLine" id="cb42-8" title="8">B &lt;-<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb42-9" title="9"><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a>
+<a class="sourceLine" id="cb42-10" title="10">B &lt;-<span class="st"> </span><span class="dv">5000</span></a>
+<a class="sourceLine" id="cb42-11" title="11"><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a></code></pre></div>
+<p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Sensitivity of a bootstrapped midrange to <em>n, B</em>.</li>
+</ol>
+<p>New functions:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">midrange &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb43-2" title="2">  (<span class="kw">min</span>(x) <span class="op">+</span><span class="st"> </span><span class="kw">max</span>(x)) <span class="op">/</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb43-3" title="3">}</a>
+<a class="sourceLine" id="cb43-4" title="4"></a>
+<a class="sourceLine" id="cb43-5" title="5">wrap.bm3 &lt;-<span class="st"> </span><span class="cf">function</span> (n, B, <span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">1</span>, <span class="dt">FUN =</span> mean, ...){</a>
+<a class="sourceLine" id="cb43-6" title="6">    sim &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, mu, sigma)</a>
+<a class="sourceLine" id="cb43-7" title="7">    boots &lt;-<span class="st"> </span><span class="kw">boot.dist.1d</span>(sim, B, <span class="dt">FUN =</span> FUN, ...)</a>
+<a class="sourceLine" id="cb43-8" title="8">    <span class="kw">sd</span>(boots)</a>
+<a class="sourceLine" id="cb43-9" title="9">}</a></code></pre></div>
+<p>Changing <em>n</em>:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1">B &lt;-<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb44-2" title="2">my_seq &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb44-3" title="3">n_vector &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">^</span>my_seq</a>
+<a class="sourceLine" id="cb44-4" title="4">se_vector &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dt">length =</span> <span class="kw">length</span>(my_seq))</a>
+<a class="sourceLine" id="cb44-5" title="5">se_pred_vector &lt;-<span class="st"> </span>pi <span class="op">/</span><span class="st"> </span>(<span class="kw">sqrt</span>(<span class="dv">24</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(n_vector)))</a>
+<a class="sourceLine" id="cb44-6" title="6"></a>
+<a class="sourceLine" id="cb44-7" title="7"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(my_seq)){ </a>
+<a class="sourceLine" id="cb44-8" title="8">  <span class="kw">set.seed</span>(<span class="dv">101</span>)</a>
+<a class="sourceLine" id="cb44-9" title="9">  se_vector[i] &lt;-<span class="st"> </span><span class="kw">wrap.bm3</span>(<span class="dt">n =</span> n_vector[i], <span class="dt">B =</span> B, <span class="dt">FUN =</span> midrange)</a>
+<a class="sourceLine" id="cb44-10" title="10">}</a>
+<a class="sourceLine" id="cb44-11" title="11"></a>
+<a class="sourceLine" id="cb44-12" title="12"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb44-13" title="13"><span class="kw">plot</span>(n_vector, se_pred_vector, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;B = &quot;</span>, B, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), </a>
+<a class="sourceLine" id="cb44-14" title="14">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.8</span>), <span class="dt">xlab =</span> <span class="st">&quot;Sample size (n)&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;SE of midrange&quot;</span>)</a>
+<a class="sourceLine" id="cb44-15" title="15"><span class="kw">points</span>(n_vector, se_vector, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Changing <em>B</em>:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1">n &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb45-2" title="2">my_seq &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb45-3" title="3">B_vector &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">^</span>my_seq</a>
+<a class="sourceLine" id="cb45-4" title="4">se_vector &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dt">length =</span> <span class="kw">length</span>(my_seq))</a>
+<a class="sourceLine" id="cb45-5" title="5">se_pred_vector &lt;-<span class="st"> </span><span class="kw">rep</span>(pi <span class="op">/</span><span class="st"> </span>(<span class="kw">sqrt</span>(<span class="dv">24</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(n))), <span class="kw">length</span>(my_seq))</a>
+<a class="sourceLine" id="cb45-6" title="6"></a>
+<a class="sourceLine" id="cb45-7" title="7"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(my_seq)){ </a>
+<a class="sourceLine" id="cb45-8" title="8">  <span class="kw">set.seed</span>(<span class="dv">101</span>)</a>
+<a class="sourceLine" id="cb45-9" title="9">  se_vector[i] &lt;-<span class="st"> </span><span class="kw">wrap.bm3</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B_vector[i], <span class="dt">FUN =</span> midrange)</a>
+<a class="sourceLine" id="cb45-10" title="10">}</a>
+<a class="sourceLine" id="cb45-11" title="11"></a>
+<a class="sourceLine" id="cb45-12" title="12"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb45-13" title="13"><span class="kw">plot</span>(B_vector, se_pred_vector, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;n = &quot;</span>, n, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), </a>
+<a class="sourceLine" id="cb45-14" title="14">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">xlab =</span> <span class="st">&quot;Bootstrap samples (B)&quot;</span>, </a>
+<a class="sourceLine" id="cb45-15" title="15">     <span class="dt">ylab =</span> <span class="st">&quot;SE of midrange&quot;</span>)</a>
+<a class="sourceLine" id="cb45-16" title="16"><span class="kw">points</span>(n_vector, se_vector, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Skipped.</li>
+</ol>
 </div>
 </div>
 <div id="semiparametric-hypothesis-testing-using-permutation-tests" class="section level2">
