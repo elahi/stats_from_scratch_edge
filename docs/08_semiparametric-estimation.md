@@ -527,7 +527,7 @@ boot.samp
 ##     boot.inds <- sample(1:n, replace = TRUE)
 ##     x[boot.inds, ]
 ## }
-## <bytecode: 0x7faeea7b3a38>
+## <bytecode: 0x7fbf6c300ee8>
 ## <environment: namespace:stfspack>
 ```
 
@@ -542,7 +542,7 @@ beta.mm
 ##     (sum(x * y) - (1/n) * sum(x) * sum(y))/(sum(x^2) - (1/n) * 
 ##         sum(x)^2)
 ## }
-## <bytecode: 0x7faeea7c1590>
+## <bytecode: 0x7fbf6703bc40>
 ## <environment: namespace:stfspack>
 ```
 
@@ -766,6 +766,234 @@ points(n_vector, se_vector, col = "red")
 
 ## Semiparametric hypothesis testing using permutation tests
 
+Here we will test the hypothesis that the estimated slope from the Anscombe dataset differs from a null hypothesis, where $\beta = 0$. This results in a simplified equation, where there is no assocation between $X$ and $Y$:
+
+$$
+\begin{aligned}
+Y = \alpha + \epsilon
+\end{aligned}
+$$
+
+We will use a **permutation test** to test the null hypothesis. Let's go over the assumptions of our test. 
+
+#### Assumptions
+
+  - *Linearity*: $\text{E}(\epsilon | X = x) =& ~ 0$
+
+  - *Independence of units*: for all *i* and $j \neq i$, $X_i, Y_i$ are independent of $X_j, Y_j$
+  
+  - *Distribution*: for all *i*, $X_i, Y_i$ are drawn from the same joint distribution $F_{X,Y}(x,y)$
+  
+  - *Independence of X and disturbances*: for all $i$, $X_i$ and $\epsilon_i$ are independent
+
+Notice that we made no assumptions aboute the distribution of the disturbance term, $\epsilon$. 
+
+The procedure for a permutation test is:
+
+1. Choose a test statistic and calculate it using the original data ($s_d$). 
+2. Permute (i.e., shuffle) the data randomly and in such a way that if the null hypothesis were true, the hypothetical dataset is just as probable as the original data. 
+3. Calculate the test statistic using the permuted data and save the value.
+4. Repeat steps (2) and (3) many times. The resulting test statistics are called a 'permutation distribution'.
+5. Compare the original statistic $s_d$ with the permutation distribution. 
+
+Note that the permuted sample is somewhat like a sample that might be observed if the $X$ and $Y$ values were independent. 
+
+Here's the original dataset, and a permuted one:
+
+```r
+# Original fertilizer use and cereal yield data
+d <- cbind(anscombe$x1, anscombe$y1) [order(anscombe$x1), ]
+# One permuted sample 
+set.seed(8675309)
+db <- cbind(anscombe$x1, anscombe$y1[sample(1:11, replace = FALSE)])[order(anscombe$x1), ]
+d; db
+```
+
+```
+##       [,1]  [,2]
+##  [1,]    4  4.26
+##  [2,]    5  5.68
+##  [3,]    6  7.24
+##  [4,]    7  4.82
+##  [5,]    8  6.95
+##  [6,]    9  8.81
+##  [7,]   10  8.04
+##  [8,]   11  8.33
+##  [9,]   12 10.84
+## [10,]   13  7.58
+## [11,]   14  9.96
+```
+
+```
+##       [,1]  [,2]
+##  [1,]    4  8.81
+##  [2,]    5  4.26
+##  [3,]    6  9.96
+##  [4,]    7  8.04
+##  [5,]    8  8.33
+##  [6,]    9 10.84
+##  [7,]   10  6.95
+##  [8,]   11  5.68
+##  [9,]   12  7.58
+## [10,]   13  7.24
+## [11,]   14  4.82
+```
+
+If we do this a number of times, we can plot the histogram of permuted samples, along with a line to represent the original $\tilde \beta$: 
+
+
+```r
+set.seed(8675309)
+nperms <- 10000
+perm_dist <- numeric(nperms)
+dat <- cbind(anscombe$x1, anscombe$y1) 
+for(i in 1:nperms){
+  samp <- perm.samp(dat)
+  perm_dist[i] <- beta.mm(samp[,1], samp[,2])
+}
+b_orig <- beta.mm(anscombe$x1, anscombe$y1)
+b_orig
+```
+
+```
+## [1] 0.5000909
+```
+
+```r
+# Plot histogram
+hist(perm_dist, xlim = c(-0.6, 0.6), breaks = 30, 
+     xlab = expression(paste(beta, " from permuted samples")), 
+     main = "", col = "gray", border = "white")
+abline(v = b_orig, col = "red", lty = 2)
+```
+
+<img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+
+We can compute a two-sided $p$ value testing the null hypothesis that $\beta = 0$ by calculating the proportion of the permuted samples for which the absolute value of $\tilde \beta_p$ is greater than the absolute value of $\tilde \beta$ from the original data:
+
+
+```r
+mean(abs(perm_dist) >= b_orig)
+```
+
+```
+## [1] 0.0033
+```
+
+In summary we tested the hypothesis that:
+
+  - $\beta = 0$  
+  AND  
+  - the $X$ and $Y$ data are linear
+  - the permuted units are independent
+  - all observations are drawn from a common distribution
+  - the $X_i$ are independent of the disturbance $\epsilon_i$
+
+Therefore, in principle, the low $p$ value indicates that one of the above are unlikely to be true. Usually, we focus on the null hypothesis, but it is important to remember the assumptions.
+
 ### Exercise set 8-5
+
+1. 20 wheat fields, 10 received treatment application (substance Z). Design a permutation procedure to assess the claim that substance Z changes the wheat yield. 
+
+> The null hypothesis is that there is no association between yield and the treatment. Alternatively, the treatment may have altered the yield. To test this, we can randomly permute the control / treatment labels for the 20 fields. Then we can calculate the mean yield for each treatment, and compare the permutation distribution to the mean yield for each treatment for the original dataset. 
+
+> Edge has a thorough explanation, and in it he highlights that a low p-value may also result from a change in the variance due to substance Z. Thus, we are really testing the null hypothesis that substance Z does not affect the distribution of wheat yield. This might be worth simulating. 
+
+2. 
+
+
+```r
+# 10 pairs
+beta_vec <- c(0, 0.1, 0.2)
+n_pairs <- 10 
+n_datasets <- 20
+p_mat <- matrix(nrow = 500, ncol = length(beta_vec))
+for(i in 1:length(beta_vec)){
+  p_mat[,i] <- sim.perm.B(n = n_pairs, nsim = n_datasets, a = 3, b = beta_vec[i])
+}
+colnames(p_mat) <- c("b_0", "b_0.1", "b_0.2")
+df10 <- as_tibble(p_mat)
+
+# 50 pairs
+beta_vec <- c(0, 0.1, 0.2)
+n_pairs <- 50
+n_datasets <- 20
+p_mat <- matrix(nrow = 500, ncol = length(beta_vec))
+for(i in 1:length(beta_vec)){
+  p_mat[,i] <- sim.perm.B(n = n_pairs, nsim = n_datasets, a = 3, b = beta_vec[i])
+}
+colnames(p_mat) <- c("b_0", "b_0.1", "b_0.2")
+df50 <- as_tibble(p_mat)
+
+# 100 pairs
+beta_vec <- c(0, 0.1, 0.2)
+n_pairs <- 100
+n_datasets <- 20
+p_mat <- matrix(nrow = 500, ncol = length(beta_vec))
+for(i in 1:length(beta_vec)){
+  p_mat[,i] <- sim.perm.B(n = n_pairs, nsim = n_datasets, a = 3, b = beta_vec[i])
+}
+colnames(p_mat) <- c("b_0", "b_0.1", "b_0.2")
+df100 <- as_tibble(p_mat)
+
+# Get proportion of significant tests
+colMeans(df10 < 0.05)
+```
+
+```
+##   b_0 b_0.1 b_0.2 
+##  0.05  0.10  0.10
+```
+
+```r
+colMeans(df50 < 0.05)
+```
+
+```
+##   b_0 b_0.1 b_0.2 
+##  0.00  0.30  0.55
+```
+
+```r
+colMeans(df100 < 0.05)
+```
+
+```
+##   b_0 b_0.1 b_0.2 
+##   0.1   0.6   1.0
+```
+
+```r
+# Plot
+library(patchwork)
+p10 <- df10 %>%
+  gather(key = beta, value = p) %>%
+  ggplot(aes(x = beta, p)) + 
+  geom_boxplot() + 
+  scale_y_continuous(limits = c(0, 1)) + 
+  ggtitle("n = 10 pairs") + 
+  geom_hline(yintercept = 0.05, color = "red")
+
+p50 <- df50 %>%
+  gather(key = beta, value = p) %>%
+  ggplot(aes(x = beta, p)) + 
+  geom_boxplot() + 
+  scale_y_continuous(limits = c(0, 1)) + 
+  ggtitle("n = 50 pairs") + 
+  geom_hline(yintercept = 0.05, color = "red")
+
+p100 <- df100 %>%
+  gather(key = beta, value = p) %>%
+  ggplot(aes(x = beta, p)) + 
+  geom_boxplot() + 
+  scale_y_continuous(limits = c(0, 1)) + 
+  ggtitle("n = 100 pairs") + 
+  geom_hline(yintercept = 0.05, color = "red")
+
+p10 + p50 + p100
+```
+
+<img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+
 
 ## Chapter summary

@@ -694,7 +694,7 @@ Y = \alpha + \beta X + \epsilon \\
 ##     boot.inds &lt;- sample(1:n, replace = TRUE)
 ##     x[boot.inds, ]
 ## }
-## &lt;bytecode: 0x7faeea7b3a38&gt;
+## &lt;bytecode: 0x7fbf6c300ee8&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">beta.mm</a></code></pre></div>
 <pre><code>## function (x, y) 
@@ -703,7 +703,7 @@ Y = \alpha + \beta X + \epsilon \\
 ##     (sum(x * y) - (1/n) * sum(x) * sum(y))/(sum(x^2) - (1/n) * 
 ##         sum(x)^2)
 ## }
-## &lt;bytecode: 0x7faeea7c1590&gt;
+## &lt;bytecode: 0x7fbf6703bc40&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <p>We use a <code>for</code> loop to draw the bootstrap sample:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">set.seed</span>(<span class="dv">8675309</span>)</a>
@@ -860,8 +860,180 @@ Y = \alpha + \beta X + \epsilon \\
 </div>
 <div id="semiparametric-hypothesis-testing-using-permutation-tests" class="section level2">
 <h2><span class="header-section-number">8.3</span> Semiparametric hypothesis testing using permutation tests</h2>
+<p>Here we will test the hypothesis that the estimated slope from the Anscombe dataset differs from a null hypothesis, where <span class="math inline">\(\beta = 0\)</span>. This results in a simplified equation, where there is no assocation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+Y = \alpha + \epsilon
+\end{aligned}
+\]</span></p>
+<p>We will use a <strong>permutation test</strong> to test the null hypothesis. Let’s go over the assumptions of our test.</p>
+<div id="assumptions-1" class="section level4">
+<h4><span class="header-section-number">8.3.0.1</span> Assumptions</h4>
+<ul>
+<li><p><em>Linearity</em>: <span class="math inline">\(\text{E}(\epsilon | X = x) =&amp; ~ 0\)</span></p></li>
+<li><p><em>Independence of units</em>: for all <em>i</em> and <span class="math inline">\(j \neq i\)</span>, <span class="math inline">\(X_i, Y_i\)</span> are independent of <span class="math inline">\(X_j, Y_j\)</span></p></li>
+<li><p><em>Distribution</em>: for all <em>i</em>, <span class="math inline">\(X_i, Y_i\)</span> are drawn from the same joint distribution <span class="math inline">\(F_{X,Y}(x,y)\)</span></p></li>
+<li><p><em>Independence of X and disturbances</em>: for all <span class="math inline">\(i\)</span>, <span class="math inline">\(X_i\)</span> and <span class="math inline">\(\epsilon_i\)</span> are independent</p></li>
+</ul>
+<p>Notice that we made no assumptions aboute the distribution of the disturbance term, <span class="math inline">\(\epsilon\)</span>.</p>
+<p>The procedure for a permutation test is:</p>
+<ol style="list-style-type: decimal">
+<li>Choose a test statistic and calculate it using the original data (<span class="math inline">\(s_d\)</span>).</li>
+<li>Permute (i.e., shuffle) the data randomly and in such a way that if the null hypothesis were true, the hypothetical dataset is just as probable as the original data.</li>
+<li>Calculate the test statistic using the permuted data and save the value.</li>
+<li>Repeat steps (2) and (3) many times. The resulting test statistics are called a ‘permutation distribution’.</li>
+<li>Compare the original statistic <span class="math inline">\(s_d\)</span> with the permutation distribution.</li>
+</ol>
+<p>Note that the permuted sample is somewhat like a sample that might be observed if the <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> values were independent.</p>
+<p>Here’s the original dataset, and a permuted one:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="co"># Original fertilizer use and cereal yield data</span></a>
+<a class="sourceLine" id="cb46-2" title="2">d &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1) [<span class="kw">order</span>(anscombe<span class="op">$</span>x1), ]</a>
+<a class="sourceLine" id="cb46-3" title="3"><span class="co"># One permuted sample </span></a>
+<a class="sourceLine" id="cb46-4" title="4"><span class="kw">set.seed</span>(<span class="dv">8675309</span>)</a>
+<a class="sourceLine" id="cb46-5" title="5">db &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">11</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)])[<span class="kw">order</span>(anscombe<span class="op">$</span>x1), ]</a>
+<a class="sourceLine" id="cb46-6" title="6">d; db</a></code></pre></div>
+<pre><code>##       [,1]  [,2]
+##  [1,]    4  4.26
+##  [2,]    5  5.68
+##  [3,]    6  7.24
+##  [4,]    7  4.82
+##  [5,]    8  6.95
+##  [6,]    9  8.81
+##  [7,]   10  8.04
+##  [8,]   11  8.33
+##  [9,]   12 10.84
+## [10,]   13  7.58
+## [11,]   14  9.96</code></pre>
+<pre><code>##       [,1]  [,2]
+##  [1,]    4  8.81
+##  [2,]    5  4.26
+##  [3,]    6  9.96
+##  [4,]    7  8.04
+##  [5,]    8  8.33
+##  [6,]    9 10.84
+##  [7,]   10  6.95
+##  [8,]   11  5.68
+##  [9,]   12  7.58
+## [10,]   13  7.24
+## [11,]   14  4.82</code></pre>
+<p>If we do this a number of times, we can plot the histogram of permuted samples, along with a line to represent the original <span class="math inline">\(\tilde \beta\)</span>:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">set.seed</span>(<span class="dv">8675309</span>)</a>
+<a class="sourceLine" id="cb49-2" title="2">nperms &lt;-<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb49-3" title="3">perm_dist &lt;-<span class="st"> </span><span class="kw">numeric</span>(nperms)</a>
+<a class="sourceLine" id="cb49-4" title="4">dat &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1) </a>
+<a class="sourceLine" id="cb49-5" title="5"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nperms){</a>
+<a class="sourceLine" id="cb49-6" title="6">  samp &lt;-<span class="st"> </span><span class="kw">perm.samp</span>(dat)</a>
+<a class="sourceLine" id="cb49-7" title="7">  perm_dist[i] &lt;-<span class="st"> </span><span class="kw">beta.mm</span>(samp[,<span class="dv">1</span>], samp[,<span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb49-8" title="8">}</a>
+<a class="sourceLine" id="cb49-9" title="9">b_orig &lt;-<span class="st"> </span><span class="kw">beta.mm</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1)</a>
+<a class="sourceLine" id="cb49-10" title="10">b_orig</a></code></pre></div>
+<pre><code>## [1] 0.5000909</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="co"># Plot histogram</span></a>
+<a class="sourceLine" id="cb51-2" title="2"><span class="kw">hist</span>(perm_dist, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>), <span class="dt">breaks =</span> <span class="dv">30</span>, </a>
+<a class="sourceLine" id="cb51-3" title="3">     <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(beta, <span class="st">&quot; from permuted samples&quot;</span>)), </a>
+<a class="sourceLine" id="cb51-4" title="4">     <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</a>
+<a class="sourceLine" id="cb51-5" title="5"><span class="kw">abline</span>(<span class="dt">v =</span> b_orig, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>We can compute a two-sided <span class="math inline">\(p\)</span> value testing the null hypothesis that <span class="math inline">\(\beta = 0\)</span> by calculating the proportion of the permuted samples for which the absolute value of <span class="math inline">\(\tilde \beta_p\)</span> is greater than the absolute value of <span class="math inline">\(\tilde \beta\)</span> from the original data:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">mean</span>(<span class="kw">abs</span>(perm_dist) <span class="op">&gt;=</span><span class="st"> </span>b_orig)</a></code></pre></div>
+<pre><code>## [1] 0.0033</code></pre>
+<p>In summary we tested the hypothesis that:</p>
+<ul>
+<li><span class="math inline">\(\beta = 0\)</span><br />
+AND<br />
+</li>
+<li>the <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> data are linear</li>
+<li>the permuted units are independent</li>
+<li>all observations are drawn from a common distribution</li>
+<li>the <span class="math inline">\(X_i\)</span> are independent of the disturbance <span class="math inline">\(\epsilon_i\)</span></li>
+</ul>
+<p>Therefore, in principle, the low <span class="math inline">\(p\)</span> value indicates that one of the above are unlikely to be true. Usually, we focus on the null hypothesis, but it is important to remember the assumptions.</p>
+</div>
 <div id="exercise-set-8-5" class="section level3">
 <h3><span class="header-section-number">8.3.1</span> Exercise set 8-5</h3>
+<ol style="list-style-type: decimal">
+<li>20 wheat fields, 10 received treatment application (substance Z). Design a permutation procedure to assess the claim that substance Z changes the wheat yield.</li>
+</ol>
+<blockquote>
+<p>The null hypothesis is that there is no association between yield and the treatment. Alternatively, the treatment may have altered the yield. To test this, we can randomly permute the control / treatment labels for the 20 fields. Then we can calculate the mean yield for each treatment, and compare the permutation distribution to the mean yield for each treatment for the original dataset.</p>
+</blockquote>
+<blockquote>
+<p>Edge has a thorough explanation, and in it he highlights that a low p-value may also result from a change in the variance due to substance Z. Thus, we are really testing the null hypothesis that substance Z does not affect the distribution of wheat yield. This might be worth simulating.</p>
+</blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="co"># 10 pairs</span></a>
+<a class="sourceLine" id="cb54-2" title="2">beta_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb54-3" title="3">n_pairs &lt;-<span class="st"> </span><span class="dv">10</span> </a>
+<a class="sourceLine" id="cb54-4" title="4">n_datasets &lt;-<span class="st"> </span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb54-5" title="5">p_mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">500</span>, <span class="dt">ncol =</span> <span class="kw">length</span>(beta_vec))</a>
+<a class="sourceLine" id="cb54-6" title="6"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(beta_vec)){</a>
+<a class="sourceLine" id="cb54-7" title="7">  p_mat[,i] &lt;-<span class="st"> </span><span class="kw">sim.perm.B</span>(<span class="dt">n =</span> n_pairs, <span class="dt">nsim =</span> n_datasets, <span class="dt">a =</span> <span class="dv">3</span>, <span class="dt">b =</span> beta_vec[i])</a>
+<a class="sourceLine" id="cb54-8" title="8">}</a>
+<a class="sourceLine" id="cb54-9" title="9"><span class="kw">colnames</span>(p_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;b_0&quot;</span>, <span class="st">&quot;b_0.1&quot;</span>, <span class="st">&quot;b_0.2&quot;</span>)</a>
+<a class="sourceLine" id="cb54-10" title="10">df10 &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(p_mat)</a>
+<a class="sourceLine" id="cb54-11" title="11"></a>
+<a class="sourceLine" id="cb54-12" title="12"><span class="co"># 50 pairs</span></a>
+<a class="sourceLine" id="cb54-13" title="13">beta_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb54-14" title="14">n_pairs &lt;-<span class="st"> </span><span class="dv">50</span></a>
+<a class="sourceLine" id="cb54-15" title="15">n_datasets &lt;-<span class="st"> </span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb54-16" title="16">p_mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">500</span>, <span class="dt">ncol =</span> <span class="kw">length</span>(beta_vec))</a>
+<a class="sourceLine" id="cb54-17" title="17"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(beta_vec)){</a>
+<a class="sourceLine" id="cb54-18" title="18">  p_mat[,i] &lt;-<span class="st"> </span><span class="kw">sim.perm.B</span>(<span class="dt">n =</span> n_pairs, <span class="dt">nsim =</span> n_datasets, <span class="dt">a =</span> <span class="dv">3</span>, <span class="dt">b =</span> beta_vec[i])</a>
+<a class="sourceLine" id="cb54-19" title="19">}</a>
+<a class="sourceLine" id="cb54-20" title="20"><span class="kw">colnames</span>(p_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;b_0&quot;</span>, <span class="st">&quot;b_0.1&quot;</span>, <span class="st">&quot;b_0.2&quot;</span>)</a>
+<a class="sourceLine" id="cb54-21" title="21">df50 &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(p_mat)</a>
+<a class="sourceLine" id="cb54-22" title="22"></a>
+<a class="sourceLine" id="cb54-23" title="23"><span class="co"># 100 pairs</span></a>
+<a class="sourceLine" id="cb54-24" title="24">beta_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb54-25" title="25">n_pairs &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb54-26" title="26">n_datasets &lt;-<span class="st"> </span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb54-27" title="27">p_mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">500</span>, <span class="dt">ncol =</span> <span class="kw">length</span>(beta_vec))</a>
+<a class="sourceLine" id="cb54-28" title="28"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(beta_vec)){</a>
+<a class="sourceLine" id="cb54-29" title="29">  p_mat[,i] &lt;-<span class="st"> </span><span class="kw">sim.perm.B</span>(<span class="dt">n =</span> n_pairs, <span class="dt">nsim =</span> n_datasets, <span class="dt">a =</span> <span class="dv">3</span>, <span class="dt">b =</span> beta_vec[i])</a>
+<a class="sourceLine" id="cb54-30" title="30">}</a>
+<a class="sourceLine" id="cb54-31" title="31"><span class="kw">colnames</span>(p_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;b_0&quot;</span>, <span class="st">&quot;b_0.1&quot;</span>, <span class="st">&quot;b_0.2&quot;</span>)</a>
+<a class="sourceLine" id="cb54-32" title="32">df100 &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(p_mat)</a>
+<a class="sourceLine" id="cb54-33" title="33"></a>
+<a class="sourceLine" id="cb54-34" title="34"><span class="co"># Get proportion of significant tests</span></a>
+<a class="sourceLine" id="cb54-35" title="35"><span class="kw">colMeans</span>(df10 <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</a></code></pre></div>
+<pre><code>##   b_0 b_0.1 b_0.2 
+##  0.05  0.10  0.10</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">colMeans</span>(df50 <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</a></code></pre></div>
+<pre><code>##   b_0 b_0.1 b_0.2 
+##  0.00  0.30  0.55</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">colMeans</span>(df100 <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</a></code></pre></div>
+<pre><code>##   b_0 b_0.1 b_0.2 
+##   0.1   0.6   1.0</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb60-2" title="2"><span class="kw">library</span>(patchwork)</a>
+<a class="sourceLine" id="cb60-3" title="3">p10 &lt;-<span class="st"> </span>df10 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb60-4" title="4"><span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> beta, <span class="dt">value =</span> p) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb60-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> beta, p)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-6" title="6"><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-7" title="7"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-8" title="8"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;n = 10 pairs&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-9" title="9"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.05</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb60-10" title="10"></a>
+<a class="sourceLine" id="cb60-11" title="11">p50 &lt;-<span class="st"> </span>df50 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb60-12" title="12"><span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> beta, <span class="dt">value =</span> p) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb60-13" title="13"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> beta, p)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-14" title="14"><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-15" title="15"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-16" title="16"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;n = 50 pairs&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-17" title="17"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.05</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb60-18" title="18"></a>
+<a class="sourceLine" id="cb60-19" title="19">p100 &lt;-<span class="st"> </span>df100 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb60-20" title="20"><span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> beta, <span class="dt">value =</span> p) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb60-21" title="21"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> beta, p)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-22" title="22"><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-23" title="23"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-24" title="24"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;n = 100 pairs&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-25" title="25"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.05</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb60-26" title="26"></a>
+<a class="sourceLine" id="cb60-27" title="27">p10 <span class="op">+</span><span class="st"> </span>p50 <span class="op">+</span><span class="st"> </span>p100</a></code></pre></div>
+<p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 </div>
 </div>
 <div id="chapter-summary-1" class="section level2">
