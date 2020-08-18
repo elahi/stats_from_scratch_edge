@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 Parametric estimation and inference | Notes on Statistical Thinking from Scratch</title>
+  <meta name="description" content="Cliff notes for Statistical Thinking from Scratch, by Doc Edge." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 Parametric estimation and inference | Notes on Statistical Thinking from Scratch" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Cliff notes for Statistical Thinking from Scratch, by Doc Edge." />
+  <meta name="github-repo" content="elahi/stats_from_scratch_edge" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 Parametric estimation and inference | Notes on Statistical Thinking from Scratch" />
+  
+  <meta name="twitter:description" content="Cliff notes for Statistical Thinking from Scratch, by Doc Edge." />
+  
+
+<meta name="author" content="Robin Elahi" />
+
+
+<meta name="date" content="2020-08-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="semiparametric.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121894527-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121894527-4');
+</script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Notes on Statistical Thinking from Scratch</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="r-eda.html"><a href="r-eda.html"><i class="fa fa-check"></i><b>2</b> R and exploratory data analysis</a><ul>
+<li class="chapter" data-level="2.1" data-path="r-eda.html"><a href="r-eda.html#inspecting-the-dataframe"><i class="fa fa-check"></i><b>2.1</b> Inspecting the dataframe</a></li>
+<li class="chapter" data-level="2.2" data-path="r-eda.html"><a href="r-eda.html#histograms"><i class="fa fa-check"></i><b>2.2</b> Histograms</a></li>
+<li class="chapter" data-level="2.3" data-path="r-eda.html"><a href="r-eda.html#summarising-data"><i class="fa fa-check"></i><b>2.3</b> Summarising data</a></li>
+<li class="chapter" data-level="2.4" data-path="r-eda.html"><a href="r-eda.html#loops"><i class="fa fa-check"></i><b>2.4</b> Loops</a></li>
+<li class="chapter" data-level="2.5" data-path="r-eda.html"><a href="r-eda.html#functions"><i class="fa fa-check"></i><b>2.5</b> Functions</a></li>
+<li class="chapter" data-level="2.6" data-path="r-eda.html"><a href="r-eda.html#boxplots"><i class="fa fa-check"></i><b>2.6</b> Boxplots</a></li>
+<li class="chapter" data-level="2.7" data-path="r-eda.html"><a href="r-eda.html#scatterplots"><i class="fa fa-check"></i><b>2.7</b> Scatterplots</a></li>
+<li class="chapter" data-level="2.8" data-path="r-eda.html"><a href="r-eda.html#exercise-set-2-2"><i class="fa fa-check"></i><b>2.8</b> Exercise set 2-2</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="best-fit-line.html"><a href="best-fit-line.html"><i class="fa fa-check"></i><b>3</b> Line of best fit</a><ul>
+<li class="chapter" data-level="3.1" data-path="best-fit-line.html"><a href="best-fit-line.html#exercise-set-3-1"><i class="fa fa-check"></i><b>3.1</b> Exercise set 3-1</a></li>
+<li class="chapter" data-level="3.2" data-path="best-fit-line.html"><a href="best-fit-line.html#exercise-set-3-2"><i class="fa fa-check"></i><b>3.2</b> Exercise set 3-2</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>4</b> Probability and random variables</a><ul>
+<li class="chapter" data-level="4.0.1" data-path="probability.html"><a href="probability.html#probability-vs-estimation"><i class="fa fa-check"></i><b>4.0.1</b> Probability vs estimation</a></li>
+<li class="chapter" data-level="4.0.2" data-path="probability.html"><a href="probability.html#what-is-a-probability"><i class="fa fa-check"></i><b>4.0.2</b> What is a probability?</a></li>
+<li class="chapter" data-level="4.0.3" data-path="probability.html"><a href="probability.html#set-notation"><i class="fa fa-check"></i><b>4.0.3</b> Set notation</a></li>
+<li class="chapter" data-level="4.1" data-path="probability.html"><a href="probability.html#kolmogorovs-three-axioms-of-probability"><i class="fa fa-check"></i><b>4.1</b> Kolmogorov’s three axioms of probability</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="probability.html"><a href="probability.html#exercise-set-4-1"><i class="fa fa-check"></i><b>4.1.1</b> Exercise set 4-1</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="probability.html"><a href="probability.html#conditional-probability-and-independence"><i class="fa fa-check"></i><b>4.2</b> Conditional probability and independence</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="probability.html"><a href="probability.html#exercise-set-4-2"><i class="fa fa-check"></i><b>4.2.1</b> Exercise set 4-2</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="probability.html"><a href="probability.html#bayes-theorem"><i class="fa fa-check"></i><b>4.3</b> Bayes’ Theorem</a></li>
+<li class="chapter" data-level="4.4" data-path="probability.html"><a href="probability.html#discrete-random-variables-and-distributions"><i class="fa fa-check"></i><b>4.4</b> Discrete random variables and distributions</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="probability.html"><a href="probability.html#exercise-set-4-3"><i class="fa fa-check"></i><b>4.4.1</b> Exercise set 4-3</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="probability.html"><a href="probability.html#continuous-random-variables-and-distributions"><i class="fa fa-check"></i><b>4.5</b> Continuous random variables and distributions</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="probability.html"><a href="probability.html#exercise-set-4-4"><i class="fa fa-check"></i><b>4.5.1</b> Exercise set 4-4</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="probability.html"><a href="probability.html#probability-density-functions"><i class="fa fa-check"></i><b>4.6</b> Probability density functions</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="probability.html"><a href="probability.html#additional-viz"><i class="fa fa-check"></i><b>4.6.1</b> Additional viz</a></li>
+<li class="chapter" data-level="4.6.2" data-path="probability.html"><a href="probability.html#exercise-set-4-5"><i class="fa fa-check"></i><b>4.6.2</b> Exercise set 4-5</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="probability.html"><a href="probability.html#families-of-distributions"><i class="fa fa-check"></i><b>4.7</b> Families of distributions</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="probability.html"><a href="probability.html#exercise-set-4-6"><i class="fa fa-check"></i><b>4.7.1</b> Exercise set 4-6</a></li>
+<li class="chapter" data-level="4.7.2" data-path="probability.html"><a href="probability.html#additional-exercise"><i class="fa fa-check"></i><b>4.7.2</b> Additional exercise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="randomvars.html"><a href="randomvars.html"><i class="fa fa-check"></i><b>5</b> Properties of random variables</a><ul>
+<li class="chapter" data-level="5.1" data-path="randomvars.html"><a href="randomvars.html#expected-values-and-the-law-of-large-numbers"><i class="fa fa-check"></i><b>5.1</b> Expected values and the law of large numbers</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="randomvars.html"><a href="randomvars.html#weak-law-of-large-numbers"><i class="fa fa-check"></i><b>5.1.1</b> Weak law of large numbers</a></li>
+<li class="chapter" data-level="5.1.2" data-path="randomvars.html"><a href="randomvars.html#handy-facts-about-expectations"><i class="fa fa-check"></i><b>5.1.2</b> Handy facts about expectations</a></li>
+<li class="chapter" data-level="5.1.3" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-1"><i class="fa fa-check"></i><b>5.1.3</b> Exercise set 5-1</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="randomvars.html"><a href="randomvars.html#variance-and-standard-deviation"><i class="fa fa-check"></i><b>5.2</b> Variance and standard deviation</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="randomvars.html"><a href="randomvars.html#beautiful-properties-of-the-variance"><i class="fa fa-check"></i><b>5.2.1</b> Beautiful properties of the variance</a></li>
+<li class="chapter" data-level="5.2.2" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-2"><i class="fa fa-check"></i><b>5.2.2</b> Exercise set 5-2</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="randomvars.html"><a href="randomvars.html#joint-distributions-covariance-and-correlation"><i class="fa fa-check"></i><b>5.3</b> Joint distributions, covariance, and correlation</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="randomvars.html"><a href="randomvars.html#joint-probability-distributions"><i class="fa fa-check"></i><b>5.3.1</b> Joint probability distributions</a></li>
+<li class="chapter" data-level="5.3.2" data-path="randomvars.html"><a href="randomvars.html#marginal-distributions"><i class="fa fa-check"></i><b>5.3.2</b> Marginal distributions</a></li>
+<li class="chapter" data-level="5.3.3" data-path="randomvars.html"><a href="randomvars.html#covariance"><i class="fa fa-check"></i><b>5.3.3</b> Covariance</a></li>
+<li class="chapter" data-level="5.3.4" data-path="randomvars.html"><a href="randomvars.html#correlation"><i class="fa fa-check"></i><b>5.3.4</b> Correlation</a></li>
+<li class="chapter" data-level="5.3.5" data-path="randomvars.html"><a href="randomvars.html#additional-exercise-1"><i class="fa fa-check"></i><b>5.3.5</b> Additional exercise</a></li>
+<li class="chapter" data-level="5.3.6" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-3"><i class="fa fa-check"></i><b>5.3.6</b> Exercise set 5-3</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="randomvars.html"><a href="randomvars.html#conditional-distribution-expectation-variance"><i class="fa fa-check"></i><b>5.4</b> Conditional distribution, expectation, variance</a></li>
+<li class="chapter" data-level="5.5" data-path="randomvars.html"><a href="randomvars.html#the-central-limit-theorem"><i class="fa fa-check"></i><b>5.5</b> The central limit theorem</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-4"><i class="fa fa-check"></i><b>5.5.1</b> Exercise set 5-4</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="randomvars.html"><a href="randomvars.html#a-probabilistic-model-for-simple-linear-regression"><i class="fa fa-check"></i><b>5.6</b> A probabilistic model for simple linear regression</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="randomvars.html"><a href="randomvars.html#assumptions-of-the-linear-model"><i class="fa fa-check"></i><b>5.6.1</b> Assumptions of the linear model</a></li>
+<li class="chapter" data-level="5.6.2" data-path="randomvars.html"><a href="randomvars.html#important-claims-that-follow-from-these-assumptions"><i class="fa fa-check"></i><b>5.6.2</b> Important claims that follow from these assumptions</a></li>
+<li class="chapter" data-level="5.6.3" data-path="randomvars.html"><a href="randomvars.html#checking-these-assumptions"><i class="fa fa-check"></i><b>5.6.3</b> Checking these assumptions</a></li>
+<li class="chapter" data-level="5.6.4" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-5"><i class="fa fa-check"></i><b>5.6.4</b> Exercise set 5-5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="estimators.html"><a href="estimators.html"><i class="fa fa-check"></i><b>6</b> Properties of point estimators</a><ul>
+<li class="chapter" data-level="6.1" data-path="estimators.html"><a href="estimators.html#bias"><i class="fa fa-check"></i><b>6.1</b> Bias</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="estimators.html"><a href="estimators.html#exercise-set-6-1"><i class="fa fa-check"></i><b>6.1.1</b> Exercise set 6-1</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="estimators.html"><a href="estimators.html#variance"><i class="fa fa-check"></i><b>6.2</b> Variance</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="estimators.html"><a href="estimators.html#exercise-set-6-2"><i class="fa fa-check"></i><b>6.2.1</b> Exercise set 6-2</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="estimators.html"><a href="estimators.html#mean-squared-error"><i class="fa fa-check"></i><b>6.3</b> Mean squared error</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="estimators.html"><a href="estimators.html#exercise-set-6-3"><i class="fa fa-check"></i><b>6.3.1</b> Exercise set 6-3</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="estimators.html"><a href="estimators.html#consistency"><i class="fa fa-check"></i><b>6.4</b> Consistency</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="estimators.html"><a href="estimators.html#exercise-set-6-4"><i class="fa fa-check"></i><b>6.4.1</b> Exercise set 6-4</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="estimators.html"><a href="estimators.html#efficiency"><i class="fa fa-check"></i><b>6.5</b> Efficiency</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="estimators.html"><a href="estimators.html#exercise-set-6-5"><i class="fa fa-check"></i><b>6.5.1</b> Exercise set 6-5</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="estimators.html"><a href="estimators.html#statistical-decision-theory-and-risk"><i class="fa fa-check"></i><b>6.6</b> Statistical decision theory and risk</a></li>
+<li class="chapter" data-level="6.7" data-path="estimators.html"><a href="estimators.html#robustness"><i class="fa fa-check"></i><b>6.7</b> Robustness</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="estimators.html"><a href="estimators.html#exercise-set-6-8"><i class="fa fa-check"></i><b>6.7.1</b> Exercise set 6-8</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="estimators.html"><a href="estimators.html#estimators-for-simple-linear-regression"><i class="fa fa-check"></i><b>6.8</b> Estimators for simple linear regression</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="estimators.html"><a href="estimators.html#exercise-set-6-9"><i class="fa fa-check"></i><b>6.8.1</b> Exercise set 6-9</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="intervals.html"><a href="intervals.html"><i class="fa fa-check"></i><b>7</b> Interval estimation and inference</a><ul>
+<li class="chapter" data-level="7.1" data-path="intervals.html"><a href="intervals.html#standard-error"><i class="fa fa-check"></i><b>7.1</b> Standard error</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="intervals.html"><a href="intervals.html#exercise-set-7-1"><i class="fa fa-check"></i><b>7.1.1</b> Exercise set 7-1</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="intervals.html"><a href="intervals.html#confidence-intervals"><i class="fa fa-check"></i><b>7.2</b> Confidence intervals</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="intervals.html"><a href="intervals.html#exercise-set-7-2"><i class="fa fa-check"></i><b>7.2.1</b> Exercise set 7-2</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="intervals.html"><a href="intervals.html#frequentist-inference-i-null-hypotheses-test-statistics-and-p-values"><i class="fa fa-check"></i><b>7.3</b> Frequentist inference I: null hypotheses, test statistics, and <em>p</em> values</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="intervals.html"><a href="intervals.html#exercise-set-7-3"><i class="fa fa-check"></i><b>7.3.1</b> Exercise set 7-3</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="intervals.html"><a href="intervals.html#frequentist-inference-ii-alternative-hypotheses-and-the-rejection-framework"><i class="fa fa-check"></i><b>7.4</b> Frequentist inference II: alternative hypotheses and the rejection framework</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="intervals.html"><a href="intervals.html#exercise-set-7-4"><i class="fa fa-check"></i><b>7.4.1</b> Exercise set 7-4</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="intervals.html"><a href="intervals.html#connecting-hypothesis-tests-and-confidence-intervals"><i class="fa fa-check"></i><b>7.5</b> Connecting hypothesis tests and confidence intervals</a></li>
+<li class="chapter" data-level="7.6" data-path="intervals.html"><a href="intervals.html#nhst-and-the-abuse-of-tests"><i class="fa fa-check"></i><b>7.6</b> NHST and the abuse of tests</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="intervals.html"><a href="intervals.html#exercise-set-7-5"><i class="fa fa-check"></i><b>7.6.1</b> Exercise set 7-5</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="intervals.html"><a href="intervals.html#frequentist-inference-iii-power"><i class="fa fa-check"></i><b>7.7</b> Frequentist inference III: power</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="intervals.html"><a href="intervals.html#exercise-set-7-6"><i class="fa fa-check"></i><b>7.7.1</b> Exercise set 7-6</a></li>
+</ul></li>
+<li class="chapter" data-level="7.8" data-path="intervals.html"><a href="intervals.html#putting-it-together-what-happens-when-the-sample-size-increases"><i class="fa fa-check"></i><b>7.8</b> Putting it together: what happens when the sample size increases?</a></li>
+<li class="chapter" data-level="7.9" data-path="intervals.html"><a href="intervals.html#chapter-summary"><i class="fa fa-check"></i><b>7.9</b> Chapter summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="semiparametric.html"><a href="semiparametric.html"><i class="fa fa-check"></i><b>8</b> Semiparametric estimation and inference</a><ul>
+<li class="chapter" data-level="8.0.1" data-path="semiparametric.html"><a href="semiparametric.html#exercise-set-8-1"><i class="fa fa-check"></i><b>8.0.1</b> Exercise set 8-1</a></li>
+<li class="chapter" data-level="8.1" data-path="semiparametric.html"><a href="semiparametric.html#semiparametric-point-estimation-using-the-method-of-moments"><i class="fa fa-check"></i><b>8.1</b> Semiparametric point estimation using the method of moments</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="semiparametric.html"><a href="semiparametric.html#introduction-to-moments"><i class="fa fa-check"></i><b>8.1.1</b> Introduction to moments</a></li>
+<li class="chapter" data-level="8.1.2" data-path="semiparametric.html"><a href="semiparametric.html#plug-in-estimators"><i class="fa fa-check"></i><b>8.1.2</b> Plug-in estimators</a></li>
+<li class="chapter" data-level="8.1.3" data-path="semiparametric.html"><a href="semiparametric.html#exercise-set-8-2"><i class="fa fa-check"></i><b>8.1.3</b> Exercise set 8-2</a></li>
+<li class="chapter" data-level="8.1.4" data-path="semiparametric.html"><a href="semiparametric.html#the-method-of-moments"><i class="fa fa-check"></i><b>8.1.4</b> The method of moments</a></li>
+<li class="chapter" data-level="8.1.5" data-path="semiparametric.html"><a href="semiparametric.html#exercise-set-8-3"><i class="fa fa-check"></i><b>8.1.5</b> Exercise set 8-3</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="semiparametric.html"><a href="semiparametric.html#semiparametric-interval-estimation-using-the-bootstrap"><i class="fa fa-check"></i><b>8.2</b> Semiparametric interval estimation using the bootstrap</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="semiparametric.html"><a href="semiparametric.html#exercise-set-8-4"><i class="fa fa-check"></i><b>8.2.1</b> Exercise set 8-4</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="semiparametric.html"><a href="semiparametric.html#semiparametric-hypothesis-testing-using-permutation-tests"><i class="fa fa-check"></i><b>8.3</b> Semiparametric hypothesis testing using permutation tests</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="semiparametric.html"><a href="semiparametric.html#exercise-set-8-5"><i class="fa fa-check"></i><b>8.3.1</b> Exercise set 8-5</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="semiparametric.html"><a href="semiparametric.html#chapter-summary-1"><i class="fa fa-check"></i><b>8.4</b> Chapter summary</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="parametric.html"><a href="parametric.html"><i class="fa fa-check"></i><b>9</b> Parametric estimation and inference</a><ul>
+<li class="chapter" data-level="9.0.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-1"><i class="fa fa-check"></i><b>9.0.1</b> Exercise set 9-1</a></li>
+<li class="chapter" data-level="9.1" data-path="parametric.html"><a href="parametric.html#parametric-estimation-using-maximum-likelihood"><i class="fa fa-check"></i><b>9.1</b> 9.1 Parametric estimation using maximum likelihood</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-2"><i class="fa fa-check"></i><b>9.1.1</b> Exercise set 9-2</a></li>
+<li class="chapter" data-level="9.1.2" data-path="parametric.html"><a href="parametric.html#exercise-set-9-3"><i class="fa fa-check"></i><b>9.1.2</b> Exercise set 9-3</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="parametric.html"><a href="parametric.html#parametric-interval-estimation-the-direct-approach-and-fisher-information"><i class="fa fa-check"></i><b>9.2</b> 9.2 Parametric interval estimation: the direct approach and Fisher information</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-4"><i class="fa fa-check"></i><b>9.2.1</b> Exercise set 9-4</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="parametric.html"><a href="parametric.html#parametric-hypothesis-testing-using-the-wald-test"><i class="fa fa-check"></i><b>9.3</b> 9.3 Parametric hypothesis testing using the Wald test</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-5"><i class="fa fa-check"></i><b>9.3.1</b> Exercise set 9-5</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="parametric.html"><a href="parametric.html#parametric-hypothesis-testing-using-the-likelihood-ratio-test"><i class="fa fa-check"></i><b>9.4</b> 9.4 Parametric hypothesis testing using the likelihood-ratio test</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-6"><i class="fa fa-check"></i><b>9.4.1</b> Exercise set 9-6</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes on Statistical Thinking from Scratch</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="parametric" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> Parametric estimation and inference</h1>
+<p>If all of the random variables in our model can be described by a finite set of parameters, we are using <em>parametric</em> estimation and inference. In paremetric estimation, the most important mathematical concept is the likelihood function, or <strong>likelihood</strong>.</p>
+<blockquote>
+<p>The likelihood allows us to compare values of a parameter in terms of their (the values’) ability to explain the observed data. In other words, if the true value of the parameter is y, how likely is the observed dataset?</p>
+</blockquote>
+<p>Suppose the observations, which we call <span class="math inline">\(d\)</span>, are instances drawn from a random variable <span class="math inline">\(D\)</span>, which is governed by a probability distribution function. <em>We do not know what this probability distribution is!</em> We have to think about the data - are they continuous or discrete; are they bounded at 0 or elsewhere; is the variance uniform or not? Based on the answers to these questions, we then assume a probability distribution function, <span class="math inline">\(f_D\)</span>.</p>
+<p>We can use <span class="math inline">\(f_D\)</span> to evaluate the probability of the data, <span class="math inline">\(d\)</span>, at every potential value of the parameter <span class="math inline">\(\theta\)</span> we are trying to estimate, and we call this the likelihood <span class="math inline">\(L(\theta)\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+L(\theta) = f_D(d | \theta)
+\end{aligned}
+\]</span></p>
+<p>It is tempting to think of the likelihood as a probability distribution. But it is not, because the function does not sum or integrate to 1 with respect to <span class="math inline">\(\theta\)</span> (which is a requirement for a probability distribution function). This is partly why we are defining it (the likelihood) as separate idea: the likelihood is a function of the parameters, and we use it to ask questions about the plausibility of the data (which are fixed), assuming different values of the parameters. If <span class="math inline">\(L(\theta_1|d) &gt; L(\theta_2|d)\)</span>, then the data we have observed are more likely to have occurred if <span class="math inline">\(\theta = \theta_1\)</span> than <span class="math inline">\(\theta = \theta_2\)</span>. We interpret this result as: <span class="math inline">\(\theta_1\)</span> is a more plausible value for <span class="math inline">\(\theta\)</span> than <span class="math inline">\(\theta_2\)</span>.</p>
+<p>Ok, so how do we actually calculate the likelihood? Suppose the data are <span class="math inline">\(n\)</span> independent observations, <span class="math inline">\(x_1, x_2, ..., x_n\)</span> each with the density function <span class="math inline">\(f_X(x)\)</span>, which depends on parameter <span class="math inline">\(\theta\)</span>. This means that these observations are independent and identically distributed, and the joint density function (of the <em>data</em> and the <em>likelihood</em>) is given by:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f_{X_1, X_2, ..., X_n}(x_1, x_2, ..., x_n) =&amp; ~ f_X(x_1) * f_X(x_2) * ... * f_X(x_n) \\
+=&amp; ~ \prod_{i = 1}^n f_X(x_i)
+\end{aligned}
+\]</span></p>
+<p>where the symbol <span class="math inline">\(\prod\)</span> denotes multiplication in the same way that the symbol <span class="math inline">\(\sum\)</span> denotes addition. Instead of multiplying, we’d prefer to work with sums for numerical reasons. Because the log of a product is the sum of the logarithms of the terms being multiplied,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{ln}(yz) = \text{ln}(y) + \text{ln}(z)
+\end{aligned}
+\]</span></p>
+<p>we can express the joint density function as a sum instead:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{ln}[f_X(x_1) * f_X(x_2) * ... * f_X(x_n)] =&amp; ~ \sum_{i = 1}^n \text{ln}[f_X(x_i)]
+\end{aligned}
+\]</span></p>
+<p>and define it as follows:</p>
+<p><span class="math display">\[
+\begin{aligned}
+l(\theta) = \text{ln}[L(\theta)]
+\end{aligned}
+\]</span></p>
+<p>The likelihood provides a framework for estimation and inference.</p>
+<div id="exercise-set-9-1" class="section level3">
+<h3><span class="header-section-number">9.0.1</span> Exercise set 9-1</h3>
+<ol style="list-style-type: decimal">
+<li>Is this statement true / false?</li>
+</ol>
+<p><em>The value of <span class="math inline">\(\theta\)</span> that maximizes <span class="math inline">\(L(\theta)\)</span> is the most probable value of <span class="math inline">\(\theta\)</span> given the observed data.</em></p>
+<p>False - see Edge explanation. Change to:</p>
+<p><em>The value of <span class="math inline">\(\theta\)</span> that maximizes <span class="math inline">\(L(\theta)\)</span> is the one that maximizes the probability of obtaining the observed data.</em></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Write all of the following in the simplest form:</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>The pdf of <span class="math inline">\(X\)</span>, a Normal(<span class="math inline">\(\mu, \sigma^2\)</span>) random variable:</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+f_X(x) = \frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac{(x - \mu)^2}{2 \sigma^2}}
+\end{aligned}
+\]</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>The log-likelihood of <span class="math inline">\(\mu\)</span> given an observation of <span class="math inline">\(x\)</span>, which is assumed to be an instance of <span class="math inline">\(X\)</span>:</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+l(\mu) =&amp; ~ \text{ln}(\frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac{(x - \mu)^2}{2 \sigma^2}}) \\
+       =&amp; ~ \text{ln}(\frac{1}{\sigma \sqrt{2 \pi}}) + \text{ln}(e^{-\frac{(x - \mu)^2}{2 \sigma^2}}) \\
+       =&amp; ~ \text{ln}(\frac{1}{\sigma \sqrt{2 \pi}}) - \frac{(x - \mu)^2}{2 \sigma^2} \\
+\end{aligned}
+\]</span></p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>The joint density of <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, two independent Normal(<span class="math inline">\(\mu, \sigma^2\)</span>) random variables.</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+f_{X_1, X_2}(x_1, x_2) =&amp; ~ \frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac{(x_1 - \mu)^2}{2 \sigma^2}} *
+                         \frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac{(x_2 - \mu)^2}{2 \sigma^2}} \\
+                        &amp; \text{consider each of these terms as a, b, and c:} \\
+                       =&amp; ~ (ab)*(ac) \\
+                       =&amp; ~ a^2(bc) \\
+                        &amp; \text{therefore we can write} \\
+                       =&amp; ~ \frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2}{2 \sigma^2}} * 
+                            e^{-\frac{(x_2 - \mu)^2}{2 \sigma^2}} \\
+                        &amp; \text{we know that } a^m * a^n = a^{m + n} \text{, so} \\
+                       =&amp; ~ \frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2 + (x_2 - \mu)^2}{2 \sigma^2}} \\
+\end{aligned}
+\]</span></p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>The log-likelihood of <span class="math inline">\(\mu\)</span> given an observation of <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>, which are assumed to be instances of <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>:</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+l(\mu) =&amp; ~ \text{ln}(\frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2 + (x_2 - \mu)^2}{2 \sigma^2}}) \\
+       =&amp; ~ \text{ln}(\frac{1}{\sigma^2 2 \pi}) + \text{ln}( e^{-\frac{(x_1 - \mu)^2 + (x_2 - \mu)^2}{2 \sigma^2}}) \\
+       =&amp; ~ \text{ln}(\frac{1}{\sigma^2 2 \pi}) -\frac{(x_1 - \mu)^2}{2 \sigma^2} -\frac{(x_2 - \mu)^2}{2 \sigma^2}\\
+       &amp; \text{though I don&#39;t know how to get to Edge&#39;s answer:} \\
+       =&amp; ~ 2~\text{ln}(\frac{1}{\sigma \sqrt {2 \pi}}) -\frac{(x_1 - \mu)^2}{2 \sigma^2} -\frac{(x_2 - \mu)^2}{2 \sigma^2}\\
+\end{aligned}
+\]</span></p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>The log-likelihood of <span class="math inline">\(\mu\)</span> given observations of <span class="math inline">\(x_1, x_2, ..., x_n\)</span>, which are assumed to be instances of <span class="math inline">\(n\)</span> independent random variables with a Normal(<span class="math inline">\(\mu, \sigma^2\)</span>) distribution:</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+l(\mu) =&amp; ~ n~\text{ln}(\frac{1}{\sigma \sqrt {2 \pi}}) - \sum_{i = 1}^n \frac{(x_i - \mu)^2}{2 \sigma^2} \\
+\end{aligned}
+\]</span></p>
+</div>
+<div id="parametric-estimation-using-maximum-likelihood" class="section level2">
+<h2><span class="header-section-number">9.1</span> 9.1 Parametric estimation using maximum likelihood</h2>
+<div id="exercise-set-9-2" class="section level3">
+<h3><span class="header-section-number">9.1.1</span> Exercise set 9-2</h3>
+</div>
+<div id="exercise-set-9-3" class="section level3">
+<h3><span class="header-section-number">9.1.2</span> Exercise set 9-3</h3>
+</div>
+</div>
+<div id="parametric-interval-estimation-the-direct-approach-and-fisher-information" class="section level2">
+<h2><span class="header-section-number">9.2</span> 9.2 Parametric interval estimation: the direct approach and Fisher information</h2>
+<div id="exercise-set-9-4" class="section level3">
+<h3><span class="header-section-number">9.2.1</span> Exercise set 9-4</h3>
+</div>
+</div>
+<div id="parametric-hypothesis-testing-using-the-wald-test" class="section level2">
+<h2><span class="header-section-number">9.3</span> 9.3 Parametric hypothesis testing using the Wald test</h2>
+<div id="exercise-set-9-5" class="section level3">
+<h3><span class="header-section-number">9.3.1</span> Exercise set 9-5</h3>
+</div>
+</div>
+<div id="parametric-hypothesis-testing-using-the-likelihood-ratio-test" class="section level2">
+<h2><span class="header-section-number">9.4</span> 9.4 Parametric hypothesis testing using the likelihood-ratio test</h2>
+<div id="exercise-set-9-6" class="section level3">
+<h3><span class="header-section-number">9.4.1</span> Exercise set 9-6</h3>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="semiparametric.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
