@@ -609,7 +609,7 @@ We will use a **permutation test** to test the null hypothesis. Let's go over th
 
 #### Assumptions
 
-  - *Linearity*: $\text{E}(\epsilon | X = x) =& ~ 0$
+  - *Linearity*: $\text{E}(\epsilon | X = x) = ~ 0$
 
   - *Independence of units*: for all *i* and $j \neq i$, $X_i, Y_i$ are independent of $X_j, Y_j$
   

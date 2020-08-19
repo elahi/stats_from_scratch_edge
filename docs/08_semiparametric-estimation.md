@@ -527,7 +527,7 @@ boot.samp
 ##     boot.inds <- sample(1:n, replace = TRUE)
 ##     x[boot.inds, ]
 ## }
-## <bytecode: 0x7ff8854bf888>
+## <bytecode: 0x7fc7a912bab8>
 ## <environment: namespace:stfspack>
 ```
 
@@ -542,7 +542,7 @@ beta.mm
 ##     (sum(x * y) - (1/n) * sum(x) * sum(y))/(sum(x^2) - (1/n) * 
 ##         sum(x)^2)
 ## }
-## <bytecode: 0x7ff8855ef7e0>
+## <bytecode: 0x7fc7a918ba10>
 ## <environment: namespace:stfspack>
 ```
 
@@ -778,7 +778,7 @@ We will use a **permutation test** to test the null hypothesis. Let's go over th
 
 #### Assumptions
 
-  - *Linearity*: $\text{E}(\epsilon | X = x) =& ~ 0$
+  - *Linearity*: $\text{E}(\epsilon | X = x) = ~ 0$
 
   - *Independence of units*: for all *i* and $j \neq i$, $X_i, Y_i$ are independent of $X_j, Y_j$
   

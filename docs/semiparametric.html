@@ -710,7 +710,7 @@ Y = \alpha + \beta X + \epsilon \\
 ##     boot.inds &lt;- sample(1:n, replace = TRUE)
 ##     x[boot.inds, ]
 ## }
-## &lt;bytecode: 0x7ff8854bf888&gt;
+## &lt;bytecode: 0x7fc7a912bab8&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">beta.mm</a></code></pre></div>
 <pre><code>## function (x, y) 
@@ -719,7 +719,7 @@ Y = \alpha + \beta X + \epsilon \\
 ##     (sum(x * y) - (1/n) * sum(x) * sum(y))/(sum(x^2) - (1/n) * 
 ##         sum(x)^2)
 ## }
-## &lt;bytecode: 0x7ff8855ef7e0&gt;
+## &lt;bytecode: 0x7fc7a918ba10&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <p>We use a <code>for</code> loop to draw the bootstrap sample:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">set.seed</span>(<span class="dv">8675309</span>)</a>
@@ -886,7 +886,7 @@ Y = \alpha + \epsilon
 <div id="assumptions-1" class="section level4">
 <h4><span class="header-section-number">8.3.0.1</span> Assumptions</h4>
 <ul>
-<li><p><em>Linearity</em>: <span class="math inline">\(\text{E}(\epsilon | X = x) =&amp; ~ 0\)</span></p></li>
+<li><p><em>Linearity</em>: <span class="math inline">\(\text{E}(\epsilon | X = x) = ~ 0\)</span></p></li>
 <li><p><em>Independence of units</em>: for all <em>i</em> and <span class="math inline">\(j \neq i\)</span>, <span class="math inline">\(X_i, Y_i\)</span> are independent of <span class="math inline">\(X_j, Y_j\)</span></p></li>
 <li><p><em>Distribution</em>: for all <em>i</em>, <span class="math inline">\(X_i, Y_i\)</span> are drawn from the same joint distribution <span class="math inline">\(F_{X,Y}(x,y)\)</span></p></li>
 <li><p><em>Independence of X and disturbances</em>: for all <span class="math inline">\(i\)</span>, <span class="math inline">\(X_i\)</span> and <span class="math inline">\(\epsilon_i\)</span> are independent</p></li>
