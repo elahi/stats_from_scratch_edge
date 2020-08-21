@@ -67,7 +67,7 @@ The likelihood provides a framework for estimation and inference.
 
 *The value of $\theta$ that maximizes $L(\theta)$ is the most probable value of $\theta$ given the observed data.*
 
-False - see Edge explanation. Change to:
+False - frequentists consider $\theta$ to be fixed, and thus has no probability distribution. See Edge explanation. Change to:
 
 *The value of $\theta$ that maximizes $L(\theta)$ is the one that maximizes the probability of obtaining the observed data.*
 
@@ -104,9 +104,13 @@ f_{X_1, X_2}(x_1, x_2) =& ~ \frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac{(x_1 - \mu)^2
                        =& ~ \frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2}{2 \sigma^2}} * 
                             e^{-\frac{(x_2 - \mu)^2}{2 \sigma^2}} \\
                         & \text{we know that } a^m * a^n = a^{m + n} \text{, so} \\
-                       =& ~ \frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2 + (x_2 - \mu)^2}{2 \sigma^2}} \\
+                       =& ~ \frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2 - (x_2 - \mu)^2}{2 \sigma^2}} \\
+                        & \text{however, this differs from Edge's answer:} \\
+                       =& ~ \frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2 + (x_2 - \mu)^2}{2 \sigma^2}} \\                      
 \end{aligned}
 $$  
+
+TBD why my answer is different, but I'll roll with Edge's solution for now.
 
   d. The log-likelihood of $\mu$ given an observation of $x_1$ and $x_2$, which are assumed to be instances of $X_1$ and $X_2$:
   
@@ -115,7 +119,7 @@ $$
 l(\mu) =& ~ \text{ln}(\frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2 + (x_2 - \mu)^2}{2 \sigma^2}}) \\
        =& ~ \text{ln}(\frac{1}{\sigma^2 2 \pi}) + \text{ln}( e^{-\frac{(x_1 - \mu)^2 + (x_2 - \mu)^2}{2 \sigma^2}}) \\
        =& ~ \text{ln}(\frac{1}{\sigma^2 2 \pi}) -\frac{(x_1 - \mu)^2}{2 \sigma^2} -\frac{(x_2 - \mu)^2}{2 \sigma^2}\\
-       & \text{though I don't know how to get to Edge's answer:} \\
+       & \text{though I don't know how to get to Edge's answer, apart from starting with our answer in 1b:} \\
        =& ~ 2~\text{ln}(\frac{1}{\sigma \sqrt {2 \pi}}) -\frac{(x_1 - \mu)^2}{2 \sigma^2} -\frac{(x_2 - \mu)^2}{2 \sigma^2}\\
 \end{aligned}
 $$  
@@ -144,7 +148,7 @@ $$
 
   - 'argmax' means 'argument of the maximum'
   - in this case, it is the value that maximizes the likelihood $L(\theta)$ or log-likelihood $l(\theta)$ 
-  - usually, we use the log-likelihood to find the $\hat \theta$
+  - usually, we use the log-likelihood to find $\hat \theta$
   
 To identify $\hat \theta$:
 
@@ -171,7 +175,7 @@ Three (repeated) caveats, for emphasis:
 
 1.
 
-a. The likelihood function for a Bernoulli distributed dataset is:
+  a. The likelihood function for a Bernoulli distributed dataset is:
 
 $$
 \begin{aligned}
@@ -179,7 +183,7 @@ L(p) =& ~ \prod_{i = 1}^n p^{x_i} (1-p)^{1 - x_i}
 \end{aligned}
 $$  
 
-b. The log-likelihood is:
+  b. The log-likelihood is:
 
 $$
 \begin{aligned}
@@ -190,7 +194,7 @@ l(p) =& ~ \text{ln}[L(p)] \\
      =& ~ \sum_{i = 1}^n x_i \text{ln}(p) + (1 - x_i)\text{ln}(1-p) \\
 \end{aligned}
 $$  
-c. 
+  c. 
 
 
 ```r
@@ -215,14 +219,6 @@ Ln_bern <- function(p, x){
 p_vec <- seq(0.001, 0.999, by = 0.001)
 # Likelihood of the data
 Ln <- Ln_bern(p = p_vec, x = x)
-max(Ln)
-```
-
-```
-## [1] 0.002223566
-```
-
-```r
 max_p <- p_vec[which.max(Ln)]
 max_Ln <- Ln[which.max(Ln)]
 # Log-likelihood of the data
@@ -259,9 +255,35 @@ summary(x)
 ##    0.00    0.25    1.00    0.70    1.00    1.00
 ```
 
-d. The MLE is 0.7, which is the same as the proportion of observations equal to 1. 
+  d. The MLE is 0.7, which is the same as the proportion of observations equal to 1. 
 
+2. Suppose that $X_1, X_2, ..., X_n$ are distributed as Normal($\theta, \sigma^2$). 
+  a. What is the MLE of $\theta$?
+
+First, we get the expression for the log-likelihood of $\theta$: 
+
+$$
+\begin{aligned}
+l(\theta) =& ~ n~\text{ln}(\frac{1}{\sigma \sqrt {2 \pi}}) - \sum_{i = 1}^n \frac{(x_i - \theta)^2}{2 \sigma^2} \\
+          =& ~ n~\text{ln}(\frac{1}{\sigma \sqrt {2 \pi}}) - 
+          \frac{1}{2 \sigma^2} 
+          \sum_{i = 1}^n (x_i - \theta)^2 \\
+          =& ~ n~\text{ln}(\frac{1}{\sigma \sqrt {2 \pi}}) - 
+          \frac{1}{2 \sigma^2} 
+          \sum_{i = 1}^n (x_i^2 - 2x_i \theta + \theta^2) \\
+\end{aligned}
+$$  
+
+Then we take the derivative and show that the MLE is the sample mean, $\bar x$; see Edge solution for the remaining details.
+
+  b. See Edge solution.
+  
+  
 ### Exercise set 9-3
+
+1. Solution on paper. 
+
+2. 
 
 ## Parametric interval estimation: the direct approach and Fisher information
 

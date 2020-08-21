@@ -75,7 +75,7 @@ The likelihood provides a framework for estimation and inference.
 
 *The value of $\theta$ that maximizes $L(\theta)$ is the most probable value of $\theta$ given the observed data.*
 
-False - see Edge explanation. Change to:
+False - frequentists consider $\theta$ to be fixed, and thus has no probability distribution. See Edge explanation. Change to:
 
 *The value of $\theta$ that maximizes $L(\theta)$ is the one that maximizes the probability of obtaining the observed data.*
 
@@ -112,9 +112,13 @@ f_{X_1, X_2}(x_1, x_2) =& ~ \frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac{(x_1 - \mu)^2
                        =& ~ \frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2}{2 \sigma^2}} * 
                             e^{-\frac{(x_2 - \mu)^2}{2 \sigma^2}} \\
                         & \text{we know that } a^m * a^n = a^{m + n} \text{, so} \\
-                       =& ~ \frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2 + (x_2 - \mu)^2}{2 \sigma^2}} \\
+                       =& ~ \frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2 - (x_2 - \mu)^2}{2 \sigma^2}} \\
+                        & \text{however, this differs from Edge's answer:} \\
+                       =& ~ \frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2 + (x_2 - \mu)^2}{2 \sigma^2}} \\                      
 \end{aligned}
 $$  
+
+TBD why my answer is different, but I'll roll with Edge's solution for now.
 
   d. The log-likelihood of $\mu$ given an observation of $x_1$ and $x_2$, which are assumed to be instances of $X_1$ and $X_2$:
   
@@ -123,7 +127,7 @@ $$
 l(\mu) =& ~ \text{ln}(\frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2 + (x_2 - \mu)^2}{2 \sigma^2}}) \\
        =& ~ \text{ln}(\frac{1}{\sigma^2 2 \pi}) + \text{ln}( e^{-\frac{(x_1 - \mu)^2 + (x_2 - \mu)^2}{2 \sigma^2}}) \\
        =& ~ \text{ln}(\frac{1}{\sigma^2 2 \pi}) -\frac{(x_1 - \mu)^2}{2 \sigma^2} -\frac{(x_2 - \mu)^2}{2 \sigma^2}\\
-       & \text{though I don't know how to get to Edge's answer:} \\
+       & \text{though I don't know how to get to Edge's answer, apart from starting with our answer in 1b:} \\
        =& ~ 2~\text{ln}(\frac{1}{\sigma \sqrt {2 \pi}}) -\frac{(x_1 - \mu)^2}{2 \sigma^2} -\frac{(x_2 - \mu)^2}{2 \sigma^2}\\
 \end{aligned}
 $$  
@@ -152,7 +156,7 @@ $$
 
   - 'argmax' means 'argument of the maximum'
   - in this case, it is the value that maximizes the likelihood $L(\theta)$ or log-likelihood $l(\theta)$ 
-  - usually, we use the log-likelihood to find the $\hat \theta$
+  - usually, we use the log-likelihood to find $\hat \theta$
   
 To identify $\hat \theta$:
 
@@ -267,6 +271,10 @@ Then we take the derivative and show that the MLE is the sample mean, $\bar x$; 
   
   
 ### Exercise set 9-3
+
+1. Solution on paper. 
+
+2. 
 
 ## Parametric interval estimation: the direct approach and Fisher information
 
