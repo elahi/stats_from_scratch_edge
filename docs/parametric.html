@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-08-06" />
+<meta name="date" content="2020-08-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -484,46 +484,46 @@ l(p) =&amp; ~ \text{ln}[L(p)] \\
 \end{aligned}
 \]</span><br />
 c. </p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">n &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb1-2" title="2">trials &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb1-3" title="3">p &lt;-<span class="st"> </span><span class="fl">0.6</span></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw">set.seed</span>(<span class="dv">121</span>)</a>
-<a class="sourceLine" id="cb1-5" title="5">x &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> n, <span class="dt">size =</span> trials, <span class="dt">prob =</span> p)</a>
-<a class="sourceLine" id="cb1-6" title="6"></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="co"># Function to calculate likelihood for a vector of observations</span></a>
-<a class="sourceLine" id="cb1-8" title="8">Ln_bern &lt;-<span class="st"> </span><span class="cf">function</span>(p, x){</a>
-<a class="sourceLine" id="cb1-9" title="9">  k &lt;-<span class="st"> </span><span class="kw">sum</span>(x)</a>
-<a class="sourceLine" id="cb1-10" title="10">  n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</a>
-<a class="sourceLine" id="cb1-11" title="11">  Ln &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="kw">length</span>(p))</a>
-<a class="sourceLine" id="cb1-12" title="12">  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(p)){</a>
-<a class="sourceLine" id="cb1-13" title="13">    Ln[i] &lt;-<span class="st"> </span><span class="kw">prod</span>(p[i]<span class="op">^</span>k <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p[i])<span class="op">^</span>(n <span class="op">-</span>k))</a>
-<a class="sourceLine" id="cb1-14" title="14">  }</a>
-<a class="sourceLine" id="cb1-15" title="15">  <span class="kw">return</span>(Ln)</a>
-<a class="sourceLine" id="cb1-16" title="16">}</a>
-<a class="sourceLine" id="cb1-17" title="17"></a>
-<a class="sourceLine" id="cb1-18" title="18"><span class="co"># Sequence of p</span></a>
-<a class="sourceLine" id="cb1-19" title="19">p_vec &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="fl">0.001</span>, <span class="fl">0.999</span>, <span class="dt">by =</span> <span class="fl">0.001</span>)</a>
-<a class="sourceLine" id="cb1-20" title="20"><span class="co"># Likelihood of the data</span></a>
-<a class="sourceLine" id="cb1-21" title="21">Ln &lt;-<span class="st"> </span><span class="kw">Ln_bern</span>(<span class="dt">p =</span> p_vec, <span class="dt">x =</span> x)</a>
-<a class="sourceLine" id="cb1-22" title="22">max_p &lt;-<span class="st"> </span>p_vec[<span class="kw">which.max</span>(Ln)]</a>
-<a class="sourceLine" id="cb1-23" title="23">max_Ln &lt;-<span class="st"> </span>Ln[<span class="kw">which.max</span>(Ln)]</a>
-<a class="sourceLine" id="cb1-24" title="24"><span class="co"># Log-likelihood of the data</span></a>
-<a class="sourceLine" id="cb1-25" title="25">ln &lt;-<span class="st"> </span><span class="kw">log</span>(Ln)</a>
-<a class="sourceLine" id="cb1-26" title="26">max_ln &lt;-<span class="st"> </span>ln[<span class="kw">which.max</span>(ln)]</a>
-<a class="sourceLine" id="cb1-27" title="27"></a>
-<a class="sourceLine" id="cb1-28" title="28"><span class="co"># Plot</span></a>
-<a class="sourceLine" id="cb1-29" title="29"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb1-30" title="30"><span class="kw">plot</span>(<span class="kw">table</span>(x), <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;10 observations, p = 0.6&quot;</span>)</a>
-<a class="sourceLine" id="cb1-31" title="31"><span class="kw">plot</span>(p_vec, Ln, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;p&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Likelihood&quot;</span>)</a>
-<a class="sourceLine" id="cb1-32" title="32"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="fl">0.6</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</a>
-<a class="sourceLine" id="cb1-33" title="33"><span class="kw">points</span>(<span class="dt">x =</span> max_p, <span class="dt">y =</span> max_Ln, <span class="dt">pch =</span> <span class="dv">19</span>)</a>
-<a class="sourceLine" id="cb1-34" title="34"><span class="kw">plot</span>(p_vec, ln, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;p&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Log likelihood&quot;</span>)</a>
-<a class="sourceLine" id="cb1-35" title="35"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="fl">0.6</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</a>
-<a class="sourceLine" id="cb1-36" title="36"><span class="kw">points</span>(<span class="dt">x =</span> max_p, <span class="dt">y =</span> max_ln, <span class="dt">pch =</span> <span class="dv">19</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb359-1" title="1">n &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb359-2" title="2">trials &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb359-3" title="3">p &lt;-<span class="st"> </span><span class="fl">0.6</span></a>
+<a class="sourceLine" id="cb359-4" title="4"><span class="kw">set.seed</span>(<span class="dv">121</span>)</a>
+<a class="sourceLine" id="cb359-5" title="5">x &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> n, <span class="dt">size =</span> trials, <span class="dt">prob =</span> p)</a>
+<a class="sourceLine" id="cb359-6" title="6"></a>
+<a class="sourceLine" id="cb359-7" title="7"><span class="co"># Function to calculate likelihood for a vector of observations</span></a>
+<a class="sourceLine" id="cb359-8" title="8">Ln_bern &lt;-<span class="st"> </span><span class="cf">function</span>(p, x){</a>
+<a class="sourceLine" id="cb359-9" title="9">  k &lt;-<span class="st"> </span><span class="kw">sum</span>(x)</a>
+<a class="sourceLine" id="cb359-10" title="10">  n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</a>
+<a class="sourceLine" id="cb359-11" title="11">  Ln &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="kw">length</span>(p))</a>
+<a class="sourceLine" id="cb359-12" title="12">  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(p)){</a>
+<a class="sourceLine" id="cb359-13" title="13">    Ln[i] &lt;-<span class="st"> </span><span class="kw">prod</span>(p[i]<span class="op">^</span>k <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p[i])<span class="op">^</span>(n <span class="op">-</span>k))</a>
+<a class="sourceLine" id="cb359-14" title="14">  }</a>
+<a class="sourceLine" id="cb359-15" title="15">  <span class="kw">return</span>(Ln)</a>
+<a class="sourceLine" id="cb359-16" title="16">}</a>
+<a class="sourceLine" id="cb359-17" title="17"></a>
+<a class="sourceLine" id="cb359-18" title="18"><span class="co"># Sequence of p</span></a>
+<a class="sourceLine" id="cb359-19" title="19">p_vec &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="fl">0.001</span>, <span class="fl">0.999</span>, <span class="dt">by =</span> <span class="fl">0.001</span>)</a>
+<a class="sourceLine" id="cb359-20" title="20"><span class="co"># Likelihood of the data</span></a>
+<a class="sourceLine" id="cb359-21" title="21">Ln &lt;-<span class="st"> </span><span class="kw">Ln_bern</span>(<span class="dt">p =</span> p_vec, <span class="dt">x =</span> x)</a>
+<a class="sourceLine" id="cb359-22" title="22">max_p &lt;-<span class="st"> </span>p_vec[<span class="kw">which.max</span>(Ln)]</a>
+<a class="sourceLine" id="cb359-23" title="23">max_Ln &lt;-<span class="st"> </span>Ln[<span class="kw">which.max</span>(Ln)]</a>
+<a class="sourceLine" id="cb359-24" title="24"><span class="co"># Log-likelihood of the data</span></a>
+<a class="sourceLine" id="cb359-25" title="25">ln &lt;-<span class="st"> </span><span class="kw">log</span>(Ln)</a>
+<a class="sourceLine" id="cb359-26" title="26">max_ln &lt;-<span class="st"> </span>ln[<span class="kw">which.max</span>(ln)]</a>
+<a class="sourceLine" id="cb359-27" title="27"></a>
+<a class="sourceLine" id="cb359-28" title="28"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb359-29" title="29"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb359-30" title="30"><span class="kw">plot</span>(<span class="kw">table</span>(x), <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;10 observations, p = 0.6&quot;</span>)</a>
+<a class="sourceLine" id="cb359-31" title="31"><span class="kw">plot</span>(p_vec, Ln, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;p&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Likelihood&quot;</span>)</a>
+<a class="sourceLine" id="cb359-32" title="32"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="fl">0.6</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</a>
+<a class="sourceLine" id="cb359-33" title="33"><span class="kw">points</span>(<span class="dt">x =</span> max_p, <span class="dt">y =</span> max_Ln, <span class="dt">pch =</span> <span class="dv">19</span>)</a>
+<a class="sourceLine" id="cb359-34" title="34"><span class="kw">plot</span>(p_vec, ln, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;p&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Log likelihood&quot;</span>)</a>
+<a class="sourceLine" id="cb359-35" title="35"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="fl">0.6</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</a>
+<a class="sourceLine" id="cb359-36" title="36"><span class="kw">points</span>(<span class="dt">x =</span> max_p, <span class="dt">y =</span> max_ln, <span class="dt">pch =</span> <span class="dv">19</span>)</a></code></pre></div>
 <p><img src="09_parametric-estimation_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">max_p</a></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb360-1" title="1">max_p</a></code></pre></div>
 <pre><code>## [1] 0.7</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">summary</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb362-1" title="1"><span class="kw">summary</span>(x)</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    0.00    0.25    1.00    0.70    1.00    1.00</code></pre>
 <ol start="4" style="list-style-type: lower-alpha">
