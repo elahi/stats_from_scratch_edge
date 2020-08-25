@@ -126,7 +126,7 @@ $$
   
 $$
 \begin{aligned}
-l(\mu) =& ~ \text{ln}(\frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2 + (x_2 - \mu)^2}{2 \sigma^2}}) \\
+l(\mu) =& ~ \text{ln} \left (\frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2 + (x_2 - \mu)^2}{2 \sigma^2}} \right) \\
        =& ~ \text{ln}(\frac{1}{\sigma^2 2 \pi}) + \text{ln}( e^{-\frac{(x_1 - \mu)^2 + (x_2 - \mu)^2}{2 \sigma^2}}) \\
        =& ~ \text{ln}(\frac{1}{\sigma^2 2 \pi}) -\frac{(x_1 - \mu)^2}{2 \sigma^2} -\frac{(x_2 - \mu)^2}{2 \sigma^2}\\
        & \text{though I don't know how to get to Edge's answer, apart from starting with our answer in 1b:} \\
@@ -134,7 +134,7 @@ l(\mu) =& ~ \text{ln}(\frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2 + (x_2 - 
 \end{aligned}
 $$  
 
-  d. The log-likelihood of $\mu$ given observations of $x_1, x_2, ..., x_n$, which are assumed to be instances of $n$ independent random variables with a Normal($\mu, \sigma^2$) distribution:
+  e. The log-likelihood of $\mu$ given observations of $x_1, x_2, ..., x_n$, which are assumed to be instances of $n$ independent random variables with a Normal($\mu, \sigma^2$) distribution:
   
 $$
 \begin{aligned}
@@ -183,7 +183,7 @@ Three (repeated) caveats, for emphasis:
 
 ### Exercise set 9-2
 
-1.
+1.  
 
   a. The likelihood function for a Bernoulli distributed dataset is:
 
@@ -198,15 +198,94 @@ $$
 $$
 \begin{aligned}
 l(p) =& ~ \text{ln}[L(p)] \\
-     =& ~ \text{ln}[\prod_{i = 1}^n p^{x_i} (1-p)^{1 - x_i}] \\
+     =& ~ \text{ln} \left [\prod_{i = 1}^n p^{x_i} (1-p)^{1 - x_i} \right] \\
      =& ~ \sum_{i = 1}^n \text{ln}[p^{x_i} (1-p)^{1 - x_i}] \\
      =& ~ \sum_{i = 1}^n \text{ln}[p^{x_i}] + \text{ln}[(1-p)^{1 - x_i}] \\
      =& ~ \sum_{i = 1}^n x_i \text{ln}(p) + (1 - x_i)\text{ln}(1-p) \\
 \end{aligned}
 $$  
-  c. 
+  c. First, we will draw ten observations from a Bernoulli(0.6) distribution. We'll use a binomial distribution with $n = k$ and $p = 0.6$, recognizing that the binomial is basically the sum of *n* independent Bernoulli trials with $p = 0.6$. 
+  
+```{r}
+n <- 10
+trials <- 1
+p <- 0.6
+set.seed(121)
+x <- rbinom(n = n, size = trials, prob = p)
+x
+```
+  
+Because we prefer to use log-likelihoods for mathematical reasons, let's translate this statement into R code:
+
+$$
+\begin{aligned}
+l(p) =& ~ \sum_{i = 1}^n x_i \text{ln}(p) + (1 - x_i)\text{ln}(1-p) \\
+\end{aligned}
+$$  
 
 ```{r}
+ln_vector <- numeric(length(x))
+for(i in 1:length(x)){
+  ln_vector[i] <- x[i]*log(p) + (1 - x[i]) * log(1 - p)}
+ln_vector
+exp(ln_vector)
+```
+
+To recap, we've calculated the log-likelihood of each observation (0 or 1), given a probability of 0.6. Above, I also took the exponent of our vector, to return the likelihood of each observation. Assuming that these observations are IID, we can add up the individual log-likelihoods and get the total log-likelihood of the dataset (n = 10), given $p = 0.6$. We can also take the exponent of the total log-likelihood to get the likelihood:
+
+```{r}
+sum(ln_vector)
+exp(sum(ln_vector))
+```
+
+That is just for a single value of p. Now we'll repeat this process for a vector of p from 0 to 1. First we create function that will calculate the log-likelihood of a dataset given one value of $p$, based on the for loop above:
+
+```{r}
+# Function to calculate the log-likelihood for a vector of observations
+ln_bern <- function(p, x){
+  ln_vector <- numeric(length(x))
+  for(i in 1:length(x)){
+    ln_vector[i] <- x[i]*log(p) + (1 - x[i]) * log(1 - p)}
+  ln <- sum(ln_vector)
+  return(ln)
+}
+```
+
+Now we create a vector for $p$, loop through all the values, then plot:
+
+```{r, fig.height=3.5, fig.cap = "This is awesome. We just found the maximum likelihood estimate of p (the black points), going from the mathematical expression we derived, and translating it to R code. The red dashed line is the true value of p. Savor this moment."}
+# Sequence of p
+p_vec <- seq(0.001, 0.999, by = 0.001)
+ln_vec <- numeric(length(p_vec))
+
+# Log-likelihood of the data
+for(i in 1:length(p_vec)){
+  ln_vec[i] <- ln_bern(p = p_vec[i], x = x)
+}
+
+# Get the value of p that maximizes the log-likelihood
+max_p <- p_vec[which.max(ln_vec)]
+max_ln <- ln_vec[which.max(ln_vec)]
+
+# Likelihood of the data
+Ln_vec <- exp(ln_vec)
+max_Ln <- Ln_vec[which.max(Ln_vec)]
+
+# Plot
+par(mfrow = c(1,3))
+plot(table(x), xlab = "", ylab = "Frequency", main = "10 observations, p = 0.6")
+plot(p_vec, Ln_vec, type = "l", xlab = "p", ylab = "Likelihood")
+abline(v = 0.6, col = "red", lty = "dashed")
+points(x = max_p, y = max_Ln, pch = 19)
+plot(p_vec, ln_vec, type = "l", xlab = "p", ylab = "Log likelihood")
+abline(v = 0.6, col = "red", lty = "dashed")
+points(x = max_p, y = max_ln, pch = 19)
+
+```
+
+Below is Edge's answer, but there is a disconnect between the answer in part b and translating the mathematical expression into R code. Specifically, his function takes a shortcut by using the binomial distribution instead of the Bernoulli. But it is a good check on my approach above:
+
+```{r, fig.height=3.5, fig.cap = "Same results as above. Ponder the differences in the code for calculating the likelihood."}
 n <- 10
 trials <- 1
 p <- 0.6
@@ -219,7 +298,7 @@ Ln_bern <- function(p, x){
   n <- length(x)
   Ln <- numeric(length(p))
   for(i in 1:length(p)){
-    Ln[i] <- prod(p[i]^k * (1 - p[i])^(n -k))
+    Ln[i] <- prod(p[i]^k * (1 - p[i])^(n - k))
   }
   return(Ln)
 }
@@ -243,12 +322,16 @@ points(x = max_p, y = max_Ln, pch = 19)
 plot(p_vec, ln, type = "l", xlab = "p", ylab = "Log likelihood")
 abline(v = 0.6, col = "red", lty = "dashed")
 points(x = max_p, y = max_ln, pch = 19)
+```
 
+  d. 
+
+```{r}
 max_p
 summary(x)
 ```
-
-  d. The MLE is 0.7, which is the same as the proportion of observations equal to 1. 
+  
+The MLE is 0.7, which is the same as the proportion of observations equal to 1. 
 
 2. Suppose that $X_1, X_2, ..., X_n$ are distributed as Normal($\theta, \sigma^2$). 
   a. What is the MLE of $\theta$?
