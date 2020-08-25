@@ -104,13 +104,15 @@ f_{X_1, X_2}(x_1, x_2) =& ~ \frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac{(x_1 - \mu)^2
                        =& ~ \frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2}{2 \sigma^2}} * 
                             e^{-\frac{(x_2 - \mu)^2}{2 \sigma^2}} \\
                         & \text{we know that } a^m * a^n = a^{m + n} \text{, so} \\
-                       =& ~ \frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2 - (x_2 - \mu)^2}{2 \sigma^2}} \\
-                        & \text{however, this differs from Edge's answer:} \\
-                       =& ~ \frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2 + (x_2 - \mu)^2}{2 \sigma^2}} \\                      
+                        =& ~ \frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2}
+                        {2 \sigma^2} - \frac{(x_2 - \mu)^2}{2 \sigma^2}} \\  
+                        & \text{we can factor out a -1} \\
+                        =& ~ \frac{1}{\sigma^2 2 \pi} e^{- \left ( \frac{(x_1 - \mu)^2}
+                        {2 \sigma^2} + \frac{(x_2 - \mu)^2}{2 \sigma^2} \right )} \\  
+                        & \text{and we are left with} \\
+                       =& ~ \frac{1}{\sigma^2 2 \pi} e^{-\frac{(x_1 - \mu)^2 + (x_2 - \mu)^2}{2 \sigma^2}} \\   
 \end{aligned}
 $$  
-
-TBD why my answer is different, but I'll roll with Edge's solution for now.
 
   d. The log-likelihood of $\mu$ given an observation of $x_1$ and $x_2$, which are assumed to be instances of $X_1$ and $X_2$:
   
