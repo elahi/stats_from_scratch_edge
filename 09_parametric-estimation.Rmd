@@ -354,7 +354,35 @@ Then we take the derivative and show that the MLE is the sample mean, $\bar x$; 
 
   b. See Edge solution.
   
+### Maximum-likelihood estimation for simple linear regression
+
+$$
+\begin{aligned}
+Y_i =& \alpha + \beta x_i + \epsilon
+\end{aligned}
+$$
+
+  - $\alpha$ and $\beta$ are fixed constants
+  - the observations $x_i$ are no longer considered random, but are fixed constants (this is different from the method of moments estimator)
+  - the only random variable in the model is the disturbance term, $\epsilon$, and it is assumed to have a parametric distribution (~ Normal($0, \sigma^2$))
+  - the dependent variable is considered to be random (despite the fact that it is observed?)
+
+#### Assumptions
+
+  - *Linearity*: $\text{E}(\epsilon | X = x) = ~ 0$
   
+  - *Homoscedasticity*: $\text{Var}(\epsilon | X = x) = 0$ for all $x$
+  
+  - *Independence of units*: for all *i* and $j \neq i$, $\epsilon_i$ is independent of $\epsilon_j$ 
+  
+  - *Distribution*: for all *i*, $\epsilon_i$ is drawn from a normal distribution
+
+Edge goes through the steps necessary to derive the maximum likelihood estimator for $\alpha$ and $\beta$, but I won't repeat it here. It turns out that the MLE for these terms is equivalent to the expressions we derived using least-squares in chapter 3. 
+
+> Thus we can interpret the least-squares line as the maximum likelihood estimator of the 'true' line under the assumption of normally distributed, independent, homoscedastic disturbances
+
+It also turns out the the ML estimates are the same as the MOM estimates, but the assumptions used to justify each are different (MOM estimates do not invoke normality and constant variance of the disturbances), and thus provide different guarantees (e.g., ML estimates are asymptotically efficient and functionally invariant)
+
 ### Exercise set 9-3
 
 1. Solution on paper. 

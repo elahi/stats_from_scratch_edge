@@ -279,7 +279,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.0.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-1"><i class="fa fa-check"></i><b>9.0.1</b> Exercise set 9-1</a></li>
 <li class="chapter" data-level="9.1" data-path="parametric.html"><a href="parametric.html#parametric-estimation-using-maximum-likelihood"><i class="fa fa-check"></i><b>9.1</b> Parametric estimation using maximum likelihood</a><ul>
 <li class="chapter" data-level="9.1.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-2"><i class="fa fa-check"></i><b>9.1.1</b> Exercise set 9-2</a></li>
-<li class="chapter" data-level="9.1.2" data-path="parametric.html"><a href="parametric.html#exercise-set-9-3"><i class="fa fa-check"></i><b>9.1.2</b> Exercise set 9-3</a></li>
+<li class="chapter" data-level="9.1.2" data-path="parametric.html"><a href="parametric.html#maximum-likelihood-estimation-for-simple-linear-regression"><i class="fa fa-check"></i><b>9.1.2</b> Maximum-likelihood estimation for simple linear regression</a></li>
+<li class="chapter" data-level="9.1.3" data-path="parametric.html"><a href="parametric.html#exercise-set-9-3"><i class="fa fa-check"></i><b>9.1.3</b> Exercise set 9-3</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="parametric.html"><a href="parametric.html#parametric-interval-estimation-the-direct-approach-and-fisher-information"><i class="fa fa-check"></i><b>9.2</b> Parametric interval estimation: the direct approach and Fisher information</a><ul>
 <li class="chapter" data-level="9.2.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-4"><i class="fa fa-check"></i><b>9.2.1</b> Exercise set 9-4</a></li>
@@ -631,8 +632,36 @@ l(\theta) =&amp; ~ n~\text{ln}(\frac{1}{\sigma \sqrt {2 \pi}}) - \sum_{i = 1}^n 
 <li>See Edge solution.</li>
 </ol>
 </div>
+<div id="maximum-likelihood-estimation-for-simple-linear-regression" class="section level3">
+<h3><span class="header-section-number">9.1.2</span> Maximum-likelihood estimation for simple linear regression</h3>
+<p><span class="math display">\[
+\begin{aligned}
+Y_i =&amp; \alpha + \beta x_i + \epsilon
+\end{aligned}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are fixed constants</li>
+<li>the observations <span class="math inline">\(x_i\)</span> are no longer considered random, but are fixed constants (this is different from the method of moments estimator)</li>
+<li>the only random variable in the model is the disturbance term, <span class="math inline">\(\epsilon\)</span>, and it is assumed to have a parametric distribution (~ Normal(<span class="math inline">\(0, \sigma^2\)</span>))</li>
+<li>the dependent variable is considered to be random (despite the fact that it is observed?)</li>
+</ul>
+<div id="assumptions-2" class="section level4">
+<h4><span class="header-section-number">9.1.2.1</span> Assumptions</h4>
+<ul>
+<li><p><em>Linearity</em>: <span class="math inline">\(\text{E}(\epsilon | X = x) = ~ 0\)</span></p></li>
+<li><p><em>Homoscedasticity</em>: <span class="math inline">\(\text{Var}(\epsilon | X = x) = 0\)</span> for all <span class="math inline">\(x\)</span></p></li>
+<li><p><em>Independence of units</em>: for all <em>i</em> and <span class="math inline">\(j \neq i\)</span>, <span class="math inline">\(\epsilon_i\)</span> is independent of <span class="math inline">\(\epsilon_j\)</span></p></li>
+<li><p><em>Distribution</em>: for all <em>i</em>, <span class="math inline">\(\epsilon_i\)</span> is drawn from a normal distribution</p></li>
+</ul>
+<p>Edge goes through the steps necessary to derive the maximum likelihood estimator for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, but I won’t repeat it here. It turns out that the MLE for these terms is equivalent to the expressions we derived using least-squares in chapter 3.</p>
+<blockquote>
+<p>Thus we can interpret the least-squares line as the maximum likelihood estimator of the ‘true’ line under the assumption of normally distributed, independent, homoscedastic disturbances</p>
+</blockquote>
+<p>It also turns out the the ML estimates are the same as the MOM estimates, but the assumptions used to justify each are different (MOM estimates do not invoke normality and constant variance of the disturbances), and thus provide different guarantees (e.g., ML estimates are asymptotically efficient and functionally invariant)</p>
+</div>
+</div>
 <div id="exercise-set-9-3" class="section level3">
-<h3><span class="header-section-number">9.1.2</span> Exercise set 9-3</h3>
+<h3><span class="header-section-number">9.1.3</span> Exercise set 9-3</h3>
 <ol style="list-style-type: decimal">
 <li><p>Solution on paper.</p></li>
 <li></li>
