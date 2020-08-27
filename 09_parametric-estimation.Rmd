@@ -385,17 +385,76 @@ It also turns out the the ML estimates are the same as the MOM estimates, but th
 
 ### Exercise set 9-3
 
-1. Solution on paper. 
+1. See attempted solution on paper. I was able to get close to Edge's answer, but there is a pesky $n$ term that I cannot recreate..
 
-2. 
+2. Skipped
+
+3. Skipped
+
+4. Skipped
 
 ## Parametric interval estimation: the direct approach and Fisher information
 
+Three approaches for estimating the variance of a maximum-likelihood estimator:
+
+  1. Use a *resampling method*, like the bootstrap
+  
+  2. Use the *direct approach*: analyze mathematically the specific model of interest; e.g., problem 2 of exercise set 9-3 carried out this direct approach for the variance of $\hat \beta$
+  
+  3. Use the *Fisher information*, a general result for maximum-likelihood estimation. This entails taking the second derivative of the log-likelihood function to understand the shape (steepness) of the function around the maximum-likelihood estimate; a steeper function indicates less uncertainty and vice versa. See Edge's Figure 9-3. 
+  
 ### Exercise set 9-4
+
+1. Skipped (using the direct approach and Fisher information to get the variance of the Poisson distribution)
 
 ## Parametric hypothesis testing using the Wald test
 
+As with interval estimation above, we have three options for hypothesis testing in a parametric framework:
+
+  1. *Resampling*; e.g., a permutation test
+  
+  2. *Direct approach*, where we design a test specific to the model in question
+  
+  3. *Wald test* or the *likelihood ratio test*, both of which apply to a wide range of problems in maximum-likelihood estimation
+
+### Wald test
+
+Suppose we want to test the hypothesis that a parameter $\theta$ is equal to a hypothesized value $\theta_0$. Consider $\theta_0$ the null hypothesis.
+
+For many models, the asymptotic distribution of the maximum-likelihood estimator $\hat \theta$ is normal, with an expectation equal to $\theta$. 
+
+We define the test statistic, $W$, as:
+
+$$
+\begin{aligned}
+W =& ~ \frac{\hat \theta - \theta_0}{\sqrt{\text{Var}(\hat \theta)}}
+\end{aligned}
+$$
+
+If the null hypothesis is true, the quantity in the numerator is 0. We can further say (though I don't fully understand why) that for large sample sizes, this quantity is normally distributed with expectation 0 and variance 1. (why the variance is 1, is unclear). But let's move on. 
+
+We do not know $\text{Var}(\hat \theta)$, but we can estimate it as $\widehat{\text{Var}}(\hat \theta)$ using direct methods or the observed Fisher information, giving a test statistic $W^*$:
+
+$$
+\begin{aligned}
+W \approx W^* =& ~ \frac{\hat \theta - \theta_0}
+                       {\sqrt{\widehat{\text{Var}}(\hat \theta)}}
+\end{aligned}
+$$
+
+For large samples, if the null hypothesis is true, $W^*$ will have an approximate Normal(0,1) distribution. That means we can compare the calculated $W^*$ with a Normal(0,1) distribution. The approximate two-sided $p$ arising from an observed value of $W^*$ is:
+
+$$
+\begin{aligned}
+p_W = 2 \Phi (-|W^*|)
+\end{aligned}
+$$
+
+where $\Phi$ is the cumulative distribution function of the Normal(0,1) distribution. The '2' is there because the test is two-sided. 
+
 ### Exercise set 9-5
+
+1. 
 
 ## Parametric hypothesis testing using the likelihood-ratio test
 

@@ -286,7 +286,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-4"><i class="fa fa-check"></i><b>9.2.1</b> Exercise set 9-4</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="parametric.html"><a href="parametric.html#parametric-hypothesis-testing-using-the-wald-test"><i class="fa fa-check"></i><b>9.3</b> Parametric hypothesis testing using the Wald test</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-5"><i class="fa fa-check"></i><b>9.3.1</b> Exercise set 9-5</a></li>
+<li class="chapter" data-level="9.3.1" data-path="parametric.html"><a href="parametric.html#wald-test"><i class="fa fa-check"></i><b>9.3.1</b> Wald test</a></li>
+<li class="chapter" data-level="9.3.2" data-path="parametric.html"><a href="parametric.html#exercise-set-9-5"><i class="fa fa-check"></i><b>9.3.2</b> Exercise set 9-5</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="parametric.html"><a href="parametric.html#parametric-hypothesis-testing-using-the-likelihood-ratio-test"><i class="fa fa-check"></i><b>9.4</b> Parametric hypothesis testing using the likelihood-ratio test</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-6"><i class="fa fa-check"></i><b>9.4.1</b> Exercise set 9-6</a></li>
@@ -663,21 +664,67 @@ Y_i =&amp; \alpha + \beta x_i + \epsilon
 <div id="exercise-set-9-3" class="section level3">
 <h3><span class="header-section-number">9.1.3</span> Exercise set 9-3</h3>
 <ol style="list-style-type: decimal">
-<li><p>Solution on paper.</p></li>
-<li></li>
+<li><p>See attempted solution on paper. I was able to get close to Edge’s answer, but there is a pesky <span class="math inline">\(n\)</span> term that I cannot recreate..</p></li>
+<li><p>Skipped</p></li>
+<li><p>Skipped</p></li>
+<li><p>Skipped</p></li>
 </ol>
 </div>
 </div>
 <div id="parametric-interval-estimation-the-direct-approach-and-fisher-information" class="section level2">
 <h2><span class="header-section-number">9.2</span> Parametric interval estimation: the direct approach and Fisher information</h2>
+<p>Three approaches for estimating the variance of a maximum-likelihood estimator:</p>
+<ol style="list-style-type: decimal">
+<li><p>Use a <em>resampling method</em>, like the bootstrap</p></li>
+<li><p>Use the <em>direct approach</em>: analyze mathematically the specific model of interest; e.g., problem 2 of exercise set 9-3 carried out this direct approach for the variance of <span class="math inline">\(\hat \beta\)</span></p></li>
+<li><p>Use the <em>Fisher information</em>, a general result for maximum-likelihood estimation. This entails taking the second derivative of the log-likelihood function to understand the shape (steepness) of the function around the maximum-likelihood estimate; a steeper function indicates less uncertainty and vice versa. See Edge’s Figure 9-3.</p></li>
+</ol>
 <div id="exercise-set-9-4" class="section level3">
 <h3><span class="header-section-number">9.2.1</span> Exercise set 9-4</h3>
+<ol style="list-style-type: decimal">
+<li>Skipped (using the direct approach and Fisher information to get the variance of the Poisson distribution)</li>
+</ol>
 </div>
 </div>
 <div id="parametric-hypothesis-testing-using-the-wald-test" class="section level2">
 <h2><span class="header-section-number">9.3</span> Parametric hypothesis testing using the Wald test</h2>
+<p>As with interval estimation above, we have three options for hypothesis testing in a parametric framework:</p>
+<ol style="list-style-type: decimal">
+<li><p><em>Resampling</em>; e.g., a permutation test</p></li>
+<li><p><em>Direct approach</em>, where we design a test specific to the model in question</p></li>
+<li><p><em>Wald test</em> or the <em>likelihood ratio test</em>, both of which apply to a wide range of problems in maximum-likelihood estimation</p></li>
+</ol>
+<div id="wald-test" class="section level3">
+<h3><span class="header-section-number">9.3.1</span> Wald test</h3>
+<p>Suppose we want to test the hypothesis that a parameter <span class="math inline">\(\theta\)</span> is equal to a hypothesized value <span class="math inline">\(\theta_0\)</span>. Consider <span class="math inline">\(\theta_0\)</span> the null hypothesis.</p>
+<p>For many models, the asymptotic distribution of the maximum-likelihood estimator <span class="math inline">\(\hat \theta\)</span> is normal, with an expectation equal to <span class="math inline">\(\theta\)</span>.</p>
+<p>We define the test statistic, <span class="math inline">\(W\)</span>, as:</p>
+<p><span class="math display">\[
+\begin{aligned}
+W =&amp; ~ \frac{\hat \theta - \theta_0}{\sqrt{\text{Var}(\hat \theta)}}
+\end{aligned}
+\]</span></p>
+<p>If the null hypothesis is true, the quantity in the numerator is 0. We can further say (though I don’t fully understand why) that for large sample sizes, this quantity is normally distributed with expectation 0 and variance 1. (why the variance is 1, is unclear). But let’s move on.</p>
+<p>We do not know <span class="math inline">\(\text{Var}(\hat \theta)\)</span>, but we can estimate it as <span class="math inline">\(\widehat{\text{Var}}(\hat \theta)\)</span> using direct methods or the observed Fisher information, giving a test statistic <span class="math inline">\(W^*\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+W \approx W^* =&amp; ~ \frac{\hat \theta - \theta_0}
+                       {\sqrt{\widehat{\text{Var}}(\hat \theta)}}
+\end{aligned}
+\]</span></p>
+<p>For large samples, if the null hypothesis is true, <span class="math inline">\(W^*\)</span> will have an approximate Normal(0,1) distribution. That means we can compare the calculated <span class="math inline">\(W^*\)</span> with a Normal(0,1) distribution. The approximate two-sided <span class="math inline">\(p\)</span> arising from an observed value of <span class="math inline">\(W^*\)</span> is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+p_W = 2 \Phi (-|W^*|)
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(\Phi\)</span> is the cumulative distribution function of the Normal(0,1) distribution. The ‘2’ is there because the test is two-sided.</p>
+</div>
 <div id="exercise-set-9-5" class="section level3">
-<h3><span class="header-section-number">9.3.1</span> Exercise set 9-5</h3>
+<h3><span class="header-section-number">9.3.2</span> Exercise set 9-5</h3>
+<ol style="list-style-type: decimal">
+<li></li>
+</ol>
 </div>
 </div>
 <div id="parametric-hypothesis-testing-using-the-likelihood-ratio-test" class="section level2">
