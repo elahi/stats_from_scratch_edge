@@ -454,8 +454,52 @@ where $\Phi$ is the cumulative distribution function of the Normal(0,1) distribu
 
 ### Exercise set 9-5
 
-1. 
+1. Compute the $p$ value for the Wald test of the hypothesis that $\beta = 0$ using the Anscombe data. 
+
+```{r}
+# Original fertilizer use and cereal yield data
+d <- tibble(x = anscombe$x1, y = anscombe$y1)
+```
+
+Use the least-squares slope to find $\hat\beta$ and $\hat\alpha$:
+
+```{r}
+x <- anscombe$x1
+y <- anscombe$y1
+n <- length(x)
+xbar <- mean(x)
+ybar <- mean(y)
+b_hat <- sum((x - xbar)*(y - ybar)) / sum((x - xbar)^2)
+a_hat <- ybar - b_hat*xbar
+```
+
+
+Use equation 9.14b to estimate the variance (I don't know how to create an upside down hat symbol..):
+
+$$
+\begin{aligned}
+\frac{n}{n-2} \widehat{\sigma^2} =& ~ \frac{1}{n-2} \sum_{i = 1}^n 
+                                      (Y_i - \hat\alpha - \hat\beta x_i)^2
+\end{aligned}
+$$
+
+```{r}
+
+```
+
 
 ## Parametric hypothesis testing using the likelihood-ratio test
 
 ### Exercise set 9-6
+
+## crap
+
+maximum likelihood estimation is one common method for estimating paremater in a parametric model, just like method of moments. We assume$X_1, X_2..., X_n$ be IID with *PDF* $f(x;\theta)$, define the likelihood function as 
+$$
+\mathcal{L}(\theta)=\Pi_{i=1}^nf(X_i;\theta)
+$$
+And the log likelihood function is defined by $\mathcal{l}_n(\theta)=log \mathcal{L}_n(\theta)=\sum_{i=1}^n log f(X_i; \theta)$. 
+
+
+The *maximum likelihood estimator* MLE, denoted by $\hat{\theta}_n$, is the value of $\theta$ that maximizes $\mathcal{L}_n(\theta)$
+
