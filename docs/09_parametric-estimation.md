@@ -501,8 +501,235 @@ where $\Phi$ is the cumulative distribution function of the Normal(0,1) distribu
 
 ### Exercise set 9-5
 
-1. 
+1. Compute the $p$ value for the Wald test of the hypothesis that $\beta = 0$ using the Anscombe data. 
+
+
+```r
+# Original fertilizer use and cereal yield data
+d <- tibble(x = anscombe$x1, y = anscombe$y1)
+```
+
+Use the least-squares slope to find $\hat\beta$:
+$$
+\begin{aligned}
+            & \text{(eq. 3.9)} \\
+\tilde\beta & = \frac{\sum_{i=1}^n (x_i - \bar x) (y_i - \bar y)}
+                   {\sum_{i=1}^n [(x_i - \bar x)^2]}
+\end{aligned}
+$$  
+
+Evaluate in `R`:
+
+```r
+x <- anscombe$x1
+y <- anscombe$y1
+n <- length(x)
+xbar <- mean(x)
+ybar <- mean(y)
+b_hat <- sum((x - xbar)*(y - ybar)) / sum((x - xbar)^2)
+```
+
+Use the least-squares intercept to find $\hat\alpha$:
+$$
+\begin{aligned}
+             & \text{(eq. 3.8)} \\
+\tilde\alpha & = \bar y - \tilde\beta \bar x
+\end{aligned}
+$$  
+
+Evaluate in `R`:
+
+```r
+a_hat <- ybar - b_hat*xbar
+```
+
+Use equation 9.14b to estimate the variance of the disturbance term (I don't know how to create an upside down hat symbol..):
+
+$$
+\begin{aligned}
+\frac{n}{n-2} \widehat{\sigma^2} =& ~ \frac{1}{n-2} \sum_{i = 1}^n 
+                                      (Y_i - \hat\alpha - \hat\beta x_i)^2
+\end{aligned}
+$$
+
+
+```r
+v_hat_dist <- sum((y - a_hat - b_hat * x)^2) / (n - 2)
+```
+
+Now estimate the variance of the slope using equation 9.12:
+
+$$
+\begin{aligned}
+            & \text{(eq. 9.12)} \\
+\text{Var}(\hat\beta) & = \frac{\sigma^2}
+                          {\sum_{i=1}^n [(x_i - \bar x)^2]}
+\end{aligned}
+$$  
+
+
+```r
+v_hat_beta <- v_hat_dist/sum((x - xbar)^2)
+```
+
+Now we plug these estimates into our equation for $W^*$:
+
+
+```r
+B0 <- 0
+wald <- (b_hat - B0) / sqrt(v_hat_beta)
+```
+
+Calculate $p$: 
+
+$$
+\begin{aligned}
+p_W = 2 \Phi (-|W^*|)
+\end{aligned}
+$$
+
+
+```r
+# Right tail
+1 - pnorm(q = wald, mean = 0, sd = 1) 
+```
+
+```
+## [1] 1.110376e-05
+```
+
+```r
+# Left tail
+pnorm(q = -wald, mean = 0, sd = 1) 
+```
+
+```
+## [1] 1.110376e-05
+```
+
+```r
+# Two-sided test, using the left tail
+2 * (pnorm(q = -wald, mean = 0, sd = 1))
+```
+
+```
+## [1] 2.220751e-05
+```
+
+Calculate $T$:
+
+```r
+# Left tail of t-distribution
+# df = 11 observations minus two parameters that we estimated (alpha, beta)
+2 * pt(q = -wald, df = 11-2)
+```
+
+```
+## [1] 0.002169629
+```
+
+Compare with `lm`:
+
+```r
+fit <- lm(y ~ x, data = d)
+summary(fit)
+```
+
+```
+## 
+## Call:
+## lm(formula = y ~ x, data = d)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.92127 -0.45577 -0.04136  0.70941  1.83882 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)   
+## (Intercept)   3.0001     1.1247   2.667  0.02573 * 
+## x             0.5001     0.1179   4.241  0.00217 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.237 on 9 degrees of freedom
+## Multiple R-squared:  0.6665,	Adjusted R-squared:  0.6295 
+## F-statistic: 17.99 on 1 and 9 DF,  p-value: 0.00217
+```
+
+Notice that the reported t-value is equal to our calculated $W^*$, and that the reported $p$ uses the $T$ distribution. 
+
+2. A random variable with a $\chi^2$ distribution has the same distribution as the sum of the squares of $k$ independent, Normal(0,1) random variables. We know that the asymptotic distribution of a maximum-likelihood estimator $\hat\theta$ is normal, with the expectation equal to the true parameter value $\theta$. If $H_0$ is true, then $W$ is Normal(0,1). If we evaluate $W^2$, then its asymptotic distribution under $H_0$ is $\chi^2(1)$. (need to chew on this some more)
+
+3. Examining Type 1 error and power of the Wald test when the significance level is $\alpha = 0.05$. 
+
+
+```r
+sim.Wald.B(n = 10, nsim = 100, a = 3, b = 0.1)
+```
+
+
+```r
+# 10 pairs
+beta_vec <- c(0, 0.1, 0.2)
+n_datasets <- 1000
+p_mat <- matrix(nrow = n_datasets, ncol = length(beta_vec))
+
+n_pairs <- 10 
+for(i in 1:length(beta_vec)){
+  p_mat[,i] <- sim.Wald.B(n = n_pairs, nsim = n_datasets, a = 3, b = beta_vec[i])
+}
+
+# Create summary table
+df_wald <- tibble(beta = c(0, 0.1, 0.2), 
+                  n_10 = colMeans(p_mat < 0.05))
+
+
+# 50 pairs
+n_pairs <- 50 
+for(i in 1:length(beta_vec)){
+  p_mat[,i] <- sim.Wald.B(n = n_pairs, nsim = n_datasets, a = 3, b = beta_vec[i])
+}
+
+# Add to summary table
+df_wald <- df_wald %>%
+  mutate(n_50 = colMeans(p_mat < 0.05))
+
+# 100 pairs
+n_pairs <- 100
+for(i in 1:length(beta_vec)){
+  p_mat[,i] <- sim.Wald.B(n = n_pairs, nsim = n_datasets, a = 3, b = beta_vec[i])
+}
+
+# Add to summary table
+df_wald <- df_wald %>%
+  mutate(n_100 = colMeans(p_mat < 0.05))
+
+library(knitr)
+kable(df_wald, caption = "Proportion of significance tests for the estimated slope that were significant, where the true beta = 0, 0.1, 0.2 and the number of observations was 10, 50, 100.")
+```
+
+
+
+Table: (\#tab:unnamed-chunk-18)Proportion of significance tests for the estimated slope that were significant, where the true beta = 0, 0.1, 0.2 and the number of observations was 10, 50, 100.
+
+ beta    n_10    n_50   n_100
+-----  ------  ------  ------
+  0.0   0.085   0.062   0.061
+  0.1   0.130   0.312   0.513
+  0.2   0.270   0.781   0.971
 
 ## Parametric hypothesis testing using the likelihood-ratio test
 
 ### Exercise set 9-6
+
+## crap
+
+maximum likelihood estimation is one common method for estimating paremater in a parametric model, just like method of moments. We assume$X_1, X_2..., X_n$ be IID with *PDF* $f(x;\theta)$, define the likelihood function as 
+$$
+\mathcal{L}(\theta)=\Pi_{i=1}^nf(X_i;\theta)
+$$
+And the log likelihood function is defined by $\mathcal{l}_n(\theta)=log \mathcal{L}_n(\theta)=\sum_{i=1}^n log f(X_i; \theta)$. 
+
+
+The *maximum likelihood estimator* MLE, denoted by $\hat{\theta}_n$, is the value of $\theta$ that maximizes $\mathcal{L}_n(\theta)$
+

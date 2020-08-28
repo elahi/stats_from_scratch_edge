@@ -292,6 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4" data-path="parametric.html"><a href="parametric.html#parametric-hypothesis-testing-using-the-likelihood-ratio-test"><i class="fa fa-check"></i><b>9.4</b> Parametric hypothesis testing using the likelihood-ratio test</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-6"><i class="fa fa-check"></i><b>9.4.1</b> Exercise set 9-6</a></li>
 </ul></li>
+<li class="chapter" data-level="9.5" data-path="parametric.html"><a href="parametric.html#crap"><i class="fa fa-check"></i><b>9.5</b> crap</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -723,16 +724,186 @@ p_W = 2 \Phi (-|W^*|)
 <div id="exercise-set-9-5" class="section level3">
 <h3><span class="header-section-number">9.3.2</span> Exercise set 9-5</h3>
 <ol style="list-style-type: decimal">
-<li></li>
+<li>Compute the <span class="math inline">\(p\)</span> value for the Wald test of the hypothesis that <span class="math inline">\(\beta = 0\)</span> using the Anscombe data.</li>
 </ol>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># Original fertilizer use and cereal yield data</span></a>
+<a class="sourceLine" id="cb18-2" title="2">d &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> anscombe<span class="op">$</span>x1, <span class="dt">y =</span> anscombe<span class="op">$</span>y1)</a></code></pre></div>
+<p>Use the least-squares slope to find <span class="math inline">\(\hat\beta\)</span>:
+<span class="math display">\[
+\begin{aligned}
+            &amp; \text{(eq. 3.9)} \\
+\tilde\beta &amp; = \frac{\sum_{i=1}^n (x_i - \bar x) (y_i - \bar y)}
+                   {\sum_{i=1}^n [(x_i - \bar x)^2]}
+\end{aligned}
+\]</span></p>
+<p>Evaluate in <code>R</code>:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">x &lt;-<span class="st"> </span>anscombe<span class="op">$</span>x1</a>
+<a class="sourceLine" id="cb19-2" title="2">y &lt;-<span class="st"> </span>anscombe<span class="op">$</span>y1</a>
+<a class="sourceLine" id="cb19-3" title="3">n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</a>
+<a class="sourceLine" id="cb19-4" title="4">xbar &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</a>
+<a class="sourceLine" id="cb19-5" title="5">ybar &lt;-<span class="st"> </span><span class="kw">mean</span>(y)</a>
+<a class="sourceLine" id="cb19-6" title="6">b_hat &lt;-<span class="st"> </span><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span>xbar)<span class="op">*</span>(y <span class="op">-</span><span class="st"> </span>ybar)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span>xbar)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<p>Use the least-squares intercept to find <span class="math inline">\(\hat\alpha\)</span>:
+<span class="math display">\[
+\begin{aligned}
+             &amp; \text{(eq. 3.8)} \\
+\tilde\alpha &amp; = \bar y - \tilde\beta \bar x
+\end{aligned}
+\]</span></p>
+<p>Evaluate in <code>R</code>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">a_hat &lt;-<span class="st"> </span>ybar <span class="op">-</span><span class="st"> </span>b_hat<span class="op">*</span>xbar</a></code></pre></div>
+<p>Use equation 9.14b to estimate the variance of the disturbance term (I don’t know how to create an upside down hat symbol..):</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{n}{n-2} \widehat{\sigma^2} =&amp; ~ \frac{1}{n-2} \sum_{i = 1}^n 
+                                      (Y_i - \hat\alpha - \hat\beta x_i)^2
+\end{aligned}
+\]</span></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">v_hat_dist &lt;-<span class="st"> </span><span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span>a_hat <span class="op">-</span><span class="st"> </span>b_hat <span class="op">*</span><span class="st"> </span>x)<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(n <span class="op">-</span><span class="st"> </span><span class="dv">2</span>)</a></code></pre></div>
+<p>Now estimate the variance of the slope using equation 9.12:</p>
+<p><span class="math display">\[
+\begin{aligned}
+            &amp; \text{(eq. 9.12)} \\
+\text{Var}(\hat\beta) &amp; = \frac{\sigma^2}
+                          {\sum_{i=1}^n [(x_i - \bar x)^2]}
+\end{aligned}
+\]</span></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">v_hat_beta &lt;-<span class="st"> </span>v_hat_dist<span class="op">/</span><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span>xbar)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<p>Now we plug these estimates into our equation for <span class="math inline">\(W^*\)</span>:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">B0 &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb23-2" title="2">wald &lt;-<span class="st"> </span>(b_hat <span class="op">-</span><span class="st"> </span>B0) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(v_hat_beta)</a></code></pre></div>
+<p>Calculate <span class="math inline">\(p\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+p_W = 2 \Phi (-|W^*|)
+\end{aligned}
+\]</span></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="co"># Right tail</span></a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="dt">q =</span> wald, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>) </a></code></pre></div>
+<pre><code>## [1] 1.110376e-05</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co"># Left tail</span></a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="kw">pnorm</span>(<span class="dt">q =</span> <span class="op">-</span>wald, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>) </a></code></pre></div>
+<pre><code>## [1] 1.110376e-05</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="co"># Two-sided test, using the left tail</span></a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(<span class="kw">pnorm</span>(<span class="dt">q =</span> <span class="op">-</span>wald, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>))</a></code></pre></div>
+<pre><code>## [1] 2.220751e-05</code></pre>
+<p>Calculate <span class="math inline">\(T\)</span>:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co"># Left tail of t-distribution</span></a>
+<a class="sourceLine" id="cb30-2" title="2"><span class="co"># df = 11 observations minus two parameters that we estimated (alpha, beta)</span></a>
+<a class="sourceLine" id="cb30-3" title="3"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">pt</span>(<span class="dt">q =</span> <span class="op">-</span>wald, <span class="dt">df =</span> <span class="dv">11-2</span>)</a></code></pre></div>
+<pre><code>## [1] 0.002169629</code></pre>
+<p>Compare with <code>lm</code>:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> d)</a>
+<a class="sourceLine" id="cb32-2" title="2"><span class="kw">summary</span>(fit)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x, data = d)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.92127 -0.45577 -0.04136  0.70941  1.83882 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)   3.0001     1.1247   2.667  0.02573 * 
+## x             0.5001     0.1179   4.241  0.00217 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.237 on 9 degrees of freedom
+## Multiple R-squared:  0.6665, Adjusted R-squared:  0.6295 
+## F-statistic: 17.99 on 1 and 9 DF,  p-value: 0.00217</code></pre>
+<p>Notice that the reported t-value is equal to our calculated <span class="math inline">\(W^*\)</span>, and that the reported <span class="math inline">\(p\)</span> uses the <span class="math inline">\(T\)</span> distribution.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>A random variable with a <span class="math inline">\(\chi^2\)</span> distribution has the same distribution as the sum of the squares of <span class="math inline">\(k\)</span> independent, Normal(0,1) random variables. We know that the asymptotic distribution of a maximum-likelihood estimator <span class="math inline">\(\hat\theta\)</span> is normal, with the expectation equal to the true parameter value <span class="math inline">\(\theta\)</span>. If <span class="math inline">\(H_0\)</span> is true, then <span class="math inline">\(W\)</span> is Normal(0,1). If we evaluate <span class="math inline">\(W^2\)</span>, then its asymptotic distribution under <span class="math inline">\(H_0\)</span> is <span class="math inline">\(\chi^2(1)\)</span>. (need to chew on this some more)</p></li>
+<li><p>Examining Type 1 error and power of the Wald test when the significance level is <span class="math inline">\(\alpha = 0.05\)</span>.</p></li>
+</ol>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">sim.Wald.B</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">nsim =</span> <span class="dv">100</span>, <span class="dt">a =</span> <span class="dv">3</span>, <span class="dt">b =</span> <span class="fl">0.1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co"># 10 pairs</span></a>
+<a class="sourceLine" id="cb35-2" title="2">beta_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb35-3" title="3">n_datasets &lt;-<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb35-4" title="4">p_mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> n_datasets, <span class="dt">ncol =</span> <span class="kw">length</span>(beta_vec))</a>
+<a class="sourceLine" id="cb35-5" title="5"></a>
+<a class="sourceLine" id="cb35-6" title="6">n_pairs &lt;-<span class="st"> </span><span class="dv">10</span> </a>
+<a class="sourceLine" id="cb35-7" title="7"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(beta_vec)){</a>
+<a class="sourceLine" id="cb35-8" title="8">  p_mat[,i] &lt;-<span class="st"> </span><span class="kw">sim.Wald.B</span>(<span class="dt">n =</span> n_pairs, <span class="dt">nsim =</span> n_datasets, <span class="dt">a =</span> <span class="dv">3</span>, <span class="dt">b =</span> beta_vec[i])</a>
+<a class="sourceLine" id="cb35-9" title="9">}</a>
+<a class="sourceLine" id="cb35-10" title="10"></a>
+<a class="sourceLine" id="cb35-11" title="11"><span class="co"># Create summary table</span></a>
+<a class="sourceLine" id="cb35-12" title="12">df_wald &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">beta =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>), </a>
+<a class="sourceLine" id="cb35-13" title="13">                  <span class="dt">n_10 =</span> <span class="kw">colMeans</span>(p_mat <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</a>
+<a class="sourceLine" id="cb35-14" title="14"></a>
+<a class="sourceLine" id="cb35-15" title="15"></a>
+<a class="sourceLine" id="cb35-16" title="16"><span class="co"># 50 pairs</span></a>
+<a class="sourceLine" id="cb35-17" title="17">n_pairs &lt;-<span class="st"> </span><span class="dv">50</span> </a>
+<a class="sourceLine" id="cb35-18" title="18"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(beta_vec)){</a>
+<a class="sourceLine" id="cb35-19" title="19">  p_mat[,i] &lt;-<span class="st"> </span><span class="kw">sim.Wald.B</span>(<span class="dt">n =</span> n_pairs, <span class="dt">nsim =</span> n_datasets, <span class="dt">a =</span> <span class="dv">3</span>, <span class="dt">b =</span> beta_vec[i])</a>
+<a class="sourceLine" id="cb35-20" title="20">}</a>
+<a class="sourceLine" id="cb35-21" title="21"></a>
+<a class="sourceLine" id="cb35-22" title="22"><span class="co"># Add to summary table</span></a>
+<a class="sourceLine" id="cb35-23" title="23">df_wald &lt;-<span class="st"> </span>df_wald <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb35-24" title="24"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n_50 =</span> <span class="kw">colMeans</span>(p_mat <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</a>
+<a class="sourceLine" id="cb35-25" title="25"></a>
+<a class="sourceLine" id="cb35-26" title="26"><span class="co"># 100 pairs</span></a>
+<a class="sourceLine" id="cb35-27" title="27">n_pairs &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb35-28" title="28"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(beta_vec)){</a>
+<a class="sourceLine" id="cb35-29" title="29">  p_mat[,i] &lt;-<span class="st"> </span><span class="kw">sim.Wald.B</span>(<span class="dt">n =</span> n_pairs, <span class="dt">nsim =</span> n_datasets, <span class="dt">a =</span> <span class="dv">3</span>, <span class="dt">b =</span> beta_vec[i])</a>
+<a class="sourceLine" id="cb35-30" title="30">}</a>
+<a class="sourceLine" id="cb35-31" title="31"></a>
+<a class="sourceLine" id="cb35-32" title="32"><span class="co"># Add to summary table</span></a>
+<a class="sourceLine" id="cb35-33" title="33">df_wald &lt;-<span class="st"> </span>df_wald <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb35-34" title="34"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n_100 =</span> <span class="kw">colMeans</span>(p_mat <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</a>
+<a class="sourceLine" id="cb35-35" title="35"></a>
+<a class="sourceLine" id="cb35-36" title="36"><span class="kw">library</span>(knitr)</a>
+<a class="sourceLine" id="cb35-37" title="37"><span class="kw">kable</span>(df_wald, <span class="dt">caption =</span> <span class="st">&quot;Proportion of significance tests for the estimated slope that were significant, where the true beta = 0, 0.1, 0.2 and the number of observations was 10, 50, 100.&quot;</span>)</a></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-18">Table 9.1: </span>Proportion of significance tests for the estimated slope that were significant, where the true beta = 0, 0.1, 0.2 and the number of observations was 10, 50, 100.</caption>
+<thead>
+<tr class="header">
+<th align="right">beta</th>
+<th align="right">n_10</th>
+<th align="right">n_50</th>
+<th align="right">n_100</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.0</td>
+<td align="right">0.085</td>
+<td align="right">0.062</td>
+<td align="right">0.061</td>
+</tr>
+<tr class="even">
+<td align="right">0.1</td>
+<td align="right">0.130</td>
+<td align="right">0.312</td>
+<td align="right">0.513</td>
+</tr>
+<tr class="odd">
+<td align="right">0.2</td>
+<td align="right">0.270</td>
+<td align="right">0.781</td>
+<td align="right">0.971</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="parametric-hypothesis-testing-using-the-likelihood-ratio-test" class="section level2">
 <h2><span class="header-section-number">9.4</span> Parametric hypothesis testing using the likelihood-ratio test</h2>
 <div id="exercise-set-9-6" class="section level3">
 <h3><span class="header-section-number">9.4.1</span> Exercise set 9-6</h3>
-
 </div>
+</div>
+<div id="crap" class="section level2">
+<h2><span class="header-section-number">9.5</span> crap</h2>
+<p>maximum likelihood estimation is one common method for estimating paremater in a parametric model, just like method of moments. We assume<span class="math inline">\(X_1, X_2..., X_n\)</span> be IID with <em>PDF</em> <span class="math inline">\(f(x;\theta)\)</span>, define the likelihood function as
+<span class="math display">\[
+\mathcal{L}(\theta)=\Pi_{i=1}^nf(X_i;\theta)
+\]</span>
+And the log likelihood function is defined by <span class="math inline">\(\mathcal{l}_n(\theta)=log \mathcal{L}_n(\theta)=\sum_{i=1}^n log f(X_i; \theta)\)</span>.</p>
+<p>The <em>maximum likelihood estimator</em> MLE, denoted by <span class="math inline">\(\hat{\theta}_n\)</span>, is the value of <span class="math inline">\(\theta\)</span> that maximizes <span class="math inline">\(\mathcal{L}_n(\theta)\)</span></p>
+
 </div>
 </div>
             </section>
