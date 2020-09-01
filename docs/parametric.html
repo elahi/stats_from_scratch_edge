@@ -292,7 +292,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4" data-path="parametric.html"><a href="parametric.html#parametric-hypothesis-testing-using-the-likelihood-ratio-test"><i class="fa fa-check"></i><b>9.4</b> Parametric hypothesis testing using the likelihood-ratio test</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-6"><i class="fa fa-check"></i><b>9.4.1</b> Exercise set 9-6</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="parametric.html"><a href="parametric.html#crap"><i class="fa fa-check"></i><b>9.5</b> crap</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -912,7 +911,7 @@ Y_i &amp; = \alpha
         &amp; = 2(l(\hat\theta) - l(\hat\theta_0))
 \end{aligned}
 \]</span></p>
-<p>where <span class="math inline">\(\hat\theta\)</span> and <span class="math inline">\(\hat\theta_0)\)</span> represent the full (or more complex) model and the nested model with a hypothesized value, respectively. In other words, <span class="math inline">\(\hat\theta_0)\)</span> represents a null hypothesis.</p>
+<p>where <span class="math inline">\(\hat\theta\)</span> and <span class="math inline">\(\hat\theta_0\)</span> represent the full (or more complex) model and the nested model with a hypothesized value, respectively. In other words, <span class="math inline">\(\hat\theta_0)\)</span> represents a null hypothesis.</p>
 <p>According to Wilks’ theorem, if the null hypothesis is true, the statistic <span class="math inline">\(\Lambda\)</span> is asymptotically distributed as <span class="math inline">\(\chi^2 (k)\)</span>, where <span class="math inline">\(k\)</span> is the number of parameters that are constrained in the nested model (representing the null hypothesis) but free in the full (comparison) model. The <span class="math inline">\(p\)</span> value is the probability of obtaining a value of <span class="math inline">\(\Lambda\)</span> as large or larger than the one observed given that the null hypothesis is true:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -929,54 +928,43 @@ p_{LRT} = 1 - F_{\chi^2(k)}(\Lambda)
 <li><p>Answer on paper.</p></li>
 <li></li>
 </ol>
-<p>First, we’ll calculate the log-likelihood using the least-square estimates:</p>
+<p>We wish to calculate the LRT, where the null hypothesis is that the slope is zero.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Lambda &amp; = 2(l(\hat\theta) - l(\hat\theta_0))
+\end{aligned}
+\]</span></p>
+<p>Here is the formula for the log-likelihood using the least-square estimates.</p>
 <p><span class="math display">\[
 \begin{aligned}
 l(\mu) =&amp; ~ n~\text{ln}(\frac{1}{\sigma \sqrt {2 \pi}}) - 
          \frac{1}{2\sigma^2} \sum_{i = 1}^n (y_i - \alpha - \beta x_i)^2 \\
 \end{aligned}
 \]</span></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">x &lt;-<span class="st"> </span>anscombe<span class="op">$</span>x1</a>
-<a class="sourceLine" id="cb36-2" title="2">y &lt;-<span class="st"> </span>anscombe<span class="op">$</span>y1</a>
-<a class="sourceLine" id="cb36-3" title="3">n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</a>
-<a class="sourceLine" id="cb36-4" title="4">xbar &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</a>
-<a class="sourceLine" id="cb36-5" title="5">ybar &lt;-<span class="st"> </span><span class="kw">mean</span>(y)</a>
-<a class="sourceLine" id="cb36-6" title="6">b_hat &lt;-<span class="st"> </span><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span>xbar)<span class="op">*</span>(y <span class="op">-</span><span class="st"> </span>ybar)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span>xbar)<span class="op">^</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb36-7" title="7">a_hat &lt;-<span class="st"> </span>ybar <span class="op">-</span><span class="st"> </span>b_hat<span class="op">*</span>xbar</a>
-<a class="sourceLine" id="cb36-8" title="8">v_hat_dist &lt;-<span class="st"> </span><span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span>a_hat <span class="op">-</span><span class="st"> </span>b_hat <span class="op">*</span><span class="st"> </span>x)<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(n <span class="op">-</span><span class="st"> </span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb36-9" title="9">v_hat_beta &lt;-<span class="st"> </span>v_hat_dist<span class="op">/</span><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span>xbar)<span class="op">^</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb36-10" title="10"></a>
-<a class="sourceLine" id="cb36-11" title="11"><span class="co"># Calculate log-likelihood of the data, given the least-squares estimates</span></a>
-<a class="sourceLine" id="cb36-12" title="12">term1 &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="kw">sqrt</span>(v_hat_beta) <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>pi)))</a>
-<a class="sourceLine" id="cb36-13" title="13">term2 &lt;-<span class="st"> </span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>v_hat_beta<span class="op">^</span><span class="dv">2</span>)) <span class="op">*</span><span class="st"> </span>(<span class="kw">sum</span>(y <span class="op">-</span><span class="st"> </span>a_hat <span class="op">-</span><span class="st"> </span>b_hat <span class="op">*</span><span class="st"> </span>x)<span class="op">^</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb36-14" title="14">ll_bMLE &lt;-<span class="st"> </span>term1 <span class="op">-</span><span class="st"> </span>term2  </a></code></pre></div>
-<p>Second, we’ll calculate the log-likelihood using the a slope of 0, our null hypothesis:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="co"># Calculate log-likelihood of the data, given the null hypothesis</span></a>
-<a class="sourceLine" id="cb37-2" title="2">b_hat &lt;-<span class="st"> </span><span class="dv">0</span> <span class="co"># null hypothesis</span></a>
-<a class="sourceLine" id="cb37-3" title="3">a_hat &lt;-<span class="st"> </span>ybar <span class="op">-</span><span class="st"> </span>b_hat<span class="op">*</span>xbar</a>
-<a class="sourceLine" id="cb37-4" title="4">v_hat_dist &lt;-<span class="st"> </span><span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span>a_hat <span class="op">-</span><span class="st"> </span>b_hat <span class="op">*</span><span class="st"> </span>x)<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(n <span class="op">-</span><span class="st"> </span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb37-5" title="5">v_hat_beta &lt;-<span class="st"> </span>v_hat_dist<span class="op">/</span><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span>xbar)<span class="op">^</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb37-6" title="6"></a>
-<a class="sourceLine" id="cb37-7" title="7"><span class="co"># Calculate log-likelihood of the data, given the least-squares estimates</span></a>
-<a class="sourceLine" id="cb37-8" title="8">term1 &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="kw">sqrt</span>(v_hat_beta) <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>pi)))</a>
-<a class="sourceLine" id="cb37-9" title="9">term2 &lt;-<span class="st"> </span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>v_hat_beta<span class="op">^</span><span class="dv">2</span>)) <span class="op">*</span><span class="st"> </span>(<span class="kw">sum</span>(y <span class="op">-</span><span class="st"> </span>a_hat <span class="op">-</span><span class="st"> </span>b_hat <span class="op">*</span><span class="st"> </span>x)<span class="op">^</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb37-10" title="10">ll_b0 &lt;-<span class="st"> </span>term1 <span class="op">-</span><span class="st"> </span>term2  </a></code></pre></div>
-<p>Third, we’ll calculate the LRT:
-<span class="math display">\[
-\begin{aligned}
-\Lambda &amp; = 2(l(\hat\theta) - l(\hat\theta_0))
-\end{aligned}
-\]</span></p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1">Lambda &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(ll_bMLE <span class="op">-</span><span class="st"> </span>ll_b0)</a></code></pre></div>
-<p>And we’ll calculate <span class="math inline">\(p\)</span> using <span class="math inline">\(k = 1\)</span>:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pchisq</span>(<span class="dt">q =</span> Lambda, <span class="dt">df =</span> <span class="dv">1</span>)</a></code></pre></div>
-<pre><code>## [1] 0.0005094818</code></pre>
-<p>Compare with the Wald test:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(<span class="kw">pnorm</span>(<span class="dt">q =</span> <span class="op">-</span>wald, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>))</a></code></pre></div>
+<p>We can simplify this equation where <span class="math inline">\(\beta = 0\)</span> and consequently <span class="math inline">\(\hat\alpha = \bar y\)</span> (from the answer to 1a). Here is a function written by Edge to calculate the test statistic <span class="math inline">\(\Lambda\)</span>:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">lr.stat.slr &lt;-<span class="st"> </span><span class="cf">function</span>(x, y){</a>
+<a class="sourceLine" id="cb36-2" title="2">  n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</a>
+<a class="sourceLine" id="cb36-3" title="3">  <span class="co">#compute MLEs of beta and alpha</span></a>
+<a class="sourceLine" id="cb36-4" title="4">  B.hat &lt;-<span class="st"> </span>(<span class="kw">sum</span>(x<span class="op">*</span>y)<span class="op">-</span><span class="kw">sum</span>(x)<span class="op">*</span><span class="kw">sum</span>(y)<span class="op">/</span>n)<span class="op">/</span>( <span class="kw">sum</span>(x<span class="op">^</span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>(x)<span class="op">^</span><span class="dv">2</span><span class="op">/</span>n)</a>
+<a class="sourceLine" id="cb36-5" title="5">  A.hat &lt;-<span class="st"> </span>(<span class="kw">sum</span>(y) <span class="op">-</span><span class="st"> </span>B.hat<span class="op">*</span><span class="kw">sum</span>(x))<span class="op">/</span>n</a>
+<a class="sourceLine" id="cb36-6" title="6">  <span class="co">#Compute estimated variance of MLE of beta</span></a>
+<a class="sourceLine" id="cb36-7" title="7">  vhat &lt;-<span class="st"> </span><span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span>A.hat <span class="op">-</span><span class="st"> </span>B.hat<span class="op">*</span>x)<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(n<span class="dv">-2</span>)</a>
+<a class="sourceLine" id="cb36-8" title="8">  <span class="co">#likelihood-ratio statistic</span></a>
+<a class="sourceLine" id="cb36-9" title="9">  lr &lt;-<span class="st"> </span>(<span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y))<span class="op">^</span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span>A.hat <span class="op">-</span><span class="st"> </span>B.hat<span class="op">*</span>x)<span class="op">^</span><span class="dv">2</span>))<span class="op">/</span>vhat</a>
+<a class="sourceLine" id="cb36-10" title="10">  <span class="kw">return</span>(lr)</a>
+<a class="sourceLine" id="cb36-11" title="11">}</a>
+<a class="sourceLine" id="cb36-12" title="12"></a>
+<a class="sourceLine" id="cb36-13" title="13">Lambda &lt;-<span class="st"> </span><span class="kw">lr.stat.slr</span>(x, y)</a></code></pre></div>
+<p>And we’ll calculate <span class="math inline">\(p\)</span> using <span class="math inline">\(k = 1\)</span> because we have fixed one parameter:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pchisq</span>(<span class="dt">q =</span> Lambda, <span class="dt">df =</span> <span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## [1] 2.220751e-05</code></pre>
-<p><strong>This is not the same answer as Edge</strong></p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</a>
-<a class="sourceLine" id="cb43-2" title="2"><span class="kw">summary</span>(lm1)</a></code></pre></div>
+<p>Compare with the Wald test:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(<span class="kw">pnorm</span>(<span class="dt">q =</span> <span class="op">-</span>wald, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>))</a></code></pre></div>
+<pre><code>## [1] 2.220751e-05</code></pre>
+<p><strong>This give the same answer</strong></p>
+<p>In addition, here I use the <code>anova</code> function in R to do the likelihood ratio test on two linear models, one with and the other without slope term.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</a>
+<a class="sourceLine" id="cb41-2" title="2"><span class="kw">summary</span>(lm1)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x)
@@ -995,8 +983,8 @@ l(\mu) =&amp; ~ n~\text{ln}(\frac{1}{\sigma \sqrt {2 \pi}}) -
 ## Residual standard error: 1.237 on 9 degrees of freedom
 ## Multiple R-squared:  0.6665, Adjusted R-squared:  0.6295 
 ## F-statistic: 17.99 on 1 and 9 DF,  p-value: 0.00217</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1">lm2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb45-2" title="2"><span class="kw">summary</span>(lm2)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">lm2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb43-2" title="2"><span class="kw">summary</span>(lm2)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ 1)
@@ -1012,7 +1000,7 @@ l(\mu) =&amp; ~ n~\text{ln}(\frac{1}{\sigma \sqrt {2 \pi}}) -
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 2.032 on 10 degrees of freedom</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">anova</span>(lm1, lm2)</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">anova</span>(lm1, lm2)</a></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: y ~ x
@@ -1022,31 +1010,16 @@ l(\mu) =&amp; ~ n~\text{ln}(\frac{1}{\sigma \sqrt {2 \pi}}) -
 ## 2     10 41.273 -1    -27.51 17.99 0.00217 **
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1">lr.stat.slr &lt;-<span class="st"> </span><span class="cf">function</span>(x, y){</a>
-<a class="sourceLine" id="cb49-2" title="2">  n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</a>
-<a class="sourceLine" id="cb49-3" title="3">  <span class="co">#compute MLEs of beta and alpha</span></a>
-<a class="sourceLine" id="cb49-4" title="4">  B.hat &lt;-<span class="st"> </span>(<span class="kw">sum</span>(x<span class="op">*</span>y)<span class="op">-</span><span class="kw">sum</span>(x)<span class="op">*</span><span class="kw">sum</span>(y)<span class="op">/</span>n)<span class="op">/</span>( <span class="kw">sum</span>(x<span class="op">^</span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>(x)<span class="op">^</span><span class="dv">2</span><span class="op">/</span>n)</a>
-<a class="sourceLine" id="cb49-5" title="5">  A.hat &lt;-<span class="st"> </span>(<span class="kw">sum</span>(y) <span class="op">-</span><span class="st"> </span>B.hat<span class="op">*</span><span class="kw">sum</span>(x))<span class="op">/</span>n</a>
-<a class="sourceLine" id="cb49-6" title="6">  <span class="co">#Compute estimated variance of MLE of beta</span></a>
-<a class="sourceLine" id="cb49-7" title="7">  vhat &lt;-<span class="st"> </span><span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span>A.hat <span class="op">-</span><span class="st"> </span>B.hat<span class="op">*</span>x)<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(n<span class="dv">-2</span>)</a>
-<a class="sourceLine" id="cb49-8" title="8">  <span class="co">#likelihood-ratio statistic</span></a>
-<a class="sourceLine" id="cb49-9" title="9">  lr &lt;-<span class="st"> </span>(<span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y))<span class="op">^</span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span>A.hat <span class="op">-</span><span class="st"> </span>B.hat<span class="op">*</span>x)<span class="op">^</span><span class="dv">2</span>))<span class="op">/</span>vhat</a>
-<a class="sourceLine" id="cb49-10" title="10">  <span class="kw">return</span>(lr)</a>
-<a class="sourceLine" id="cb49-11" title="11">}</a>
-<a class="sourceLine" id="cb49-12" title="12"></a>
-<a class="sourceLine" id="cb49-13" title="13"><span class="kw">lr.stat.slr</span>(x, y)</a></code></pre></div>
-<pre><code>## [1] 17.98994</code></pre>
-</div>
-</div>
-<div id="crap" class="section level2">
-<h2><span class="header-section-number">9.5</span> crap</h2>
-<p>maximum likelihood estimation is one common method for estimating paremater in a parametric model, just like method of moments. We assume<span class="math inline">\(X_1, X_2..., X_n\)</span> be IID with <em>PDF</em> <span class="math inline">\(f(x;\theta)\)</span>, define the likelihood function as
-<span class="math display">\[
-\mathcal{L}(\theta)=\Pi_{i=1}^nf(X_i;\theta)
-\]</span>
-And the log likelihood function is defined by <span class="math inline">\(\mathcal{l}_n(\theta)=log \mathcal{L}_n(\theta)=\sum_{i=1}^n log f(X_i; \theta)\)</span>.</p>
-<p>The <em>maximum likelihood estimator</em> MLE, denoted by <span class="math inline">\(\hat{\theta}_n\)</span>, is the value of <span class="math inline">\(\theta\)</span> that maximizes <span class="math inline">\(\mathcal{L}_n(\theta)\)</span></p>
+<p>Notice that the test statistic is the same, but the <span class="math inline">\(p\)</span> value differs, because it appears to use the F distribution instead of the <span class="math inline">\(\chi^2\)</span> distribution for the hypothesis test.</p>
+<!-- ## crap -->
+<!-- maximum likelihood estimation is one common method for estimating paremater in a parametric model, just like method of moments. We assume$X_1, X_2..., X_n$ be IID with *PDF* $f(x;\theta)$, define the likelihood function as  -->
+<!-- $$ -->
+<!-- \mathcal{L}(\theta)=\Pi_{i=1}^nf(X_i;\theta) -->
+<!-- $$ -->
+<!-- And the log likelihood function is defined by $\mathcal{l}_n(\theta)=log \mathcal{L}_n(\theta)=\sum_{i=1}^n log f(X_i; \theta)$.  -->
+<!-- The *maximum likelihood estimator* MLE, denoted by $\hat{\theta}_n$, is the value of $\theta$ that maximizes $\mathcal{L}_n(\theta)$ -->
 
+</div>
 </div>
 </div>
             </section>

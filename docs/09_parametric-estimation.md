@@ -747,7 +747,7 @@ $$
 \end{aligned}
 $$
 
-where $\hat\theta$ and $\hat\theta_0)$ represent the full (or more complex) model and the nested model with a hypothesized value, respectively. In other words, $\hat\theta_0)$ represents a null hypothesis. 
+where $\hat\theta$ and $\hat\theta_0$ represent the full (or more complex) model and the nested model with a hypothesized value, respectively. In other words, $\hat\theta_0)$ represents a null hypothesis. 
 
 According to Wilks' theorem, if the null hypothesis is true, the statistic $\Lambda$ is asymptotically distributed as $\chi^2 (k)$, where $k$ is the number of parameters that are constrained in the nested model (representing the null hypothesis) but free in the full (comparison) model. The $p$ value is the probability of obtaining a value of $\Lambda$ as large or larger than the one observed given that the null hypothesis is true: 
 
@@ -767,7 +767,15 @@ where $F_{\chi^2(k)}$ is the cumulative distribution  of the $\chi^2$ distributi
   
   b. 
 
-First, we'll calculate the log-likelihood using the least-square estimates:
+We wish to calculate the LRT, where the null hypothesis is that the slope is zero. 
+
+$$
+\begin{aligned}
+\Lambda & = 2(l(\hat\theta) - l(\hat\theta_0))
+\end{aligned}
+$$
+
+Here is the formula for the log-likelihood using the least-square estimates. 
 
 $$
 \begin{aligned}
@@ -776,51 +784,26 @@ l(\mu) =& ~ n~\text{ln}(\frac{1}{\sigma \sqrt {2 \pi}}) -
 \end{aligned}
 $$  
 
+We can simplify this equation where $\beta = 0$ and consequently $\hat\alpha = \bar y$ (from the answer to 1a). Here is a function written by Edge to calculate the test statistic $\Lambda$: 
+
 
 ```r
-x <- anscombe$x1
-y <- anscombe$y1
-n <- length(x)
-xbar <- mean(x)
-ybar <- mean(y)
-b_hat <- sum((x - xbar)*(y - ybar)) / sum((x - xbar)^2)
-a_hat <- ybar - b_hat*xbar
-v_hat_dist <- sum((y - a_hat - b_hat * x)^2) / (n - 2)
-v_hat_beta <- v_hat_dist/sum((x - xbar)^2)
+lr.stat.slr <- function(x, y){
+  n <- length(x)
+  #compute MLEs of beta and alpha
+  B.hat <- (sum(x*y)-sum(x)*sum(y)/n)/( sum(x^2) - sum(x)^2/n)
+  A.hat <- (sum(y) - B.hat*sum(x))/n
+  #Compute estimated variance of MLE of beta
+  vhat <- sum((y - A.hat - B.hat*x)^2)/(n-2)
+  #likelihood-ratio statistic
+  lr <- (sum((y - mean(y))^2) - sum((y - A.hat - B.hat*x)^2))/vhat
+  return(lr)
+}
 
-# Calculate log-likelihood of the data, given the least-squares estimates
-term1 <- n * log(1 / (sqrt(v_hat_beta) * sqrt(2 * pi)))
-term2 <- (1 / (2 * v_hat_beta^2)) * (sum(y - a_hat - b_hat * x)^2)
-ll_bMLE <- term1 - term2  
+Lambda <- lr.stat.slr(x, y)
 ```
 
-Second, we'll calculate the log-likelihood using the a slope of 0, our null hypothesis:
-
-```r
-# Calculate log-likelihood of the data, given the null hypothesis
-b_hat <- 0 # null hypothesis
-a_hat <- ybar - b_hat*xbar
-v_hat_dist <- sum((y - a_hat - b_hat * x)^2) / (n - 2)
-v_hat_beta <- v_hat_dist/sum((x - xbar)^2)
-
-# Calculate log-likelihood of the data, given the least-squares estimates
-term1 <- n * log(1 / (sqrt(v_hat_beta) * sqrt(2 * pi)))
-term2 <- (1 / (2 * v_hat_beta^2)) * (sum(y - a_hat - b_hat * x)^2)
-ll_b0 <- term1 - term2  
-```
-
-Third, we'll calculate the LRT:
-$$
-\begin{aligned}
-\Lambda & = 2(l(\hat\theta) - l(\hat\theta_0))
-\end{aligned}
-$$
-
-```r
-Lambda <- 2 * (ll_bMLE - ll_b0)
-```
-
-And we'll calculate $p$ using $k = 1$: 
+And we'll calculate $p$ using $k = 1$ because we have fixed one parameter: 
 
 
 ```r
@@ -828,7 +811,7 @@ And we'll calculate $p$ using $k = 1$:
 ```
 
 ```
-## [1] 0.0005094818
+## [1] 2.220751e-05
 ```
 
 Compare with the Wald test:
@@ -841,7 +824,9 @@ Compare with the Wald test:
 ## [1] 2.220751e-05
 ```
 
-**This is not the same answer as Edge**
+**This give the same answer**
+
+In addition, here I use the `anova` function in R to do the likelihood ratio test on two linear models, one with and the other without slope term. 
 
 
 ```r
@@ -909,36 +894,16 @@ anova(lm1, lm2)
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
+Notice that the test statistic is the same, but the $p$ value differs, because it appears to use the F distribution instead of the $\chi^2$ distribution for the hypothesis test. 
 
-```r
-lr.stat.slr <- function(x, y){
-  n <- length(x)
-  #compute MLEs of beta and alpha
-  B.hat <- (sum(x*y)-sum(x)*sum(y)/n)/( sum(x^2) - sum(x)^2/n)
-  A.hat <- (sum(y) - B.hat*sum(x))/n
-  #Compute estimated variance of MLE of beta
-  vhat <- sum((y - A.hat - B.hat*x)^2)/(n-2)
-  #likelihood-ratio statistic
-  lr <- (sum((y - mean(y))^2) - sum((y - A.hat - B.hat*x)^2))/vhat
-  return(lr)
-}
+<!-- ## crap -->
 
-lr.stat.slr(x, y)
-```
-
-```
-## [1] 17.98994
-```
+<!-- maximum likelihood estimation is one common method for estimating paremater in a parametric model, just like method of moments. We assume$X_1, X_2..., X_n$ be IID with *PDF* $f(x;\theta)$, define the likelihood function as  -->
+<!-- $$ -->
+<!-- \mathcal{L}(\theta)=\Pi_{i=1}^nf(X_i;\theta) -->
+<!-- $$ -->
+<!-- And the log likelihood function is defined by $\mathcal{l}_n(\theta)=log \mathcal{L}_n(\theta)=\sum_{i=1}^n log f(X_i; \theta)$.  -->
 
 
-## crap
-
-maximum likelihood estimation is one common method for estimating paremater in a parametric model, just like method of moments. We assume$X_1, X_2..., X_n$ be IID with *PDF* $f(x;\theta)$, define the likelihood function as 
-$$
-\mathcal{L}(\theta)=\Pi_{i=1}^nf(X_i;\theta)
-$$
-And the log likelihood function is defined by $\mathcal{l}_n(\theta)=log \mathcal{L}_n(\theta)=\sum_{i=1}^n log f(X_i; \theta)$. 
-
-
-The *maximum likelihood estimator* MLE, denoted by $\hat{\theta}_n$, is the value of $\theta$ that maximizes $\mathcal{L}_n(\theta)$
+<!-- The *maximum likelihood estimator* MLE, denoted by $\hat{\theta}_n$, is the value of $\theta$ that maximizes $\mathcal{L}_n(\theta)$ -->
 
