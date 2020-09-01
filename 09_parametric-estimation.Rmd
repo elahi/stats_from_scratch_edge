@@ -609,7 +609,141 @@ kable(df_wald, caption = "Proportion of significance tests for the estimated slo
 
 ## Parametric hypothesis testing using the likelihood-ratio test
 
+Likelihood-ratio tests can be used to make joint inferences about several parameters at once. They accomplish this by comparing *nested* models. For example, consider the full model:
+
+$$
+\begin{aligned}
+Y_i & = \alpha +  \beta_1 x_i +  \beta_2 w_i +  \beta_3 z_i
+\end{aligned}
+$$ 
+
+In this full model, the *free* parameters are: $\alpha, \beta_1, \beta_2, \beta_3$. If we give any of these parameters a *fixed* value - then the resulting model is considered to be nested within the full model. Often, we compare models where some of the coefficients are set to 0, indicating no effect. So, all of the following models can be considered to be nested within the full model:
+
+$$
+\begin{aligned}
+Y_i & = \alpha + \beta_3 z_i \\
+Y_i & = \alpha + \beta_1 x_i +  \beta_2 w_i \\
+Y_i & = \alpha 
+\end{aligned}
+$$
+
+The likelihood-ratio test compares the maximum likelihood of two nested models, and keeps track of the difference in the number of free parameters ($k$) in the models. The test statistic $\Lambda$ is calculated as:
+
+$$
+\begin{aligned}
+\Lambda & = 2 \text{ln} \frac{L(\hat\theta)}{L(\hat\theta_0)} \\
+        & = 2(l(\hat\theta) - l(\hat\theta_0))
+\end{aligned}
+$$
+
+where $\hat\theta$ and $\hat\theta_0)$ represent the full (or more complex) model and the nested model with a hypothesized value, respectively. In other words, $\hat\theta_0)$ represents a null hypothesis. 
+
+According to Wilks' theorem, if the null hypothesis is true, the statistic $\Lambda$ is asymptotically distributed as $\chi^2 (k)$, where $k$ is the number of parameters that are constrained in the nested model (representing the null hypothesis) but free in the full (comparison) model. The $p$ value is the probability of obtaining a value of $\Lambda$ as large or larger than the one observed given that the null hypothesis is true: 
+
+$$
+\begin{aligned}
+p_{LRT} = 1 - F_{\chi^2(k)}(\Lambda) 
+\end{aligned}
+$$
+
+where $F_{\chi^2(k)}$ is the cumulative distribution  of the $\chi^2$ distribution. 
+
 ### Exercise set 9-6
+
+1. 
+
+  a. Answer on paper. 
+  
+  b. 
+
+First, we'll calculate the log-likelihood using the least-square estimates:
+
+$$
+\begin{aligned}
+l(\mu) =& ~ n~\text{ln}(\frac{1}{\sigma \sqrt {2 \pi}}) - 
+         \frac{1}{2\sigma^2} \sum_{i = 1}^n (y_i - \alpha - \beta x_i)^2 \\
+\end{aligned}
+$$  
+
+```{r}
+x <- anscombe$x1
+y <- anscombe$y1
+n <- length(x)
+xbar <- mean(x)
+ybar <- mean(y)
+b_hat <- sum((x - xbar)*(y - ybar)) / sum((x - xbar)^2)
+a_hat <- ybar - b_hat*xbar
+v_hat_dist <- sum((y - a_hat - b_hat * x)^2) / (n - 2)
+v_hat_beta <- v_hat_dist/sum((x - xbar)^2)
+
+# Calculate log-likelihood of the data, given the least-squares estimates
+term1 <- n * log(1 / (sqrt(v_hat_beta) * sqrt(2 * pi)))
+term2 <- (1 / (2 * v_hat_beta^2)) * (sum(y - a_hat - b_hat * x)^2)
+ll_bMLE <- term1 - term2  
+```
+
+Second, we'll calculate the log-likelihood using the a slope of 0, our null hypothesis:
+```{r}
+# Calculate log-likelihood of the data, given the null hypothesis
+b_hat <- 0 # null hypothesis
+a_hat <- ybar - b_hat*xbar
+v_hat_dist <- sum((y - a_hat - b_hat * x)^2) / (n - 2)
+v_hat_beta <- v_hat_dist/sum((x - xbar)^2)
+
+# Calculate log-likelihood of the data, given the least-squares estimates
+term1 <- n * log(1 / (sqrt(v_hat_beta) * sqrt(2 * pi)))
+term2 <- (1 / (2 * v_hat_beta^2)) * (sum(y - a_hat - b_hat * x)^2)
+ll_b0 <- term1 - term2  
+```
+
+Third, we'll calculate the LRT:
+$$
+\begin{aligned}
+\Lambda & = 2(l(\hat\theta) - l(\hat\theta_0))
+\end{aligned}
+$$
+```{r}
+Lambda <- 2 * (ll_bMLE - ll_b0)
+```
+
+And we'll calculate $p$ using $k = 1$: 
+
+```{r}
+1 - pchisq(q = Lambda, df = 1)
+```
+
+Compare with the Wald test:
+```{r}
+2 * (pnorm(q = -wald, mean = 0, sd = 1))
+```
+
+**This is not the same answer as Edge**
+
+```{r}
+lm1 <- lm(y ~ x)
+summary(lm1)
+lm2 <- lm(y ~ 1)
+summary(lm2)
+anova(lm1, lm2)
+```
+
+```{r}
+lr.stat.slr <- function(x, y){
+  n <- length(x)
+  #compute MLEs of beta and alpha
+  B.hat <- (sum(x*y)-sum(x)*sum(y)/n)/( sum(x^2) - sum(x)^2/n)
+  A.hat <- (sum(y) - B.hat*sum(x))/n
+  #Compute estimated variance of MLE of beta
+  vhat <- sum((y - A.hat - B.hat*x)^2)/(n-2)
+  #likelihood-ratio statistic
+  lr <- (sum((y - mean(y))^2) - sum((y - A.hat - B.hat*x)^2))/vhat
+  return(lr)
+}
+
+lr.stat.slr(x, y)
+
+```
+
 
 ## crap
 
