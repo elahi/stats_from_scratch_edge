@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-08-21" />
+<meta name="date" content="2020-09-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -62,9 +62,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -73,14 +73,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -89,9 +91,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -279,17 +281,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.0.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-1"><i class="fa fa-check"></i><b>9.0.1</b> Exercise set 9-1</a></li>
 <li class="chapter" data-level="9.1" data-path="parametric.html"><a href="parametric.html#parametric-estimation-using-maximum-likelihood"><i class="fa fa-check"></i><b>9.1</b> Parametric estimation using maximum likelihood</a><ul>
 <li class="chapter" data-level="9.1.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-2"><i class="fa fa-check"></i><b>9.1.1</b> Exercise set 9-2</a></li>
-<li class="chapter" data-level="9.1.2" data-path="parametric.html"><a href="parametric.html#exercise-set-9-3"><i class="fa fa-check"></i><b>9.1.2</b> Exercise set 9-3</a></li>
+<li class="chapter" data-level="9.1.2" data-path="parametric.html"><a href="parametric.html#maximum-likelihood-estimation-for-simple-linear-regression"><i class="fa fa-check"></i><b>9.1.2</b> Maximum-likelihood estimation for simple linear regression</a></li>
+<li class="chapter" data-level="9.1.3" data-path="parametric.html"><a href="parametric.html#exercise-set-9-3"><i class="fa fa-check"></i><b>9.1.3</b> Exercise set 9-3</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="parametric.html"><a href="parametric.html#parametric-interval-estimation-the-direct-approach-and-fisher-information"><i class="fa fa-check"></i><b>9.2</b> Parametric interval estimation: the direct approach and Fisher information</a><ul>
 <li class="chapter" data-level="9.2.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-4"><i class="fa fa-check"></i><b>9.2.1</b> Exercise set 9-4</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="parametric.html"><a href="parametric.html#parametric-hypothesis-testing-using-the-wald-test"><i class="fa fa-check"></i><b>9.3</b> Parametric hypothesis testing using the Wald test</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-5"><i class="fa fa-check"></i><b>9.3.1</b> Exercise set 9-5</a></li>
+<li class="chapter" data-level="9.3.1" data-path="parametric.html"><a href="parametric.html#wald-test"><i class="fa fa-check"></i><b>9.3.1</b> Wald test</a></li>
+<li class="chapter" data-level="9.3.2" data-path="parametric.html"><a href="parametric.html#exercise-set-9-5"><i class="fa fa-check"></i><b>9.3.2</b> Exercise set 9-5</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="parametric.html"><a href="parametric.html#parametric-hypothesis-testing-using-the-likelihood-ratio-test"><i class="fa fa-check"></i><b>9.4</b> Parametric hypothesis testing using the likelihood-ratio test</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-6"><i class="fa fa-check"></i><b>9.4.1</b> Exercise set 9-6</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>10</b> Bayesian estimation and inference</a><ul>
+<li class="chapter" data-level="10.1" data-path="bayesian.html"><a href="bayesian.html#how-to-choose-a-prior-distribution"><i class="fa fa-check"></i><b>10.1</b> How to choose a prior distribution?</a></li>
+<li class="chapter" data-level="10.2" data-path="bayesian.html"><a href="bayesian.html#the-unscaled-posterior-conjugacy-and-sampling-from-the-posterior"><i class="fa fa-check"></i><b>10.2</b> The unscaled posterior, conjugacy, and sampling from the posterior</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="bayesian.html"><a href="bayesian.html#rejection-sampling-algorithm"><i class="fa fa-check"></i><b>10.2.1</b> Rejection sampling algorithm</a></li>
+<li class="chapter" data-level="10.2.2" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-1"><i class="fa fa-check"></i><b>10.2.2</b> Exercise set 10-1</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="bayesian.html"><a href="bayesian.html#bayesian-point-estimation-using-bayes-estimators"><i class="fa fa-check"></i><b>10.3</b> Bayesian point estimation using Bayes estimators</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-2"><i class="fa fa-check"></i><b>10.3.1</b> Exercise set 10-2</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="bayesian.html"><a href="bayesian.html#bayesian-interval-estimation-using-credible-intervals"><i class="fa fa-check"></i><b>10.4</b> Bayesian interval estimation using credible intervals</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-3"><i class="fa fa-check"></i><b>10.4.1</b> Exercise set 10-3</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="bayesian.html"><a href="bayesian.html#bayesian-hypothesis-testing-using-bayes-factors"><i class="fa fa-check"></i><b>10.5</b> Bayesian ‘hypothesis testing’ using Bayes factors</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-4"><i class="fa fa-check"></i><b>10.5.1</b> Exercise set 10-4</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="bayesian.html"><a href="bayesian.html#conclusion-bayesian-vs.-frequentist-methods"><i class="fa fa-check"></i><b>10.6</b> Conclusion: Bayesian vs. frequentist methods</a></li>
+<li class="chapter" data-level="10.7" data-path="bayesian.html"><a href="bayesian.html#chapter-summary-2"><i class="fa fa-check"></i><b>10.7</b> Chapter summary</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -318,7 +340,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="https://r4ds.had.co.nz/">R for data science</a></p>
 <div id="inspecting-the-dataframe" class="section level2">
 <h2><span class="header-section-number">2.1</span> Inspecting the dataframe</h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">head</span>(iris)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="r-eda.html#cb10-1"></a><span class="kw">head</span>(iris)</span></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1          5.1         3.5          1.4         0.2  setosa
 ## 2          4.9         3.0          1.4         0.2  setosa
@@ -326,7 +348,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4          4.6         3.1          1.5         0.2  setosa
 ## 5          5.0         3.6          1.4         0.2  setosa
 ## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">glimpse</span>(iris)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="r-eda.html#cb12-1"></a><span class="kw">glimpse</span>(iris)</span></code></pre></div>
 <pre><code>## Observations: 150
 ## Variables: 5
 ## $ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4…
@@ -334,7 +356,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## $ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1…
 ## $ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0…
 ## $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, …</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">summary</span>(iris)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="r-eda.html#cb14-1"></a><span class="kw">summary</span>(iris)</span></code></pre></div>
 <pre><code>##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
 ##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
 ##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
@@ -352,26 +374,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="histograms" class="section level2">
 <h2><span class="header-section-number">2.2</span> Histograms</h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># Base</span></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="kw">hist</span>(iris<span class="op">$</span>Sepal.Length, <span class="dt">xlab =</span> <span class="st">&quot;Sepal Length&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="r-eda.html#cb16-1"></a><span class="co"># Base</span></span>
+<span id="cb16-2"><a href="r-eda.html#cb16-2"></a><span class="kw">hist</span>(iris<span class="op">$</span>Sepal.Length, <span class="dt">xlab =</span> <span class="st">&quot;Sepal Length&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <p><img src="02_r-eda_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># Tidyverse</span></a>
-<a class="sourceLine" id="cb17-2" title="2">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb17-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Sepal.Length)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb17-4" title="4"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">8</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb17-5" title="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Sepal Length&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="r-eda.html#cb17-1"></a><span class="co"># Tidyverse</span></span>
+<span id="cb17-2"><a href="r-eda.html#cb17-2"></a>iris <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb17-3"><a href="r-eda.html#cb17-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Sepal.Length)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb17-4"><a href="r-eda.html#cb17-4"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">8</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb17-5"><a href="r-eda.html#cb17-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Sepal Length&quot;</span>)</span></code></pre></div>
 <p><img src="02_r-eda_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
 </div>
 <div id="summarising-data" class="section level2">
 <h2><span class="header-section-number">2.3</span> Summarising data</h2>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># Base</span></a>
-<a class="sourceLine" id="cb18-2" title="2"><span class="kw">tapply</span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Species, mean)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="r-eda.html#cb18-1"></a><span class="co"># Base</span></span>
+<span id="cb18-2"><a href="r-eda.html#cb18-2"></a><span class="kw">tapply</span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Species, mean)</span></code></pre></div>
 <pre><code>##     setosa versicolor  virginica 
 ##      5.006      5.936      6.588</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co"># Tidyverse</span></a>
-<a class="sourceLine" id="cb20-2" title="2">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(Sepal.Length))</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="r-eda.html#cb20-1"></a><span class="co"># Tidyverse</span></span>
+<span id="cb20-2"><a href="r-eda.html#cb20-2"></a>iris <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb20-3"><a href="r-eda.html#cb20-3"></a><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb20-4"><a href="r-eda.html#cb20-4"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(Sepal.Length))</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   Species     mean
 ##   &lt;fct&gt;      &lt;dbl&gt;
@@ -379,93 +401,93 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 versicolor  5.94
 ## 3 virginica   6.59</code></pre>
 <p>Note that the tidyverse output is a tibble (essentially a dataframe), which is a consistent feature of the tidy approach to data wrangling. Not that you can’t do this in base R with the <code>aggregate</code> function - which is how I used to do it BT (<em>before tidyverse</em>):</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># Base option 2</span></a>
-<a class="sourceLine" id="cb22-2" title="2"><span class="kw">aggregate</span>(iris<span class="op">$</span>Sepal.Length, <span class="kw">list</span>(iris<span class="op">$</span>Species), mean) </a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="r-eda.html#cb22-1"></a><span class="co"># Base option 2</span></span>
+<span id="cb22-2"><a href="r-eda.html#cb22-2"></a><span class="kw">aggregate</span>(iris<span class="op">$</span>Sepal.Length, <span class="kw">list</span>(iris<span class="op">$</span>Species), mean) </span></code></pre></div>
 <pre><code>##      Group.1     x
 ## 1     setosa 5.006
 ## 2 versicolor 5.936
 ## 3  virginica 6.588</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="co"># You can check the output using str()</span></a>
-<a class="sourceLine" id="cb24-2" title="2"><span class="kw">aggregate</span>(iris<span class="op">$</span>Sepal.Length, <span class="kw">list</span>(iris<span class="op">$</span>Species), mean) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="r-eda.html#cb24-1"></a><span class="co"># You can check the output using str()</span></span>
+<span id="cb24-2"><a href="r-eda.html#cb24-2"></a><span class="kw">aggregate</span>(iris<span class="op">$</span>Sepal.Length, <span class="kw">list</span>(iris<span class="op">$</span>Species), mean) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str</span>()</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    3 obs. of  2 variables:
 ##  $ Group.1: Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 2 3
 ##  $ x      : num  5.01 5.94 6.59</code></pre>
 </div>
 <div id="loops" class="section level2">
 <h2><span class="header-section-number">2.4</span> Loops</h2>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>){</a>
-<a class="sourceLine" id="cb26-2" title="2">  <span class="kw">print</span>(i)</a>
-<a class="sourceLine" id="cb26-3" title="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="r-eda.html#cb26-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>){</span>
+<span id="cb26-2"><a href="r-eda.html#cb26-2"></a>  <span class="kw">print</span>(i)</span>
+<span id="cb26-3"><a href="r-eda.html#cb26-3"></a>}</span></code></pre></div>
 <pre><code>## [1] 1
 ## [1] 2
 ## [1] 3</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">i &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb28-2" title="2"><span class="kw">print</span>(i)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="r-eda.html#cb28-1"></a>i &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb28-2"><a href="r-eda.html#cb28-2"></a><span class="kw">print</span>(i)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">unique</span>(iris<span class="op">$</span>Species)</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="r-eda.html#cb30-1"></a><span class="kw">unique</span>(iris<span class="op">$</span>Species)</span></code></pre></div>
 <pre><code>## [1] setosa     versicolor virginica 
 ## Levels: setosa versicolor virginica</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">unique</span>(iris<span class="op">$</span>Species)){</a>
-<a class="sourceLine" id="cb32-2" title="2">  <span class="kw">print</span>(<span class="kw">mean</span>(iris<span class="op">$</span>Sepal.Length[iris<span class="op">$</span>Species <span class="op">==</span><span class="st"> </span>i]))</a>
-<a class="sourceLine" id="cb32-3" title="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="r-eda.html#cb32-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">unique</span>(iris<span class="op">$</span>Species)){</span>
+<span id="cb32-2"><a href="r-eda.html#cb32-2"></a>  <span class="kw">print</span>(<span class="kw">mean</span>(iris<span class="op">$</span>Sepal.Length[iris<span class="op">$</span>Species <span class="op">==</span><span class="st"> </span>i]))</span>
+<span id="cb32-3"><a href="r-eda.html#cb32-3"></a>}</span></code></pre></div>
 <pre><code>## [1] 5.006
 ## [1] 5.936
 ## [1] 6.588</code></pre>
 </div>
 <div id="functions" class="section level2">
 <h2><span class="header-section-number">2.5</span> Functions</h2>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">conditional.mean &lt;-<span class="st"> </span><span class="cf">function</span>(x, y){</a>
-<a class="sourceLine" id="cb34-2" title="2">  <span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">unique</span>(y)){</a>
-<a class="sourceLine" id="cb34-3" title="3">    <span class="kw">print</span>(<span class="kw">mean</span>(x[y <span class="op">==</span><span class="st"> </span>i]))</a>
-<a class="sourceLine" id="cb34-4" title="4">  }</a>
-<a class="sourceLine" id="cb34-5" title="5">}</a></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">conditional.mean</span>(<span class="dt">x =</span> iris<span class="op">$</span>Sepal.Length, <span class="dt">y =</span> iris<span class="op">$</span>Species)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="r-eda.html#cb34-1"></a>conditional.mean &lt;-<span class="st"> </span><span class="cf">function</span>(x, y){</span>
+<span id="cb34-2"><a href="r-eda.html#cb34-2"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">unique</span>(y)){</span>
+<span id="cb34-3"><a href="r-eda.html#cb34-3"></a>    <span class="kw">print</span>(<span class="kw">mean</span>(x[y <span class="op">==</span><span class="st"> </span>i]))</span>
+<span id="cb34-4"><a href="r-eda.html#cb34-4"></a>  }</span>
+<span id="cb34-5"><a href="r-eda.html#cb34-5"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="r-eda.html#cb35-1"></a><span class="kw">conditional.mean</span>(<span class="dt">x =</span> iris<span class="op">$</span>Sepal.Length, <span class="dt">y =</span> iris<span class="op">$</span>Species)</span></code></pre></div>
 <pre><code>## [1] 5.006
 ## [1] 5.936
 ## [1] 6.588</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">conditional.mean</span>(<span class="dt">x =</span> iris<span class="op">$</span>Sepal.Width, <span class="dt">y =</span> iris<span class="op">$</span>Species)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="r-eda.html#cb37-1"></a><span class="kw">conditional.mean</span>(<span class="dt">x =</span> iris<span class="op">$</span>Sepal.Width, <span class="dt">y =</span> iris<span class="op">$</span>Species)</span></code></pre></div>
 <pre><code>## [1] 3.428
 ## [1] 2.77
 ## [1] 2.974</code></pre>
 </div>
 <div id="boxplots" class="section level2">
 <h2><span class="header-section-number">2.6</span> Boxplots</h2>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="co"># Base</span></a>
-<a class="sourceLine" id="cb39-2" title="2"><span class="kw">boxplot</span>(iris<span class="op">$</span>Sepal.Length <span class="op">~</span><span class="st"> </span>iris<span class="op">$</span>Species, </a>
-<a class="sourceLine" id="cb39-3" title="3">        <span class="dt">xlab =</span> <span class="st">&quot;Species&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Sepal length&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="r-eda.html#cb39-1"></a><span class="co"># Base</span></span>
+<span id="cb39-2"><a href="r-eda.html#cb39-2"></a><span class="kw">boxplot</span>(iris<span class="op">$</span>Sepal.Length <span class="op">~</span><span class="st"> </span>iris<span class="op">$</span>Species, </span>
+<span id="cb39-3"><a href="r-eda.html#cb39-3"></a>        <span class="dt">xlab =</span> <span class="st">&quot;Species&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Sepal length&quot;</span>)</span></code></pre></div>
 <p><img src="02_r-eda_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="co"># Tidyverse</span></a>
-<a class="sourceLine" id="cb40-2" title="2">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb40-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Species, Sepal.Length)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb40-4" title="4"><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb40-5" title="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Species&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Sepal length&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="r-eda.html#cb40-1"></a><span class="co"># Tidyverse</span></span>
+<span id="cb40-2"><a href="r-eda.html#cb40-2"></a>iris <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb40-3"><a href="r-eda.html#cb40-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Species, Sepal.Length)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb40-4"><a href="r-eda.html#cb40-4"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb40-5"><a href="r-eda.html#cb40-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Species&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Sepal length&quot;</span>)</span></code></pre></div>
 <p><img src="02_r-eda_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
 </div>
 <div id="scatterplots" class="section level2">
 <h2><span class="header-section-number">2.7</span> Scatterplots</h2>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="co"># Base</span></a>
-<a class="sourceLine" id="cb41-2" title="2"><span class="kw">plot</span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Sepal.Width, </a>
-<a class="sourceLine" id="cb41-3" title="3">        <span class="dt">xlab =</span> <span class="st">&quot;Sepal length&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Sepal width&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="r-eda.html#cb41-1"></a><span class="co"># Base</span></span>
+<span id="cb41-2"><a href="r-eda.html#cb41-2"></a><span class="kw">plot</span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Sepal.Width, </span>
+<span id="cb41-3"><a href="r-eda.html#cb41-3"></a>        <span class="dt">xlab =</span> <span class="st">&quot;Sepal length&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Sepal width&quot;</span>)</span></code></pre></div>
 <p><img src="02_r-eda_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="co"># Tidyverse</span></a>
-<a class="sourceLine" id="cb42-2" title="2">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb42-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Sepal.Length, Sepal.Width)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb42-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb42-5" title="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Sepal length&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Sepal width&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="r-eda.html#cb42-1"></a><span class="co"># Tidyverse</span></span>
+<span id="cb42-2"><a href="r-eda.html#cb42-2"></a>iris <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb42-3"><a href="r-eda.html#cb42-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Sepal.Length, Sepal.Width)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb42-4"><a href="r-eda.html#cb42-4"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb42-5"><a href="r-eda.html#cb42-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Sepal length&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Sepal width&quot;</span>)</span></code></pre></div>
 <p><img src="02_r-eda_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
 <p>With unique symbols for species:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="co"># Base</span></a>
-<a class="sourceLine" id="cb43-2" title="2"><span class="kw">plot</span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Sepal.Width, </a>
-<a class="sourceLine" id="cb43-3" title="3">     <span class="dt">xlab =</span> <span class="st">&quot;Sepal length&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Sepal width&quot;</span>, </a>
-<a class="sourceLine" id="cb43-4" title="4">     <span class="dt">pch =</span> <span class="kw">as.numeric</span>(iris<span class="op">$</span>Species))</a>
-<a class="sourceLine" id="cb43-5" title="5"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">pch =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), </a>
-<a class="sourceLine" id="cb43-6" title="6">       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;setosa&quot;</span>, <span class="st">&quot;versicolor&quot;</span>, <span class="st">&quot;virginica&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="r-eda.html#cb43-1"></a><span class="co"># Base</span></span>
+<span id="cb43-2"><a href="r-eda.html#cb43-2"></a><span class="kw">plot</span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Sepal.Width, </span>
+<span id="cb43-3"><a href="r-eda.html#cb43-3"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Sepal length&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Sepal width&quot;</span>, </span>
+<span id="cb43-4"><a href="r-eda.html#cb43-4"></a>     <span class="dt">pch =</span> <span class="kw">as.numeric</span>(iris<span class="op">$</span>Species))</span>
+<span id="cb43-5"><a href="r-eda.html#cb43-5"></a><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">pch =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), </span>
+<span id="cb43-6"><a href="r-eda.html#cb43-6"></a>       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;setosa&quot;</span>, <span class="st">&quot;versicolor&quot;</span>, <span class="st">&quot;virginica&quot;</span>))</span></code></pre></div>
 <p><img src="02_r-eda_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="co"># Tidyverse</span></a>
-<a class="sourceLine" id="cb44-2" title="2">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb44-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Sepal.Length, Sepal.Width, <span class="dt">shape =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb44-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb44-5" title="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Sepal length&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Sepal width&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="r-eda.html#cb44-1"></a><span class="co"># Tidyverse</span></span>
+<span id="cb44-2"><a href="r-eda.html#cb44-2"></a>iris <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb44-3"><a href="r-eda.html#cb44-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Sepal.Length, Sepal.Width, <span class="dt">shape =</span> Species)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb44-4"><a href="r-eda.html#cb44-4"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb44-5"><a href="r-eda.html#cb44-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Sepal length&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Sepal width&quot;</span>)</span></code></pre></div>
 <p><img src="02_r-eda_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
 </div>
 <div id="exercise-set-2-2" class="section level2">
@@ -474,14 +496,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Repeat the above analyses (histogram, summarising data, boxplots) for <code>Petal.Width</code>.</p></li>
 <li><p>Install and load a new package <code>gpairs</code>. Run the following line of code. What do you see?</p></li>
 </ol>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">gpairs</span>(iris, <span class="dt">scatter.pars =</span> <span class="kw">list</span>(<span class="dt">col =</span> <span class="kw">as.numeric</span>(iris<span class="op">$</span>Species)))</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="r-eda.html#cb45-1"></a><span class="kw">gpairs</span>(iris, <span class="dt">scatter.pars =</span> <span class="kw">list</span>(<span class="dt">col =</span> <span class="kw">as.numeric</span>(iris<span class="op">$</span>Species)))</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>Install and load the package <code>stfspack</code> if you have not already done so.</li>
 </ol>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
-<a class="sourceLine" id="cb46-2" title="2"><span class="kw">library</span>(devtools) </a>
-<a class="sourceLine" id="cb46-3" title="3"><span class="kw">install_github</span>(<span class="st">&quot;mdedge/stfspack&quot;</span>)</a>
-<a class="sourceLine" id="cb46-4" title="4"><span class="kw">library</span>(stfspack)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="r-eda.html#cb46-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb46-2"><a href="r-eda.html#cb46-2"></a><span class="kw">library</span>(devtools) </span>
+<span id="cb46-3"><a href="r-eda.html#cb46-3"></a><span class="kw">install_github</span>(<span class="st">&quot;mdedge/stfspack&quot;</span>)</span>
+<span id="cb46-4"><a href="r-eda.html#cb46-4"></a><span class="kw">library</span>(stfspack)</span></code></pre></div>
 
 </div>
 </div>

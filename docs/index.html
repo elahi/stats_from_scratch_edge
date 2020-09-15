@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-08-21" />
+<meta name="date" content="2020-09-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -62,9 +62,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -73,14 +73,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -89,9 +91,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -279,17 +281,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.0.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-1"><i class="fa fa-check"></i><b>9.0.1</b> Exercise set 9-1</a></li>
 <li class="chapter" data-level="9.1" data-path="parametric.html"><a href="parametric.html#parametric-estimation-using-maximum-likelihood"><i class="fa fa-check"></i><b>9.1</b> Parametric estimation using maximum likelihood</a><ul>
 <li class="chapter" data-level="9.1.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-2"><i class="fa fa-check"></i><b>9.1.1</b> Exercise set 9-2</a></li>
-<li class="chapter" data-level="9.1.2" data-path="parametric.html"><a href="parametric.html#exercise-set-9-3"><i class="fa fa-check"></i><b>9.1.2</b> Exercise set 9-3</a></li>
+<li class="chapter" data-level="9.1.2" data-path="parametric.html"><a href="parametric.html#maximum-likelihood-estimation-for-simple-linear-regression"><i class="fa fa-check"></i><b>9.1.2</b> Maximum-likelihood estimation for simple linear regression</a></li>
+<li class="chapter" data-level="9.1.3" data-path="parametric.html"><a href="parametric.html#exercise-set-9-3"><i class="fa fa-check"></i><b>9.1.3</b> Exercise set 9-3</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="parametric.html"><a href="parametric.html#parametric-interval-estimation-the-direct-approach-and-fisher-information"><i class="fa fa-check"></i><b>9.2</b> Parametric interval estimation: the direct approach and Fisher information</a><ul>
 <li class="chapter" data-level="9.2.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-4"><i class="fa fa-check"></i><b>9.2.1</b> Exercise set 9-4</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="parametric.html"><a href="parametric.html#parametric-hypothesis-testing-using-the-wald-test"><i class="fa fa-check"></i><b>9.3</b> Parametric hypothesis testing using the Wald test</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-5"><i class="fa fa-check"></i><b>9.3.1</b> Exercise set 9-5</a></li>
+<li class="chapter" data-level="9.3.1" data-path="parametric.html"><a href="parametric.html#wald-test"><i class="fa fa-check"></i><b>9.3.1</b> Wald test</a></li>
+<li class="chapter" data-level="9.3.2" data-path="parametric.html"><a href="parametric.html#exercise-set-9-5"><i class="fa fa-check"></i><b>9.3.2</b> Exercise set 9-5</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="parametric.html"><a href="parametric.html#parametric-hypothesis-testing-using-the-likelihood-ratio-test"><i class="fa fa-check"></i><b>9.4</b> Parametric hypothesis testing using the likelihood-ratio test</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-6"><i class="fa fa-check"></i><b>9.4.1</b> Exercise set 9-6</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>10</b> Bayesian estimation and inference</a><ul>
+<li class="chapter" data-level="10.1" data-path="bayesian.html"><a href="bayesian.html#how-to-choose-a-prior-distribution"><i class="fa fa-check"></i><b>10.1</b> How to choose a prior distribution?</a></li>
+<li class="chapter" data-level="10.2" data-path="bayesian.html"><a href="bayesian.html#the-unscaled-posterior-conjugacy-and-sampling-from-the-posterior"><i class="fa fa-check"></i><b>10.2</b> The unscaled posterior, conjugacy, and sampling from the posterior</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="bayesian.html"><a href="bayesian.html#rejection-sampling-algorithm"><i class="fa fa-check"></i><b>10.2.1</b> Rejection sampling algorithm</a></li>
+<li class="chapter" data-level="10.2.2" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-1"><i class="fa fa-check"></i><b>10.2.2</b> Exercise set 10-1</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="bayesian.html"><a href="bayesian.html#bayesian-point-estimation-using-bayes-estimators"><i class="fa fa-check"></i><b>10.3</b> Bayesian point estimation using Bayes estimators</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-2"><i class="fa fa-check"></i><b>10.3.1</b> Exercise set 10-2</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="bayesian.html"><a href="bayesian.html#bayesian-interval-estimation-using-credible-intervals"><i class="fa fa-check"></i><b>10.4</b> Bayesian interval estimation using credible intervals</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-3"><i class="fa fa-check"></i><b>10.4.1</b> Exercise set 10-3</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="bayesian.html"><a href="bayesian.html#bayesian-hypothesis-testing-using-bayes-factors"><i class="fa fa-check"></i><b>10.5</b> Bayesian ‘hypothesis testing’ using Bayes factors</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-4"><i class="fa fa-check"></i><b>10.5.1</b> Exercise set 10-4</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="bayesian.html"><a href="bayesian.html#conclusion-bayesian-vs.-frequentist-methods"><i class="fa fa-check"></i><b>10.6</b> Conclusion: Bayesian vs. frequentist methods</a></li>
+<li class="chapter" data-level="10.7" data-path="bayesian.html"><a href="bayesian.html#chapter-summary-2"><i class="fa fa-check"></i><b>10.7</b> Chapter summary</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -314,16 +336,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Notes on Statistical Thinking from Scratch</h1>
 <p class="author"><em>Robin Elahi</em></p>
-<p class="date"><em>2020-08-21</em></p>
+<p class="date"><em>2020-09-14</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
 <p>This project is a set of notes for <a href="https://global.oup.com/academic/product/statistical-thinking-from-scratch-9780198827634?cc=us&amp;lang=en&amp;#">Statistical Thinking from Scratch</a>, by <a href="https://www.doc-edge.net/">M.D. Edge</a>. The goal is to become more comfortable with the nitty gritty underlying the statistical tools I commonly use - essentially, regression. Edge takes a unique approach in that he takes a small dataset, and dissects regression ‘from scratch’. Each of these <code>bookdown</code> chapters corresponds to each of Edge’s 10 book chapters. The impetus for this <code>bookdown</code> project was the cancellation of my spring 2020 course <a href="https://elahi.github.io/xdp/">Experimental Design and Probability</a> due to <a href="https://healthalerts.stanford.edu/">COVID-19</a>. So, I’ll be filling in some gaps in my stats toolkit and learning how to use <a href="https://bookdown.org/">bookdown</a>.</p>
 <p>The <strong>stfs</strong> package can be installed from Github:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(devtools) </a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw">install_github</span>(<span class="st">&quot;mdedge/stfspack&quot;</span>)</a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw">library</span>(stfspack)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb1-2"><a href="index.html#cb1-2"></a><span class="kw">library</span>(devtools) </span>
+<span id="cb1-3"><a href="index.html#cb1-3"></a><span class="kw">install_github</span>(<span class="st">&quot;mdedge/stfspack&quot;</span>)</span>
+<span id="cb1-4"><a href="index.html#cb1-4"></a><span class="kw">library</span>(stfspack)</span></code></pre></div>
 <p>As Edge points out in his <strong>Prelude</strong>, the typical introductory course in biological statistics (including my own) revolves around learning a series of <em>tests</em>: t-tests, regression, ANOVA . In <em>STFS</em>, the focus instead is on one procedure - simple linear regression - and takes ‘little for granted’ (translation: we’ll be working through the math, lightly). The primary dataset consists of 11 observations. To heck with big data. So in this project, you will find mostly code - I’ll leave the exposition to Edge, who does a nice job explaining the concepts in his textbook. I’ll chime in whenever it seems useful.</p>
 <p>The chapters will work through the following:<br />
 1. Probability<br />

@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-08-21" />
+<meta name="date" content="2020-09-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -62,9 +62,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -73,14 +73,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -89,9 +91,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -279,17 +281,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.0.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-1"><i class="fa fa-check"></i><b>9.0.1</b> Exercise set 9-1</a></li>
 <li class="chapter" data-level="9.1" data-path="parametric.html"><a href="parametric.html#parametric-estimation-using-maximum-likelihood"><i class="fa fa-check"></i><b>9.1</b> Parametric estimation using maximum likelihood</a><ul>
 <li class="chapter" data-level="9.1.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-2"><i class="fa fa-check"></i><b>9.1.1</b> Exercise set 9-2</a></li>
-<li class="chapter" data-level="9.1.2" data-path="parametric.html"><a href="parametric.html#exercise-set-9-3"><i class="fa fa-check"></i><b>9.1.2</b> Exercise set 9-3</a></li>
+<li class="chapter" data-level="9.1.2" data-path="parametric.html"><a href="parametric.html#maximum-likelihood-estimation-for-simple-linear-regression"><i class="fa fa-check"></i><b>9.1.2</b> Maximum-likelihood estimation for simple linear regression</a></li>
+<li class="chapter" data-level="9.1.3" data-path="parametric.html"><a href="parametric.html#exercise-set-9-3"><i class="fa fa-check"></i><b>9.1.3</b> Exercise set 9-3</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="parametric.html"><a href="parametric.html#parametric-interval-estimation-the-direct-approach-and-fisher-information"><i class="fa fa-check"></i><b>9.2</b> Parametric interval estimation: the direct approach and Fisher information</a><ul>
 <li class="chapter" data-level="9.2.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-4"><i class="fa fa-check"></i><b>9.2.1</b> Exercise set 9-4</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="parametric.html"><a href="parametric.html#parametric-hypothesis-testing-using-the-wald-test"><i class="fa fa-check"></i><b>9.3</b> Parametric hypothesis testing using the Wald test</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-5"><i class="fa fa-check"></i><b>9.3.1</b> Exercise set 9-5</a></li>
+<li class="chapter" data-level="9.3.1" data-path="parametric.html"><a href="parametric.html#wald-test"><i class="fa fa-check"></i><b>9.3.1</b> Wald test</a></li>
+<li class="chapter" data-level="9.3.2" data-path="parametric.html"><a href="parametric.html#exercise-set-9-5"><i class="fa fa-check"></i><b>9.3.2</b> Exercise set 9-5</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="parametric.html"><a href="parametric.html#parametric-hypothesis-testing-using-the-likelihood-ratio-test"><i class="fa fa-check"></i><b>9.4</b> Parametric hypothesis testing using the likelihood-ratio test</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-6"><i class="fa fa-check"></i><b>9.4.1</b> Exercise set 9-6</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>10</b> Bayesian estimation and inference</a><ul>
+<li class="chapter" data-level="10.1" data-path="bayesian.html"><a href="bayesian.html#how-to-choose-a-prior-distribution"><i class="fa fa-check"></i><b>10.1</b> How to choose a prior distribution?</a></li>
+<li class="chapter" data-level="10.2" data-path="bayesian.html"><a href="bayesian.html#the-unscaled-posterior-conjugacy-and-sampling-from-the-posterior"><i class="fa fa-check"></i><b>10.2</b> The unscaled posterior, conjugacy, and sampling from the posterior</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="bayesian.html"><a href="bayesian.html#rejection-sampling-algorithm"><i class="fa fa-check"></i><b>10.2.1</b> Rejection sampling algorithm</a></li>
+<li class="chapter" data-level="10.2.2" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-1"><i class="fa fa-check"></i><b>10.2.2</b> Exercise set 10-1</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="bayesian.html"><a href="bayesian.html#bayesian-point-estimation-using-bayes-estimators"><i class="fa fa-check"></i><b>10.3</b> Bayesian point estimation using Bayes estimators</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-2"><i class="fa fa-check"></i><b>10.3.1</b> Exercise set 10-2</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="bayesian.html"><a href="bayesian.html#bayesian-interval-estimation-using-credible-intervals"><i class="fa fa-check"></i><b>10.4</b> Bayesian interval estimation using credible intervals</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-3"><i class="fa fa-check"></i><b>10.4.1</b> Exercise set 10-3</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="bayesian.html"><a href="bayesian.html#bayesian-hypothesis-testing-using-bayes-factors"><i class="fa fa-check"></i><b>10.5</b> Bayesian ‘hypothesis testing’ using Bayes factors</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-4"><i class="fa fa-check"></i><b>10.5.1</b> Exercise set 10-4</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="bayesian.html"><a href="bayesian.html#conclusion-bayesian-vs.-frequentist-methods"><i class="fa fa-check"></i><b>10.6</b> Conclusion: Bayesian vs. frequentist methods</a></li>
+<li class="chapter" data-level="10.7" data-path="bayesian.html"><a href="bayesian.html#chapter-summary-2"><i class="fa fa-check"></i><b>10.7</b> Chapter summary</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -557,27 +579,27 @@ F_X(x) = P(X \leq x)
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(X\)</span> is a random variable that takes values in the interval [0, 1], and the probability distribution is uniform. Draw the cumulative distribution function <span class="math inline">\(F_X(x)\)</span> for <span class="math inline">\(x \in [-1, 2]\)</span>.</li>
 </ol>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb55-2" title="2">Fx &lt;-<span class="st"> </span>x</a>
-<a class="sourceLine" id="cb55-3" title="3"><span class="kw">plot</span>(x, Fx, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb55-4" title="4"><span class="kw">lines</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>), <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb55-5" title="5"><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="probability.html#cb55-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb55-2"><a href="probability.html#cb55-2"></a>Fx &lt;-<span class="st"> </span>x</span>
+<span id="cb55-3"><a href="probability.html#cb55-3"></a><span class="kw">plot</span>(x, Fx, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb55-4"><a href="probability.html#cb55-4"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>), <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb55-5"><a href="probability.html#cb55-5"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
 <p><img src="04_probability_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>If <span class="math inline">\(X\)</span> were more likely to land in [0.4, 0.6] than in any other region of length 0.2, the line between 0.4 and 0.6 would be steeper.</li>
 </ol>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1">x1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.4</span>)</a>
-<a class="sourceLine" id="cb56-2" title="2">x2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>)</a>
-<a class="sourceLine" id="cb56-3" title="3">x3 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb56-4" title="4">Fx1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.3</span>)</a>
-<a class="sourceLine" id="cb56-5" title="5">Fx2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.7</span>)</a>
-<a class="sourceLine" id="cb56-6" title="6">Fx3 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.7</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb56-7" title="7"><span class="kw">plot</span>(x1, Fx1, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">xlab =</span></a>
-<a class="sourceLine" id="cb56-8" title="8"><span class="st">&quot;x&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Fx&quot;</span>)</a>
-<a class="sourceLine" id="cb56-9" title="9"><span class="kw">lines</span>(x2, Fx2)</a>
-<a class="sourceLine" id="cb56-10" title="10"><span class="kw">lines</span>(x3, Fx3)</a>
-<a class="sourceLine" id="cb56-11" title="11"><span class="kw">lines</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>), <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb56-12" title="12"><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="probability.html#cb56-1"></a>x1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.4</span>)</span>
+<span id="cb56-2"><a href="probability.html#cb56-2"></a>x2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>)</span>
+<span id="cb56-3"><a href="probability.html#cb56-3"></a>x3 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.6</span>, <span class="dv">1</span>)</span>
+<span id="cb56-4"><a href="probability.html#cb56-4"></a>Fx1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.3</span>)</span>
+<span id="cb56-5"><a href="probability.html#cb56-5"></a>Fx2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.7</span>)</span>
+<span id="cb56-6"><a href="probability.html#cb56-6"></a>Fx3 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.7</span>, <span class="dv">1</span>)</span>
+<span id="cb56-7"><a href="probability.html#cb56-7"></a><span class="kw">plot</span>(x1, Fx1, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">xlab =</span></span>
+<span id="cb56-8"><a href="probability.html#cb56-8"></a><span class="st">&quot;x&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Fx&quot;</span>)</span>
+<span id="cb56-9"><a href="probability.html#cb56-9"></a><span class="kw">lines</span>(x2, Fx2)</span>
+<span id="cb56-10"><a href="probability.html#cb56-10"></a><span class="kw">lines</span>(x3, Fx3)</span>
+<span id="cb56-11"><a href="probability.html#cb56-11"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>), <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb56-12"><a href="probability.html#cb56-12"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
 <p><img src="04_probability_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 </div>
@@ -636,58 +658,58 @@ F_X(x) =&amp; \int_{- \infty}^{x} f_X(u) du \\
 <li><p>Use the probability mass function of the geometric distribution with parameter 1/2. If our first “heads” occurs on the 6th flip, then we have five tails before it. We plug <span class="math inline">\(p\)</span> = 1/2 and <span class="math inline">\(k\)</span> = 5 into <span class="math inline">\(P(X = k) = (1-p)^kp\)</span> to get 1/64.</p></li>
 <li><p>Consider a Poisson distribution with parameter <span class="math inline">\(\lambda\)</span> = 5. If we want to know the value of the probability mass function for x = 2, <span class="math inline">\(f_X(2)\)</span>, we use the <code>dpois()</code> function:</p></li>
 </ol>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="kw">dpois</span>(<span class="dv">2</span>, <span class="dt">lambda =</span> <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="probability.html#cb57-1"></a><span class="kw">dpois</span>(<span class="dv">2</span>, <span class="dt">lambda =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.08422434</code></pre>
 <p>To get the value of the cumulative distribution function <span class="math inline">\(F_X(2)\)</span>, we use <code>ppois()</code>:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="kw">ppois</span>(<span class="dv">2</span>, <span class="dt">lambda =</span> <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="probability.html#cb59-1"></a><span class="kw">ppois</span>(<span class="dv">2</span>, <span class="dt">lambda =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.124652</code></pre>
 <p>If we want to know the <em>inverse</em> of the cumulative distribution function. That is, we want to know the value of <span class="math inline">\(q\)</span> that solves the equation <span class="math inline">\(F_X(q) = p\)</span>. What is the number <span class="math inline">\(q\)</span> such that the probability tha the random variable is less than or equal to <span class="math inline">\(q\)</span> is <span class="math inline">\(p\)</span>; <span class="math inline">\(q\)</span> is the <span class="math inline">\(pth\)</span> percentile of the distribution. We can get this using <code>qpois()</code>:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="kw">qpois</span>(<span class="fl">0.124652</span>, <span class="dt">lambda =</span> <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="probability.html#cb61-1"></a><span class="kw">qpois</span>(<span class="fl">0.124652</span>, <span class="dt">lambda =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p>The inverse of the cdf is also called the quantile function. Using the standard normal distribution (mean = 0, sd = 1), plot the probability density function for x <span class="math inline">\(\in\)</span> [-3, 3].</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb63-2" title="2">fx &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> x)</a>
-<a class="sourceLine" id="cb63-3" title="3"><span class="kw">plot</span>(x, fx, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;PDF&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="probability.html#cb63-1"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb63-2"><a href="probability.html#cb63-2"></a>fx &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> x)</span>
+<span id="cb63-3"><a href="probability.html#cb63-3"></a><span class="kw">plot</span>(x, fx, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;PDF&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="04_probability_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Plot the cdf for x <span class="math inline">\(\in\)</span> [-3, 3].</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb64-2" title="2">fx &lt;-<span class="st"> </span><span class="kw">pnorm</span>(<span class="dt">q =</span> x)</a>
-<a class="sourceLine" id="cb64-3" title="3"><span class="kw">plot</span>(x, fx, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;CDF&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="probability.html#cb64-1"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb64-2"><a href="probability.html#cb64-2"></a>fx &lt;-<span class="st"> </span><span class="kw">pnorm</span>(<span class="dt">q =</span> x)</span>
+<span id="cb64-3"><a href="probability.html#cb64-3"></a><span class="kw">plot</span>(x, fx, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;CDF&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="04_probability_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>What value of <span class="math inline">\(x\)</span> is at the 97.5th percentile of the standard normal?</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="kw">qnorm</span>(<span class="dt">p =</span> <span class="fl">0.975</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="probability.html#cb65-1"></a><span class="kw">qnorm</span>(<span class="dt">p =</span> <span class="fl">0.975</span>)</span></code></pre></div>
 <pre><code>## [1] 1.959964</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>Simulating from a normal distribution and from a uniform distribution:</li>
 </ol>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1">n &lt;-<span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb67-2" title="2">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n)</a>
-<a class="sourceLine" id="cb67-3" title="3"><span class="kw">hist</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="probability.html#cb67-1"></a>n &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb67-2"><a href="probability.html#cb67-2"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n)</span>
+<span id="cb67-3"><a href="probability.html#cb67-3"></a><span class="kw">hist</span>(x)</span></code></pre></div>
 <p><img src="04_probability_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1">x &lt;-<span class="st"> </span><span class="kw">runif</span>(n, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb68-2" title="2"><span class="kw">hist</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="probability.html#cb68-1"></a>x &lt;-<span class="st"> </span><span class="kw">runif</span>(n, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</span>
+<span id="cb68-2"><a href="probability.html#cb68-2"></a><span class="kw">hist</span>(x)</span></code></pre></div>
 <p><img src="04_probability_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
 <p>Now take those values between 0 and 1, and feed them into the <code>qnorm</code> function to get the values at which we see those quantiles:</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1">y &lt;-<span class="st"> </span><span class="kw">qnorm</span>(<span class="dt">p =</span> x, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb69-2" title="2"><span class="kw">hist</span>(y)</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="probability.html#cb69-1"></a>y &lt;-<span class="st"> </span><span class="kw">qnorm</span>(<span class="dt">p =</span> x, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb69-2"><a href="probability.html#cb69-2"></a><span class="kw">hist</span>(y)</span></code></pre></div>
 <p><img src="04_probability_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>These values are normally distributed around 0. This plot is saying that most of the probability (in fact ~95%) lies between -2 &lt; y &lt; 2 (2 standard deviations).</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1">r &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">length.out =</span> <span class="dv">1000</span>)</a>
-<a class="sourceLine" id="cb70-2" title="2">cdf &lt;-<span class="st"> </span><span class="kw">pnorm</span>(r)</a>
-<a class="sourceLine" id="cb70-3" title="3"><span class="co">#Draw the normal cumulative distribution function.</span></a>
-<a class="sourceLine" id="cb70-4" title="4"><span class="kw">plot</span>(r, cdf, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="dt">yaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb70-5" title="5"><span class="dv">3</span>), <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">italic</span>(x)), <span class="dt">ylab =</span></a>
-<a class="sourceLine" id="cb70-6" title="6"><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="kw">italic</span>(F[X]), <span class="st">&quot;(&quot;</span>, <span class="kw">italic</span>(x), <span class="st">&quot;)&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)),</a>
-<a class="sourceLine" id="cb70-7" title="7"><span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb70-8" title="8"><span class="co">#Draw light grey lines representing random samples from the</span></a>
-<a class="sourceLine" id="cb70-9" title="9"><span class="co">#standard normal distribution.</span></a>
-<a class="sourceLine" id="cb70-10" title="10">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb70-11" title="11"><span class="cf">for</span>(i <span class="cf">in</span> x){</a>
-<a class="sourceLine" id="cb70-12" title="12">  <span class="kw">lines</span>(<span class="kw">c</span>(i,i), <span class="kw">c</span>(<span class="kw">min</span>(x), <span class="kw">pnorm</span>(i)), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dv">190</span>, <span class="dv">190</span>, <span class="dv">190</span>,</a>
-<a class="sourceLine" id="cb70-13" title="13">     <span class="dt">alpha =</span> <span class="dv">60</span>, <span class="dt">max =</span> <span class="dv">255</span>))</a>
-<a class="sourceLine" id="cb70-14" title="14">  <span class="kw">lines</span>(<span class="kw">c</span>(<span class="kw">min</span>(x)<span class="op">-</span><span class="dv">1</span>,i), <span class="kw">c</span>(<span class="kw">pnorm</span>(i), <span class="kw">pnorm</span>(i)), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dv">190</span>,</a>
-<a class="sourceLine" id="cb70-15" title="15">     <span class="dv">190</span>, <span class="dv">190</span>, <span class="dt">alpha =</span> <span class="dv">60</span>, <span class="dt">max =</span> <span class="dv">255</span>))</a>
-<a class="sourceLine" id="cb70-16" title="16">}</a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="probability.html#cb70-1"></a>r &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">length.out =</span> <span class="dv">1000</span>)</span>
+<span id="cb70-2"><a href="probability.html#cb70-2"></a>cdf &lt;-<span class="st"> </span><span class="kw">pnorm</span>(r)</span>
+<span id="cb70-3"><a href="probability.html#cb70-3"></a><span class="co">#Draw the normal cumulative distribution function.</span></span>
+<span id="cb70-4"><a href="probability.html#cb70-4"></a><span class="kw">plot</span>(r, cdf, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="dt">yaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>,</span>
+<span id="cb70-5"><a href="probability.html#cb70-5"></a><span class="dv">3</span>), <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">italic</span>(x)), <span class="dt">ylab =</span></span>
+<span id="cb70-6"><a href="probability.html#cb70-6"></a><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="kw">italic</span>(F[X]), <span class="st">&quot;(&quot;</span>, <span class="kw">italic</span>(x), <span class="st">&quot;)&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)),</span>
+<span id="cb70-7"><a href="probability.html#cb70-7"></a><span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb70-8"><a href="probability.html#cb70-8"></a><span class="co">#Draw light grey lines representing random samples from the</span></span>
+<span id="cb70-9"><a href="probability.html#cb70-9"></a><span class="co">#standard normal distribution.</span></span>
+<span id="cb70-10"><a href="probability.html#cb70-10"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb70-11"><a href="probability.html#cb70-11"></a><span class="cf">for</span>(i <span class="cf">in</span> x){</span>
+<span id="cb70-12"><a href="probability.html#cb70-12"></a>  <span class="kw">lines</span>(<span class="kw">c</span>(i,i), <span class="kw">c</span>(<span class="kw">min</span>(x), <span class="kw">pnorm</span>(i)), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dv">190</span>, <span class="dv">190</span>, <span class="dv">190</span>,</span>
+<span id="cb70-13"><a href="probability.html#cb70-13"></a>     <span class="dt">alpha =</span> <span class="dv">60</span>, <span class="dt">max =</span> <span class="dv">255</span>))</span>
+<span id="cb70-14"><a href="probability.html#cb70-14"></a>  <span class="kw">lines</span>(<span class="kw">c</span>(<span class="kw">min</span>(x)<span class="op">-</span><span class="dv">1</span>,i), <span class="kw">c</span>(<span class="kw">pnorm</span>(i), <span class="kw">pnorm</span>(i)), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dv">190</span>,</span>
+<span id="cb70-15"><a href="probability.html#cb70-15"></a>     <span class="dv">190</span>, <span class="dv">190</span>, <span class="dt">alpha =</span> <span class="dv">60</span>, <span class="dt">max =</span> <span class="dv">255</span>))</span>
+<span id="cb70-16"><a href="probability.html#cb70-16"></a>}</span></code></pre></div>
 <p><img src="04_probability_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
 <div id="additional-exercise" class="section level3">
@@ -728,23 +750,23 @@ F_X(X = x) =&amp; \int_{0}^{x} \lambda e^{-\lambda x} dx \\
 \end{aligned}
 \]</span></p>
 <p>Then, plug in <span class="math inline">\(x = 10\)</span> and <span class="math inline">\(\lambda = 1/20\)</span>:</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">20</span>) <span class="op">*</span><span class="st"> </span>(<span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="probability.html#cb71-1"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">20</span>) <span class="op">*</span><span class="st"> </span>(<span class="dv">10</span>))</span></code></pre></div>
 <pre><code>## [1] 0.3934693</code></pre>
 <p>Check to make sure we’ve done this right using the <code>pexp</code> function in R:</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1"><span class="kw">pexp</span>(<span class="dt">q =</span> <span class="dv">10</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="probability.html#cb73-1"></a><span class="kw">pexp</span>(<span class="dt">q =</span> <span class="dv">10</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>)</span></code></pre></div>
 <pre><code>## [1] 0.3934693</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>What is the probability that an earthquake will occur between 10 and 20 years from now?</li>
 </ol>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1"><span class="kw">pexp</span>(<span class="dt">q =</span> <span class="dv">20</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>) <span class="op">-</span><span class="st"> </span><span class="kw">pexp</span>(<span class="dt">q =</span> <span class="dv">10</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="probability.html#cb75-1"></a><span class="kw">pexp</span>(<span class="dt">q =</span> <span class="dv">20</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>) <span class="op">-</span><span class="st"> </span><span class="kw">pexp</span>(<span class="dt">q =</span> <span class="dv">10</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>)</span></code></pre></div>
 <pre><code>## [1] 0.2386512</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>If you have time, write the CDF of your chosen distribution as an R function. It should take a value x and a parameter, and return a probability P(X ≤ x). Use your function to plot the cumulative distribution as a function of x.</li>
 </ol>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1">exp_cdf &lt;-<span class="st"> </span><span class="cf">function</span>(x, lambda) <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>lambda <span class="op">*</span><span class="st"> </span>x)</a>
-<a class="sourceLine" id="cb77-2" title="2">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">80</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb77-3" title="3">p &lt;-<span class="st"> </span><span class="kw">exp_cdf</span>(<span class="dt">x =</span> x, <span class="dt">lambda =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb77-4" title="4"><span class="kw">plot</span>(p <span class="op">~</span><span class="st"> </span>x, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;FX(x)&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="probability.html#cb77-1"></a>exp_cdf &lt;-<span class="st"> </span><span class="cf">function</span>(x, lambda) <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>lambda <span class="op">*</span><span class="st"> </span>x)</span>
+<span id="cb77-2"><a href="probability.html#cb77-2"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">80</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb77-3"><a href="probability.html#cb77-3"></a>p &lt;-<span class="st"> </span><span class="kw">exp_cdf</span>(<span class="dt">x =</span> x, <span class="dt">lambda =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">20</span>)</span>
+<span id="cb77-4"><a href="probability.html#cb77-4"></a><span class="kw">plot</span>(p <span class="op">~</span><span class="st"> </span>x, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;FX(x)&quot;</span>)</span></code></pre></div>
 <p><img src="04_probability_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 
 </div>

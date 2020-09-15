@@ -5,7 +5,7 @@ editor_options:
 ---
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, cache = TRUE)
 ```
 
 ```{r load-packages, include = FALSE}
@@ -200,7 +200,120 @@ lines(x, pd_conjugate, lwd = 2)
 
 ## Bayesian point estimation using Bayes estimators
 
+The Bayesian approach to point estimation is to report a standard indicator of the posterior distribution's central tendency: the posterior mean, median, or mode. These are Bayes estimators with appealing loss functions: 
+
+  - Mean: minimizes squared error loss
+  - Median: minimizes absolute error loss
+  - Mode: minimizes zero-one loss
+  
+See text for a more thorough explanation. 
+
 ### Exercise set 10-2
+
+1. 
+
+a. Fit model using maximum likelihood:
+
+```{r}
+library(arm)
+x <- anscombe$x1
+y <- anscombe$y1
+lm1 <- lm(y ~ x)
+summary(lm1)
+```
+
+b. Fit model using `MCMCregress`:
+
+b0: prior mean of Beta
+B0: prior precision of Beta
+
+```{r}
+b0 <- c(0, 0)
+reg1 <- MCMCregress(y ~ x, b0 = b0, B0 = 0.0001)
+res1 <- summary(reg1)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 0.0001)
+
+reg2 <- MCMCregress(y ~ x, b0 = b0, B0 = 1)
+res2 <- summary(reg2)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 1)
+
+reg3 <- MCMCregress(y ~ x, b0 = b0, B0 = 100)
+res3 <- summary(reg3)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 100)
+
+df <- rbind(res1, res2, res3)
+
+df %>% 
+  ggplot(aes(x = precision, y = Mean)) + 
+  geom_point() + 
+  geom_errorbar(aes(ymin = Mean - SD, ymax = Mean + SD), width = 0) +
+  facet_wrap(~ parameter, scales = "free") + 
+  scale_x_log10() + 
+  coord_flip()
+```
+
+```{r}
+b0 <- c(3, 0)
+reg1 <- MCMCregress(y ~ x, b0 = b0, B0 = 0.0001)
+res1 <- summary(reg1)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 0.0001)
+
+reg2 <- MCMCregress(y ~ x, b0 = b0, B0 = 1)
+res2 <- summary(reg2)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 1)
+
+reg3 <- MCMCregress(y ~ x, b0 = b0, B0 = 100)
+res3 <- summary(reg3)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 100)
+
+df <- rbind(res1, res2, res3)
+
+df %>% 
+  ggplot(aes(x = precision, y = Mean)) + 
+  geom_point() + 
+  geom_errorbar(aes(ymin = Mean - SD, ymax = Mean + SD), width = 0) +
+  facet_wrap(~ parameter, scales = "free") + 
+  scale_x_log10() + 
+  coord_flip()
+```
+
+```{r}
+b0 <- c(10, -5)
+reg1 <- MCMCregress(y ~ x, b0 = b0, B0 = 0.0001)
+res1 <- summary(reg1)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 0.0001)
+
+reg2 <- MCMCregress(y ~ x, b0 = b0, B0 = 1)
+res2 <- summary(reg2)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 1)
+
+reg3 <- MCMCregress(y ~ x, b0 = b0, B0 = 100)
+res3 <- summary(reg3)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 100)
+
+df <- rbind(res1, res2, res3)
+
+df %>% 
+  ggplot(aes(x = precision, y = Mean)) + 
+  geom_point() + 
+  geom_errorbar(aes(ymin = Mean - SD, ymax = Mean + SD), width = 0) +
+  facet_wrap(~ parameter, scales = "free") + 
+  scale_x_log10() + 
+  coord_flip()
+```
+
+When the precision on the prior estimates of the intercept and slope is very high, the posterior point estimates reflect the choice of priors more than the data. It is interesting to note that the variance of the disturbances is very large when the precision is very high. This is likely because the Bayesian machine has to fight between the observed data and the strong prior, and the consequence of this fight is large uncertainty. 
+
+2. Proving claims about Bayes estimators; skipped
 
 ## Bayesian interval estimation using credible intervals
 

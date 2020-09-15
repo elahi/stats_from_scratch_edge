@@ -231,7 +231,151 @@ lines(x, pd_conjugate, lwd = 2)
 
 ## Bayesian point estimation using Bayes estimators
 
+The Bayesian approach to point estimation is to report a standard indicator of the posterior distribution's central tendency: the posterior mean, median, or mode. These are Bayes estimators with appealing loss functions: 
+
+  - Mean: minimizes squared error loss
+  - Median: minimizes absolute error loss
+  - Mode: minimizes zero-one loss
+  
+See text for a more thorough explanation. 
+
 ### Exercise set 10-2
+
+1. 
+
+a. Fit model using maximum likelihood:
+
+
+```r
+library(arm)
+x <- anscombe$x1
+y <- anscombe$y1
+lm1 <- lm(y ~ x)
+summary(lm1)
+```
+
+```
+## 
+## Call:
+## lm(formula = y ~ x)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.92127 -0.45577 -0.04136  0.70941  1.83882 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)   
+## (Intercept)   3.0001     1.1247   2.667  0.02573 * 
+## x             0.5001     0.1179   4.241  0.00217 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.237 on 9 degrees of freedom
+## Multiple R-squared:  0.6665,	Adjusted R-squared:  0.6295 
+## F-statistic: 17.99 on 1 and 9 DF,  p-value: 0.00217
+```
+
+b. Fit model using `MCMCregress`:
+
+b0: prior mean of Beta
+B0: prior precision of Beta
+
+
+```r
+b0 <- c(0, 0)
+reg1 <- MCMCregress(y ~ x, b0 = b0, B0 = 0.0001)
+res1 <- summary(reg1)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 0.0001)
+
+reg2 <- MCMCregress(y ~ x, b0 = b0, B0 = 1)
+res2 <- summary(reg2)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 1)
+
+reg3 <- MCMCregress(y ~ x, b0 = b0, B0 = 100)
+res3 <- summary(reg3)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 100)
+
+df <- rbind(res1, res2, res3)
+
+df %>% 
+  ggplot(aes(x = precision, y = Mean)) + 
+  geom_point() + 
+  geom_errorbar(aes(ymin = Mean - SD, ymax = Mean + SD), width = 0) +
+  facet_wrap(~ parameter, scales = "free") + 
+  scale_x_log10() + 
+  coord_flip()
+```
+
+<img src="10_bayesian-estimation_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+
+
+```r
+b0 <- c(3, 0)
+reg1 <- MCMCregress(y ~ x, b0 = b0, B0 = 0.0001)
+res1 <- summary(reg1)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 0.0001)
+
+reg2 <- MCMCregress(y ~ x, b0 = b0, B0 = 1)
+res2 <- summary(reg2)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 1)
+
+reg3 <- MCMCregress(y ~ x, b0 = b0, B0 = 100)
+res3 <- summary(reg3)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 100)
+
+df <- rbind(res1, res2, res3)
+
+df %>% 
+  ggplot(aes(x = precision, y = Mean)) + 
+  geom_point() + 
+  geom_errorbar(aes(ymin = Mean - SD, ymax = Mean + SD), width = 0) +
+  facet_wrap(~ parameter, scales = "free") + 
+  scale_x_log10() + 
+  coord_flip()
+```
+
+<img src="10_bayesian-estimation_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+
+
+```r
+b0 <- c(10, -5)
+reg1 <- MCMCregress(y ~ x, b0 = b0, B0 = 0.0001)
+res1 <- summary(reg1)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 0.0001)
+
+reg2 <- MCMCregress(y ~ x, b0 = b0, B0 = 1)
+res2 <- summary(reg2)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 1)
+
+reg3 <- MCMCregress(y ~ x, b0 = b0, B0 = 100)
+res3 <- summary(reg3)$statistics[,1:2] %>% 
+  as_tibble(rownames = "parameter") %>%
+  mutate(precision = 100)
+
+df <- rbind(res1, res2, res3)
+
+df %>% 
+  ggplot(aes(x = precision, y = Mean)) + 
+  geom_point() + 
+  geom_errorbar(aes(ymin = Mean - SD, ymax = Mean + SD), width = 0) +
+  facet_wrap(~ parameter, scales = "free") + 
+  scale_x_log10() + 
+  coord_flip()
+```
+
+<img src="10_bayesian-estimation_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+
+When the precision on the prior estimates of the intercept and slope is very high, the posterior point estimates reflect the choice of priors more than the data. It is interesting to note that the variance of the disturbances is very large when the precision is very high. This is likely because the Bayesian machine has to fight between the observed data and the strong prior, and the consequence of this fight is large uncertainty. 
+
+2. Proving claims about Bayes estimators; skipped
 
 ## Bayesian interval estimation using credible intervals
 

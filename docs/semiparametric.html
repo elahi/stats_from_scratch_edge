@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-08-21" />
+<meta name="date" content="2020-09-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -62,9 +62,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -73,14 +73,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -89,9 +91,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -279,17 +281,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.0.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-1"><i class="fa fa-check"></i><b>9.0.1</b> Exercise set 9-1</a></li>
 <li class="chapter" data-level="9.1" data-path="parametric.html"><a href="parametric.html#parametric-estimation-using-maximum-likelihood"><i class="fa fa-check"></i><b>9.1</b> Parametric estimation using maximum likelihood</a><ul>
 <li class="chapter" data-level="9.1.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-2"><i class="fa fa-check"></i><b>9.1.1</b> Exercise set 9-2</a></li>
-<li class="chapter" data-level="9.1.2" data-path="parametric.html"><a href="parametric.html#exercise-set-9-3"><i class="fa fa-check"></i><b>9.1.2</b> Exercise set 9-3</a></li>
+<li class="chapter" data-level="9.1.2" data-path="parametric.html"><a href="parametric.html#maximum-likelihood-estimation-for-simple-linear-regression"><i class="fa fa-check"></i><b>9.1.2</b> Maximum-likelihood estimation for simple linear regression</a></li>
+<li class="chapter" data-level="9.1.3" data-path="parametric.html"><a href="parametric.html#exercise-set-9-3"><i class="fa fa-check"></i><b>9.1.3</b> Exercise set 9-3</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="parametric.html"><a href="parametric.html#parametric-interval-estimation-the-direct-approach-and-fisher-information"><i class="fa fa-check"></i><b>9.2</b> Parametric interval estimation: the direct approach and Fisher information</a><ul>
 <li class="chapter" data-level="9.2.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-4"><i class="fa fa-check"></i><b>9.2.1</b> Exercise set 9-4</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="parametric.html"><a href="parametric.html#parametric-hypothesis-testing-using-the-wald-test"><i class="fa fa-check"></i><b>9.3</b> Parametric hypothesis testing using the Wald test</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-5"><i class="fa fa-check"></i><b>9.3.1</b> Exercise set 9-5</a></li>
+<li class="chapter" data-level="9.3.1" data-path="parametric.html"><a href="parametric.html#wald-test"><i class="fa fa-check"></i><b>9.3.1</b> Wald test</a></li>
+<li class="chapter" data-level="9.3.2" data-path="parametric.html"><a href="parametric.html#exercise-set-9-5"><i class="fa fa-check"></i><b>9.3.2</b> Exercise set 9-5</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="parametric.html"><a href="parametric.html#parametric-hypothesis-testing-using-the-likelihood-ratio-test"><i class="fa fa-check"></i><b>9.4</b> Parametric hypothesis testing using the likelihood-ratio test</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-6"><i class="fa fa-check"></i><b>9.4.1</b> Exercise set 9-6</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>10</b> Bayesian estimation and inference</a><ul>
+<li class="chapter" data-level="10.1" data-path="bayesian.html"><a href="bayesian.html#how-to-choose-a-prior-distribution"><i class="fa fa-check"></i><b>10.1</b> How to choose a prior distribution?</a></li>
+<li class="chapter" data-level="10.2" data-path="bayesian.html"><a href="bayesian.html#the-unscaled-posterior-conjugacy-and-sampling-from-the-posterior"><i class="fa fa-check"></i><b>10.2</b> The unscaled posterior, conjugacy, and sampling from the posterior</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="bayesian.html"><a href="bayesian.html#rejection-sampling-algorithm"><i class="fa fa-check"></i><b>10.2.1</b> Rejection sampling algorithm</a></li>
+<li class="chapter" data-level="10.2.2" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-1"><i class="fa fa-check"></i><b>10.2.2</b> Exercise set 10-1</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="bayesian.html"><a href="bayesian.html#bayesian-point-estimation-using-bayes-estimators"><i class="fa fa-check"></i><b>10.3</b> Bayesian point estimation using Bayes estimators</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-2"><i class="fa fa-check"></i><b>10.3.1</b> Exercise set 10-2</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="bayesian.html"><a href="bayesian.html#bayesian-interval-estimation-using-credible-intervals"><i class="fa fa-check"></i><b>10.4</b> Bayesian interval estimation using credible intervals</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-3"><i class="fa fa-check"></i><b>10.4.1</b> Exercise set 10-3</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="bayesian.html"><a href="bayesian.html#bayesian-hypothesis-testing-using-bayes-factors"><i class="fa fa-check"></i><b>10.5</b> Bayesian ‘hypothesis testing’ using Bayes factors</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-4"><i class="fa fa-check"></i><b>10.5.1</b> Exercise set 10-4</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="bayesian.html"><a href="bayesian.html#conclusion-bayesian-vs.-frequentist-methods"><i class="fa fa-check"></i><b>10.6</b> Conclusion: Bayesian vs. frequentist methods</a></li>
+<li class="chapter" data-level="10.7" data-path="bayesian.html"><a href="bayesian.html#chapter-summary-2"><i class="fa fa-check"></i><b>10.7</b> Chapter summary</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -340,24 +362,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: lower-alpha">
 <li>As the sample size increases, the ECDF approximates the CDF of the normal distribution.</li>
 </ol>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" title="1">n &lt;-<span class="st"> </span><span class="dv">500</span></a>
-<a class="sourceLine" id="cb299-2" title="2">x.vals &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">length.out =</span> <span class="dv">10000</span>)</a>
-<a class="sourceLine" id="cb299-3" title="3">Fx &lt;-<span class="st"> </span><span class="kw">pnorm</span>(x.vals, <span class="dv">0</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb299-4" title="4"><span class="kw">plot</span>(x.vals, Fx, <span class="dt">xlab =</span> <span class="st">&quot;z&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;F(z)&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a>
-<a class="sourceLine" id="cb299-5" title="5">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb299-6" title="6"><span class="kw">lines</span>(<span class="kw">ecdf</span>(x), <span class="dt">verticals =</span> <span class="ot">TRUE</span>, <span class="dt">do.points =</span> <span class="ot">FALSE</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="semiparametric.html#cb299-1"></a>n &lt;-<span class="st"> </span><span class="dv">500</span></span>
+<span id="cb299-2"><a href="semiparametric.html#cb299-2"></a>x.vals &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">length.out =</span> <span class="dv">10000</span>)</span>
+<span id="cb299-3"><a href="semiparametric.html#cb299-3"></a>Fx &lt;-<span class="st"> </span><span class="kw">pnorm</span>(x.vals, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb299-4"><a href="semiparametric.html#cb299-4"></a><span class="kw">plot</span>(x.vals, Fx, <span class="dt">xlab =</span> <span class="st">&quot;z&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;F(z)&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</span>
+<span id="cb299-5"><a href="semiparametric.html#cb299-5"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb299-6"><a href="semiparametric.html#cb299-6"></a><span class="kw">lines</span>(<span class="kw">ecdf</span>(x), <span class="dt">verticals =</span> <span class="ot">TRUE</span>, <span class="dt">do.points =</span> <span class="ot">FALSE</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Comparing an ECDF with a CDF for the Poisson distribution</li>
 </ol>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" title="1"><span class="kw">set.seed</span>(<span class="dv">22</span>)</a>
-<a class="sourceLine" id="cb300-2" title="2">n &lt;-<span class="st"> </span><span class="dv">30</span></a>
-<a class="sourceLine" id="cb300-3" title="3">lambda &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb300-4" title="4">x.vals &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dt">by =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb300-5" title="5">Fx &lt;-<span class="st"> </span><span class="kw">ppois</span>(x.vals, <span class="dt">lambda =</span> lambda)</a>
-<a class="sourceLine" id="cb300-6" title="6"><span class="kw">plot</span>(x.vals, Fx, <span class="dt">xlab =</span> <span class="st">&quot;z&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;F(z)&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;p&quot;</span>)</a>
-<a class="sourceLine" id="cb300-7" title="7">x &lt;-<span class="st"> </span><span class="kw">rpois</span>(n, <span class="dt">lambda =</span> lambda)</a>
-<a class="sourceLine" id="cb300-8" title="8"><span class="kw">lines</span>(<span class="kw">ecdf</span>(x), <span class="dt">verticals =</span> <span class="ot">TRUE</span>, <span class="dt">do.points =</span> <span class="ot">FALSE</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="semiparametric.html#cb300-1"></a><span class="kw">set.seed</span>(<span class="dv">22</span>)</span>
+<span id="cb300-2"><a href="semiparametric.html#cb300-2"></a>n &lt;-<span class="st"> </span><span class="dv">30</span></span>
+<span id="cb300-3"><a href="semiparametric.html#cb300-3"></a>lambda &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb300-4"><a href="semiparametric.html#cb300-4"></a>x.vals &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dt">by =</span> <span class="dv">1</span>)</span>
+<span id="cb300-5"><a href="semiparametric.html#cb300-5"></a>Fx &lt;-<span class="st"> </span><span class="kw">ppois</span>(x.vals, <span class="dt">lambda =</span> lambda)</span>
+<span id="cb300-6"><a href="semiparametric.html#cb300-6"></a><span class="kw">plot</span>(x.vals, Fx, <span class="dt">xlab =</span> <span class="st">&quot;z&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;F(z)&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;p&quot;</span>)</span>
+<span id="cb300-7"><a href="semiparametric.html#cb300-7"></a>x &lt;-<span class="st"> </span><span class="kw">rpois</span>(n, <span class="dt">lambda =</span> lambda)</span>
+<span id="cb300-8"><a href="semiparametric.html#cb300-8"></a><span class="kw">lines</span>(<span class="kw">ecdf</span>(x), <span class="dt">verticals =</span> <span class="ot">TRUE</span>, <span class="dt">do.points =</span> <span class="ot">FALSE</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>See handwritten notes.</li>
@@ -500,65 +522,65 @@ Let’s use the 2nd equation:</p>
 <li>Demonstrate the downward bias in R with simulations.</li>
 </ol>
 <p>This is what I did first:</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb301-1" title="1">n_obs &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb301-2" title="2">n_sims &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb301-3" title="3"><span class="kw">set.seed</span>(<span class="dv">1010</span>)</a>
-<a class="sourceLine" id="cb301-4" title="4">x &lt;-<span class="st"> </span><span class="kw">mat.samps</span>(<span class="dt">n =</span> n_obs, <span class="dt">nsim =</span> n_sims)</a>
-<a class="sourceLine" id="cb301-5" title="5">x_var &lt;-<span class="st"> </span><span class="kw">apply</span>(<span class="dt">X =</span> x, <span class="dt">MARGIN =</span> <span class="dv">1</span>, <span class="dt">FUN =</span> var)</a>
-<a class="sourceLine" id="cb301-6" title="6"><span class="kw">mean</span>(x_var)</a></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="semiparametric.html#cb301-1"></a>n_obs &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb301-2"><a href="semiparametric.html#cb301-2"></a>n_sims &lt;-<span class="st"> </span><span class="dv">10000</span></span>
+<span id="cb301-3"><a href="semiparametric.html#cb301-3"></a><span class="kw">set.seed</span>(<span class="dv">1010</span>)</span>
+<span id="cb301-4"><a href="semiparametric.html#cb301-4"></a>x &lt;-<span class="st"> </span><span class="kw">mat.samps</span>(<span class="dt">n =</span> n_obs, <span class="dt">nsim =</span> n_sims)</span>
+<span id="cb301-5"><a href="semiparametric.html#cb301-5"></a>x_var &lt;-<span class="st"> </span><span class="kw">apply</span>(<span class="dt">X =</span> x, <span class="dt">MARGIN =</span> <span class="dv">1</span>, <span class="dt">FUN =</span> var)</span>
+<span id="cb301-6"><a href="semiparametric.html#cb301-6"></a><span class="kw">mean</span>(x_var)</span></code></pre></div>
 <pre><code>## [1] 1.004699</code></pre>
 <p>The result is very close to 1. This surprised me, given that I was expecting something below 1. So I ran Edge’s code, and in it, he defines a function to calculate the variance himself.</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" title="1">var.pi &lt;-<span class="st"> </span><span class="cf">function</span>(vec){</a>
-<a class="sourceLine" id="cb303-2" title="2">  <span class="kw">return</span>(<span class="kw">sum</span>((vec<span class="op">-</span><span class="kw">mean</span>(vec))<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span><span class="kw">length</span>(vec))</a>
-<a class="sourceLine" id="cb303-3" title="3">}</a>
-<a class="sourceLine" id="cb303-4" title="4">vars.pi &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">1</span>, var.pi)</a>
-<a class="sourceLine" id="cb303-5" title="5"><span class="kw">mean</span>(vars.pi)</a></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="semiparametric.html#cb303-1"></a>var.pi &lt;-<span class="st"> </span><span class="cf">function</span>(vec){</span>
+<span id="cb303-2"><a href="semiparametric.html#cb303-2"></a>  <span class="kw">return</span>(<span class="kw">sum</span>((vec<span class="op">-</span><span class="kw">mean</span>(vec))<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span><span class="kw">length</span>(vec))</span>
+<span id="cb303-3"><a href="semiparametric.html#cb303-3"></a>}</span>
+<span id="cb303-4"><a href="semiparametric.html#cb303-4"></a>vars.pi &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">1</span>, var.pi)</span>
+<span id="cb303-5"><a href="semiparametric.html#cb303-5"></a><span class="kw">mean</span>(vars.pi)</span></code></pre></div>
 <pre><code>## [1] 0.8037593</code></pre>
 <p>Why the difference? Turns out this is a great demonstration of something I had read some time ago, and then buried away because it frankly was not super relevant. Let’s inspect the help function for <code>var</code>:</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" title="1">?var</a></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="semiparametric.html#cb305-1"></a>?var</span></code></pre></div>
 <p>And in the details you’ll see this note:</p>
 <blockquote>
 <p>The denominator n - 1 is used which gives an unbiased estimator of the (co)variance for i.i.d. observations. These functions return NA when there is only one observation (whereas S-PLUS has been returning NaN), and fail if x has length zero.</p>
 </blockquote>
 <p>Thanks to this book, this statement make sense. Let’s calculate the variance using <em>n</em> and <em>n-1</em> as the denominator:</p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" title="1">vec &lt;-<span class="st"> </span>x[<span class="dv">1</span>,]</a>
-<a class="sourceLine" id="cb306-2" title="2">vec</a></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="semiparametric.html#cb306-1"></a>vec &lt;-<span class="st"> </span>x[<span class="dv">1</span>,]</span>
+<span id="cb306-2"><a href="semiparametric.html#cb306-2"></a>vec</span></code></pre></div>
 <pre><code>## [1]  0.4974519  1.1826813  1.0876947 -1.3540474 -0.9988671</code></pre>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb308-1" title="1"><span class="co"># Default function to calculate the variance in R</span></a>
-<a class="sourceLine" id="cb308-2" title="2"><span class="kw">var</span>(vec)</a></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="semiparametric.html#cb308-1"></a><span class="co"># Default function to calculate the variance in R</span></span>
+<span id="cb308-2"><a href="semiparametric.html#cb308-2"></a><span class="kw">var</span>(vec)</span></code></pre></div>
 <pre><code>## [1] 1.406506</code></pre>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb310-1" title="1"><span class="co"># Edge&#39;s function, with the denominator of n</span></a>
-<a class="sourceLine" id="cb310-2" title="2"><span class="kw">var.pi</span>(vec)</a></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="semiparametric.html#cb310-1"></a><span class="co"># Edge&#39;s function, with the denominator of n</span></span>
+<span id="cb310-2"><a href="semiparametric.html#cb310-2"></a><span class="kw">var.pi</span>(vec)</span></code></pre></div>
 <pre><code>## [1] 1.125205</code></pre>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb312-1" title="1"><span class="co"># Beating a dead horse:</span></a>
-<a class="sourceLine" id="cb312-2" title="2"><span class="kw">sum</span>((vec<span class="op">-</span><span class="kw">mean</span>(vec))<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="kw">length</span>(vec)) </a></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="semiparametric.html#cb312-1"></a><span class="co"># Beating a dead horse:</span></span>
+<span id="cb312-2"><a href="semiparametric.html#cb312-2"></a><span class="kw">sum</span>((vec<span class="op">-</span><span class="kw">mean</span>(vec))<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="kw">length</span>(vec)) </span></code></pre></div>
 <pre><code>## [1] 1.125205</code></pre>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" title="1"><span class="co"># But now we change the denominator from n, to n-1</span></a>
-<a class="sourceLine" id="cb314-2" title="2"><span class="co"># Unbiased estimator for the variance </span></a>
-<a class="sourceLine" id="cb314-3" title="3"><span class="co"># Gives the same result as `var`</span></a>
-<a class="sourceLine" id="cb314-4" title="4"><span class="kw">sum</span>((vec<span class="op">-</span><span class="kw">mean</span>(vec))<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="kw">length</span>(vec) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="semiparametric.html#cb314-1"></a><span class="co"># But now we change the denominator from n, to n-1</span></span>
+<span id="cb314-2"><a href="semiparametric.html#cb314-2"></a><span class="co"># Unbiased estimator for the variance </span></span>
+<span id="cb314-3"><a href="semiparametric.html#cb314-3"></a><span class="co"># Gives the same result as `var`</span></span>
+<span id="cb314-4"><a href="semiparametric.html#cb314-4"></a><span class="kw">sum</span>((vec<span class="op">-</span><span class="kw">mean</span>(vec))<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="kw">length</span>(vec) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) </span></code></pre></div>
 <pre><code>## [1] 1.406506</code></pre>
 <p>I have not read ahead, but I suspect Edge will discuss this discrepancy soon..</p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Repeating the simulation, but with samples sizes from 2 to 10.</li>
 </ol>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" title="1">n_sims &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb316-2" title="2">n_vec &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">:</span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb316-3" title="3">variance_vec &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length =</span> <span class="kw">length</span>(n_vec))</a>
-<a class="sourceLine" id="cb316-4" title="4"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(n_vec)){</a>
-<a class="sourceLine" id="cb316-5" title="5">  n_obs &lt;-<span class="st"> </span>n_vec[i]</a>
-<a class="sourceLine" id="cb316-6" title="6">  x &lt;-<span class="st"> </span><span class="kw">mat.samps</span>(<span class="dt">n =</span> n_obs, <span class="dt">nsim =</span> n_sims)</a>
-<a class="sourceLine" id="cb316-7" title="7">  vars.pi &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">1</span>, var.pi)</a>
-<a class="sourceLine" id="cb316-8" title="8">  variance_vec[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(vars.pi)</a>
-<a class="sourceLine" id="cb316-9" title="9">}</a>
-<a class="sourceLine" id="cb316-10" title="10">variance_vec </a></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="semiparametric.html#cb316-1"></a>n_sims &lt;-<span class="st"> </span><span class="dv">10000</span></span>
+<span id="cb316-2"><a href="semiparametric.html#cb316-2"></a>n_vec &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">:</span><span class="dv">10</span></span>
+<span id="cb316-3"><a href="semiparametric.html#cb316-3"></a>variance_vec &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length =</span> <span class="kw">length</span>(n_vec))</span>
+<span id="cb316-4"><a href="semiparametric.html#cb316-4"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(n_vec)){</span>
+<span id="cb316-5"><a href="semiparametric.html#cb316-5"></a>  n_obs &lt;-<span class="st"> </span>n_vec[i]</span>
+<span id="cb316-6"><a href="semiparametric.html#cb316-6"></a>  x &lt;-<span class="st"> </span><span class="kw">mat.samps</span>(<span class="dt">n =</span> n_obs, <span class="dt">nsim =</span> n_sims)</span>
+<span id="cb316-7"><a href="semiparametric.html#cb316-7"></a>  vars.pi &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">1</span>, var.pi)</span>
+<span id="cb316-8"><a href="semiparametric.html#cb316-8"></a>  variance_vec[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(vars.pi)</span>
+<span id="cb316-9"><a href="semiparametric.html#cb316-9"></a>}</span>
+<span id="cb316-10"><a href="semiparametric.html#cb316-10"></a>variance_vec </span></code></pre></div>
 <pre><code>## [1] 0.4879436 0.6578587 0.7378372 0.7852684 0.8369602 0.8502939 0.8715858
 ## [8] 0.8900192 0.9012010</code></pre>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" title="1"><span class="kw">plot</span>(n_vec, variance_vec, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, </a>
-<a class="sourceLine" id="cb318-2" title="2">     <span class="dt">xlab =</span> <span class="st">&quot;Number of samples&quot;</span>, </a>
-<a class="sourceLine" id="cb318-3" title="3">     <span class="dt">ylab =</span> <span class="st">&quot;Mean variance&quot;</span>, </a>
-<a class="sourceLine" id="cb318-4" title="4">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb318-5" title="5"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">2</span> , <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="semiparametric.html#cb318-1"></a><span class="kw">plot</span>(n_vec, variance_vec, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, </span>
+<span id="cb318-2"><a href="semiparametric.html#cb318-2"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Number of samples&quot;</span>, </span>
+<span id="cb318-3"><a href="semiparametric.html#cb318-3"></a>     <span class="dt">ylab =</span> <span class="st">&quot;Mean variance&quot;</span>, </span>
+<span id="cb318-4"><a href="semiparametric.html#cb318-4"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb318-5"><a href="semiparametric.html#cb318-5"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">2</span> , <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>The bias is largest with a sample size of 2, and the plug-in estimator gets closer to the true value with increasing sample size.</p>
 <p>I did not think to convert these decimal outputs to fractions as indicated in Edge’s solution, even having stumbled upon the unbiased estimator above. So this result is not yet intuitive:</p>
@@ -669,12 +691,12 @@ Y = \alpha + \beta X + \epsilon \\
 </div>
 <div id="bootstrapping-the-anscombe-dataset" class="section level4">
 <h4><span class="header-section-number">8.2.0.2</span> Bootstrapping the Anscombe dataset</h4>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb319-1" title="1"><span class="co"># Original fertilizer use and cereal yield data</span></a>
-<a class="sourceLine" id="cb319-2" title="2">d &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1) [<span class="kw">order</span>(anscombe<span class="op">$</span>x1), ]</a>
-<a class="sourceLine" id="cb319-3" title="3"><span class="co"># One bootstrap sample </span></a>
-<a class="sourceLine" id="cb319-4" title="4"><span class="kw">set.seed</span>(<span class="dv">8675309</span>)</a>
-<a class="sourceLine" id="cb319-5" title="5">db &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1) [<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">11</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>), ]</a>
-<a class="sourceLine" id="cb319-6" title="6">d; db</a></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="semiparametric.html#cb319-1"></a><span class="co"># Original fertilizer use and cereal yield data</span></span>
+<span id="cb319-2"><a href="semiparametric.html#cb319-2"></a>d &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1) [<span class="kw">order</span>(anscombe<span class="op">$</span>x1), ]</span>
+<span id="cb319-3"><a href="semiparametric.html#cb319-3"></a><span class="co"># One bootstrap sample </span></span>
+<span id="cb319-4"><a href="semiparametric.html#cb319-4"></a><span class="kw">set.seed</span>(<span class="dv">8675309</span>)</span>
+<span id="cb319-5"><a href="semiparametric.html#cb319-5"></a>db &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1) [<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">11</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>), ]</span>
+<span id="cb319-6"><a href="semiparametric.html#cb319-6"></a>d; db</span></code></pre></div>
 <pre><code>##       [,1]  [,2]
 ##  [1,]    4  4.26
 ##  [2,]    5  5.68
@@ -700,7 +722,7 @@ Y = \alpha + \beta X + \epsilon \\
 ## [10,]   11  8.33
 ## [11,]    7  4.82</code></pre>
 <p>The function <code>boot.samp</code> returns a bootstrap sample of either a vector or the rows of a matrix. The function <code>beta.mm</code> calculates the methods of moments estimate of <span class="math inline">\(\beta\)</span>.</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb322-1" title="1">boot.samp</a></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="semiparametric.html#cb322-1"></a>boot.samp</span></code></pre></div>
 <pre><code>## function (x) 
 ## {
 ##     if (is.null(dim(x))) {
@@ -710,34 +732,34 @@ Y = \alpha + \beta X + \epsilon \\
 ##     boot.inds &lt;- sample(1:n, replace = TRUE)
 ##     x[boot.inds, ]
 ## }
-## &lt;bytecode: 0x7f965df18300&gt;
+## &lt;bytecode: 0x7f8cb5b64ca8&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb324-1" title="1">beta.mm</a></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="semiparametric.html#cb324-1"></a>beta.mm</span></code></pre></div>
 <pre><code>## function (x, y) 
 ## {
 ##     n &lt;- length(x)
 ##     (sum(x * y) - (1/n) * sum(x) * sum(y))/(sum(x^2) - (1/n) * 
 ##         sum(x)^2)
 ## }
-## &lt;bytecode: 0x7f965df78258&gt;
+## &lt;bytecode: 0x7f8cb5bbec00&gt;
 ## &lt;environment: namespace:stfspack&gt;</code></pre>
 <p>We use a <code>for</code> loop to draw the bootstrap sample:</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb326-1" title="1"><span class="kw">set.seed</span>(<span class="dv">8675309</span>)</a>
-<a class="sourceLine" id="cb326-2" title="2">B &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb326-3" title="3">boot.dist &lt;-<span class="st"> </span><span class="kw">numeric</span>(B)</a>
-<a class="sourceLine" id="cb326-4" title="4">dat &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y2)</a>
-<a class="sourceLine" id="cb326-5" title="5"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>B){</a>
-<a class="sourceLine" id="cb326-6" title="6">  samp &lt;-<span class="st"> </span><span class="kw">boot.samp</span>(dat)</a>
-<a class="sourceLine" id="cb326-7" title="7">  boot.dist[i] &lt;-<span class="st"> </span><span class="kw">beta.mm</span>(samp[,<span class="dv">1</span>], samp[,<span class="dv">2</span>])</a>
-<a class="sourceLine" id="cb326-8" title="8">}</a></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="semiparametric.html#cb326-1"></a><span class="kw">set.seed</span>(<span class="dv">8675309</span>)</span>
+<span id="cb326-2"><a href="semiparametric.html#cb326-2"></a>B &lt;-<span class="st"> </span><span class="dv">10000</span></span>
+<span id="cb326-3"><a href="semiparametric.html#cb326-3"></a>boot.dist &lt;-<span class="st"> </span><span class="kw">numeric</span>(B)</span>
+<span id="cb326-4"><a href="semiparametric.html#cb326-4"></a>dat &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y2)</span>
+<span id="cb326-5"><a href="semiparametric.html#cb326-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>B){</span>
+<span id="cb326-6"><a href="semiparametric.html#cb326-6"></a>  samp &lt;-<span class="st"> </span><span class="kw">boot.samp</span>(dat)</span>
+<span id="cb326-7"><a href="semiparametric.html#cb326-7"></a>  boot.dist[i] &lt;-<span class="st"> </span><span class="kw">beta.mm</span>(samp[,<span class="dv">1</span>], samp[,<span class="dv">2</span>])</span>
+<span id="cb326-8"><a href="semiparametric.html#cb326-8"></a>}</span></code></pre></div>
 <p>We can plot a histogram and calculate the standard error of the estimator, <span class="math inline">\(\tilde \beta\)</span> (recalling that the standard error of an estimate is its standard deviation).</p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb327-1" title="1"><span class="co"># Plot histogram</span></a>
-<a class="sourceLine" id="cb327-2" title="2"><span class="kw">hist</span>(boot.dist, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1.2</span>), <span class="dt">breaks =</span> <span class="dv">30</span>, </a>
-<a class="sourceLine" id="cb327-3" title="3">     <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;Bootstrapped &quot;</span>, beta)), </a>
-<a class="sourceLine" id="cb327-4" title="4">     <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="semiparametric.html#cb327-1"></a><span class="co"># Plot histogram</span></span>
+<span id="cb327-2"><a href="semiparametric.html#cb327-2"></a><span class="kw">hist</span>(boot.dist, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1.2</span>), <span class="dt">breaks =</span> <span class="dv">30</span>, </span>
+<span id="cb327-3"><a href="semiparametric.html#cb327-3"></a>     <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;Bootstrapped &quot;</span>, beta)), </span>
+<span id="cb327-4"><a href="semiparametric.html#cb327-4"></a>     <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span></code></pre></div>
 <p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb328-1" title="1"><span class="co"># Estimate standard error of boostrapped beta</span></a>
-<a class="sourceLine" id="cb328-2" title="2"><span class="kw">sd</span>(boot.dist)</a></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="semiparametric.html#cb328-1"></a><span class="co"># Estimate standard error of boostrapped beta</span></span>
+<span id="cb328-2"><a href="semiparametric.html#cb328-2"></a><span class="kw">sd</span>(boot.dist)</span></code></pre></div>
 <pre><code>## [1] 0.165262</code></pre>
 </div>
 <div id="approximating-confidence-intervals-for-tilde-beta" class="section level4">
@@ -746,19 +768,19 @@ Y = \alpha + \beta X + \epsilon \\
 <ol style="list-style-type: decimal">
 <li>If we assume the sampling distribution is normal, then we can use the bootstrap estimate to identify a confidence interval (<span class="math inline">\(1 - \alpha\)</span> interval).</li>
 </ol>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb330-1" title="1"><span class="co"># Normal bootstrap interval</span></a>
-<a class="sourceLine" id="cb330-2" title="2">a &lt;-<span class="st"> </span><span class="fl">0.05</span></a>
-<a class="sourceLine" id="cb330-3" title="3">b_mm &lt;-<span class="st"> </span><span class="kw">beta.mm</span>(dat[,<span class="dv">1</span>], dat[,<span class="dv">2</span>])</a>
-<a class="sourceLine" id="cb330-4" title="4">b_sd &lt;-<span class="st"> </span><span class="kw">sd</span>(boot.dist)</a>
-<a class="sourceLine" id="cb330-5" title="5">z &lt;-<span class="st"> </span><span class="kw">qnorm</span>(<span class="dt">p =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(a <span class="op">/</span><span class="st"> </span><span class="dv">2</span>), <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb330-6" title="6">b_mm <span class="op">-</span><span class="st"> </span>b_sd<span class="op">*</span>z; b_mm <span class="op">+</span><span class="st"> </span>b_sd<span class="op">*</span>z</a></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="semiparametric.html#cb330-1"></a><span class="co"># Normal bootstrap interval</span></span>
+<span id="cb330-2"><a href="semiparametric.html#cb330-2"></a>a &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb330-3"><a href="semiparametric.html#cb330-3"></a>b_mm &lt;-<span class="st"> </span><span class="kw">beta.mm</span>(dat[,<span class="dv">1</span>], dat[,<span class="dv">2</span>])</span>
+<span id="cb330-4"><a href="semiparametric.html#cb330-4"></a>b_sd &lt;-<span class="st"> </span><span class="kw">sd</span>(boot.dist)</span>
+<span id="cb330-5"><a href="semiparametric.html#cb330-5"></a>z &lt;-<span class="st"> </span><span class="kw">qnorm</span>(<span class="dt">p =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(a <span class="op">/</span><span class="st"> </span><span class="dv">2</span>), <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb330-6"><a href="semiparametric.html#cb330-6"></a>b_mm <span class="op">-</span><span class="st"> </span>b_sd<span class="op">*</span>z; b_mm <span class="op">+</span><span class="st"> </span>b_sd<span class="op">*</span>z</span></code></pre></div>
 <pre><code>## [1] 0.1760924</code></pre>
 <pre><code>## [1] 0.8239076</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Use the percentiles of the bootstrap distribution to bound a confidence interval (<span class="math inline">\(1 - \alpha ~ percentile\)</span> interval).</li>
 </ol>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb333-1" title="1"><span class="co"># 95% percentile interval</span></a>
-<a class="sourceLine" id="cb333-2" title="2"><span class="kw">quantile</span>(boot.dist, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="semiparametric.html#cb333-1"></a><span class="co"># 95% percentile interval</span></span>
+<span id="cb333-2"><a href="semiparametric.html#cb333-2"></a><span class="kw">quantile</span>(boot.dist, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span></code></pre></div>
 <pre><code>##      2.5%     97.5% 
 ## 0.1630270 0.8459399</code></pre>
 <ol start="3" style="list-style-type: decimal">
@@ -771,16 +793,16 @@ Y = \alpha + \beta X + \epsilon \\
 <li>Sensitivity of a bootstrapped mean to <em>n, B</em>.</li>
 </ol>
 <p>Try the <code>boot.dist.1d</code> function:</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb335-1" title="1">n &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb335-2" title="2">B &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb335-3" title="3">sim &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb335-4" title="4"><span class="kw">boot.dist.1d</span>(<span class="dt">x =</span> sim, <span class="dt">B =</span> B, <span class="dt">FUN =</span> mean)</a></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="semiparametric.html#cb335-1"></a>n &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb335-2"><a href="semiparametric.html#cb335-2"></a>B &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb335-3"><a href="semiparametric.html#cb335-3"></a>sim &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb335-4"><a href="semiparametric.html#cb335-4"></a><span class="kw">boot.dist.1d</span>(<span class="dt">x =</span> sim, <span class="dt">B =</span> B, <span class="dt">FUN =</span> mean)</span></code></pre></div>
 <pre><code>##  [1] -0.22323507 -0.01956961  0.04809411 -0.21668665  0.20288450 -0.01956961
 ##  [7] -0.13718622 -0.26937485 -0.33757747 -0.10288316</code></pre>
 <p>Use the wrapper function:</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb337-1" title="1">n &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb337-2" title="2">B &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb337-3" title="3"><span class="kw">wrap.bm</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="semiparametric.html#cb337-1"></a>n &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb337-2"><a href="semiparametric.html#cb337-2"></a>B &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb337-3"><a href="semiparametric.html#cb337-3"></a><span class="kw">wrap.bm</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</span></code></pre></div>
 <p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <pre><code>## $`boot m`
 ## [1] -0.7622767
@@ -788,86 +810,86 @@ Y = \alpha + \beta X + \epsilon \\
 ## $`boot se`
 ## [1] 0.2741837</code></pre>
 <p>Changing <em>n</em>:</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb339-1" title="1"><span class="co"># Adjust wrapper function</span></a>
-<a class="sourceLine" id="cb339-2" title="2">wrap.bm2 &lt;-<span class="st"> </span><span class="cf">function</span> (n, B, <span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">1</span>, <span class="dt">FUN =</span> mean, ...){</a>
-<a class="sourceLine" id="cb339-3" title="3">    sim &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, mu, sigma)</a>
-<a class="sourceLine" id="cb339-4" title="4">    boots &lt;-<span class="st"> </span><span class="kw">boot.dist.1d</span>(sim, B, <span class="dt">FUN =</span> FUN, ...)</a>
-<a class="sourceLine" id="cb339-5" title="5">    <span class="kw">hist</span>(boots, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;n = &quot;</span>, n, <span class="st">&quot;; &quot;</span>, <span class="st">&quot;B = &quot;</span>, B, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), </a>
-<a class="sourceLine" id="cb339-6" title="6">         <span class="dt">xlab =</span> <span class="st">&quot;Bootstrap distribution&quot;</span>, </a>
-<a class="sourceLine" id="cb339-7" title="7">         <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>), <span class="dt">col =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</a>
-<a class="sourceLine" id="cb339-8" title="8">}</a>
-<a class="sourceLine" id="cb339-9" title="9">B &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb339-10" title="10">n &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb339-11" title="11"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb339-12" title="12"><span class="kw">set.seed</span>(<span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb339-13" title="13"><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a>
-<a class="sourceLine" id="cb339-14" title="14">n &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb339-15" title="15"><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a>
-<a class="sourceLine" id="cb339-16" title="16">n &lt;-<span class="st"> </span><span class="dv">50</span></a>
-<a class="sourceLine" id="cb339-17" title="17"><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a>
-<a class="sourceLine" id="cb339-18" title="18">n &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb339-19" title="19"><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="semiparametric.html#cb339-1"></a><span class="co"># Adjust wrapper function</span></span>
+<span id="cb339-2"><a href="semiparametric.html#cb339-2"></a>wrap.bm2 &lt;-<span class="st"> </span><span class="cf">function</span> (n, B, <span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">1</span>, <span class="dt">FUN =</span> mean, ...){</span>
+<span id="cb339-3"><a href="semiparametric.html#cb339-3"></a>    sim &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, mu, sigma)</span>
+<span id="cb339-4"><a href="semiparametric.html#cb339-4"></a>    boots &lt;-<span class="st"> </span><span class="kw">boot.dist.1d</span>(sim, B, <span class="dt">FUN =</span> FUN, ...)</span>
+<span id="cb339-5"><a href="semiparametric.html#cb339-5"></a>    <span class="kw">hist</span>(boots, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;n = &quot;</span>, n, <span class="st">&quot;; &quot;</span>, <span class="st">&quot;B = &quot;</span>, B, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), </span>
+<span id="cb339-6"><a href="semiparametric.html#cb339-6"></a>         <span class="dt">xlab =</span> <span class="st">&quot;Bootstrap distribution&quot;</span>, </span>
+<span id="cb339-7"><a href="semiparametric.html#cb339-7"></a>         <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>), <span class="dt">col =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb339-8"><a href="semiparametric.html#cb339-8"></a>}</span>
+<span id="cb339-9"><a href="semiparametric.html#cb339-9"></a>B &lt;-<span class="st"> </span><span class="dv">10000</span></span>
+<span id="cb339-10"><a href="semiparametric.html#cb339-10"></a>n &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb339-11"><a href="semiparametric.html#cb339-11"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb339-12"><a href="semiparametric.html#cb339-12"></a><span class="kw">set.seed</span>(<span class="dv">3</span>)</span>
+<span id="cb339-13"><a href="semiparametric.html#cb339-13"></a><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</span>
+<span id="cb339-14"><a href="semiparametric.html#cb339-14"></a>n &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb339-15"><a href="semiparametric.html#cb339-15"></a><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</span>
+<span id="cb339-16"><a href="semiparametric.html#cb339-16"></a>n &lt;-<span class="st"> </span><span class="dv">50</span></span>
+<span id="cb339-17"><a href="semiparametric.html#cb339-17"></a><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</span>
+<span id="cb339-18"><a href="semiparametric.html#cb339-18"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb339-19"><a href="semiparametric.html#cb339-19"></a><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</span></code></pre></div>
 <p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>Changing <em>B</em>:</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb340-1" title="1">n &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb340-2" title="2">B &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb340-3" title="3"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb340-4" title="4"><span class="kw">set.seed</span>(<span class="dv">101</span>)</a>
-<a class="sourceLine" id="cb340-5" title="5"><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a>
-<a class="sourceLine" id="cb340-6" title="6">B &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb340-7" title="7"><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a>
-<a class="sourceLine" id="cb340-8" title="8">B &lt;-<span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb340-9" title="9"><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a>
-<a class="sourceLine" id="cb340-10" title="10">B &lt;-<span class="st"> </span><span class="dv">5000</span></a>
-<a class="sourceLine" id="cb340-11" title="11"><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</a></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="semiparametric.html#cb340-1"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb340-2"><a href="semiparametric.html#cb340-2"></a>B &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb340-3"><a href="semiparametric.html#cb340-3"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb340-4"><a href="semiparametric.html#cb340-4"></a><span class="kw">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb340-5"><a href="semiparametric.html#cb340-5"></a><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</span>
+<span id="cb340-6"><a href="semiparametric.html#cb340-6"></a>B &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb340-7"><a href="semiparametric.html#cb340-7"></a><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</span>
+<span id="cb340-8"><a href="semiparametric.html#cb340-8"></a>B &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb340-9"><a href="semiparametric.html#cb340-9"></a><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</span>
+<span id="cb340-10"><a href="semiparametric.html#cb340-10"></a>B &lt;-<span class="st"> </span><span class="dv">5000</span></span>
+<span id="cb340-11"><a href="semiparametric.html#cb340-11"></a><span class="kw">wrap.bm2</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B)</span></code></pre></div>
 <p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>Sensitivity of a bootstrapped midrange to <em>n, B</em>.</li>
 </ol>
 <p>New functions:</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb341-1" title="1">midrange &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
-<a class="sourceLine" id="cb341-2" title="2">  (<span class="kw">min</span>(x) <span class="op">+</span><span class="st"> </span><span class="kw">max</span>(x)) <span class="op">/</span><span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb341-3" title="3">}</a>
-<a class="sourceLine" id="cb341-4" title="4"></a>
-<a class="sourceLine" id="cb341-5" title="5">wrap.bm3 &lt;-<span class="st"> </span><span class="cf">function</span> (n, B, <span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">1</span>, <span class="dt">FUN =</span> mean, ...){</a>
-<a class="sourceLine" id="cb341-6" title="6">    sim &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, mu, sigma)</a>
-<a class="sourceLine" id="cb341-7" title="7">    boots &lt;-<span class="st"> </span><span class="kw">boot.dist.1d</span>(sim, B, <span class="dt">FUN =</span> FUN, ...)</a>
-<a class="sourceLine" id="cb341-8" title="8">    <span class="kw">sd</span>(boots)</a>
-<a class="sourceLine" id="cb341-9" title="9">}</a></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="semiparametric.html#cb341-1"></a>midrange &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
+<span id="cb341-2"><a href="semiparametric.html#cb341-2"></a>  (<span class="kw">min</span>(x) <span class="op">+</span><span class="st"> </span><span class="kw">max</span>(x)) <span class="op">/</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb341-3"><a href="semiparametric.html#cb341-3"></a>}</span>
+<span id="cb341-4"><a href="semiparametric.html#cb341-4"></a></span>
+<span id="cb341-5"><a href="semiparametric.html#cb341-5"></a>wrap.bm3 &lt;-<span class="st"> </span><span class="cf">function</span> (n, B, <span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">1</span>, <span class="dt">FUN =</span> mean, ...){</span>
+<span id="cb341-6"><a href="semiparametric.html#cb341-6"></a>    sim &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, mu, sigma)</span>
+<span id="cb341-7"><a href="semiparametric.html#cb341-7"></a>    boots &lt;-<span class="st"> </span><span class="kw">boot.dist.1d</span>(sim, B, <span class="dt">FUN =</span> FUN, ...)</span>
+<span id="cb341-8"><a href="semiparametric.html#cb341-8"></a>    <span class="kw">sd</span>(boots)</span>
+<span id="cb341-9"><a href="semiparametric.html#cb341-9"></a>}</span></code></pre></div>
 <p>Changing <em>n</em>:</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb342-1" title="1">B &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb342-2" title="2">my_seq &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb342-3" title="3">n_vector &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">^</span>my_seq</a>
-<a class="sourceLine" id="cb342-4" title="4">se_vector &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dt">length =</span> <span class="kw">length</span>(my_seq))</a>
-<a class="sourceLine" id="cb342-5" title="5">se_pred_vector &lt;-<span class="st"> </span>pi <span class="op">/</span><span class="st"> </span>(<span class="kw">sqrt</span>(<span class="dv">24</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(n_vector)))</a>
-<a class="sourceLine" id="cb342-6" title="6"></a>
-<a class="sourceLine" id="cb342-7" title="7"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(my_seq)){ </a>
-<a class="sourceLine" id="cb342-8" title="8">  <span class="kw">set.seed</span>(<span class="dv">101</span>)</a>
-<a class="sourceLine" id="cb342-9" title="9">  se_vector[i] &lt;-<span class="st"> </span><span class="kw">wrap.bm3</span>(<span class="dt">n =</span> n_vector[i], <span class="dt">B =</span> B, <span class="dt">FUN =</span> midrange)</a>
-<a class="sourceLine" id="cb342-10" title="10">}</a>
-<a class="sourceLine" id="cb342-11" title="11"></a>
-<a class="sourceLine" id="cb342-12" title="12"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb342-13" title="13"><span class="kw">plot</span>(n_vector, se_pred_vector, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;B = &quot;</span>, B, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), </a>
-<a class="sourceLine" id="cb342-14" title="14">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.8</span>), <span class="dt">xlab =</span> <span class="st">&quot;Sample size (n)&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;SE of midrange&quot;</span>)</a>
-<a class="sourceLine" id="cb342-15" title="15"><span class="kw">points</span>(n_vector, se_vector, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="semiparametric.html#cb342-1"></a>B &lt;-<span class="st"> </span><span class="dv">10000</span></span>
+<span id="cb342-2"><a href="semiparametric.html#cb342-2"></a>my_seq &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</span>
+<span id="cb342-3"><a href="semiparametric.html#cb342-3"></a>n_vector &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">^</span>my_seq</span>
+<span id="cb342-4"><a href="semiparametric.html#cb342-4"></a>se_vector &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dt">length =</span> <span class="kw">length</span>(my_seq))</span>
+<span id="cb342-5"><a href="semiparametric.html#cb342-5"></a>se_pred_vector &lt;-<span class="st"> </span>pi <span class="op">/</span><span class="st"> </span>(<span class="kw">sqrt</span>(<span class="dv">24</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(n_vector)))</span>
+<span id="cb342-6"><a href="semiparametric.html#cb342-6"></a></span>
+<span id="cb342-7"><a href="semiparametric.html#cb342-7"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(my_seq)){ </span>
+<span id="cb342-8"><a href="semiparametric.html#cb342-8"></a>  <span class="kw">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb342-9"><a href="semiparametric.html#cb342-9"></a>  se_vector[i] &lt;-<span class="st"> </span><span class="kw">wrap.bm3</span>(<span class="dt">n =</span> n_vector[i], <span class="dt">B =</span> B, <span class="dt">FUN =</span> midrange)</span>
+<span id="cb342-10"><a href="semiparametric.html#cb342-10"></a>}</span>
+<span id="cb342-11"><a href="semiparametric.html#cb342-11"></a></span>
+<span id="cb342-12"><a href="semiparametric.html#cb342-12"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb342-13"><a href="semiparametric.html#cb342-13"></a><span class="kw">plot</span>(n_vector, se_pred_vector, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;B = &quot;</span>, B, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), </span>
+<span id="cb342-14"><a href="semiparametric.html#cb342-14"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.8</span>), <span class="dt">xlab =</span> <span class="st">&quot;Sample size (n)&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;SE of midrange&quot;</span>)</span>
+<span id="cb342-15"><a href="semiparametric.html#cb342-15"></a><span class="kw">points</span>(n_vector, se_vector, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>Changing <em>B</em>:</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb343-1" title="1">n &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb343-2" title="2">my_seq &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb343-3" title="3">B_vector &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">^</span>my_seq</a>
-<a class="sourceLine" id="cb343-4" title="4">se_vector &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dt">length =</span> <span class="kw">length</span>(my_seq))</a>
-<a class="sourceLine" id="cb343-5" title="5">se_pred_vector &lt;-<span class="st"> </span><span class="kw">rep</span>(pi <span class="op">/</span><span class="st"> </span>(<span class="kw">sqrt</span>(<span class="dv">24</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(n))), <span class="kw">length</span>(my_seq))</a>
-<a class="sourceLine" id="cb343-6" title="6"></a>
-<a class="sourceLine" id="cb343-7" title="7"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(my_seq)){ </a>
-<a class="sourceLine" id="cb343-8" title="8">  <span class="kw">set.seed</span>(<span class="dv">101</span>)</a>
-<a class="sourceLine" id="cb343-9" title="9">  se_vector[i] &lt;-<span class="st"> </span><span class="kw">wrap.bm3</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B_vector[i], <span class="dt">FUN =</span> midrange)</a>
-<a class="sourceLine" id="cb343-10" title="10">}</a>
-<a class="sourceLine" id="cb343-11" title="11"></a>
-<a class="sourceLine" id="cb343-12" title="12"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb343-13" title="13"><span class="kw">plot</span>(B_vector, se_pred_vector, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;n = &quot;</span>, n, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), </a>
-<a class="sourceLine" id="cb343-14" title="14">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">xlab =</span> <span class="st">&quot;Bootstrap samples (B)&quot;</span>, </a>
-<a class="sourceLine" id="cb343-15" title="15">     <span class="dt">ylab =</span> <span class="st">&quot;SE of midrange&quot;</span>)</a>
-<a class="sourceLine" id="cb343-16" title="16"><span class="kw">points</span>(n_vector, se_vector, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="semiparametric.html#cb343-1"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb343-2"><a href="semiparametric.html#cb343-2"></a>my_seq &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</span>
+<span id="cb343-3"><a href="semiparametric.html#cb343-3"></a>B_vector &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">^</span>my_seq</span>
+<span id="cb343-4"><a href="semiparametric.html#cb343-4"></a>se_vector &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dt">length =</span> <span class="kw">length</span>(my_seq))</span>
+<span id="cb343-5"><a href="semiparametric.html#cb343-5"></a>se_pred_vector &lt;-<span class="st"> </span><span class="kw">rep</span>(pi <span class="op">/</span><span class="st"> </span>(<span class="kw">sqrt</span>(<span class="dv">24</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(n))), <span class="kw">length</span>(my_seq))</span>
+<span id="cb343-6"><a href="semiparametric.html#cb343-6"></a></span>
+<span id="cb343-7"><a href="semiparametric.html#cb343-7"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(my_seq)){ </span>
+<span id="cb343-8"><a href="semiparametric.html#cb343-8"></a>  <span class="kw">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb343-9"><a href="semiparametric.html#cb343-9"></a>  se_vector[i] &lt;-<span class="st"> </span><span class="kw">wrap.bm3</span>(<span class="dt">n =</span> n, <span class="dt">B =</span> B_vector[i], <span class="dt">FUN =</span> midrange)</span>
+<span id="cb343-10"><a href="semiparametric.html#cb343-10"></a>}</span>
+<span id="cb343-11"><a href="semiparametric.html#cb343-11"></a></span>
+<span id="cb343-12"><a href="semiparametric.html#cb343-12"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb343-13"><a href="semiparametric.html#cb343-13"></a><span class="kw">plot</span>(B_vector, se_pred_vector, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;n = &quot;</span>, n, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), </span>
+<span id="cb343-14"><a href="semiparametric.html#cb343-14"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">xlab =</span> <span class="st">&quot;Bootstrap samples (B)&quot;</span>, </span>
+<span id="cb343-15"><a href="semiparametric.html#cb343-15"></a>     <span class="dt">ylab =</span> <span class="st">&quot;SE of midrange&quot;</span>)</span>
+<span id="cb343-16"><a href="semiparametric.html#cb343-16"></a><span class="kw">points</span>(n_vector, se_vector, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li>Skipped.</li>
@@ -902,12 +924,12 @@ Y = \alpha + \epsilon
 </ol>
 <p>Note that the permuted sample is somewhat like a sample that might be observed if the <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> values were independent.</p>
 <p>Here’s the original dataset, and a permuted one:</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb344-1" title="1"><span class="co"># Original fertilizer use and cereal yield data</span></a>
-<a class="sourceLine" id="cb344-2" title="2">d &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1) [<span class="kw">order</span>(anscombe<span class="op">$</span>x1), ]</a>
-<a class="sourceLine" id="cb344-3" title="3"><span class="co"># One permuted sample </span></a>
-<a class="sourceLine" id="cb344-4" title="4"><span class="kw">set.seed</span>(<span class="dv">8675309</span>)</a>
-<a class="sourceLine" id="cb344-5" title="5">db &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">11</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)])[<span class="kw">order</span>(anscombe<span class="op">$</span>x1), ]</a>
-<a class="sourceLine" id="cb344-6" title="6">d; db</a></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="semiparametric.html#cb344-1"></a><span class="co"># Original fertilizer use and cereal yield data</span></span>
+<span id="cb344-2"><a href="semiparametric.html#cb344-2"></a>d &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1) [<span class="kw">order</span>(anscombe<span class="op">$</span>x1), ]</span>
+<span id="cb344-3"><a href="semiparametric.html#cb344-3"></a><span class="co"># One permuted sample </span></span>
+<span id="cb344-4"><a href="semiparametric.html#cb344-4"></a><span class="kw">set.seed</span>(<span class="dv">8675309</span>)</span>
+<span id="cb344-5"><a href="semiparametric.html#cb344-5"></a>db &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">11</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)])[<span class="kw">order</span>(anscombe<span class="op">$</span>x1), ]</span>
+<span id="cb344-6"><a href="semiparametric.html#cb344-6"></a>d; db</span></code></pre></div>
 <pre><code>##       [,1]  [,2]
 ##  [1,]    4  4.26
 ##  [2,]    5  5.68
@@ -933,25 +955,25 @@ Y = \alpha + \epsilon
 ## [10,]   13  7.24
 ## [11,]   14  4.82</code></pre>
 <p>If we do this a number of times, we can plot the histogram of permuted samples, along with a line to represent the original <span class="math inline">\(\tilde \beta\)</span>:</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb347-1" title="1"><span class="kw">set.seed</span>(<span class="dv">8675309</span>)</a>
-<a class="sourceLine" id="cb347-2" title="2">nperms &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb347-3" title="3">perm_dist &lt;-<span class="st"> </span><span class="kw">numeric</span>(nperms)</a>
-<a class="sourceLine" id="cb347-4" title="4">dat &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1) </a>
-<a class="sourceLine" id="cb347-5" title="5"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nperms){</a>
-<a class="sourceLine" id="cb347-6" title="6">  samp &lt;-<span class="st"> </span><span class="kw">perm.samp</span>(dat)</a>
-<a class="sourceLine" id="cb347-7" title="7">  perm_dist[i] &lt;-<span class="st"> </span><span class="kw">beta.mm</span>(samp[,<span class="dv">1</span>], samp[,<span class="dv">2</span>])</a>
-<a class="sourceLine" id="cb347-8" title="8">}</a>
-<a class="sourceLine" id="cb347-9" title="9">b_orig &lt;-<span class="st"> </span><span class="kw">beta.mm</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1)</a>
-<a class="sourceLine" id="cb347-10" title="10">b_orig</a></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="semiparametric.html#cb347-1"></a><span class="kw">set.seed</span>(<span class="dv">8675309</span>)</span>
+<span id="cb347-2"><a href="semiparametric.html#cb347-2"></a>nperms &lt;-<span class="st"> </span><span class="dv">10000</span></span>
+<span id="cb347-3"><a href="semiparametric.html#cb347-3"></a>perm_dist &lt;-<span class="st"> </span><span class="kw">numeric</span>(nperms)</span>
+<span id="cb347-4"><a href="semiparametric.html#cb347-4"></a>dat &lt;-<span class="st"> </span><span class="kw">cbind</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1) </span>
+<span id="cb347-5"><a href="semiparametric.html#cb347-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nperms){</span>
+<span id="cb347-6"><a href="semiparametric.html#cb347-6"></a>  samp &lt;-<span class="st"> </span><span class="kw">perm.samp</span>(dat)</span>
+<span id="cb347-7"><a href="semiparametric.html#cb347-7"></a>  perm_dist[i] &lt;-<span class="st"> </span><span class="kw">beta.mm</span>(samp[,<span class="dv">1</span>], samp[,<span class="dv">2</span>])</span>
+<span id="cb347-8"><a href="semiparametric.html#cb347-8"></a>}</span>
+<span id="cb347-9"><a href="semiparametric.html#cb347-9"></a>b_orig &lt;-<span class="st"> </span><span class="kw">beta.mm</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1)</span>
+<span id="cb347-10"><a href="semiparametric.html#cb347-10"></a>b_orig</span></code></pre></div>
 <pre><code>## [1] 0.5000909</code></pre>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb349-1" title="1"><span class="co"># Plot histogram</span></a>
-<a class="sourceLine" id="cb349-2" title="2"><span class="kw">hist</span>(perm_dist, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>), <span class="dt">breaks =</span> <span class="dv">30</span>, </a>
-<a class="sourceLine" id="cb349-3" title="3">     <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(beta, <span class="st">&quot; from permuted samples&quot;</span>)), </a>
-<a class="sourceLine" id="cb349-4" title="4">     <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</a>
-<a class="sourceLine" id="cb349-5" title="5"><span class="kw">abline</span>(<span class="dt">v =</span> b_orig, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="semiparametric.html#cb349-1"></a><span class="co"># Plot histogram</span></span>
+<span id="cb349-2"><a href="semiparametric.html#cb349-2"></a><span class="kw">hist</span>(perm_dist, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>), <span class="dt">breaks =</span> <span class="dv">30</span>, </span>
+<span id="cb349-3"><a href="semiparametric.html#cb349-3"></a>     <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(beta, <span class="st">&quot; from permuted samples&quot;</span>)), </span>
+<span id="cb349-4"><a href="semiparametric.html#cb349-4"></a>     <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb349-5"><a href="semiparametric.html#cb349-5"></a><span class="kw">abline</span>(<span class="dt">v =</span> b_orig, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>We can compute a two-sided <span class="math inline">\(p\)</span> value testing the null hypothesis that <span class="math inline">\(\beta = 0\)</span> by calculating the proportion of the permuted samples for which the absolute value of <span class="math inline">\(\tilde \beta_p\)</span> is greater than the absolute value of <span class="math inline">\(\tilde \beta\)</span> from the original data:</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb350-1" title="1"><span class="kw">mean</span>(<span class="kw">abs</span>(perm_dist) <span class="op">&gt;=</span><span class="st"> </span>b_orig)</a></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="semiparametric.html#cb350-1"></a><span class="kw">mean</span>(<span class="kw">abs</span>(perm_dist) <span class="op">&gt;=</span><span class="st"> </span>b_orig)</span></code></pre></div>
 <pre><code>## [1] 0.0033</code></pre>
 <p>In summary we tested the hypothesis that:</p>
 <ul>
@@ -979,76 +1001,76 @@ AND<br />
 <ol start="2" style="list-style-type: decimal">
 <li></li>
 </ol>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb352-1" title="1"><span class="co"># 10 pairs</span></a>
-<a class="sourceLine" id="cb352-2" title="2">beta_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>)</a>
-<a class="sourceLine" id="cb352-3" title="3">n_pairs &lt;-<span class="st"> </span><span class="dv">10</span> </a>
-<a class="sourceLine" id="cb352-4" title="4">n_datasets &lt;-<span class="st"> </span><span class="dv">20</span></a>
-<a class="sourceLine" id="cb352-5" title="5">p_mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">500</span>, <span class="dt">ncol =</span> <span class="kw">length</span>(beta_vec))</a>
-<a class="sourceLine" id="cb352-6" title="6"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(beta_vec)){</a>
-<a class="sourceLine" id="cb352-7" title="7">  p_mat[,i] &lt;-<span class="st"> </span><span class="kw">sim.perm.B</span>(<span class="dt">n =</span> n_pairs, <span class="dt">nsim =</span> n_datasets, <span class="dt">a =</span> <span class="dv">3</span>, <span class="dt">b =</span> beta_vec[i])</a>
-<a class="sourceLine" id="cb352-8" title="8">}</a>
-<a class="sourceLine" id="cb352-9" title="9"><span class="kw">colnames</span>(p_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;b_0&quot;</span>, <span class="st">&quot;b_0.1&quot;</span>, <span class="st">&quot;b_0.2&quot;</span>)</a>
-<a class="sourceLine" id="cb352-10" title="10">df10 &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(p_mat)</a>
-<a class="sourceLine" id="cb352-11" title="11"></a>
-<a class="sourceLine" id="cb352-12" title="12"><span class="co"># 50 pairs</span></a>
-<a class="sourceLine" id="cb352-13" title="13">beta_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>)</a>
-<a class="sourceLine" id="cb352-14" title="14">n_pairs &lt;-<span class="st"> </span><span class="dv">50</span></a>
-<a class="sourceLine" id="cb352-15" title="15">n_datasets &lt;-<span class="st"> </span><span class="dv">20</span></a>
-<a class="sourceLine" id="cb352-16" title="16">p_mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">500</span>, <span class="dt">ncol =</span> <span class="kw">length</span>(beta_vec))</a>
-<a class="sourceLine" id="cb352-17" title="17"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(beta_vec)){</a>
-<a class="sourceLine" id="cb352-18" title="18">  p_mat[,i] &lt;-<span class="st"> </span><span class="kw">sim.perm.B</span>(<span class="dt">n =</span> n_pairs, <span class="dt">nsim =</span> n_datasets, <span class="dt">a =</span> <span class="dv">3</span>, <span class="dt">b =</span> beta_vec[i])</a>
-<a class="sourceLine" id="cb352-19" title="19">}</a>
-<a class="sourceLine" id="cb352-20" title="20"><span class="kw">colnames</span>(p_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;b_0&quot;</span>, <span class="st">&quot;b_0.1&quot;</span>, <span class="st">&quot;b_0.2&quot;</span>)</a>
-<a class="sourceLine" id="cb352-21" title="21">df50 &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(p_mat)</a>
-<a class="sourceLine" id="cb352-22" title="22"></a>
-<a class="sourceLine" id="cb352-23" title="23"><span class="co"># 100 pairs</span></a>
-<a class="sourceLine" id="cb352-24" title="24">beta_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>)</a>
-<a class="sourceLine" id="cb352-25" title="25">n_pairs &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb352-26" title="26">n_datasets &lt;-<span class="st"> </span><span class="dv">20</span></a>
-<a class="sourceLine" id="cb352-27" title="27">p_mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">500</span>, <span class="dt">ncol =</span> <span class="kw">length</span>(beta_vec))</a>
-<a class="sourceLine" id="cb352-28" title="28"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(beta_vec)){</a>
-<a class="sourceLine" id="cb352-29" title="29">  p_mat[,i] &lt;-<span class="st"> </span><span class="kw">sim.perm.B</span>(<span class="dt">n =</span> n_pairs, <span class="dt">nsim =</span> n_datasets, <span class="dt">a =</span> <span class="dv">3</span>, <span class="dt">b =</span> beta_vec[i])</a>
-<a class="sourceLine" id="cb352-30" title="30">}</a>
-<a class="sourceLine" id="cb352-31" title="31"><span class="kw">colnames</span>(p_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;b_0&quot;</span>, <span class="st">&quot;b_0.1&quot;</span>, <span class="st">&quot;b_0.2&quot;</span>)</a>
-<a class="sourceLine" id="cb352-32" title="32">df100 &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(p_mat)</a>
-<a class="sourceLine" id="cb352-33" title="33"></a>
-<a class="sourceLine" id="cb352-34" title="34"><span class="co"># Get proportion of significant tests</span></a>
-<a class="sourceLine" id="cb352-35" title="35"><span class="kw">colMeans</span>(df10 <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="semiparametric.html#cb352-1"></a><span class="co"># 10 pairs</span></span>
+<span id="cb352-2"><a href="semiparametric.html#cb352-2"></a>beta_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>)</span>
+<span id="cb352-3"><a href="semiparametric.html#cb352-3"></a>n_pairs &lt;-<span class="st"> </span><span class="dv">10</span> </span>
+<span id="cb352-4"><a href="semiparametric.html#cb352-4"></a>n_datasets &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb352-5"><a href="semiparametric.html#cb352-5"></a>p_mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">500</span>, <span class="dt">ncol =</span> <span class="kw">length</span>(beta_vec))</span>
+<span id="cb352-6"><a href="semiparametric.html#cb352-6"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(beta_vec)){</span>
+<span id="cb352-7"><a href="semiparametric.html#cb352-7"></a>  p_mat[,i] &lt;-<span class="st"> </span><span class="kw">sim.perm.B</span>(<span class="dt">n =</span> n_pairs, <span class="dt">nsim =</span> n_datasets, <span class="dt">a =</span> <span class="dv">3</span>, <span class="dt">b =</span> beta_vec[i])</span>
+<span id="cb352-8"><a href="semiparametric.html#cb352-8"></a>}</span>
+<span id="cb352-9"><a href="semiparametric.html#cb352-9"></a><span class="kw">colnames</span>(p_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;b_0&quot;</span>, <span class="st">&quot;b_0.1&quot;</span>, <span class="st">&quot;b_0.2&quot;</span>)</span>
+<span id="cb352-10"><a href="semiparametric.html#cb352-10"></a>df10 &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(p_mat)</span>
+<span id="cb352-11"><a href="semiparametric.html#cb352-11"></a></span>
+<span id="cb352-12"><a href="semiparametric.html#cb352-12"></a><span class="co"># 50 pairs</span></span>
+<span id="cb352-13"><a href="semiparametric.html#cb352-13"></a>beta_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>)</span>
+<span id="cb352-14"><a href="semiparametric.html#cb352-14"></a>n_pairs &lt;-<span class="st"> </span><span class="dv">50</span></span>
+<span id="cb352-15"><a href="semiparametric.html#cb352-15"></a>n_datasets &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb352-16"><a href="semiparametric.html#cb352-16"></a>p_mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">500</span>, <span class="dt">ncol =</span> <span class="kw">length</span>(beta_vec))</span>
+<span id="cb352-17"><a href="semiparametric.html#cb352-17"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(beta_vec)){</span>
+<span id="cb352-18"><a href="semiparametric.html#cb352-18"></a>  p_mat[,i] &lt;-<span class="st"> </span><span class="kw">sim.perm.B</span>(<span class="dt">n =</span> n_pairs, <span class="dt">nsim =</span> n_datasets, <span class="dt">a =</span> <span class="dv">3</span>, <span class="dt">b =</span> beta_vec[i])</span>
+<span id="cb352-19"><a href="semiparametric.html#cb352-19"></a>}</span>
+<span id="cb352-20"><a href="semiparametric.html#cb352-20"></a><span class="kw">colnames</span>(p_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;b_0&quot;</span>, <span class="st">&quot;b_0.1&quot;</span>, <span class="st">&quot;b_0.2&quot;</span>)</span>
+<span id="cb352-21"><a href="semiparametric.html#cb352-21"></a>df50 &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(p_mat)</span>
+<span id="cb352-22"><a href="semiparametric.html#cb352-22"></a></span>
+<span id="cb352-23"><a href="semiparametric.html#cb352-23"></a><span class="co"># 100 pairs</span></span>
+<span id="cb352-24"><a href="semiparametric.html#cb352-24"></a>beta_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>)</span>
+<span id="cb352-25"><a href="semiparametric.html#cb352-25"></a>n_pairs &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb352-26"><a href="semiparametric.html#cb352-26"></a>n_datasets &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb352-27"><a href="semiparametric.html#cb352-27"></a>p_mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">500</span>, <span class="dt">ncol =</span> <span class="kw">length</span>(beta_vec))</span>
+<span id="cb352-28"><a href="semiparametric.html#cb352-28"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(beta_vec)){</span>
+<span id="cb352-29"><a href="semiparametric.html#cb352-29"></a>  p_mat[,i] &lt;-<span class="st"> </span><span class="kw">sim.perm.B</span>(<span class="dt">n =</span> n_pairs, <span class="dt">nsim =</span> n_datasets, <span class="dt">a =</span> <span class="dv">3</span>, <span class="dt">b =</span> beta_vec[i])</span>
+<span id="cb352-30"><a href="semiparametric.html#cb352-30"></a>}</span>
+<span id="cb352-31"><a href="semiparametric.html#cb352-31"></a><span class="kw">colnames</span>(p_mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;b_0&quot;</span>, <span class="st">&quot;b_0.1&quot;</span>, <span class="st">&quot;b_0.2&quot;</span>)</span>
+<span id="cb352-32"><a href="semiparametric.html#cb352-32"></a>df100 &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(p_mat)</span>
+<span id="cb352-33"><a href="semiparametric.html#cb352-33"></a></span>
+<span id="cb352-34"><a href="semiparametric.html#cb352-34"></a><span class="co"># Get proportion of significant tests</span></span>
+<span id="cb352-35"><a href="semiparametric.html#cb352-35"></a><span class="kw">colMeans</span>(df10 <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>##   b_0 b_0.1 b_0.2 
 ##  0.05  0.10  0.10</code></pre>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb354-1" title="1"><span class="kw">colMeans</span>(df50 <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="semiparametric.html#cb354-1"></a><span class="kw">colMeans</span>(df50 <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>##   b_0 b_0.1 b_0.2 
 ##  0.00  0.30  0.55</code></pre>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb356-1" title="1"><span class="kw">colMeans</span>(df100 <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="semiparametric.html#cb356-1"></a><span class="kw">colMeans</span>(df100 <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>##   b_0 b_0.1 b_0.2 
 ##   0.1   0.6   1.0</code></pre>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb358-1" title="1"><span class="co"># Plot</span></a>
-<a class="sourceLine" id="cb358-2" title="2"><span class="kw">library</span>(patchwork)</a>
-<a class="sourceLine" id="cb358-3" title="3">p10 &lt;-<span class="st"> </span>df10 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb358-4" title="4"><span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> beta, <span class="dt">value =</span> p) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb358-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> beta, p)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb358-6" title="6"><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb358-7" title="7"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb358-8" title="8"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;n = 10 pairs&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb358-9" title="9"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.05</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb358-10" title="10"></a>
-<a class="sourceLine" id="cb358-11" title="11">p50 &lt;-<span class="st"> </span>df50 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb358-12" title="12"><span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> beta, <span class="dt">value =</span> p) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb358-13" title="13"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> beta, p)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb358-14" title="14"><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb358-15" title="15"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb358-16" title="16"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;n = 50 pairs&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb358-17" title="17"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.05</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb358-18" title="18"></a>
-<a class="sourceLine" id="cb358-19" title="19">p100 &lt;-<span class="st"> </span>df100 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb358-20" title="20"><span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> beta, <span class="dt">value =</span> p) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb358-21" title="21"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> beta, p)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb358-22" title="22"><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb358-23" title="23"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb358-24" title="24"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;n = 100 pairs&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb358-25" title="25"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.05</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb358-26" title="26"></a>
-<a class="sourceLine" id="cb358-27" title="27">p10 <span class="op">+</span><span class="st"> </span>p50 <span class="op">+</span><span class="st"> </span>p100</a></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="semiparametric.html#cb358-1"></a><span class="co"># Plot</span></span>
+<span id="cb358-2"><a href="semiparametric.html#cb358-2"></a><span class="kw">library</span>(patchwork)</span>
+<span id="cb358-3"><a href="semiparametric.html#cb358-3"></a>p10 &lt;-<span class="st"> </span>df10 <span class="op">%&gt;%</span></span>
+<span id="cb358-4"><a href="semiparametric.html#cb358-4"></a><span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> beta, <span class="dt">value =</span> p) <span class="op">%&gt;%</span></span>
+<span id="cb358-5"><a href="semiparametric.html#cb358-5"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> beta, p)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb358-6"><a href="semiparametric.html#cb358-6"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb358-7"><a href="semiparametric.html#cb358-7"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb358-8"><a href="semiparametric.html#cb358-8"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;n = 10 pairs&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb358-9"><a href="semiparametric.html#cb358-9"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.05</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb358-10"><a href="semiparametric.html#cb358-10"></a></span>
+<span id="cb358-11"><a href="semiparametric.html#cb358-11"></a>p50 &lt;-<span class="st"> </span>df50 <span class="op">%&gt;%</span></span>
+<span id="cb358-12"><a href="semiparametric.html#cb358-12"></a><span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> beta, <span class="dt">value =</span> p) <span class="op">%&gt;%</span></span>
+<span id="cb358-13"><a href="semiparametric.html#cb358-13"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> beta, p)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb358-14"><a href="semiparametric.html#cb358-14"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb358-15"><a href="semiparametric.html#cb358-15"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb358-16"><a href="semiparametric.html#cb358-16"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;n = 50 pairs&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb358-17"><a href="semiparametric.html#cb358-17"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.05</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb358-18"><a href="semiparametric.html#cb358-18"></a></span>
+<span id="cb358-19"><a href="semiparametric.html#cb358-19"></a>p100 &lt;-<span class="st"> </span>df100 <span class="op">%&gt;%</span></span>
+<span id="cb358-20"><a href="semiparametric.html#cb358-20"></a><span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> beta, <span class="dt">value =</span> p) <span class="op">%&gt;%</span></span>
+<span id="cb358-21"><a href="semiparametric.html#cb358-21"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> beta, p)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb358-22"><a href="semiparametric.html#cb358-22"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb358-23"><a href="semiparametric.html#cb358-23"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb358-24"><a href="semiparametric.html#cb358-24"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;n = 100 pairs&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb358-25"><a href="semiparametric.html#cb358-25"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.05</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb358-26"><a href="semiparametric.html#cb358-26"></a></span>
+<span id="cb358-27"><a href="semiparametric.html#cb358-27"></a>p10 <span class="op">+</span><span class="st"> </span>p50 <span class="op">+</span><span class="st"> </span>p100</span></code></pre></div>
 <p><img src="08_semiparametric-estimation_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 </div>
 </div>

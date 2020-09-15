@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-08-21" />
+<meta name="date" content="2020-09-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -62,9 +62,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -73,14 +73,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -89,9 +91,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -279,17 +281,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.0.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-1"><i class="fa fa-check"></i><b>9.0.1</b> Exercise set 9-1</a></li>
 <li class="chapter" data-level="9.1" data-path="parametric.html"><a href="parametric.html#parametric-estimation-using-maximum-likelihood"><i class="fa fa-check"></i><b>9.1</b> Parametric estimation using maximum likelihood</a><ul>
 <li class="chapter" data-level="9.1.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-2"><i class="fa fa-check"></i><b>9.1.1</b> Exercise set 9-2</a></li>
-<li class="chapter" data-level="9.1.2" data-path="parametric.html"><a href="parametric.html#exercise-set-9-3"><i class="fa fa-check"></i><b>9.1.2</b> Exercise set 9-3</a></li>
+<li class="chapter" data-level="9.1.2" data-path="parametric.html"><a href="parametric.html#maximum-likelihood-estimation-for-simple-linear-regression"><i class="fa fa-check"></i><b>9.1.2</b> Maximum-likelihood estimation for simple linear regression</a></li>
+<li class="chapter" data-level="9.1.3" data-path="parametric.html"><a href="parametric.html#exercise-set-9-3"><i class="fa fa-check"></i><b>9.1.3</b> Exercise set 9-3</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="parametric.html"><a href="parametric.html#parametric-interval-estimation-the-direct-approach-and-fisher-information"><i class="fa fa-check"></i><b>9.2</b> Parametric interval estimation: the direct approach and Fisher information</a><ul>
 <li class="chapter" data-level="9.2.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-4"><i class="fa fa-check"></i><b>9.2.1</b> Exercise set 9-4</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="parametric.html"><a href="parametric.html#parametric-hypothesis-testing-using-the-wald-test"><i class="fa fa-check"></i><b>9.3</b> Parametric hypothesis testing using the Wald test</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-5"><i class="fa fa-check"></i><b>9.3.1</b> Exercise set 9-5</a></li>
+<li class="chapter" data-level="9.3.1" data-path="parametric.html"><a href="parametric.html#wald-test"><i class="fa fa-check"></i><b>9.3.1</b> Wald test</a></li>
+<li class="chapter" data-level="9.3.2" data-path="parametric.html"><a href="parametric.html#exercise-set-9-5"><i class="fa fa-check"></i><b>9.3.2</b> Exercise set 9-5</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="parametric.html"><a href="parametric.html#parametric-hypothesis-testing-using-the-likelihood-ratio-test"><i class="fa fa-check"></i><b>9.4</b> Parametric hypothesis testing using the likelihood-ratio test</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-6"><i class="fa fa-check"></i><b>9.4.1</b> Exercise set 9-6</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>10</b> Bayesian estimation and inference</a><ul>
+<li class="chapter" data-level="10.1" data-path="bayesian.html"><a href="bayesian.html#how-to-choose-a-prior-distribution"><i class="fa fa-check"></i><b>10.1</b> How to choose a prior distribution?</a></li>
+<li class="chapter" data-level="10.2" data-path="bayesian.html"><a href="bayesian.html#the-unscaled-posterior-conjugacy-and-sampling-from-the-posterior"><i class="fa fa-check"></i><b>10.2</b> The unscaled posterior, conjugacy, and sampling from the posterior</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="bayesian.html"><a href="bayesian.html#rejection-sampling-algorithm"><i class="fa fa-check"></i><b>10.2.1</b> Rejection sampling algorithm</a></li>
+<li class="chapter" data-level="10.2.2" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-1"><i class="fa fa-check"></i><b>10.2.2</b> Exercise set 10-1</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="bayesian.html"><a href="bayesian.html#bayesian-point-estimation-using-bayes-estimators"><i class="fa fa-check"></i><b>10.3</b> Bayesian point estimation using Bayes estimators</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-2"><i class="fa fa-check"></i><b>10.3.1</b> Exercise set 10-2</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="bayesian.html"><a href="bayesian.html#bayesian-interval-estimation-using-credible-intervals"><i class="fa fa-check"></i><b>10.4</b> Bayesian interval estimation using credible intervals</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-3"><i class="fa fa-check"></i><b>10.4.1</b> Exercise set 10-3</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="bayesian.html"><a href="bayesian.html#bayesian-hypothesis-testing-using-bayes-factors"><i class="fa fa-check"></i><b>10.5</b> Bayesian ‘hypothesis testing’ using Bayes factors</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-4"><i class="fa fa-check"></i><b>10.5.1</b> Exercise set 10-4</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="bayesian.html"><a href="bayesian.html#conclusion-bayesian-vs.-frequentist-methods"><i class="fa fa-check"></i><b>10.6</b> Conclusion: Bayesian vs. frequentist methods</a></li>
+<li class="chapter" data-level="10.7" data-path="bayesian.html"><a href="bayesian.html#chapter-summary-2"><i class="fa fa-check"></i><b>10.7</b> Chapter summary</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -319,21 +341,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Calculate least-squares intercept <em>a</em> and least-squares slope <em>b</em> for the <code>anscombe</code> data.</li>
 </ol>
 <p>I will use equations 3.8 and 3.9.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">x &lt;-<span class="st"> </span>anscombe<span class="op">$</span>x1</a>
-<a class="sourceLine" id="cb47-2" title="2">y &lt;-<span class="st"> </span>anscombe<span class="op">$</span>y1</a>
-<a class="sourceLine" id="cb47-3" title="3"></a>
-<a class="sourceLine" id="cb47-4" title="4">xbar &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</a>
-<a class="sourceLine" id="cb47-5" title="5">ybar &lt;-<span class="st"> </span><span class="kw">mean</span>(y)</a>
-<a class="sourceLine" id="cb47-6" title="6"></a>
-<a class="sourceLine" id="cb47-7" title="7">b &lt;-<span class="st"> </span><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span>xbar)<span class="op">*</span>(y <span class="op">-</span><span class="st"> </span>ybar)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span>xbar)<span class="op">^</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb47-8" title="8">b</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="best-fit-line.html#cb47-1"></a>x &lt;-<span class="st"> </span>anscombe<span class="op">$</span>x1</span>
+<span id="cb47-2"><a href="best-fit-line.html#cb47-2"></a>y &lt;-<span class="st"> </span>anscombe<span class="op">$</span>y1</span>
+<span id="cb47-3"><a href="best-fit-line.html#cb47-3"></a></span>
+<span id="cb47-4"><a href="best-fit-line.html#cb47-4"></a>xbar &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</span>
+<span id="cb47-5"><a href="best-fit-line.html#cb47-5"></a>ybar &lt;-<span class="st"> </span><span class="kw">mean</span>(y)</span>
+<span id="cb47-6"><a href="best-fit-line.html#cb47-6"></a></span>
+<span id="cb47-7"><a href="best-fit-line.html#cb47-7"></a>b &lt;-<span class="st"> </span><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span>xbar)<span class="op">*</span>(y <span class="op">-</span><span class="st"> </span>ybar)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span>xbar)<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb47-8"><a href="best-fit-line.html#cb47-8"></a>b</span></code></pre></div>
 <pre><code>## [1] 0.5000909</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1">a &lt;-<span class="st"> </span>ybar <span class="op">-</span><span class="st"> </span>b<span class="op">*</span>xbar</a>
-<a class="sourceLine" id="cb49-2" title="2">a</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="best-fit-line.html#cb49-1"></a>a &lt;-<span class="st"> </span>ybar <span class="op">-</span><span class="st"> </span>b<span class="op">*</span>xbar</span>
+<span id="cb49-2"><a href="best-fit-line.html#cb49-2"></a>a</span></code></pre></div>
 <pre><code>## [1] 3.000091</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="co"># Check using lm</span></a>
-<a class="sourceLine" id="cb51-2" title="2">m1 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</a>
-<a class="sourceLine" id="cb51-3" title="3"><span class="kw">summary</span>(m1)</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="best-fit-line.html#cb51-1"></a><span class="co"># Check using lm</span></span>
+<span id="cb51-2"><a href="best-fit-line.html#cb51-2"></a>m1 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</span>
+<span id="cb51-3"><a href="best-fit-line.html#cb51-3"></a><span class="kw">summary</span>(m1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x)
@@ -361,26 +383,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>On paper</p></li>
 <li><p>Comparing L1 and L2 lines.</p></li>
 </ol>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="kw">library</span>(quantreg)</a>
-<a class="sourceLine" id="cb53-2" title="2">x &lt;-<span class="st"> </span>anscombe<span class="op">$</span>x1</a>
-<a class="sourceLine" id="cb53-3" title="3">y &lt;-<span class="st"> </span>anscombe<span class="op">$</span>y1</a>
-<a class="sourceLine" id="cb53-4" title="4"></a>
-<a class="sourceLine" id="cb53-5" title="5">mL1 &lt;-<span class="st"> </span><span class="kw">rq</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">tau =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb53-6" title="6">mL2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</a>
-<a class="sourceLine" id="cb53-7" title="7"></a>
-<a class="sourceLine" id="cb53-8" title="8"><span class="kw">plot</span>(x, y)</a>
-<a class="sourceLine" id="cb53-9" title="9"><span class="kw">abline</span>(mL2, <span class="dt">lty =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb53-10" title="10"><span class="kw">abline</span>(mL1, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb53-11" title="11"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;L2&quot;</span>, <span class="st">&quot;L1&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="best-fit-line.html#cb53-1"></a><span class="kw">library</span>(quantreg)</span>
+<span id="cb53-2"><a href="best-fit-line.html#cb53-2"></a>x &lt;-<span class="st"> </span>anscombe<span class="op">$</span>x1</span>
+<span id="cb53-3"><a href="best-fit-line.html#cb53-3"></a>y &lt;-<span class="st"> </span>anscombe<span class="op">$</span>y1</span>
+<span id="cb53-4"><a href="best-fit-line.html#cb53-4"></a></span>
+<span id="cb53-5"><a href="best-fit-line.html#cb53-5"></a>mL1 &lt;-<span class="st"> </span><span class="kw">rq</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">tau =</span> <span class="fl">0.5</span>)</span>
+<span id="cb53-6"><a href="best-fit-line.html#cb53-6"></a>mL2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</span>
+<span id="cb53-7"><a href="best-fit-line.html#cb53-7"></a></span>
+<span id="cb53-8"><a href="best-fit-line.html#cb53-8"></a><span class="kw">plot</span>(x, y)</span>
+<span id="cb53-9"><a href="best-fit-line.html#cb53-9"></a><span class="kw">abline</span>(mL2, <span class="dt">lty =</span> <span class="dv">1</span>)</span>
+<span id="cb53-10"><a href="best-fit-line.html#cb53-10"></a><span class="kw">abline</span>(mL1, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb53-11"><a href="best-fit-line.html#cb53-11"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;L2&quot;</span>, <span class="st">&quot;L1&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span></code></pre></div>
 <p><img src="03_best-fit-line_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Dataset with outlier.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1">mL1 &lt;-<span class="st"> </span><span class="kw">rq</span>(y3 <span class="op">~</span><span class="st"> </span>x3, <span class="dt">tau =</span> <span class="fl">0.5</span>, <span class="dt">data =</span> anscombe)</a>
-<a class="sourceLine" id="cb54-2" title="2">mL2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y3 <span class="op">~</span><span class="st"> </span>x3, <span class="dt">data =</span> anscombe)</a>
-<a class="sourceLine" id="cb54-3" title="3"></a>
-<a class="sourceLine" id="cb54-4" title="4"><span class="kw">plot</span>(y3 <span class="op">~</span><span class="st"> </span>x3, <span class="dt">data =</span> anscombe)</a>
-<a class="sourceLine" id="cb54-5" title="5"><span class="kw">abline</span>(mL2, <span class="dt">lty =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb54-6" title="6"><span class="kw">abline</span>(mL1, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb54-7" title="7"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;L2&quot;</span>, <span class="st">&quot;L1&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="best-fit-line.html#cb54-1"></a>mL1 &lt;-<span class="st"> </span><span class="kw">rq</span>(y3 <span class="op">~</span><span class="st"> </span>x3, <span class="dt">tau =</span> <span class="fl">0.5</span>, <span class="dt">data =</span> anscombe)</span>
+<span id="cb54-2"><a href="best-fit-line.html#cb54-2"></a>mL2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y3 <span class="op">~</span><span class="st"> </span>x3, <span class="dt">data =</span> anscombe)</span>
+<span id="cb54-3"><a href="best-fit-line.html#cb54-3"></a></span>
+<span id="cb54-4"><a href="best-fit-line.html#cb54-4"></a><span class="kw">plot</span>(y3 <span class="op">~</span><span class="st"> </span>x3, <span class="dt">data =</span> anscombe)</span>
+<span id="cb54-5"><a href="best-fit-line.html#cb54-5"></a><span class="kw">abline</span>(mL2, <span class="dt">lty =</span> <span class="dv">1</span>)</span>
+<span id="cb54-6"><a href="best-fit-line.html#cb54-6"></a><span class="kw">abline</span>(mL1, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb54-7"><a href="best-fit-line.html#cb54-7"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;L2&quot;</span>, <span class="st">&quot;L1&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span></code></pre></div>
 <p><img src="03_best-fit-line_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 
 </div>
