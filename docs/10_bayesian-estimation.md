@@ -247,7 +247,7 @@ a. Fit model using maximum likelihood:
 
 
 ```r
-library(arm)
+#library(arm)
 x <- anscombe$x1
 y <- anscombe$y1
 lm1 <- lm(y ~ x)
@@ -284,6 +284,7 @@ B0: prior precision of Beta
 ```r
 b0 <- c(0, 0)
 reg1 <- MCMCregress(y ~ x, b0 = b0, B0 = 0.0001)
+
 res1 <- summary(reg1)$statistics[,1:2] %>% 
   as_tibble(rownames = "parameter") %>%
   mutate(precision = 0.0001)
@@ -381,9 +382,15 @@ When the precision on the prior estimates of the intercept and slope is very hig
 
 ### Exercise set 10-3
 
+1. Compute 95% credible intervals for all models in exercise 10-2-1. 
+
+Skipped; see Edge for solution. 
+
 ## Bayesian 'hypothesis testing' using Bayes factors
 
 ### Exercise set 10-4
+
+1. Skipped; not relevant to my interests. 
 
 ## Conclusion: Bayesian vs. frequentist methods
 
