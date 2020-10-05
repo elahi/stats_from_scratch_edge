@@ -1,0 +1,178 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, cache = TRUE)
+```
+
+```{r load-packages, include = FALSE}
+library(tidyverse)
+library(stfspack)
+theme_set(theme_bw(base_size = 12) + 
+            theme(strip.background = element_blank(), 
+                  panel.grid = element_blank())) 
+```
+
+# Postlude: models and data {#postlude}
+
+## Post.1 Evaluating assumptions
+
+Fitting the models: 
+
+```{r}
+anscombe
+mod1 <- lm(anscombe$y1 ~ anscombe$x1)
+mod2 <- lm(anscombe$y2 ~ anscombe$x2)
+mod3 <- lm(anscombe$y3 ~ anscombe$x3)
+mod4 <- lm(anscombe$y4 ~ anscombe$x4)
+
+summary(mod1)
+summary(mod2)
+summary(mod3)
+summary(mod4)
+```
+
+Plotting the quartet:
+
+```{r}
+x <- anscombe %>% 
+  select(x1:x4) %>%
+  gather(key = datx, value = x, x1:x4)
+y <- anscombe %>% 
+  select(y1:y4) %>%
+  gather(key = daty, value = y, y1:y4)
+d <- cbind(x, y)
+
+d %>% 
+  ggplot(aes(x = x, y = y)) + 
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(~ datx)
+```
+
+### Exercise set Postlude-1
+
+1. Plotting the assumptions from the `lm` models:
+
+```{r}
+par(mfrow = c(2,2))
+plot(mod1)
+plot(mod2)
+plot(mod3)
+plot(mod4)
+```
+
+### Exercise set Postlude-2
+
+1. Applying `gvlma` to the `lm` models:
+
+```{r}
+library(gvlma)
+gvlma(mod1)
+gvlma(mod2)
+gvlma(mod3)
+gvlma(mod4)
+```
+
+## Post.2 Some extensions of simple linear regression
+
+### Multiple regression
+
+### Exercise set Postlude-3
+
+1. 
+
+a. First, a multiple regression of mpg vs transmission (0 = automatic; 1 = manual)
+
+```{r}
+m1 <- lm(mpg ~ am + hp, data = mtcars)
+```
+
+b. Next, we extract the residuals after fitting two models:
+
+  - transmission ~ horsepower
+  - mpg ~ horsepower
+  
+And then fit a model of the residuals:
+
+```{r}
+resid.am.hp <- lm(am ~ hp, data = mtcars)$residuals
+resid.mpg.hp <- lm(mpg ~ hp, data = mtcars)$residuals
+m2 <- lm(resid.mpg.hp ~ resid.am.hp)
+```
+
+Now compare the coefficient for transmission type:
+
+```{r}
+summary(m1)$coefficients
+summary(m2)$coefficients
+```
+
+Plot the variables:
+
+```{r}
+par(mfrow = c(2,2))
+plot(mpg ~ am, data = mtcars)
+plot(mpg ~ hp, data = mtcars)
+plot(am ~ hp, data = mtcars)
+plot(resid.mpg.hp ~ resid.am.hp)
+```
+
+c. To get the estimated slope of horsepower using only simple linear regression:
+
+```{r}
+resid.hp.am <- lm(hp ~ am, data = mtcars)$residuals
+resid.mpg.am <- lm(mpg ~ am, data = mtcars)$residuals
+m3 <- lm(resid.mpg.am ~ resid.hp.am)
+```
+
+Now compare the coefficient for transmission type:
+
+```{r}
+summary(m1)$coefficients
+summary(m3)$coefficients
+```
+
+d. 
+
+```{r}
+mean(mtcars$mpg) - (mean(mtcars$am) * 5.277) - (mean(mtcars$hp) * -0.0588)
+```
+
+2. Comparing `lm` with other tests
+
+a. T-test
+```{r}
+t.test(mtcars$mpg ~ mtcars$am, var.equal = TRUE)
+mod <- lm(mtcars$mpg ~ mtcars$am)
+summary(mod)
+```
+
+b. Correlation
+```{r}
+cor.test(anscombe$x1, anscombe$y1)
+mod1 <- lm(anscombe$y1 ~ anscombe$x1)
+summary(mod1)
+```
+
+c. ANOVA
+```{r}
+anova.fit <- aov(weight ~ group, data = PlantGrowth)
+summary(anova.fit)
+lm.fit <- lm(weight ~ group, data = PlantGrowth)
+summary(lm.fit)
+```
+
+### Generalized linear models
+
+### Exercise set Postlude-4
+
+### Mixed models
+
+### Exercise set Postlude-5
+
+## Post.3 Conclusion
+
