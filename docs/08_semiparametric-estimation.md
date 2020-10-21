@@ -527,7 +527,7 @@ boot.samp
 ##     boot.inds <- sample(1:n, replace = TRUE)
 ##     x[boot.inds, ]
 ## }
-## <bytecode: 0x7f8cb5b64ca8>
+## <bytecode: 0x7fb72b0bd6f8>
 ## <environment: namespace:stfspack>
 ```
 
@@ -542,7 +542,7 @@ beta.mm
 ##     (sum(x * y) - (1/n) * sum(x) * sum(y))/(sum(x^2) - (1/n) * 
 ##         sum(x)^2)
 ## }
-## <bytecode: 0x7f8cb5bbec00>
+## <bytecode: 0x7fb72cc78a50>
 ## <environment: namespace:stfspack>
 ```
 

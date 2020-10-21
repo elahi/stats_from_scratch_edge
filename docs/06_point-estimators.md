@@ -349,7 +349,7 @@ rnorm.contam
 ##     c(rnorm(n - ncontam, mu, sigma), rnorm(ncontam, contam.mu, 
 ##         contam.sigma))
 ## }
-## <bytecode: 0x7fb67200c120>
+## <bytecode: 0x7fc17c215610>
 ## <environment: namespace:stfspack>
 ```
 
@@ -418,7 +418,7 @@ sim.lm
 ##     y <- a + b * x + disturbs
 ##     cbind(x, y)
 ## }
-## <bytecode: 0x7fb66bfd7cb0>
+## <bytecode: 0x7fc174eba020>
 ## <environment: namespace:stfspack>
 ```
 
@@ -721,7 +721,7 @@ sim.2var
 ##     ymat <- matrix(y, nrow = nsim)
 ##     list(xmat, ymat)
 ## }
-## <bytecode: 0x7fb66dcff6c8>
+## <bytecode: 0x7fc174eb7530>
 ## <environment: namespace:stfspack>
 ```
 

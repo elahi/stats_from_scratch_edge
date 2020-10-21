@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Bayesian estimation and inference | Notes on Statistical Thinking from Scratch</title>
   <meta name="description" content="Cliff notes for Statistical Thinking from Scratch, by Doc Edge." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Bayesian estimation and inference | Notes on Statistical Thinking from Scratch" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Robin Elahi" />
 
 
-<meta name="date" content="2020-09-14" />
+<meta name="date" content="2020-10-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="parametric.html"/>
-
+<link rel="next" href="postlude.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121894527-4"></script>
 <script>
@@ -200,7 +199,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3.2" data-path="randomvars.html"><a href="randomvars.html#marginal-distributions"><i class="fa fa-check"></i><b>5.3.2</b> Marginal distributions</a></li>
 <li class="chapter" data-level="5.3.3" data-path="randomvars.html"><a href="randomvars.html#covariance"><i class="fa fa-check"></i><b>5.3.3</b> Covariance</a></li>
 <li class="chapter" data-level="5.3.4" data-path="randomvars.html"><a href="randomvars.html#correlation"><i class="fa fa-check"></i><b>5.3.4</b> Correlation</a></li>
-<li class="chapter" data-level="5.3.5" data-path="probability.html"><a href="probability.html#additional-exercise"><i class="fa fa-check"></i><b>5.3.5</b> Additional exercise</a></li>
+<li class="chapter" data-level="5.3.5" data-path="randomvars.html"><a href="randomvars.html#additional-exercise-1"><i class="fa fa-check"></i><b>5.3.5</b> Additional exercise</a></li>
 <li class="chapter" data-level="5.3.6" data-path="randomvars.html"><a href="randomvars.html#exercise-set-5-3"><i class="fa fa-check"></i><b>5.3.6</b> Exercise set 5-3</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="randomvars.html"><a href="randomvars.html#conditional-distribution-expectation-variance"><i class="fa fa-check"></i><b>5.4</b> Conditional distribution, expectation, variance</a></li>
@@ -276,7 +275,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3" data-path="semiparametric.html"><a href="semiparametric.html#semiparametric-hypothesis-testing-using-permutation-tests"><i class="fa fa-check"></i><b>8.3</b> Semiparametric hypothesis testing using permutation tests</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="semiparametric.html"><a href="semiparametric.html#exercise-set-8-5"><i class="fa fa-check"></i><b>8.3.1</b> Exercise set 8-5</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="intervals.html"><a href="intervals.html#chapter-summary"><i class="fa fa-check"></i><b>8.4</b> Chapter summary</a></li>
+<li class="chapter" data-level="8.4" data-path="semiparametric.html"><a href="semiparametric.html#chapter-summary-1"><i class="fa fa-check"></i><b>8.4</b> Chapter summary</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="parametric.html"><a href="parametric.html"><i class="fa fa-check"></i><b>9</b> Parametric estimation and inference</a><ul>
 <li class="chapter" data-level="9.0.1" data-path="parametric.html"><a href="parametric.html#exercise-set-9-1"><i class="fa fa-check"></i><b>9.0.1</b> Exercise set 9-1</a></li>
@@ -312,7 +311,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5.1" data-path="bayesian.html"><a href="bayesian.html#exercise-set-10-4"><i class="fa fa-check"></i><b>10.5.1</b> Exercise set 10-4</a></li>
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="bayesian.html"><a href="bayesian.html#conclusion-bayesian-vs.-frequentist-methods"><i class="fa fa-check"></i><b>10.6</b> Conclusion: Bayesian vs. frequentist methods</a></li>
-<li class="chapter" data-level="10.7" data-path="intervals.html"><a href="intervals.html#chapter-summary"><i class="fa fa-check"></i><b>10.7</b> Chapter summary</a></li>
+<li class="chapter" data-level="10.7" data-path="bayesian.html"><a href="bayesian.html#chapter-summary-2"><i class="fa fa-check"></i><b>10.7</b> Chapter summary</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="postlude.html"><a href="postlude.html"><i class="fa fa-check"></i><b>11</b> Postlude: models and data</a><ul>
+<li class="chapter" data-level="11.1" data-path="postlude.html"><a href="postlude.html#post.1-evaluating-assumptions"><i class="fa fa-check"></i><b>11.1</b> Post.1 Evaluating assumptions</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="postlude.html"><a href="postlude.html#exercise-set-postlude-1"><i class="fa fa-check"></i><b>11.1.1</b> Exercise set Postlude-1</a></li>
+<li class="chapter" data-level="11.1.2" data-path="postlude.html"><a href="postlude.html#exercise-set-postlude-2"><i class="fa fa-check"></i><b>11.1.2</b> Exercise set Postlude-2</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="postlude.html"><a href="postlude.html#post.2-some-extensions-of-simple-linear-regression"><i class="fa fa-check"></i><b>11.2</b> Post.2 Some extensions of simple linear regression</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="postlude.html"><a href="postlude.html#multiple-regression"><i class="fa fa-check"></i><b>11.2.1</b> Multiple regression</a></li>
+<li class="chapter" data-level="11.2.2" data-path="postlude.html"><a href="postlude.html#exercise-set-postlude-3"><i class="fa fa-check"></i><b>11.2.2</b> Exercise set Postlude-3</a></li>
+<li class="chapter" data-level="11.2.3" data-path="postlude.html"><a href="postlude.html#generalized-linear-models"><i class="fa fa-check"></i><b>11.2.3</b> Generalized linear models</a></li>
+<li class="chapter" data-level="11.2.4" data-path="postlude.html"><a href="postlude.html#exercise-set-postlude-4"><i class="fa fa-check"></i><b>11.2.4</b> Exercise set Postlude-4</a></li>
+<li class="chapter" data-level="11.2.5" data-path="postlude.html"><a href="postlude.html#mixed-models"><i class="fa fa-check"></i><b>11.2.5</b> Mixed models</a></li>
+<li class="chapter" data-level="11.2.6" data-path="postlude.html"><a href="postlude.html#exercise-set-postlude-5"><i class="fa fa-check"></i><b>11.2.6</b> Exercise set Postlude-5</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="postlude.html"><a href="postlude.html#post.3-conclusion"><i class="fa fa-check"></i><b>11.3</b> Post.3 Conclusion</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -388,36 +402,36 @@ m =&amp; ~ \frac{f_D(d|\theta^*) ~ f_{\theta}(\theta^*)} {f_{\theta}(\theta^*)} 
 <ol style="list-style-type: decimal">
 <li></li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="bayesian.html#cb1-1"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb1-2"><a href="bayesian.html#cb1-2"></a>true.mean &lt;-<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb1-3"><a href="bayesian.html#cb1-3"></a>known.sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb1-4"><a href="bayesian.html#cb1-4"></a>prior.mean &lt;-<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb1-5"><a href="bayesian.html#cb1-5"></a>prior.sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb1-6"><a href="bayesian.html#cb1-6"></a><span class="kw">set.seed</span>(<span class="dv">8675309</span>)</span>
-<span id="cb1-7"><a href="bayesian.html#cb1-7"></a>z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n,true.mean,known.sd)</span>
-<span id="cb1-8"><a href="bayesian.html#cb1-8"></a><span class="kw">mean</span>(z)</span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="bayesian.html#cb405-1"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb405-2"><a href="bayesian.html#cb405-2"></a>true.mean &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb405-3"><a href="bayesian.html#cb405-3"></a>known.sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb405-4"><a href="bayesian.html#cb405-4"></a>prior.mean &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb405-5"><a href="bayesian.html#cb405-5"></a>prior.sd &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb405-6"><a href="bayesian.html#cb405-6"></a><span class="kw">set.seed</span>(<span class="dv">8675309</span>)</span>
+<span id="cb405-7"><a href="bayesian.html#cb405-7"></a>z &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n,true.mean,known.sd)</span>
+<span id="cb405-8"><a href="bayesian.html#cb405-8"></a><span class="kw">mean</span>(z)</span></code></pre></div>
 <pre><code>## [1] 2.149314</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="bayesian.html#cb3-1"></a><span class="kw">hist</span>(z)</span></code></pre></div>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="bayesian.html#cb407-1"></a><span class="kw">hist</span>(z)</span></code></pre></div>
 <p><img src="10_bayesian-estimation_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <ol style="list-style-type: lower-alpha">
 <li>Edge’s function uses equations 10.4 and 10.5 to calculate the mean and variance of the posterior distribution, which we know is normal due to conjugacy (Normal prior <span class="math inline">\(\times\)</span> Normal likelihood = Normal posterior):</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="bayesian.html#cb4-1"></a>post.conj.norm.norm &lt;-<span class="st"> </span><span class="cf">function</span>(z, known.sd, prior.mean, prior.sd){</span>
-<span id="cb4-2"><a href="bayesian.html#cb4-2"></a>  xbar &lt;-<span class="st"> </span><span class="kw">mean</span>(z)</span>
-<span id="cb4-3"><a href="bayesian.html#cb4-3"></a>  post.expec &lt;-<span class="st"> </span>(prior.mean <span class="op">/</span><span class="st"> </span>prior.sd<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>xbar<span class="op">*</span><span class="kw">length</span>(z) <span class="op">/</span></span>
-<span id="cb4-4"><a href="bayesian.html#cb4-4"></a><span class="st">        </span>known.sd<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(<span class="dv">1</span> <span class="op">/</span><span class="st">   </span>prior.sd<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">length</span>(z) <span class="op">/</span><span class="st"> </span>known.sd<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb4-5"><a href="bayesian.html#cb4-5"></a>  post.var &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">/</span><span class="st">   </span>prior.sd<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">length</span>(z) <span class="op">/</span><span class="st"> </span>known.sd<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb4-6"><a href="bayesian.html#cb4-6"></a>  <span class="kw">list</span>(<span class="st">&quot;posterior.expectation&quot;</span> =<span class="st"> </span>post.expec,</span>
-<span id="cb4-7"><a href="bayesian.html#cb4-7"></a><span class="st">&quot;posterior.variance&quot;</span> =<span class="st"> </span>post.var)</span>
-<span id="cb4-8"><a href="bayesian.html#cb4-8"></a>}</span>
-<span id="cb4-9"><a href="bayesian.html#cb4-9"></a></span>
-<span id="cb4-10"><a href="bayesian.html#cb4-10"></a>post_conjugate &lt;-<span class="st"> </span><span class="kw">post.conj.norm.norm</span>(z, known.sd, prior.mean, prior.sd)</span></code></pre></div>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="bayesian.html#cb408-1"></a>post.conj.norm.norm &lt;-<span class="st"> </span><span class="cf">function</span>(z, known.sd, prior.mean, prior.sd){</span>
+<span id="cb408-2"><a href="bayesian.html#cb408-2"></a>  xbar &lt;-<span class="st"> </span><span class="kw">mean</span>(z)</span>
+<span id="cb408-3"><a href="bayesian.html#cb408-3"></a>  post.expec &lt;-<span class="st"> </span>(prior.mean <span class="op">/</span><span class="st"> </span>prior.sd<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>xbar<span class="op">*</span><span class="kw">length</span>(z) <span class="op">/</span></span>
+<span id="cb408-4"><a href="bayesian.html#cb408-4"></a><span class="st">        </span>known.sd<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(<span class="dv">1</span> <span class="op">/</span><span class="st">   </span>prior.sd<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">length</span>(z) <span class="op">/</span><span class="st"> </span>known.sd<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb408-5"><a href="bayesian.html#cb408-5"></a>  post.var &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">/</span><span class="st">   </span>prior.sd<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">length</span>(z) <span class="op">/</span><span class="st"> </span>known.sd<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb408-6"><a href="bayesian.html#cb408-6"></a>  <span class="kw">list</span>(<span class="st">&quot;posterior.expectation&quot;</span> =<span class="st"> </span>post.expec,</span>
+<span id="cb408-7"><a href="bayesian.html#cb408-7"></a><span class="st">&quot;posterior.variance&quot;</span> =<span class="st"> </span>post.var)</span>
+<span id="cb408-8"><a href="bayesian.html#cb408-8"></a>}</span>
+<span id="cb408-9"><a href="bayesian.html#cb408-9"></a></span>
+<span id="cb408-10"><a href="bayesian.html#cb408-10"></a>post_conjugate &lt;-<span class="st"> </span><span class="kw">post.conj.norm.norm</span>(z, known.sd, prior.mean, prior.sd)</span></code></pre></div>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Using MCMC</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="bayesian.html#cb5-1"></a><span class="kw">library</span>(MCMCpack)</span>
-<span id="cb5-2"><a href="bayesian.html#cb5-2"></a>mn.mod &lt;-<span class="st"> </span><span class="kw">MCnormalnormal</span>(z, <span class="dt">sigma2 =</span> <span class="dv">1</span>, <span class="dt">mu0 =</span> prior.mean, <span class="dt">tau20 =</span> prior.sd<span class="op">^</span><span class="dv">2</span>, <span class="dt">mc =</span> <span class="dv">10000</span>)</span>
-<span id="cb5-3"><a href="bayesian.html#cb5-3"></a><span class="kw">summary</span>(mn.mod) </span></code></pre></div>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="bayesian.html#cb409-1"></a><span class="kw">library</span>(MCMCpack)</span>
+<span id="cb409-2"><a href="bayesian.html#cb409-2"></a>mn.mod &lt;-<span class="st"> </span><span class="kw">MCnormalnormal</span>(z, <span class="dt">sigma2 =</span> <span class="dv">1</span>, <span class="dt">mu0 =</span> prior.mean, <span class="dt">tau20 =</span> prior.sd<span class="op">^</span><span class="dv">2</span>, <span class="dt">mc =</span> <span class="dv">10000</span>)</span>
+<span id="cb409-3"><a href="bayesian.html#cb409-3"></a><span class="kw">summary</span>(mn.mod) </span></code></pre></div>
 <pre><code>## 
 ## Iterations = 1:10000
 ## Thinning interval = 1 
@@ -435,10 +449,10 @@ m =&amp; ~ \frac{f_D(d|\theta^*) ~ f_{\theta}(\theta^*)} {f_{\theta}(\theta^*)} 
 ##  2.5%   25%   50%   75% 97.5% 
 ## 1.614 1.897 2.045 2.194 2.476</code></pre>
 <p>Let’s plot the MCMC results in a histogram, and overlaid with a normal distribution from the conjugate expression.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="bayesian.html#cb7-1"></a><span class="kw">hist</span>(mn.mod, <span class="dt">freq =</span> <span class="ot">FALSE</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span>
-<span id="cb7-2"><a href="bayesian.html#cb7-2"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dt">length=</span><span class="dv">100</span>)</span>
-<span id="cb7-3"><a href="bayesian.html#cb7-3"></a>hx &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> post_conjugate<span class="op">$</span>posterior.expectation, <span class="dt">sd =</span> <span class="kw">sqrt</span>(post_conjugate<span class="op">$</span>posterior.variance))</span>
-<span id="cb7-4"><a href="bayesian.html#cb7-4"></a><span class="kw">lines</span>(x, hx, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="bayesian.html#cb411-1"></a><span class="kw">hist</span>(mn.mod, <span class="dt">freq =</span> <span class="ot">FALSE</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb411-2"><a href="bayesian.html#cb411-2"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dt">length=</span><span class="dv">100</span>)</span>
+<span id="cb411-3"><a href="bayesian.html#cb411-3"></a>hx &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> post_conjugate<span class="op">$</span>posterior.expectation, <span class="dt">sd =</span> <span class="kw">sqrt</span>(post_conjugate<span class="op">$</span>posterior.variance))</span>
+<span id="cb411-4"><a href="bayesian.html#cb411-4"></a><span class="kw">lines</span>(x, hx, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="10_bayesian-estimation_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li></li>
@@ -457,60 +471,60 @@ m =&amp; ~ \frac{L(\theta^* | d)} {\text{argmax} ~ L(\theta | d)} \\
 \end{aligned}
 \]</span>
 d. Edge’s R function for rejection sampling</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="bayesian.html#cb8-1"></a><span class="co">#Get 1 sample under rejection sampling from normal with known sd.</span></span>
-<span id="cb8-2"><a href="bayesian.html#cb8-2"></a><span class="co">#z is a vector of data.</span></span>
-<span id="cb8-3"><a href="bayesian.html#cb8-3"></a>get.<span class="fl">1.</span>samp.norm &lt;-<span class="st"> </span><span class="cf">function</span>(z, <span class="dt">known.sd =</span> <span class="dv">1</span>, <span class="dt">prior.mean =</span> <span class="dv">0</span>, <span class="dt">prior.sd =</span> <span class="dv">1</span>){</span>
-<span id="cb8-4"><a href="bayesian.html#cb8-4"></a>  accepted &lt;-<span class="st"> </span><span class="ot">FALSE</span></span>
-<span id="cb8-5"><a href="bayesian.html#cb8-5"></a>  max.like &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">dnorm</span>(z, <span class="dt">mean =</span> <span class="kw">mean</span>(z), <span class="dt">sd =</span> known.sd)))) </span>
-<span id="cb8-6"><a href="bayesian.html#cb8-6"></a>  <span class="cf">while</span>(accepted <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>){</span>
-<span id="cb8-7"><a href="bayesian.html#cb8-7"></a>    cand &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, prior.mean, prior.sd)</span>
-<span id="cb8-8"><a href="bayesian.html#cb8-8"></a>    like &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">dnorm</span>(z, <span class="dt">mean =</span> cand, <span class="dt">sd =</span> known.sd)))) </span>
-<span id="cb8-9"><a href="bayesian.html#cb8-9"></a>    crit &lt;-<span class="st"> </span>like <span class="op">/</span><span class="st"> </span>max.like</span>
-<span id="cb8-10"><a href="bayesian.html#cb8-10"></a>    xunif &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
-<span id="cb8-11"><a href="bayesian.html#cb8-11"></a>    <span class="cf">if</span>(xunif <span class="op">&lt;=</span><span class="st"> </span>crit){accepted &lt;-<span class="st"> </span><span class="ot">TRUE</span>}</span>
-<span id="cb8-12"><a href="bayesian.html#cb8-12"></a>  }</span>
-<span id="cb8-13"><a href="bayesian.html#cb8-13"></a>  cand</span>
-<span id="cb8-14"><a href="bayesian.html#cb8-14"></a>}</span>
-<span id="cb8-15"><a href="bayesian.html#cb8-15"></a></span>
-<span id="cb8-16"><a href="bayesian.html#cb8-16"></a><span class="co"># Wrapper for get.1.samp.norm() that gets rejection sample from posterior of desired size.</span></span>
-<span id="cb8-17"><a href="bayesian.html#cb8-17"></a>reject.samp.norm &lt;-<span class="st"> </span><span class="cf">function</span>(z, <span class="dt">known.sd =</span> <span class="dv">1</span>, <span class="dt">prior.mean =</span> <span class="dv">0</span>, <span class="dt">prior.sd =</span> <span class="dv">1</span>, <span class="dt">nsamps =</span> <span class="dv">10000</span>){</span>
-<span id="cb8-18"><a href="bayesian.html#cb8-18"></a>  samps &lt;-<span class="st"> </span><span class="kw">numeric</span>(nsamps)</span>
-<span id="cb8-19"><a href="bayesian.html#cb8-19"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_along</span>(samps)){</span>
-<span id="cb8-20"><a href="bayesian.html#cb8-20"></a>    samps[i] &lt;-<span class="st"> </span><span class="kw">get.1.samp.norm</span>(z, known.sd, prior.mean, prior.sd) }</span>
-<span id="cb8-21"><a href="bayesian.html#cb8-21"></a>  samps }</span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="bayesian.html#cb9-1"></a><span class="co">#Get 1 sample under rejection sampling from normal with known sd, using unscaled likelihood</span></span>
-<span id="cb9-2"><a href="bayesian.html#cb9-2"></a><span class="co">#z is a vector of data.</span></span>
-<span id="cb9-3"><a href="bayesian.html#cb9-3"></a>get.<span class="fl">1.</span>samp.norm.unscaled &lt;-<span class="st"> </span><span class="cf">function</span>(z, <span class="dt">known.sd =</span> <span class="dv">1</span>, <span class="dt">prior.mean =</span> <span class="dv">0</span>, <span class="dt">prior.sd =</span> <span class="dv">1</span>){</span>
-<span id="cb9-4"><a href="bayesian.html#cb9-4"></a>  accepted &lt;-<span class="st"> </span><span class="ot">FALSE</span></span>
-<span id="cb9-5"><a href="bayesian.html#cb9-5"></a>  max.like &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">dnorm</span>(z, <span class="dt">mean =</span> <span class="kw">mean</span>(z), <span class="dt">sd =</span> known.sd)))) </span>
-<span id="cb9-6"><a href="bayesian.html#cb9-6"></a>  <span class="cf">while</span>(accepted <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>){</span>
-<span id="cb9-7"><a href="bayesian.html#cb9-7"></a>    cand &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, prior.mean, prior.sd)</span>
-<span id="cb9-8"><a href="bayesian.html#cb9-8"></a>    like &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">dnorm</span>(z, <span class="dt">mean =</span> cand, <span class="dt">sd =</span> known.sd)))) </span>
-<span id="cb9-9"><a href="bayesian.html#cb9-9"></a>    crit &lt;-<span class="st"> </span>like <span class="co">#/ max.like</span></span>
-<span id="cb9-10"><a href="bayesian.html#cb9-10"></a>    xunif &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
-<span id="cb9-11"><a href="bayesian.html#cb9-11"></a>    <span class="cf">if</span>(xunif <span class="op">&lt;=</span><span class="st"> </span>crit){accepted &lt;-<span class="st"> </span><span class="ot">TRUE</span>}</span>
-<span id="cb9-12"><a href="bayesian.html#cb9-12"></a>  }</span>
-<span id="cb9-13"><a href="bayesian.html#cb9-13"></a>  cand</span>
-<span id="cb9-14"><a href="bayesian.html#cb9-14"></a>}</span>
-<span id="cb9-15"><a href="bayesian.html#cb9-15"></a></span>
-<span id="cb9-16"><a href="bayesian.html#cb9-16"></a><span class="co"># Wrapper for get.1.samp.norm() that gets rejection sample from posterior of desired size.</span></span>
-<span id="cb9-17"><a href="bayesian.html#cb9-17"></a>reject.samp.norm.unscaled &lt;-<span class="st"> </span><span class="cf">function</span>(z, <span class="dt">known.sd =</span> <span class="dv">1</span>, <span class="dt">prior.mean =</span> <span class="dv">0</span>, <span class="dt">prior.sd =</span> <span class="dv">1</span>, <span class="dt">nsamps =</span> <span class="dv">10000</span>){</span>
-<span id="cb9-18"><a href="bayesian.html#cb9-18"></a>  samps &lt;-<span class="st"> </span><span class="kw">numeric</span>(nsamps)</span>
-<span id="cb9-19"><a href="bayesian.html#cb9-19"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_along</span>(samps)){</span>
-<span id="cb9-20"><a href="bayesian.html#cb9-20"></a>    samps[i] &lt;-<span class="st"> </span><span class="kw">get.1.samp.norm.unscaled</span>(z, known.sd, prior.mean, prior.sd) }</span>
-<span id="cb9-21"><a href="bayesian.html#cb9-21"></a>  samps }</span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="bayesian.html#cb10-1"></a>post_rej &lt;-<span class="st"> </span><span class="kw">reject.samp.norm</span>(<span class="dt">z =</span> z, <span class="dt">known.sd =</span> known.sd, </span>
-<span id="cb10-2"><a href="bayesian.html#cb10-2"></a>                             <span class="dt">prior.mean =</span> prior.mean, <span class="dt">prior.sd =</span> prior.sd, <span class="dt">nsamps =</span> <span class="dv">10000</span>)</span>
-<span id="cb10-3"><a href="bayesian.html#cb10-3"></a><span class="co"># post_rej_unscaled &lt;- reject.samp.norm.unscaled(z = z, known.sd = known.sd, </span></span>
-<span id="cb10-4"><a href="bayesian.html#cb10-4"></a><span class="co">#                              prior.mean = prior.mean, prior.sd = prior.sd, nsamps = 10000) # takes much longer</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="bayesian.html#cb11-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb11-2"><a href="bayesian.html#cb11-2"></a><span class="kw">hist</span>(mn.mod, <span class="dt">freq =</span> <span class="ot">FALSE</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span>
-<span id="cb11-3"><a href="bayesian.html#cb11-3"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dt">length=</span><span class="dv">100</span>)</span>
-<span id="cb11-4"><a href="bayesian.html#cb11-4"></a>pd_conjugate &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> post_conjugate<span class="op">$</span>posterior.expectation, <span class="dt">sd =</span> <span class="kw">sqrt</span>(post_conjugate<span class="op">$</span>posterior.variance))</span>
-<span id="cb11-5"><a href="bayesian.html#cb11-5"></a><span class="kw">lines</span>(x, pd_conjugate, <span class="dt">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb11-6"><a href="bayesian.html#cb11-6"></a></span>
-<span id="cb11-7"><a href="bayesian.html#cb11-7"></a><span class="kw">hist</span>(post_rej, <span class="dt">freq =</span> <span class="ot">FALSE</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span>
-<span id="cb11-8"><a href="bayesian.html#cb11-8"></a><span class="kw">lines</span>(x, pd_conjugate, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="bayesian.html#cb412-1"></a><span class="co">#Get 1 sample under rejection sampling from normal with known sd.</span></span>
+<span id="cb412-2"><a href="bayesian.html#cb412-2"></a><span class="co">#z is a vector of data.</span></span>
+<span id="cb412-3"><a href="bayesian.html#cb412-3"></a>get.<span class="fl">1.</span>samp.norm &lt;-<span class="st"> </span><span class="cf">function</span>(z, <span class="dt">known.sd =</span> <span class="dv">1</span>, <span class="dt">prior.mean =</span> <span class="dv">0</span>, <span class="dt">prior.sd =</span> <span class="dv">1</span>){</span>
+<span id="cb412-4"><a href="bayesian.html#cb412-4"></a>  accepted &lt;-<span class="st"> </span><span class="ot">FALSE</span></span>
+<span id="cb412-5"><a href="bayesian.html#cb412-5"></a>  max.like &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">dnorm</span>(z, <span class="dt">mean =</span> <span class="kw">mean</span>(z), <span class="dt">sd =</span> known.sd)))) </span>
+<span id="cb412-6"><a href="bayesian.html#cb412-6"></a>  <span class="cf">while</span>(accepted <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>){</span>
+<span id="cb412-7"><a href="bayesian.html#cb412-7"></a>    cand &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, prior.mean, prior.sd)</span>
+<span id="cb412-8"><a href="bayesian.html#cb412-8"></a>    like &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">dnorm</span>(z, <span class="dt">mean =</span> cand, <span class="dt">sd =</span> known.sd)))) </span>
+<span id="cb412-9"><a href="bayesian.html#cb412-9"></a>    crit &lt;-<span class="st"> </span>like <span class="op">/</span><span class="st"> </span>max.like</span>
+<span id="cb412-10"><a href="bayesian.html#cb412-10"></a>    xunif &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb412-11"><a href="bayesian.html#cb412-11"></a>    <span class="cf">if</span>(xunif <span class="op">&lt;=</span><span class="st"> </span>crit){accepted &lt;-<span class="st"> </span><span class="ot">TRUE</span>}</span>
+<span id="cb412-12"><a href="bayesian.html#cb412-12"></a>  }</span>
+<span id="cb412-13"><a href="bayesian.html#cb412-13"></a>  cand</span>
+<span id="cb412-14"><a href="bayesian.html#cb412-14"></a>}</span>
+<span id="cb412-15"><a href="bayesian.html#cb412-15"></a></span>
+<span id="cb412-16"><a href="bayesian.html#cb412-16"></a><span class="co"># Wrapper for get.1.samp.norm() that gets rejection sample from posterior of desired size.</span></span>
+<span id="cb412-17"><a href="bayesian.html#cb412-17"></a>reject.samp.norm &lt;-<span class="st"> </span><span class="cf">function</span>(z, <span class="dt">known.sd =</span> <span class="dv">1</span>, <span class="dt">prior.mean =</span> <span class="dv">0</span>, <span class="dt">prior.sd =</span> <span class="dv">1</span>, <span class="dt">nsamps =</span> <span class="dv">10000</span>){</span>
+<span id="cb412-18"><a href="bayesian.html#cb412-18"></a>  samps &lt;-<span class="st"> </span><span class="kw">numeric</span>(nsamps)</span>
+<span id="cb412-19"><a href="bayesian.html#cb412-19"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_along</span>(samps)){</span>
+<span id="cb412-20"><a href="bayesian.html#cb412-20"></a>    samps[i] &lt;-<span class="st"> </span><span class="kw">get.1.samp.norm</span>(z, known.sd, prior.mean, prior.sd) }</span>
+<span id="cb412-21"><a href="bayesian.html#cb412-21"></a>  samps }</span></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="bayesian.html#cb413-1"></a><span class="co">#Get 1 sample under rejection sampling from normal with known sd, using unscaled likelihood</span></span>
+<span id="cb413-2"><a href="bayesian.html#cb413-2"></a><span class="co">#z is a vector of data.</span></span>
+<span id="cb413-3"><a href="bayesian.html#cb413-3"></a>get.<span class="fl">1.</span>samp.norm.unscaled &lt;-<span class="st"> </span><span class="cf">function</span>(z, <span class="dt">known.sd =</span> <span class="dv">1</span>, <span class="dt">prior.mean =</span> <span class="dv">0</span>, <span class="dt">prior.sd =</span> <span class="dv">1</span>){</span>
+<span id="cb413-4"><a href="bayesian.html#cb413-4"></a>  accepted &lt;-<span class="st"> </span><span class="ot">FALSE</span></span>
+<span id="cb413-5"><a href="bayesian.html#cb413-5"></a>  max.like &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">dnorm</span>(z, <span class="dt">mean =</span> <span class="kw">mean</span>(z), <span class="dt">sd =</span> known.sd)))) </span>
+<span id="cb413-6"><a href="bayesian.html#cb413-6"></a>  <span class="cf">while</span>(accepted <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>){</span>
+<span id="cb413-7"><a href="bayesian.html#cb413-7"></a>    cand &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, prior.mean, prior.sd)</span>
+<span id="cb413-8"><a href="bayesian.html#cb413-8"></a>    like &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">dnorm</span>(z, <span class="dt">mean =</span> cand, <span class="dt">sd =</span> known.sd)))) </span>
+<span id="cb413-9"><a href="bayesian.html#cb413-9"></a>    crit &lt;-<span class="st"> </span>like <span class="co">#/ max.like</span></span>
+<span id="cb413-10"><a href="bayesian.html#cb413-10"></a>    xunif &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb413-11"><a href="bayesian.html#cb413-11"></a>    <span class="cf">if</span>(xunif <span class="op">&lt;=</span><span class="st"> </span>crit){accepted &lt;-<span class="st"> </span><span class="ot">TRUE</span>}</span>
+<span id="cb413-12"><a href="bayesian.html#cb413-12"></a>  }</span>
+<span id="cb413-13"><a href="bayesian.html#cb413-13"></a>  cand</span>
+<span id="cb413-14"><a href="bayesian.html#cb413-14"></a>}</span>
+<span id="cb413-15"><a href="bayesian.html#cb413-15"></a></span>
+<span id="cb413-16"><a href="bayesian.html#cb413-16"></a><span class="co"># Wrapper for get.1.samp.norm() that gets rejection sample from posterior of desired size.</span></span>
+<span id="cb413-17"><a href="bayesian.html#cb413-17"></a>reject.samp.norm.unscaled &lt;-<span class="st"> </span><span class="cf">function</span>(z, <span class="dt">known.sd =</span> <span class="dv">1</span>, <span class="dt">prior.mean =</span> <span class="dv">0</span>, <span class="dt">prior.sd =</span> <span class="dv">1</span>, <span class="dt">nsamps =</span> <span class="dv">10000</span>){</span>
+<span id="cb413-18"><a href="bayesian.html#cb413-18"></a>  samps &lt;-<span class="st"> </span><span class="kw">numeric</span>(nsamps)</span>
+<span id="cb413-19"><a href="bayesian.html#cb413-19"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_along</span>(samps)){</span>
+<span id="cb413-20"><a href="bayesian.html#cb413-20"></a>    samps[i] &lt;-<span class="st"> </span><span class="kw">get.1.samp.norm.unscaled</span>(z, known.sd, prior.mean, prior.sd) }</span>
+<span id="cb413-21"><a href="bayesian.html#cb413-21"></a>  samps }</span></code></pre></div>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="bayesian.html#cb414-1"></a>post_rej &lt;-<span class="st"> </span><span class="kw">reject.samp.norm</span>(<span class="dt">z =</span> z, <span class="dt">known.sd =</span> known.sd, </span>
+<span id="cb414-2"><a href="bayesian.html#cb414-2"></a>                             <span class="dt">prior.mean =</span> prior.mean, <span class="dt">prior.sd =</span> prior.sd, <span class="dt">nsamps =</span> <span class="dv">10000</span>)</span>
+<span id="cb414-3"><a href="bayesian.html#cb414-3"></a><span class="co"># post_rej_unscaled &lt;- reject.samp.norm.unscaled(z = z, known.sd = known.sd, </span></span>
+<span id="cb414-4"><a href="bayesian.html#cb414-4"></a><span class="co">#                              prior.mean = prior.mean, prior.sd = prior.sd, nsamps = 10000) # takes much longer</span></span></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="bayesian.html#cb415-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb415-2"><a href="bayesian.html#cb415-2"></a><span class="kw">hist</span>(mn.mod, <span class="dt">freq =</span> <span class="ot">FALSE</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb415-3"><a href="bayesian.html#cb415-3"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dt">length=</span><span class="dv">100</span>)</span>
+<span id="cb415-4"><a href="bayesian.html#cb415-4"></a>pd_conjugate &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> post_conjugate<span class="op">$</span>posterior.expectation, <span class="dt">sd =</span> <span class="kw">sqrt</span>(post_conjugate<span class="op">$</span>posterior.variance))</span>
+<span id="cb415-5"><a href="bayesian.html#cb415-5"></a><span class="kw">lines</span>(x, pd_conjugate, <span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb415-6"><a href="bayesian.html#cb415-6"></a></span>
+<span id="cb415-7"><a href="bayesian.html#cb415-7"></a><span class="kw">hist</span>(post_rej, <span class="dt">freq =</span> <span class="ot">FALSE</span>, <span class="dt">border =</span> <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb415-8"><a href="bayesian.html#cb415-8"></a><span class="kw">lines</span>(x, pd_conjugate, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="10_bayesian-estimation_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 </div>
@@ -531,11 +545,11 @@ d. Edge’s R function for rejection sampling</p>
 <ol style="list-style-type: lower-alpha">
 <li>Fit model using maximum likelihood:</li>
 </ol>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="bayesian.html#cb12-1"></a><span class="co">#library(arm)</span></span>
-<span id="cb12-2"><a href="bayesian.html#cb12-2"></a>x &lt;-<span class="st"> </span>anscombe<span class="op">$</span>x1</span>
-<span id="cb12-3"><a href="bayesian.html#cb12-3"></a>y &lt;-<span class="st"> </span>anscombe<span class="op">$</span>y1</span>
-<span id="cb12-4"><a href="bayesian.html#cb12-4"></a>lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</span>
-<span id="cb12-5"><a href="bayesian.html#cb12-5"></a><span class="kw">summary</span>(lm1)</span></code></pre></div>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="bayesian.html#cb416-1"></a><span class="co">#library(arm)</span></span>
+<span id="cb416-2"><a href="bayesian.html#cb416-2"></a>x &lt;-<span class="st"> </span>anscombe<span class="op">$</span>x1</span>
+<span id="cb416-3"><a href="bayesian.html#cb416-3"></a>y &lt;-<span class="st"> </span>anscombe<span class="op">$</span>y1</span>
+<span id="cb416-4"><a href="bayesian.html#cb416-4"></a>lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</span>
+<span id="cb416-5"><a href="bayesian.html#cb416-5"></a><span class="kw">summary</span>(lm1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x)
@@ -552,91 +566,91 @@ d. Edge’s R function for rejection sampling</p>
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 1.237 on 9 degrees of freedom
-## Multiple R-squared:  0.6665,	Adjusted R-squared:  0.6295 
+## Multiple R-squared:  0.6665, Adjusted R-squared:  0.6295 
 ## F-statistic: 17.99 on 1 and 9 DF,  p-value: 0.00217</code></pre>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Fit model using <code>MCMCregress</code>:</li>
 </ol>
 <p>b0: prior mean of Beta
 B0: prior precision of Beta</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="bayesian.html#cb14-1"></a>b0 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb14-2"><a href="bayesian.html#cb14-2"></a>reg1 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="fl">0.0001</span>)</span>
-<span id="cb14-3"><a href="bayesian.html#cb14-3"></a></span>
-<span id="cb14-4"><a href="bayesian.html#cb14-4"></a>res1 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg1)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb14-5"><a href="bayesian.html#cb14-5"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb14-6"><a href="bayesian.html#cb14-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="fl">0.0001</span>)</span>
-<span id="cb14-7"><a href="bayesian.html#cb14-7"></a></span>
-<span id="cb14-8"><a href="bayesian.html#cb14-8"></a>reg2 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="dv">1</span>)</span>
-<span id="cb14-9"><a href="bayesian.html#cb14-9"></a>res2 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg2)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb14-10"><a href="bayesian.html#cb14-10"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb14-11"><a href="bayesian.html#cb14-11"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="dv">1</span>)</span>
-<span id="cb14-12"><a href="bayesian.html#cb14-12"></a></span>
-<span id="cb14-13"><a href="bayesian.html#cb14-13"></a>reg3 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="dv">100</span>)</span>
-<span id="cb14-14"><a href="bayesian.html#cb14-14"></a>res3 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg3)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb14-15"><a href="bayesian.html#cb14-15"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb14-16"><a href="bayesian.html#cb14-16"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="dv">100</span>)</span>
-<span id="cb14-17"><a href="bayesian.html#cb14-17"></a></span>
-<span id="cb14-18"><a href="bayesian.html#cb14-18"></a>df &lt;-<span class="st"> </span><span class="kw">rbind</span>(res1, res2, res3)</span>
-<span id="cb14-19"><a href="bayesian.html#cb14-19"></a></span>
-<span id="cb14-20"><a href="bayesian.html#cb14-20"></a>df <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb14-21"><a href="bayesian.html#cb14-21"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> precision, <span class="dt">y =</span> Mean)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb14-22"><a href="bayesian.html#cb14-22"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb14-23"><a href="bayesian.html#cb14-23"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> Mean <span class="op">-</span><span class="st"> </span>SD, <span class="dt">ymax =</span> Mean <span class="op">+</span><span class="st"> </span>SD), <span class="dt">width =</span> <span class="dv">0</span>) <span class="op">+</span></span>
-<span id="cb14-24"><a href="bayesian.html#cb14-24"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>parameter, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb14-25"><a href="bayesian.html#cb14-25"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb14-26"><a href="bayesian.html#cb14-26"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="bayesian.html#cb418-1"></a>b0 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb418-2"><a href="bayesian.html#cb418-2"></a>reg1 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="fl">0.0001</span>)</span>
+<span id="cb418-3"><a href="bayesian.html#cb418-3"></a></span>
+<span id="cb418-4"><a href="bayesian.html#cb418-4"></a>res1 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg1)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb418-5"><a href="bayesian.html#cb418-5"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb418-6"><a href="bayesian.html#cb418-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="fl">0.0001</span>)</span>
+<span id="cb418-7"><a href="bayesian.html#cb418-7"></a></span>
+<span id="cb418-8"><a href="bayesian.html#cb418-8"></a>reg2 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="dv">1</span>)</span>
+<span id="cb418-9"><a href="bayesian.html#cb418-9"></a>res2 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg2)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb418-10"><a href="bayesian.html#cb418-10"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb418-11"><a href="bayesian.html#cb418-11"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="dv">1</span>)</span>
+<span id="cb418-12"><a href="bayesian.html#cb418-12"></a></span>
+<span id="cb418-13"><a href="bayesian.html#cb418-13"></a>reg3 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="dv">100</span>)</span>
+<span id="cb418-14"><a href="bayesian.html#cb418-14"></a>res3 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg3)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb418-15"><a href="bayesian.html#cb418-15"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb418-16"><a href="bayesian.html#cb418-16"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="dv">100</span>)</span>
+<span id="cb418-17"><a href="bayesian.html#cb418-17"></a></span>
+<span id="cb418-18"><a href="bayesian.html#cb418-18"></a>df &lt;-<span class="st"> </span><span class="kw">rbind</span>(res1, res2, res3)</span>
+<span id="cb418-19"><a href="bayesian.html#cb418-19"></a></span>
+<span id="cb418-20"><a href="bayesian.html#cb418-20"></a>df <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb418-21"><a href="bayesian.html#cb418-21"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> precision, <span class="dt">y =</span> Mean)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb418-22"><a href="bayesian.html#cb418-22"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb418-23"><a href="bayesian.html#cb418-23"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> Mean <span class="op">-</span><span class="st"> </span>SD, <span class="dt">ymax =</span> Mean <span class="op">+</span><span class="st"> </span>SD), <span class="dt">width =</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb418-24"><a href="bayesian.html#cb418-24"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>parameter, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb418-25"><a href="bayesian.html#cb418-25"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb418-26"><a href="bayesian.html#cb418-26"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
 <p><img src="10_bayesian-estimation_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="bayesian.html#cb15-1"></a>b0 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">0</span>)</span>
-<span id="cb15-2"><a href="bayesian.html#cb15-2"></a>reg1 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="fl">0.0001</span>)</span>
-<span id="cb15-3"><a href="bayesian.html#cb15-3"></a>res1 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg1)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb15-4"><a href="bayesian.html#cb15-4"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb15-5"><a href="bayesian.html#cb15-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="fl">0.0001</span>)</span>
-<span id="cb15-6"><a href="bayesian.html#cb15-6"></a></span>
-<span id="cb15-7"><a href="bayesian.html#cb15-7"></a>reg2 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="dv">1</span>)</span>
-<span id="cb15-8"><a href="bayesian.html#cb15-8"></a>res2 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg2)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb15-9"><a href="bayesian.html#cb15-9"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb15-10"><a href="bayesian.html#cb15-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="dv">1</span>)</span>
-<span id="cb15-11"><a href="bayesian.html#cb15-11"></a></span>
-<span id="cb15-12"><a href="bayesian.html#cb15-12"></a>reg3 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="dv">100</span>)</span>
-<span id="cb15-13"><a href="bayesian.html#cb15-13"></a>res3 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg3)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb15-14"><a href="bayesian.html#cb15-14"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb15-15"><a href="bayesian.html#cb15-15"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="dv">100</span>)</span>
-<span id="cb15-16"><a href="bayesian.html#cb15-16"></a></span>
-<span id="cb15-17"><a href="bayesian.html#cb15-17"></a>df &lt;-<span class="st"> </span><span class="kw">rbind</span>(res1, res2, res3)</span>
-<span id="cb15-18"><a href="bayesian.html#cb15-18"></a></span>
-<span id="cb15-19"><a href="bayesian.html#cb15-19"></a>df <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb15-20"><a href="bayesian.html#cb15-20"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> precision, <span class="dt">y =</span> Mean)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb15-21"><a href="bayesian.html#cb15-21"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb15-22"><a href="bayesian.html#cb15-22"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> Mean <span class="op">-</span><span class="st"> </span>SD, <span class="dt">ymax =</span> Mean <span class="op">+</span><span class="st"> </span>SD), <span class="dt">width =</span> <span class="dv">0</span>) <span class="op">+</span></span>
-<span id="cb15-23"><a href="bayesian.html#cb15-23"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>parameter, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb15-24"><a href="bayesian.html#cb15-24"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb15-25"><a href="bayesian.html#cb15-25"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="bayesian.html#cb419-1"></a>b0 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">0</span>)</span>
+<span id="cb419-2"><a href="bayesian.html#cb419-2"></a>reg1 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="fl">0.0001</span>)</span>
+<span id="cb419-3"><a href="bayesian.html#cb419-3"></a>res1 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg1)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb419-4"><a href="bayesian.html#cb419-4"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb419-5"><a href="bayesian.html#cb419-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="fl">0.0001</span>)</span>
+<span id="cb419-6"><a href="bayesian.html#cb419-6"></a></span>
+<span id="cb419-7"><a href="bayesian.html#cb419-7"></a>reg2 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="dv">1</span>)</span>
+<span id="cb419-8"><a href="bayesian.html#cb419-8"></a>res2 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg2)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb419-9"><a href="bayesian.html#cb419-9"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb419-10"><a href="bayesian.html#cb419-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="dv">1</span>)</span>
+<span id="cb419-11"><a href="bayesian.html#cb419-11"></a></span>
+<span id="cb419-12"><a href="bayesian.html#cb419-12"></a>reg3 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="dv">100</span>)</span>
+<span id="cb419-13"><a href="bayesian.html#cb419-13"></a>res3 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg3)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb419-14"><a href="bayesian.html#cb419-14"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb419-15"><a href="bayesian.html#cb419-15"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="dv">100</span>)</span>
+<span id="cb419-16"><a href="bayesian.html#cb419-16"></a></span>
+<span id="cb419-17"><a href="bayesian.html#cb419-17"></a>df &lt;-<span class="st"> </span><span class="kw">rbind</span>(res1, res2, res3)</span>
+<span id="cb419-18"><a href="bayesian.html#cb419-18"></a></span>
+<span id="cb419-19"><a href="bayesian.html#cb419-19"></a>df <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb419-20"><a href="bayesian.html#cb419-20"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> precision, <span class="dt">y =</span> Mean)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb419-21"><a href="bayesian.html#cb419-21"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb419-22"><a href="bayesian.html#cb419-22"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> Mean <span class="op">-</span><span class="st"> </span>SD, <span class="dt">ymax =</span> Mean <span class="op">+</span><span class="st"> </span>SD), <span class="dt">width =</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb419-23"><a href="bayesian.html#cb419-23"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>parameter, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb419-24"><a href="bayesian.html#cb419-24"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb419-25"><a href="bayesian.html#cb419-25"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
 <p><img src="10_bayesian-estimation_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="bayesian.html#cb16-1"></a>b0 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">-5</span>)</span>
-<span id="cb16-2"><a href="bayesian.html#cb16-2"></a>reg1 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="fl">0.0001</span>)</span>
-<span id="cb16-3"><a href="bayesian.html#cb16-3"></a>res1 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg1)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb16-4"><a href="bayesian.html#cb16-4"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb16-5"><a href="bayesian.html#cb16-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="fl">0.0001</span>)</span>
-<span id="cb16-6"><a href="bayesian.html#cb16-6"></a></span>
-<span id="cb16-7"><a href="bayesian.html#cb16-7"></a>reg2 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="dv">1</span>)</span>
-<span id="cb16-8"><a href="bayesian.html#cb16-8"></a>res2 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg2)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb16-9"><a href="bayesian.html#cb16-9"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb16-10"><a href="bayesian.html#cb16-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="dv">1</span>)</span>
-<span id="cb16-11"><a href="bayesian.html#cb16-11"></a></span>
-<span id="cb16-12"><a href="bayesian.html#cb16-12"></a>reg3 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="dv">100</span>)</span>
-<span id="cb16-13"><a href="bayesian.html#cb16-13"></a>res3 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg3)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb16-14"><a href="bayesian.html#cb16-14"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb16-15"><a href="bayesian.html#cb16-15"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="dv">100</span>)</span>
-<span id="cb16-16"><a href="bayesian.html#cb16-16"></a></span>
-<span id="cb16-17"><a href="bayesian.html#cb16-17"></a>df &lt;-<span class="st"> </span><span class="kw">rbind</span>(res1, res2, res3)</span>
-<span id="cb16-18"><a href="bayesian.html#cb16-18"></a></span>
-<span id="cb16-19"><a href="bayesian.html#cb16-19"></a>df <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb16-20"><a href="bayesian.html#cb16-20"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> precision, <span class="dt">y =</span> Mean)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb16-21"><a href="bayesian.html#cb16-21"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb16-22"><a href="bayesian.html#cb16-22"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> Mean <span class="op">-</span><span class="st"> </span>SD, <span class="dt">ymax =</span> Mean <span class="op">+</span><span class="st"> </span>SD), <span class="dt">width =</span> <span class="dv">0</span>) <span class="op">+</span></span>
-<span id="cb16-23"><a href="bayesian.html#cb16-23"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>parameter, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb16-24"><a href="bayesian.html#cb16-24"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb16-25"><a href="bayesian.html#cb16-25"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="bayesian.html#cb420-1"></a>b0 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">-5</span>)</span>
+<span id="cb420-2"><a href="bayesian.html#cb420-2"></a>reg1 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="fl">0.0001</span>)</span>
+<span id="cb420-3"><a href="bayesian.html#cb420-3"></a>res1 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg1)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb420-4"><a href="bayesian.html#cb420-4"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb420-5"><a href="bayesian.html#cb420-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="fl">0.0001</span>)</span>
+<span id="cb420-6"><a href="bayesian.html#cb420-6"></a></span>
+<span id="cb420-7"><a href="bayesian.html#cb420-7"></a>reg2 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="dv">1</span>)</span>
+<span id="cb420-8"><a href="bayesian.html#cb420-8"></a>res2 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg2)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb420-9"><a href="bayesian.html#cb420-9"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb420-10"><a href="bayesian.html#cb420-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="dv">1</span>)</span>
+<span id="cb420-11"><a href="bayesian.html#cb420-11"></a></span>
+<span id="cb420-12"><a href="bayesian.html#cb420-12"></a>reg3 &lt;-<span class="st"> </span><span class="kw">MCMCregress</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">b0 =</span> b0, <span class="dt">B0 =</span> <span class="dv">100</span>)</span>
+<span id="cb420-13"><a href="bayesian.html#cb420-13"></a>res3 &lt;-<span class="st"> </span><span class="kw">summary</span>(reg3)<span class="op">$</span>statistics[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb420-14"><a href="bayesian.html#cb420-14"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;parameter&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb420-15"><a href="bayesian.html#cb420-15"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precision =</span> <span class="dv">100</span>)</span>
+<span id="cb420-16"><a href="bayesian.html#cb420-16"></a></span>
+<span id="cb420-17"><a href="bayesian.html#cb420-17"></a>df &lt;-<span class="st"> </span><span class="kw">rbind</span>(res1, res2, res3)</span>
+<span id="cb420-18"><a href="bayesian.html#cb420-18"></a></span>
+<span id="cb420-19"><a href="bayesian.html#cb420-19"></a>df <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb420-20"><a href="bayesian.html#cb420-20"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> precision, <span class="dt">y =</span> Mean)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb420-21"><a href="bayesian.html#cb420-21"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb420-22"><a href="bayesian.html#cb420-22"></a><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> Mean <span class="op">-</span><span class="st"> </span>SD, <span class="dt">ymax =</span> Mean <span class="op">+</span><span class="st"> </span>SD), <span class="dt">width =</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb420-23"><a href="bayesian.html#cb420-23"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>parameter, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb420-24"><a href="bayesian.html#cb420-24"></a><span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb420-25"><a href="bayesian.html#cb420-25"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
 <p><img src="10_bayesian-estimation_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>When the precision on the prior estimates of the intercept and slope is very high, the posterior point estimates reflect the choice of priors more than the data. It is interesting to note that the variance of the disturbances is very large when the precision is very high. This is likely because the Bayesian machine has to fight between the observed data and the strong prior, and the consequence of this fight is large uncertainty.</p>
 <ol start="2" style="list-style-type: decimal">
@@ -666,7 +680,7 @@ B0: prior precision of Beta</p>
 <div id="conclusion-bayesian-vs.-frequentist-methods" class="section level2">
 <h2><span class="header-section-number">10.6</span> Conclusion: Bayesian vs. frequentist methods</h2>
 </div>
-<div id="chapter-summary" class="section level2">
+<div id="chapter-summary-2" class="section level2">
 <h2><span class="header-section-number">10.7</span> Chapter summary</h2>
 
 </div>
@@ -676,8 +690,8 @@ B0: prior precision of Beta</p>
           </div>
         </div>
       </div>
-<a href="parametric.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="parametric.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="postlude.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

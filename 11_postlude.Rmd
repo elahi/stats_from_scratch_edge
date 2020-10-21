@@ -22,13 +22,11 @@ theme_set(theme_bw(base_size = 12) +
 
 Fitting the models: 
 
-```{r}
-anscombe
+```{r, results = "hide"}
 mod1 <- lm(anscombe$y1 ~ anscombe$x1)
 mod2 <- lm(anscombe$y2 ~ anscombe$x2)
 mod3 <- lm(anscombe$y3 ~ anscombe$x3)
 mod4 <- lm(anscombe$y4 ~ anscombe$x4)
-
 summary(mod1)
 summary(mod2)
 summary(mod3)
@@ -170,7 +168,88 @@ summary(lm.fit)
 
 ### Exercise set Postlude-4
 
+1. 
+
+```{r}
+library(car)
+probit.fit <- glm(volunteer ~ extraversion + neuroticism + sex, 
+                  data = Cowles, family = binomial("probit"))
+summary(probit.fit)
+```
+
+2. 
+
+```{r, fig.width = 7, fig.height = 7}
+plot(sim.lm(5000, 3, 1/2, het.coef = 0.25))
+par(mfrow = c(2,2))
+
+ests <- sim.lm.ests(n = 10, nsim = 1000, a = 3, b = 1/2, het.coef = 0.25)
+colMeans(ests)
+apply(ests, 2, var)
+hist(ests[,2], main = "n = 10", xlab = "Slope")
+
+ests <- sim.lm.ests(n = 50, nsim = 1000, a = 3, b = 1/2, het.coef = 0.25)
+colMeans(ests)
+apply(ests, 2, var)
+hist(ests[,2], main = "n = 50", xlab = "Slope")
+
+ests <- sim.lm.ests(n = 100, nsim = 1000, a = 3, b = 1/2, het.coef = 0.25)
+colMeans(ests)
+apply(ests, 2, var)
+hist(ests[,2], main = "n = 100", xlab = "Slope")
+
+ests <- sim.lm.ests(n = 1000, nsim = 1000, a = 3, b = 1/2, het.coef = 0.25)
+colMeans(ests)
+apply(ests, 2, var)
+hist(ests[,2], main = "n = 1000", xlab = "Slope")
+```
+
 ### Mixed models
+
+```{r}
+set.seed(8675309)
+alpha <- 3
+beta <- 0.5
+eps.sd <- sqrt(0.5)
+re.sd <- 1
+yrs <- 10
+x <- rep(anscombe$x1, 10)
+rand.ints <- rnorm(length(anscombe$x1), 0, re.sd)
+y <- alpha + beta*x + rep(rand.ints, 10) + rnorm(length(x), 0, eps.sd)
+d <- tibble(x = x, y = y, j = rep(1:10, each = 11)) %>% 
+  mutate(group = letters[j])
+```
+
+```{r}
+d %>% 
+  ggplot(aes(x, y, color = group)) +
+  geom_point(alpha = 0.8) + 
+  scale_color_viridis_d() + 
+  labs(x = "Fertilizer consumption (kg/hectare)", 
+       y = "Cereal yield (100 kg/hectare)")
+```
+
+Here's the linear model:
+
+```{r}
+m1 <- lm(y ~ x, data = d)
+summary(m1)
+```
+
+Here's a mixed-effects model fit using `lmer`:
+
+```{r}
+library(lme4)
+mm1 <- lmer(y ~ x + (1 | group), data = d, REML = TRUE)
+summary(mm1)
+```
+
+
+```{r}
+library(nlme)
+mm2 <- lme(y ~ x, random = ~ 1 | group, data = d)
+summary(mm2)
+```
 
 ### Exercise set Postlude-5
 
